@@ -1,0 +1,248 @@
+﻿<div ng-init="init()"></div>
+
+<div ui-view>
+    <div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+        <div class="col-lg-10">
+            <ol class="breadcrumb">
+                <li>
+                    <a ui-sref="anasayfa">
+                        <i class="fa fa-home"></i> Ana Sayfa
+                    </a>
+                </li>
+                <li>
+                    <a ui-sref="proje.bilgiguvenligirisklistesi"><i class="fa fa-newspaper-o"></i> Bilgi Güvenliği Risk Listesi</a>
+                </li>
+                <li class="active">
+                    <strong>
+                        <i class="fa fa-wrench"></i>
+                        B.G Risk Tehdit Gerçekleşme Sayısı
+                    </strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2"> </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated-emfa animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-wrench"></i>  B.G Risk Tehdit Gerçekleşme Sayısı Bilgileri
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <form method="get" name="frm_bgRiskTehditGerceklesmeSayisi" id="frm_bgRiskTehditGerceklesmeSayisi" class="form-horizontal" novalidate>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Bilgi Güvenliği Risk No<span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <input type="text" ng-disabled="disabled" name="txtB_G_RISK_NO" ng-model="bgRiskNo" class="form-control" readonly>
+                                                <!--<p ng-show="frm_bgRiskTehditGerceklesmeSayisi.txtB_G_RISK_NO.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>-->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Tehdit Gerçekleşme Tarihi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <input type="datetime" name="txtTEHDIT_GERCEKLESME_TARIHI" id="txtTEHDIT_GERCEKLESME_TARIHI" ng-model="Info.TEHDIT_GERCEKLESME_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control"
+                                                       required>
+                                                <p ng-show="frm_bgRiskTehditGerceklesmeSayisi.txtTEHDIT_GERCEKLESME_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label  txt-algn-left">Tehdit Gerçekleşme Sayısı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <input type="number" name="txtTEHDIT_GERCEKLESME_SAYISI" id="txtTEHDIT_GERCEKLESME_SAYISI" ng-model="Info.TEHDIT_GERCEKLESME_SAYISI" class="form-control" required>
+                                                <p ng-show="frm_bgRiskTehditGerceklesmeSayisi.txtTEHDIT_GERCEKLESME_SAYISI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label  txt-algn-left">Ölçme Türü Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <ol class="nya-bs-select form-control" id="cmbOLCME_TURU_ID" name="cmbOLCME_TURU_ID" ng-model="Info.OLCME_TURU_ID"
+                                                    data-live-search="true" title="Ölçme Türü Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in OlcmeTuruListesi" deep-watch="true" data-value="item.OLCME_TURU_ID">
+                                                        <a>
+                                                            {{item.OLCME_TURU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frm_bgRiskTehditGerceklesmeSayisi.cmbOLCME_TURU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="BGRiskTehditGerceklesmeSayisiEkleGuncelle(Info,frm_bgRiskTehditGerceklesmeSayisi)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+
+                                                <a class="btn btn-primary" href="#" ui-sref="proje.bilgiguvenligirisklistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i> B.G Risk Tehdit Gerçekleşme Sayısı Listesi
+                        </h5>
+                    </div>
+
+                    <div class="ibox-content">
+                        <form name="src-BGRiskTehditGerceklesmeSayisi" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs col-lg-offset-2">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Ölçme Türü Adı</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtOLCME_TURU_ADI" ng-model="AramaKriter.OLCME_TURU_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Ölçme türü adını giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button ng-click="BGRiskTehditGerceklesmeSayisiGetData(AramaKriter, AramaKriter.SayfaNo= 1 )" class="btn btn-sm btn-warning" type="submit">
+                                                    <i class="fa fa-filter"></i>&nbsp;
+                                                    <strong>Filtrele</strong>
+                                                </button>
+                                                <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <strong>Temizle</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="ibox-content" ng-if="BGRiskTehditGerceklesmeSayisiListesi.length>0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="filtreTemizle()" data-ui-sref-opts="{reload:true}"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                                <strong> Toplam {{toplamKayitSayisi }} kayıt </strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list table-emfa">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td><b>No</b></td>
+                                                <td><b>Ölçme Türü Adı</b></td>
+                                                <td><b>Tehdit Gerceklesme Tarihi</b></td>
+                                                <td><b>Tehdit Gerceklesme Sayisi</b></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="post in BGRiskTehditGerceklesmeSayisiListesi | filter:ignoreTurkish">
+                                                <td>
+                                                    <span class="label label-success">{{ $index + 1}}</span>
+                                                </td>
+                                                <td class="table-main">
+                                                    <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                    <a class="editLink-Emfa" ui-sref="proje.bilgiguvenligirisklistesi.bgrisktehditgerceklesmesayisilistesi.bgrisktehditgerceklesmesayisikayit({ bgRiskTehditGerceklesmeSayisiID: post.B_G_RISK_TEHDIT_GERCEKLESME_SAYISI_ID})">{{post.OLCME_TURU_ADI}} </a><br />
+                                                </td>
+                                                <td class="tarih">
+                                                    <span class="label label-primary">
+                                                        <i class="fa fa-calendar"></i>
+                                                        {{post.TEHDIT_GERCEKLESME_TARIHI | tarih}}
+                                                    </span>
+                                                </td>
+
+                                                <td>
+                                                    {{post.TEHDIT_GERCEKLESME_SAYISI}}
+                                                </td>
+
+                                                <td class="actions">
+                                                    <div class="pull-right">
+                                                        <a ui-sref="proje.bilgiguvenligirisklistesi.bgrisktehditgerceklesmesayisilistesi.bgrisktehditgerceklesmesayisikayit({ bgRiskTehditGerceklesmeSayisiID: post.B_G_RISK_TEHDIT_GERCEKLESME_SAYISI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                    </div>
+                                                </td>
+
+                                                <td class="actions">
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-center">
+                                                    <pagination ng-model="AramaKriter.SayfaNo" ng-change="BGRiskTehditGerceklesmeSayisiGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content" ng-show="BGRiskTehditGerceklesmeSayisiListesi.length==0||BGRiskTehditGerceklesmeSayisiListesi==undefined">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-sm btn-white" ng-click="filtreTemizle()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br /><br />
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    &nbsp;Bilgi güvenliği risk bağlı işlemlerine bağlı tehdit gerçekleşme sayısı kaydı <strong>bulunmamaktadır.</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

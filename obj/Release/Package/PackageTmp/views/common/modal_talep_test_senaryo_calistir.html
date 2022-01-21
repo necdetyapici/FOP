@@ -1,0 +1,81 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">{{seciliProjeTestSenaryoNo}} Test Senaryo</h4>
+    </div>
+    <div class="modal-body">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="project-list table-emfa">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>No</b></td>
+                                        <td><b>Açıklama</b></td>
+                                        <td><b>Beklenen Sonuç</b></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr ng-repeat="item in ProjeTestSenaryoTestAdimTalepDurumListesiModal | filter:ignoreTurkish">
+                                        <td>
+                                            <span class="label label-success">{{item.SIRA}}</span>
+                                        </td>
+
+                                        <td>
+                                            {{ item.ACIKLAMA}}
+                                        </td>
+                                        <td>
+                                            {{ item.BEKLENEN_SONUC}}
+                                        </td>
+                                        <td class="actions">
+
+                                            <button class="btn btn-sm btn-circle" ng-click="item.YENI_DURUM = true"  ng-class="{'btn-info': item.YENI_DURUM == true}" tooltip="Başırılı" tooltip-append-to-body="true"><i class="fa fa-check"></i></button>
+
+                                        </td>
+                                        <td class="actions">
+                                            <div class="pull-left">
+
+                                                <button class="btn btn-sm btn-circle" ng-click="item.YENI_DURUM = false" ng-class="{'btn-danger': item.YENI_DURUM == false}" tooltip="Başarısız" tooltip-append-to-body="true"><i class="fa fa-remove"></i></button>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="ProjeTestSenaryoTestAdimTalepDurumListesiModal.length == 0 || ProjeTestSenaryoTestAdimTalepDurumListesiModal == null">
+                    <div class="col-lg-12">
+                        <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                            <i class="fa fa-exclamation-circle"></i>
+                            &nbsp;Test senaryosuna bağlı test adım kaydı <strong>bulunmamaktadır.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-sm btn-warning" type="button" ng-click="TestSenaryoBug(ProjeTestSenaryoTestAdimTalepDurumListesiModal)">
+            <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Bug Ekle</span>
+        </button>
+        <button class="btn btn-sm btn-success" type="button" ng-click="ProjeTestSenaryoTestAdimTalepDurumEkleGuncelle(ProjeTestSenaryoTestAdimTalepDurumListesiModal)">
+            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet & Kapat</span>
+        </button>
+        <!--<button type="button" class="btn btn-primary" ng-click="TestSenaryoCalistirGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>-->
+    </div>
+</div>
+
+
+
+
+

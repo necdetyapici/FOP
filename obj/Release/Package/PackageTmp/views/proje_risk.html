@@ -1,0 +1,32 @@
+﻿
+
+
+<div class="row" style="margin-top:30px">
+    <div class="col-lg-3 ">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                                <i class="fa fa-bell"></i> Risk
+                            </h5>
+                        </div>
+                        <div class="fizibilite ibox-content">
+                            <ul class="alt-nav-tabs nav nav-tabs">
+                                <li ng-class="{'active-altTab' : altTab == 31}"><a class="altTabMenuItem" ng-click="setAltTab(31)" ui-sref=".projerisklistesi"><i class="fa fa-bell"></i>&nbsp;Risk Listesi</a></li>
+
+                                <!--<li ng-class="{'active-altTab' : altTab == 1}"><a class="altTabMenuItem" ng-click="setAltTab(1)" ui-sref=".riskderecesi"><i class="fa fa-exclamation-circle"></i>&nbsp;Tehdit Listesi</a></li>-->
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div ui-view></div>
+    </div>
+</div>

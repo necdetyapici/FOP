@@ -1,0 +1,499 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Masraf İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.masraflistesi"><i class="fa fa-list"></i> Masraf Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-credit-card"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-credit-card"></i>
+                        Masraf Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen masraf bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmMasraf" id="frmMasraf" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Masraf No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="50" ng-minlength="1" name="txtMASRAF_NO" ng-model="InfoPersonelMasraf.MASRAF_NO" class="formEkleDuzenleInput form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Masraf Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtAVANS_ADI" ng-model="InfoPersonelMasraf.MASRAF_ADI" class="formEkleDuzenleInput form-control" placeholder="Masraf adını giriniz." required readonly>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Eden<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtTALEP_EDEN_KULLANICI_AD_SOYAD" ng-model="InfoPersonelMasraf.TALEP_EDEN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Talep Eden giriniz." readonly>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Başlangıç Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtBASLANGIC_TARIHI" ng-model="InfoPersonelMasraf.BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required readonly>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Bitiş Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtBITIS_TARIHI" ng-model="InfoPersonelMasraf.BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required readonly>
+                                            </div>
+                                        </div>
+                                    </div>                                   
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Alınan Avans</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtAVANS_MASRAF_ADI" id="txtAVANS_MASRAF_ADI" style="resize:none;" ng-model="InfoPersonelMasraf.AVANS_MASRAF_ADI" rows="2" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Alınan avans tutarını giriniz" disabled></textarea>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gözden Geçiren<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtGOZDEN_GECIREN_KULLANICI_AD_SOYAD" ng-model="InfoPersonelMasraf.GOZDEN_GECIREN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Gözden Geçiren giriniz." readonly>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Muhasebe<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtMUHASEBE_KULLANICI_AD_SOYAD" ng-model="InfoPersonelMasraf.MUHASEBE_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Muhasebe Yöneticisini giriniz." readonly>
+                                        </div>
+                                    </div>
+
+
+
+                                    <!--<div class="form-group">
+        <label class="col-lg-4 control-label">Onaylayan<span class="text-danger">*</span></label>
+        <div class="col-lg-8">
+            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtONAYLAYAN_KULLANICI_AD_SOYAD" ng-model="InfoPersonelMasraf.ONAYLAYAN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Onaylayan giriniz." readonly>
+        </div>
+    </div>-->
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İade Edilecek Tutar</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIADE_EDILECEK_TUTAR" ui-number-mask="2" ng-model="InfoPersonelMasraf.IADE_EDILECEK_TUTAR" class="formEkleDuzenleInput form-control" placeholder="İade edilecek tutarı giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ödenecek Tutar</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtODENECEK_TUTAR" ui-number-mask="2" ng-model="InfoPersonelMasraf.ODENECEK_TUTAR" class="formEkleDuzenleInput form-control" placeholder="Ödenecek tutarı giriniz." readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtPROJE_ADI" ng-model="InfoPersonelMasraf.PROJE_ADI" class="formEkleDuzenleInput form-control" placeholder="Proje adını giriniz." readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Etiket</label>
+                                        <div class="col-lg-8">
+                                            <ui-select multiple ng-model="InfoPersonelMasraf.SeciliEtiketler" tagging="etiketOlustur" tagging-label="(Yeni)" theme="bootstrap" style="width: 300px;" ng-disabled="true">
+                                                <ui-select-match placeholder="Etiket seçimi yapınız...">{{$item.ADI}}</ui-select-match>
+                                                <ui-select-choices repeat="item in ProjeEtiketListesi | filter: $select.search">
+                                                    {{item.ADI}}
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-danger " ng-show="($storage.KULLANICI_ID == InfoPersonelMasraf.GOZDEN_GECIREN_KULLANICI_ID)  && (InfoPersonelMasraf.MASRAF_ID > 0) && (InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID == 2 || InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID == 6)" href="#" ng-click="MasrafRed()">
+                                                <i class="fa fa-check-circle-o"></i>&nbsp;&nbsp;<span class="bold">Reddet</span>
+                                            </button>
+                                            <!--<button class=" btn btn-info " ng-show="$storage.KULLANICI_ID == InfoPersonelMasraf.ONAYLAYAN_KULLANICI_ID && InfoPersonelMasraf.MASRAF_ID > 0 && InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID == 2 " href="#" ng-click="MasrafOnay(InfoPersonelMasraf, InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID = 5)">
+                                                <i class="fa fa-check-circle-o"></i>&nbsp;&nbsp;<span class="bold">G.M Onay</span>
+                                            </button>-->
+                                            <button class=" btn btn-warning " href="#" ng-show="$storage.KULLANICI_ID == InfoPersonelMasraf.GOZDEN_GECIREN_KULLANICI_ID && InfoPersonelMasraf.MASRAF_ID > 0 && InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID == 6" ng-click="MasrafGozdenGecir()">
+                                                <i class="fa fa-eye"></i>&nbsp;&nbsp;<span class="bold">Gözden Geçir</span>
+                                            </button>
+                                            <button class=" btn btn-success " href="#" ng-show="$storage.KULLANICI_ID == InfoPersonelMasraf.MUHASEBE_KULLANICI_ID && InfoPersonelMasraf.MASRAF_ID > 0 && InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID == 2" ng-click="MasrafOnay(InfoPersonelMasraf, InfoPersonelMasraf.AVANS_MASRAF_DURUMU_ID = 3)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Onayla</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="insankaynaklari.masraflistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Masraf Detay Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-MasrafDetay" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Belge No</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="50" ng-minlength="1" name="txtBELGE_NO" id="txtBELGE_NO" ng-model="AramaKriterMasrafDetay.BELGE_NO" class="formEkleDuzenleInput form-control" placeholder="Belge No giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Belge Tarihi </label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtBELGE_TARIHI" id="txtBELGE_TARIHI" ng-model="AramaKriterMasrafDetay.BELGE_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="MasrafDetayGetData(AramaKriterMasrafDetay, AramaKriterMasrafDetay.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizleMasrafDetay()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                   
+
+                    <div class="client-detail" style="height:550px;" ng-if="MasrafDetayListesi.length > 0">
+                        <div class="full-height-scroll" full-scroll>
+                            <strong>Masraflar</strong>
+                            <table class="table table-striped table-topFixed table-height table-bottomFixed" ng-if="MasrafDetayListesi.length > 0">
+                                <thead>
+                                    <tr>
+                                        <td><b>No</b></td>
+                                        <td><b>Belge No</b></td>
+                                        <td><b>Belge Tarihi</b></td>
+                                        <td><b>Tutar</b></td>
+                                        <td><b>Durumu</b></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody ng-repeat="post in MasrafDetayListesi | filter:ignoreTurkish">
+                                    <tr>
+                                        <td>
+                                            <span class="label label-success">{{ $index + 1 }}</span>
+                                        </td>
+                                        <td class="table-main">
+                                            {{post.BELGE_NO}}
+                                        </td>
+                                        <td class="tarih">
+                                            <span class="label label-primary">
+                                                <i class="fa fa-calendar"></i>
+                                                {{post.BELGE_TARIHI | tarih}}
+
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {{post.TUTAR}}
+                                        </td>
+                                        <td class="no-wrap">
+                                            <label class="label label-warning input-lg ng-scope" ng-show="post.DURUMU==null">Beklemede</label>
+                                            <label class="label label-info input-lg ng-scope" ng-show="post.DURUMU==true">Onaylandı</label>
+                                            <label class="label label-danger input-lg ng-scope" ng-show="post.DURUMU==false"> Reddedildi</label>
+                                        </td>
+                                        <td class="form-actions">
+                                            <div class="pull-right">
+                                                <a ng-click="masrafDetayRedAciklama = !masrafDetayRedAciklama" ng-class="{ 'btn-danger': masrafDetayRedAciklama, 'btn-warning' : !masrafDetayRedAciklama}" class="btn btn-sm" tooltip="Red Açıklama Göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Masraf Red Açıklama Göster --></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-circle btn-primary" tooltip="Onayla" tooltip-append-to-body="true" ng-click="MasrafDetayOnay(post, post.DURUMU = true)" style="margin: 0px 10px 5px 10px;"><i class="fa fa-play"></i></button>
+                                                <button class="btn btn-sm btn-circle btn-danger" tooltip="Reddet" ng-click="MasrafDetayRed(post)" style="margin: 0px 10px 5px 10px;" tooltip-append-to-body="true"><i class="fa fa-remove"></i></button>
+
+                                            </div>
+                                        </td>
+                                        <td class="form-actions">
+                                            <div class="pull-right">
+                                                <a ng-click="masrafDetayAciklamaGoster = !masrafDetayAciklamaGoster" ng-class="{ 'btn-danger': masrafDetayAciklamaGoster, 'btn-info' : !masrafDetayAciklamaGoster}" class="btn btn-sm" tooltip="Açıklama Göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Açıklama Göster --></a>
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr ng-show="masrafDetayAciklamaGoster">
+                                        <td></td>
+                                        <td><b>Açıklama</b></td>
+                                        <td colspan="6">{{post.ACIKLAMA}}</td>
+                                    </tr>
+                                    <tr ng-show="masrafDetayRedAciklama">
+                                        <td></td>
+                                        <td><b>Red Açıklama</b></td>
+                                        <td colspan="6">{{post.RED_ACIKLAMA}}</td>
+                                    </tr>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th colspan="3">
+                                            <div class="row" style="padding-top:10px;padding-bottom:10px;">
+                                                <div class="col-lg-12" style="text-align:right;">
+                                                    <b>Toplam Tutar :</b>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px;padding-bottom:10px;">
+                                                <div class="col-lg-12" style="text-align:right;">
+                                                    <b>Onaylanan Tutar :</b>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px;">
+                                                <div class="col-lg-12" style="text-align:right;">
+                                                    <b>Reddedilen Tutar :</b>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td colspan="7">
+                                            <div class="row" style="padding-top:10px;padding-bottom:10px;">
+                                                <div class="col-lg-12" style="text-align:left;">
+                                                    {{toplamMasraf}}
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px;padding-bottom:10px;">
+                                                <div class="col-lg-12 " style="text-align:left;">
+                                                    {{onaylananMasraf}}
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding-top:10px;">
+                                                <div class="col-lg-12" style="text-align:left;">
+                                                    {{reddedilenMasraf}}
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="alert-Emfa alert alert-danger  animated bounceIn" ng-if="MasrafDetayListesi.length == 0 || MasrafDetayListesi == null">
+                        <i class="fa fa-exclamation-circle"></i>
+                        &nbsp;Masraf detay kaydı <strong>bulunmamaktadır.</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Masraf Detay Ekler
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-MasrafDetayEkler" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs  ">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Belge No</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtBELGE_NO" ng-model="AramaKriterMasrafDetayEkler.BELGE_NO" class="form-control formEkleDuzenleInput input-sm  " placeholder="Belge No giriniz.">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtDOSYA_ADI" ng-model="AramaKriterMasrafDetayEkler.DOSYA_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Dosya adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="MasrafDetayEklerGetData(AramaKriterMasraDetayEkler,  AramaKriterMasraDetayEkler.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizleMasrafDetayEkler()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="MasrafDetayEklerListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="MasrafDetayEklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisiMasrafDetayEkler }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Belge No</b></td>
+                                            <td><b>Dosya Adı</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in MasrafDetayEklerListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td>{{post.BELGE_NO}}</td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <sa-dosyaindir tablo="MASRAF_DETAY_EKLER" dosyaid="post.MASRAF_DETAY_EKLER_ID" tooltip="Döküman İndir">{{post.DOSYA_ADI}}</sa-dosyaindir><br />
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right" ng-if="post.DOSYA_TIPI == 'image/jpeg' || post.DOSYA_TIPI == 'image/png' || post.DOSYA_TIPI == 'application/pdf'">
+                                                    <button ng-click="IkPersonelMasrafDetayEklerGoster(post.MASRAF_DETAY_EKLER_ID)" class="btn btn-sm btn-info" tooltip="Göster" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriterMasraDetayEkler.SayfaNo" ng-change="MasrafDetayEklerGetData(AramaKriterMasraDetayEkler)" total-items="toplamKayitSayisiMasrafDetayEkler"
+                                                            items-per-page="AramaKriterMasraDetayEkler.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="MasrafDetayEklerListesi.length==0 || MasrafDetayEklerListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MasrafDetayEklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Masraf detay ekler ait kayıt <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

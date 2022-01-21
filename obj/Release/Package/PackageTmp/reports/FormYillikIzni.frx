@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/17/2018 14:02:04" ReportInfo.Modified="01/23/2019 11:50:52" ReportInfo.CreatorVersion="2018.3.17.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    private void Data1_AfterLayout(object sender, EventArgs e)
+    {
+      double izinSaat=  Convert.ToDouble(Report.GetColumnValue(&quot;IK_PERSONEL_IZIN.IK_PERSONEL_IZIN_SURESI&quot;));
+      txtIzinsure.Text=(izinSaat/9).ToString();
+    }                                        
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/i/WFGN2pYCVAC3y+73UFGjKbQyR83UMgnQUiro1iL0bs4vaN1HxZeC+hM0sPLBLWJC6shf/1+RG0acOr61G5Bcg5JNkRma3ePQ52/CTbyn0cnJYiGzgGFnZ+7zozUfFr6vdh6ylaDFGnf7EyZ6QGi8w==">
+      <TableDataSource Name="IK_PERSONEL_IZIN" DataType="System.Int32" Enabled="true" TableName="IK_PERSONEL_IZIN" SelectCommand="Select *  from IK_PERSONEL_IZIN AS i &#13;&#10;INNER JOIN KULLANICILAR AS k ON i.KULLANICI_ID = k.KULLANICI_ID&#13;&#10;INNER JOIN  IK_PERSONEL AS p ON p.KULLANICI_ID = i.KULLANICI_ID &#13;&#10;INNER JOIN IK_UNVAN AS u ON u.IK_UNVAN_ID = p.IK_UNVAN_ID &#13;&#10;LEFT JOIN KULLANICILAR AS ik ON i.INSAN_KAYNAKLARI_YONETICI_KULLANICI_ID = ik.KULLANICI_ID &#13;&#10;INNER JOIN KULLANICILAR AS d ON i.DEPARTMAN_YONETICI_KULLANICI_ID = d.KULLANICI_ID &#13;&#10;LEFT JOIN KULLANICILAR AS g ON i.GENEL_MUDUR_KULLANICI_ID = g.KULLANICI_ID&#13;&#10; Where (i.IK_PERSONEL_IZIN_ID = @IK_PERSONEL_IZIN_ID)">
+        <Column Name="Column" DataType="System.Int32" Calculated="true" Expression=""/>
+        <Column Name="IK_PERSONEL_IZIN_ID" DataType="System.Int32"/>
+        <Column Name="IZIN_TURU_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="IK_PERSONEL_IZIN_BASLANGIC_TARIHI" DataType="System.DateTime"/>
+        <Column Name="IK_PERSONEL_IZIN_BITIS_TARIHI" DataType="System.DateTime"/>
+        <Column Name="IK_PERSONEL_ISE_BASLANGIC_TARIHI" DataType="System.DateTime"/>
+        <Column Name="MUSTERI_ID" DataType="System.Int32"/>
+        <Column Name="EKLEYEN_KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="KAYIT_TARIHI" DataType="System.DateTime"/>
+        <Column Name="IK_PERSONEL_IZIN_SURESI" DataType="System.Int32"/>
+        <Column Name="IZIN_TALEP_NEDENI" DataType="System.String"/>
+        <Column Name="YERINE_GOREVLI_PERSONEL_KULLANIC_ID" DataType="System.Int32"/>
+        <Column Name="IZIN_YILI" DataType="System.String"/>
+        <Column Name="IZINDE_BULUNACAGI_YER" DataType="System.String"/>
+        <Column Name="DEPARTMAN_YONETICI_KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="INSAN_KAYNAKLARI_YONETICI_KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="GENEL_MUDUR_KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="IZIN_DURUMU_ID" DataType="System.Int32"/>
+        <Column Name="IZIN_SURE_TURU_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ID1" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ADI" DataType="System.String"/>
+        <Column Name="KULLANICI_SIFRE" DataType="System.String"/>
+        <Column Name="AD_SOYAD" DataType="System.String"/>
+        <Column Name="KULLANICI_DURUM_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TIPI_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TELEFON" DataType="System.String"/>
+        <Column Name="KULLANICI_E_POSTA" DataType="System.String"/>
+        <Column Name="MUSTERI_ID1" DataType="System.Int32"/>
+        <Column Name="PERSONEL_TIPI_ID" DataType="System.Int32"/>
+        <Column Name="CINSIYET" DataType="System.String"/>
+        <Column Name="DOGUM_TARIHI" DataType="System.DateTime"/>
+        <Column Name="ISE_BASLAMA_TARIHI" DataType="System.DateTime"/>
+        <Column Name="ISTEN_AYRILMA_TARIHI" DataType="System.DateTime"/>
+        <Column Name="KAYIT_TARIHI1" DataType="System.DateTime"/>
+        <Column Name="KULLANICI_RESIM_ID" DataType="System.Int32"/>
+        <Column Name="IK_PERSONEL_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ID2" DataType="System.Int32"/>
+        <Column Name="IK_TC_NO" DataType="System.String"/>
+        <Column Name="KAN_GRUBU_ID" DataType="System.Int32"/>
+        <Column Name="IK_UNVAN_ID" DataType="System.Int32"/>
+        <Column Name="IK_PERSONEL_DAHILI_TELEFON_NO" DataType="System.String"/>
+        <Column Name="IK_PERSONEL_CEP_TELEFONU" DataType="System.String"/>
+        <Column Name="IK_PERSONEL_SIRKET_HATTI_NUMARASI" DataType="System.String"/>
+        <Column Name="IK_PERSONEL_YAKININIZ_AD_SOYAD" DataType="System.String"/>
+        <Column Name="IK_PERSONEL_YAKIN_TELEFON_NO" DataType="System.String"/>
+        <Column Name="IL_ID" DataType="System.Int32"/>
+        <Column Name="ILCE_ID" DataType="System.Int32"/>
+        <Column Name="IK_PERSONEL_ADRES" DataType="System.String"/>
+        <Column Name="IK_PERSONEL_ARAC_PLAKA_NO" DataType="System.String"/>
+        <Column Name="IK_BIRIM_ID" DataType="System.Int32"/>
+        <Column Name="IK_DEPARTMAN_ID" DataType="System.Int32"/>
+        <Column Name="MUSTERI_ID2" DataType="System.Int32"/>
+        <Column Name="EKLEYEN_KULLANICI_ID1" DataType="System.Int32"/>
+        <Column Name="KAYIT_TARIHI2" DataType="System.DateTime"/>
+        <Column Name="IK_UNVAN_ID1" DataType="System.Int32"/>
+        <Column Name="IK_UNVAN_ADI" DataType="System.String"/>
+        <Column Name="KULLANICI_ID3" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ADI1" DataType="System.String"/>
+        <Column Name="KULLANICI_SIFRE1" DataType="System.String"/>
+        <Column Name="AD_SOYAD1" DataType="System.String"/>
+        <Column Name="KULLANICI_DURUM_ID1" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TIPI_ID1" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TELEFON1" DataType="System.String"/>
+        <Column Name="KULLANICI_E_POSTA1" DataType="System.String"/>
+        <Column Name="MUSTERI_ID3" DataType="System.Int32"/>
+        <Column Name="PERSONEL_TIPI_ID1" DataType="System.Int32"/>
+        <Column Name="CINSIYET1" DataType="System.String"/>
+        <Column Name="DOGUM_TARIHI1" DataType="System.DateTime"/>
+        <Column Name="ISE_BASLAMA_TARIHI1" DataType="System.DateTime"/>
+        <Column Name="ISTEN_AYRILMA_TARIHI1" DataType="System.DateTime"/>
+        <Column Name="KAYIT_TARIHI3" DataType="System.DateTime"/>
+        <Column Name="KULLANICI_RESIM_ID1" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ID4" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ADI2" DataType="System.String"/>
+        <Column Name="KULLANICI_SIFRE2" DataType="System.String"/>
+        <Column Name="AD_SOYAD2" DataType="System.String"/>
+        <Column Name="KULLANICI_DURUM_ID2" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TIPI_ID2" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TELEFON2" DataType="System.String"/>
+        <Column Name="KULLANICI_E_POSTA2" DataType="System.String"/>
+        <Column Name="MUSTERI_ID4" DataType="System.Int32"/>
+        <Column Name="PERSONEL_TIPI_ID2" DataType="System.Int32"/>
+        <Column Name="CINSIYET2" DataType="System.String"/>
+        <Column Name="DOGUM_TARIHI2" DataType="System.DateTime"/>
+        <Column Name="ISE_BASLAMA_TARIHI2" DataType="System.DateTime"/>
+        <Column Name="ISTEN_AYRILMA_TARIHI2" DataType="System.DateTime"/>
+        <Column Name="KAYIT_TARIHI4" DataType="System.DateTime"/>
+        <Column Name="KULLANICI_RESIM_ID2" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ID5" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ADI3" DataType="System.String"/>
+        <Column Name="KULLANICI_SIFRE3" DataType="System.String"/>
+        <Column Name="AD_SOYAD3" DataType="System.String"/>
+        <Column Name="KULLANICI_DURUM_ID3" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TIPI_ID3" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TELEFON3" DataType="System.String"/>
+        <Column Name="KULLANICI_E_POSTA3" DataType="System.String"/>
+        <Column Name="MUSTERI_ID5" DataType="System.Int32"/>
+        <Column Name="PERSONEL_TIPI_ID3" DataType="System.Int32"/>
+        <Column Name="CINSIYET3" DataType="System.String"/>
+        <Column Name="DOGUM_TARIHI3" DataType="System.DateTime"/>
+        <Column Name="ISE_BASLAMA_TARIHI3" DataType="System.DateTime"/>
+        <Column Name="ISTEN_AYRILMA_TARIHI3" DataType="System.DateTime"/>
+        <Column Name="KAYIT_TARIHI5" DataType="System.DateTime"/>
+        <Column Name="KULLANICI_RESIM_ID3" DataType="System.Int32"/>
+        <Column Name="IZIN_REDDET" DataType="System.String"/>
+        <Column Name="MUHASEBE_YONETICISI_ID" DataType="System.Int32"/>
+        <Column Name="IK_PERSONEL_YAKINLIK_DERECESI_ID" DataType="System.Int32"/>
+        <Column Name="IK_MEDENI_HAL" DataType="System.Int32"/>
+        <Column Name="IK_PERSONEL_SINIFLANDIRMA" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="IK_YONETICI_ID" DataType="System.Int32"/>
+        <Column Name="DEVIR_IZNI" DataType="System.Int32"/>
+        <CommandParameter Name="IK_PERSONEL_IZIN_ID" DataType="8" Expression="[IK_PERSONEL_IZIN_ID]" DefaultValue="1"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="IK_PERSONEL_IZIN_ID" DataType="System.Int32" Expression="[IK_PERSONEL_IZIN_ID]"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="113.4">
+      <PictureObject Name="Picture2" Left="9.45" Width="207.9" Height="113.4" Image="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"/>
+      <TextObject Name="Text1" Left="255.15" Top="75.6" Width="255.15" Height="18.9" Text="YILLIK ÜCRETLİ İZİN TALEP FORMU" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text2" Left="633.15" Top="28.35" Width="75.6" Height="18.9" Text="Sayfa 1/1"/>
+      <TextObject Name="Text3" Left="652.05" Top="56.7" Width="56.7" Height="18.9" Text="Rev: 0"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="117.7" Width="718.2"/>
+    <DataBand Name="Data1" Top="122" Width="718.2" Height="907.2" AfterLayoutEvent="Data1_AfterLayout" DataSource="IK_PERSONEL_IZIN">
+      <TableObject Name="Table2" Left="396.9" Width="302.4" Height="349.24" Border.Shadow="true" Border.ShadowWidth="2" Border.Lines="All" Border.Width="3">
+        <TableColumn Name="Column6" Width="143.64"/>
+        <TableColumn Name="Column7" Width="39.69"/>
+        <TableColumn Name="Column8" Width="39.69"/>
+        <TableColumn Name="Column9" Width="39.69"/>
+        <TableColumn Name="Column10" Width="39.69"/>
+        <TableRow Name="Row12" Height="35.61">
+          <TableCell Name="Cell56" Border.Lines="Bottom" Border.Width="2" Fill.Color="236, 80, 13" Text="Bu bölüm personel tarafından doldurulacaktır." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White" ColSpan="5"/>
+          <TableCell Name="Cell57"/>
+          <TableCell Name="Cell58"/>
+          <TableCell Name="Cell59"/>
+          <TableCell Name="Cell60"/>
+        </TableRow>
+        <TableRow Name="Row13" Height="26.16">
+          <TableCell Name="Cell61" Text="İnsan Kaynakları Birimi'ne;" HorzAlign="Center" VertAlign="Center" ColSpan="5"/>
+          <TableCell Name="Cell62" HorzAlign="Center"/>
+          <TableCell Name="Cell63" HorzAlign="Center"/>
+          <TableCell Name="Cell64" HorzAlign="Center"/>
+          <TableCell Name="Cell65" HorzAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row14" Height="26.16">
+          <TableCell Name="Cell111" Text="Yıllık Ücretli İzin kullanma dönemim olan ...../ ...../ 20..... ile ...../ ...../ 20..... Tarihleri arasında kullanmam gereken izin hakkımı Yıllık Ücretli İzin Talep Formu'nda beyan ettiğim günlerde kullanmak istiyorum.	" HorzAlign="Center" VertAlign="Center" ColSpan="5" RowSpan="2"/>
+          <TableCell Name="Cell112" HorzAlign="Center"/>
+          <TableCell Name="Cell113" HorzAlign="Center"/>
+          <TableCell Name="Cell114" HorzAlign="Center"/>
+          <TableCell Name="Cell115" HorzAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row15" Height="63.96">
+          <TableCell Name="Cell71" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell72" HorzAlign="Center"/>
+          <TableCell Name="Cell73" HorzAlign="Center"/>
+          <TableCell Name="Cell74" HorzAlign="Center"/>
+          <TableCell Name="Cell75" HorzAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row16" Height="26.16">
+          <TableCell Name="Cell76" Text="	Gereğini arz ederim.&#13;&#10;	Saygılarımla;" VertAlign="Center" ColSpan="5" RowSpan="3"/>
+          <TableCell Name="Cell77"/>
+          <TableCell Name="Cell78"/>
+          <TableCell Name="Cell79"/>
+          <TableCell Name="Cell80"/>
+        </TableRow>
+        <TableRow Name="Row17" Height="20.49">
+          <TableCell Name="Cell81" VertAlign="Center"/>
+          <TableCell Name="Cell82"/>
+          <TableCell Name="Cell83"/>
+          <TableCell Name="Cell84"/>
+          <TableCell Name="Cell85"/>
+        </TableRow>
+        <TableRow Name="Row18" Height="12.04">
+          <TableCell Name="Cell86" VertAlign="Center"/>
+          <TableCell Name="Cell87"/>
+          <TableCell Name="Cell88"/>
+          <TableCell Name="Cell89"/>
+          <TableCell Name="Cell90"/>
+        </TableRow>
+        <TableRow Name="Row19" Height="29.94">
+          <TableCell Name="Cell91" Text="Personeli Adı Soyadı" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell92" ColSpan="4"/>
+          <TableCell Name="Cell93"/>
+          <TableCell Name="Cell94"/>
+          <TableCell Name="Cell95"/>
+        </TableRow>
+        <TableRow Name="Row20" Height="29.94">
+          <TableCell Name="Cell96" Border.Lines="All" Border.Style="Dash" Text="İzin Talep Tarihi" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell97" Border.Lines="Right, Top, Bottom" Border.Style="Dash" ColSpan="4"/>
+          <TableCell Name="Cell98" Border.Lines="All" Border.Style="Dash"/>
+          <TableCell Name="Cell99" Border.Lines="All" Border.Style="Dash"/>
+          <TableCell Name="Cell100" Border.Lines="All" Border.Style="Dash"/>
+        </TableRow>
+        <TableRow Name="Row21" Height="29.94">
+          <TableCell Name="Cell101" Text="İmza" HorzAlign="Center" VertAlign="Center" RowSpan="2"/>
+          <TableCell Name="Cell102" Border.Lines="Left, Right" Border.Style="Dash" ColSpan="4" RowSpan="2"/>
+          <TableCell Name="Cell103" Border.Lines="Left, Right" Border.Style="Dash"/>
+          <TableCell Name="Cell104" Border.Lines="Left, Right" Border.Style="Dash"/>
+          <TableCell Name="Cell105" Border.Lines="Left, Right" Border.Style="Dash"/>
+        </TableRow>
+        <TableRow Name="Row22" Height="48.84">
+          <TableCell Name="Cell106" Border.Lines="Left, Right" Border.Style="Dash" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell107" Border.Lines="Left, Right" Border.Style="Dash"/>
+          <TableCell Name="Cell108" Border.Lines="Left, Right" Border.Style="Dash"/>
+          <TableCell Name="Cell109" Border.Lines="Left, Right" Border.Style="Dash"/>
+          <TableCell Name="Cell110" Border.Lines="Left, Right" Border.Style="Dash"/>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table3" Left="9.45" Top="349.65" Width="689.85" Height="441.97" Border.Shadow="true" Border.ShadowWidth="2" Border.Lines="Left, Top, Bottom" Border.Width="3">
+        <TableColumn Name="Column11" Width="128.52"/>
+        <TableColumn Name="Column12" Width="119.07"/>
+        <TableColumn Name="Column13" Width="147.42"/>
+        <TableColumn Name="Column14" Width="147.42"/>
+        <TableColumn Name="Column15" Width="147.42"/>
+        <TableRow Name="Row23" Height="24.85">
+          <TableCell Name="Cell116" Fill.Color="236, 80, 13" Text="Bilgi" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White"/>
+          <TableCell Name="Cell117" Border.Lines="Left, Right, Top" Border.Width="3" Fill.Color="236, 80, 13" Text="Ücretli İzin Hakları" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White" ColSpan="4"/>
+          <TableCell Name="Cell118" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell119" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell120" HorzAlign="Center" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row24" Height="24.87">
+          <TableCell Name="Cell121" Border.Lines="Top, Bottom" Border.Width="3" Fill.Color="LightGray" Text="İzin Süresinin Tespiti" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell122" TextFill.Color="White"/>
+          <TableCell Name="Cell123" Border.Lines="All" Border.Width="3" Fill.Color="Gainsboro" Text="İznin Uygulanması - Yıllık Ücretli İzin Yönetmeliği Madde - 6 (26.04.2016 Tarihli Yeni Düzenleme Uyarınca Uygulanacaktır.)" HorzAlign="Center" VertAlign="Center" ColSpan="3" RowSpan="2"/>
+          <TableCell Name="Cell124"/>
+          <TableCell Name="Cell125"/>
+        </TableRow>
+        <TableRow Name="Row25" Height="24.87">
+          <TableCell Name="Cell126" Text="1 Yıldan 5 Yıla (5.Yıl dahil) - 14 gün" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell127" TextFill.Color="White"/>
+          <TableCell Name="Cell128"/>
+          <TableCell Name="Cell129"/>
+          <TableCell Name="Cell130"/>
+        </TableRow>
+        <TableRow Name="Row26" Height="24.87">
+          <TableCell Name="Cell131" Border.Lines="Top, Bottom" Border.Style="Dash" Border.Width="2" Text="5 Yıldan fazla 15 Yıldan az - 20 gün" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell132" TextFill.Color="White"/>
+          <TableCell Name="Cell133" Border.Lines="Left, Right, Bottom" Border.Width="3" ColSpan="3" RowSpan="5">
+            <TextObject Name="Text13" Left="9.45" Top="9.45" Width="425.25" Height="217.35" Text="Bu iznin 53 üncü maddede gösterilen süreler içinde işveren tarafından sürekli bir şekilde verilmesi zorunludur.&#13;&#10;Ancak, 53 üncü maddede öngörülen izin sürelieri, tarafların anlaşması ile&#13;&#10;                                                                 üzere                                 kullanılabilir. İşveren tarafından yıl içinde verilmiş bulunan diğer ücretli ve ücretsiz izinler veya dinlenme ve hastalık izinleri yıllık izne mahsup edilemez.&#13;&#10;Yıllık ücretli izin günlerinin hesabında izin süresine rastlayan ulusal bayram, hafta tatili ve genel tatil günleri izin süresinden sayılmaz. ......&#13;&#10;........ İşveren tarafından iş sözleşmesinin feshedilmesi halinde İş Kanununun 17 inci maddesinde belirtilen bildirim süresi ile 27 inci maddesi gereğince işçiye verilmesi zorunlu yeni iş arama izinleri, yıllık ücretli izin süreleri ile iç içe giremez.&#13;&#10;İşveren, işyerinde çalışan işçilerin yıllık ücretli izinlerini gösterir izin kayıt belgesi tutmak zorundadır. " Font="Arial, 9pt"/>
+            <TextObject Name="Text14" Left="9.45" Top="51.03" Width="226.8" Height="15.12" Text="bir bölümü on günden aşağı olmamak" Font="Arial, 9pt" TextFill.Color="Red"/>
+            <TextObject Name="Text15" Left="264.6" Top="51.03" Width="103.95" Height="15.12" Text="bölümler halinde" Font="Arial, 9pt" TextFill.Color="Red"/>
+          </TableCell>
+          <TableCell Name="Cell134"/>
+          <TableCell Name="Cell135"/>
+        </TableRow>
+        <TableRow Name="Row27" Height="24.87">
+          <TableCell Name="Cell136" Border.Lines="Bottom" Border.Width="3" Text="15 Yıl(dahil) ve daha fazla - 26 gün" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell137" TextFill.Color="White"/>
+          <TableCell Name="Cell138"/>
+          <TableCell Name="Cell139"/>
+          <TableCell Name="Cell140"/>
+        </TableRow>
+        <TableRow Name="Row28" Height="43.73">
+          <TableCell Name="Cell141" Border.Lines="Left, Bottom" Border.Width="3" Fill.Color="236, 80, 13" Text="Bu bölüm personel tarafından doldurulacaktır." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White" ColSpan="2"/>
+          <TableCell Name="Cell142"/>
+          <TableCell Name="Cell143"/>
+          <TableCell Name="Cell144"/>
+          <TableCell Name="Cell145"/>
+        </TableRow>
+        <TableRow Name="Row29" Height="100.42">
+          <TableCell Name="Cell146" Border.Lines="Left, Bottom" Border.Style="Dash" Border.Width="2" Text="Bilgi bölümde, bilgilendirme amaçlı olarak yer alan düzenlemeleri okudum ve Ücretli İzin Yönetmeliği kapsamında iznimi kullanıcağımı kabul ve beyan ediyorum." HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell147"/>
+          <TableCell Name="Cell148"/>
+          <TableCell Name="Cell149"/>
+          <TableCell Name="Cell150"/>
+        </TableRow>
+        <TableRow Name="Row30" Height="43.77">
+          <TableCell Name="Cell151" Border.Lines="Left, Bottom" Border.Style="Dash" Border.Width="2" Text="[IK_PERSONEL_IZIN.AD_SOYAD]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold" ColSpan="2"/>
+          <TableCell Name="Cell152"/>
+          <TableCell Name="Cell153"/>
+          <TableCell Name="Cell154"/>
+          <TableCell Name="Cell155"/>
+        </TableRow>
+        <TableRow Name="Row42" Height="27.49">
+          <TableCell Name="Cell229" Border.Lines="Left" Text="İmza" HorzAlign="Center" VertAlign="Center" ColSpan="2" RowSpan="2"/>
+          <TableCell Name="Cell230" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell231" Border.Lines="Left, Right, Bottom" Border.Width="3" Text="İzin İstediğim Zamanı - Yıllık Ücretli İzin Yönetmeliği Madde - 7" HorzAlign="Center" VertAlign="Center" ColSpan="3"/>
+          <TableCell Name="Cell232" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell233" HorzAlign="Center" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row43" Height="36.94">
+          <TableCell Name="Cell234" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell235" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell236" Border.Lines="Left, Right" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text16" Top="5.67" Width="434.7" Height="37.8" Text="İşçi yukarıdaki maddelere göre hak ettiği yıllık ücretli iznini, kullanmak istediği zamandan                          işverene yazılı olarak bildirir." Font="Arial, 9pt"/>
+            <TextObject Name="Text17" Left="66.15" Top="18.9" Width="75.6" Height="18.9" Text="en az bir ay" Font="Arial, 9pt" TextFill.Color="Red"/>
+          </TableCell>
+          <TableCell Name="Cell237"/>
+          <TableCell Name="Cell238"/>
+        </TableRow>
+        <TableRow Name="Row44" Height="65.29">
+          <TableCell Name="Cell239" Border.Lines="Left, Right, Top" Border.Width="3" Fill.Color="236, 80, 13" Text="Düşünce ve Onay" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White"/>
+          <TableCell Name="Cell240" Border.Lines="Right, Top" Border.Width="3" ColSpan="4">
+            <TextObject Name="Text18" Top="9.45" Width="548.1" Height="56.7" Text="Kimliği yukarıda yer alan personelimizin, ________ yılına ait yıllık ücretli izin hakkını                                                          tarihinde ayrılmak ve                        tarihinde göreve başlamak kaydıyla kullanması uygundur. " Font="Arial, 9pt"/>
+            <TextObject Name="Text20" Left="455.49" Top="7.56" Width="132.3" Height="15.12" Text="[IK_PERSONEL_IZIN.IK_PERSONEL_IZIN_BASLANGIC_TARIHI]" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+            <TextObject Name="Text21" Left="119.07" Top="22.68" Width="141.75" Height="15.12" Text="[IK_PERSONEL_IZIN.IK_PERSONEL_ISE_BASLANGIC_TARIHI]" Format="Date" Format.Format="d" Font="Arial, 10pt, style=Bold"/>
+            <TextObject Name="Text19" Left="226.8" Top="5.67" Width="47.25" Height="15.12" Text="[IK_PERSONEL_IZIN.IZIN_YILI]" NullValue="          " HorzAlign="Center" Font="Arial, 10pt, style=Bold" ParagraphFormat.LineSpacingType="Multiple"/>
+          </TableCell>
+          <TableCell Name="Cell241"/>
+          <TableCell Name="Cell242"/>
+          <TableCell Name="Cell243"/>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table5" Left="9.45" Top="793.8" Width="690.21" Height="92.6">
+        <TableColumn Name="Column22" Width="66.21"/>
+        <TableColumn Name="Column23" Width="170.16"/>
+        <TableColumn Name="Column24" Width="66.21"/>
+        <TableColumn Name="Column25" Width="170.16"/>
+        <TableColumn Name="Column26" Width="56.76"/>
+        <TableColumn Name="Column27" Width="160.71"/>
+        <TableRow Name="Row38" Height="23.15">
+          <TableCell Name="Cell200" Text="İnsan Kaynakları" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell201"/>
+          <TableCell Name="Cell202" Text="Departman Yöneticisi" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell203"/>
+          <TableCell Name="Cell204" Text="Genel Müdür" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell225"/>
+        </TableRow>
+        <TableRow Name="Row39" Height="23.15">
+          <TableCell Name="Cell205" Border.Lines="All" Border.Width="3" Text="İsim" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell206" Border.Lines="All" Border.Width="3" Text="[IK_PERSONEL_IZIN.AD_SOYAD1]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell207" Border.Lines="All" Border.Width="3" Text="İsim" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell208" Border.Lines="All" Border.Width="3" Text="[IK_PERSONEL_IZIN.AD_SOYAD2]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell209" Border.Lines="All" Border.Width="3" Text="İsim" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell226" Border.Lines="All" Border.Width="3" Text="[IK_PERSONEL_IZIN.AD_SOYAD3]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row40" Height="23.15">
+          <TableCell Name="Cell210" Border.Lines="All" Border.Width="3" Text="Görev" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell211" Border.Lines="All" Border.Width="3"/>
+          <TableCell Name="Cell212" Border.Lines="All" Border.Width="3" Text="Görev" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell213" Border.Lines="All" Border.Width="3"/>
+          <TableCell Name="Cell214" Border.Lines="All" Border.Width="3" Text="Görev" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell227" Border.Lines="All" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row41" Height="23.15">
+          <TableCell Name="Cell215" Border.Lines="All" Border.Width="3" Text="İmza" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell216" Border.Lines="All" Border.Width="3"/>
+          <TableCell Name="Cell217" Border.Lines="All" Border.Width="3" Text="İmza" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell218" Border.Lines="All" Border.Width="3"/>
+          <TableCell Name="Cell219" Border.Lines="All" Border.Width="3" Text="İmza" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell228" Border.Lines="All" Border.Width="3"/>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table4" Left="9.45" Width="368.55" Height="349.64" Border.Lines="All" Border.Width="3">
+        <TableColumn Name="Column28" Width="68.04"/>
+        <TableColumn Name="Column29" Width="105.84"/>
+        <TableColumn Name="Column30" Width="68.04"/>
+        <TableColumn Name="Column31" Width="68.04"/>
+        <TableColumn Name="Column32" Width="58.59"/>
+        <TableRow Name="Row45" Height="36.94">
+          <TableCell Name="Cell249" Border.Lines="Bottom" Border.Width="3" Fill.Color="236, 80, 13" Text="Bu bölüm insan kaynakları tarafından doldurulacaktır." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White" ColSpan="5"/>
+          <TableCell Name="Cell250" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell251" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell252" HorzAlign="Center" VertAlign="Center"/>
+          <TableCell Name="Cell253" HorzAlign="Center" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row46" Height="27.49">
+          <TableCell Name="Cell254" Border.Lines="Right, Bottom" Border.Width="3" Text="Personelin Adı Soyadı" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell255" Border.Lines="Right, Bottom"/>
+          <TableCell Name="Cell256" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text4" Top="3.78" Width="189" Height="18.9" Text="[IK_PERSONEL_IZIN.AD_SOYAD]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell257" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell258" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row47" Height="46.39">
+          <TableCell Name="Cell259" Border.Lines="Right, Bottom" Border.Width="3" Text="Görevi" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell260" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell261" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text5" Width="189" Height="46.12" Text="[IK_PERSONEL_IZIN.IK_UNVAN_ADI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell262" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell263" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row48" Height="27.49">
+          <TableCell Name="Cell264" Border.Lines="Right, Bottom" Border.Width="3" Text="İşe Giriş Tarihi" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell265" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell266" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text6" Width="189" Height="27.22" Text="[IK_PERSONEL_IZIN.ISE_BASLAMA_TARIHI]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell267" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell268" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row49" Height="27.49">
+          <TableCell Name="Cell269" Border.Lines="Right, Bottom" Border.Width="3" Text="Yıllık İzin Hakettiği Tarih" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell270" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell271" Border.Lines="Bottom" Border.Width="3" Text="[AddYears([IK_PERSONEL_IZIN.ISE_BASLAMA_TARIHI],1)]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="3"/>
+          <TableCell Name="Cell272" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell273" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row50" Height="27.49">
+          <TableCell Name="Cell274" Border.Lines="Right, Bottom" Border.Width="3" Text="İzin Başlangıç Tarihi" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell275" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell276" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text8" Width="189" Height="27.59" Text="[IK_PERSONEL_IZIN.IK_PERSONEL_IZIN_BASLANGIC_TARIHI]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell277" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell278" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row51" Height="36.94">
+          <TableCell Name="Cell279" Border.Lines="Right, Bottom" Border.Width="3" Text="İzin Bitiş(İşe Başlama) Tarihi" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell280" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell281" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text9" Width="189" Height="37.04" Text="[IK_PERSONEL_IZIN.IK_PERSONEL_ISE_BASLANGIC_TARIHI]" Format="Date" Format.Format="d" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell282" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell283" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row52" Height="27.49">
+          <TableCell Name="Cell284" Border.Lines="Right, Bottom" Border.Width="3" Text="İzin Gün Sayısı" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell285" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell286" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="txtIzinsure" Width="189" Height="18.9" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell287" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell288" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row53" Height="27.49">
+          <TableCell Name="Cell289" Border.Lines="Bottom" Border.Width="3" Fill.Color="236, 80, 13" Text="Bu bölüm personel tarafından doldurulacaktır." HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Italic" TextFill.Color="White" ColSpan="5"/>
+          <TableCell Name="Cell290"/>
+          <TableCell Name="Cell291"/>
+          <TableCell Name="Cell292"/>
+          <TableCell Name="Cell293"/>
+        </TableRow>
+        <TableRow Name="Row54" Height="27.49">
+          <TableCell Name="Cell294" Border.Lines="Right, Bottom" Border.Width="3" Text="İrtibat Telefon Numarası" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell295" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell296" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text11" Width="189" Height="27.59" Text="[IK_PERSONEL_IZIN.KULLANICI_TELEFON]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell297" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell298" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+        <TableRow Name="Row55" Height="36.94">
+          <TableCell Name="Cell299" Border.Lines="Right, Bottom" Border.Width="3" Text="İzinde Bulunacağı Adres" HorzAlign="Right" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell300" Border.Lines="Right, Bottom" Border.Width="3" HorzAlign="Right" VertAlign="Center"/>
+          <TableCell Name="Cell301" Border.Lines="Bottom" Border.Width="3" ColSpan="3">
+            <TextObject Name="Text12" Width="189" Height="37.04" Text="[IK_PERSONEL_IZIN.IZINDE_BULUNACAGI_YER]" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell302" Border.Lines="Bottom" Border.Width="3"/>
+          <TableCell Name="Cell303" Border.Lines="Bottom" Border.Width="3"/>
+        </TableRow>
+      </TableObject>
+      <HtmlObject Name="Html3" Left="567" Top="888.3" Width="132.3" Height="18.9" Text="FRM-İK01-Rev 0.0"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="1033.5" Width="718.2"/>
+  </ReportPage>
+</Report>

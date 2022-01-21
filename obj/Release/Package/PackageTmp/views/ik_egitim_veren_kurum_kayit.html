@@ -1,0 +1,74 @@
+﻿
+<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Eğitim Veren Kurum</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="tanimlamalar.ikegitimverenkurumlistesi"><i class="fa fa-list"></i> Eğitim Veren Kurum Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-mortar-board"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-mortar-board"></i>
+                        Eğitim Veren Kurum Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp; Lütfen Eğitim Veren Kurum bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmEgitimVerenKurum" id="frmEgitimVerenKurum" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Veren Kurum Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIK_EGITIM_VEREN_KURUM_ADI" ng-model="Info.IK_EGITIM_VEREN_KURUM_ADI" class="formEkleDuzenleInput form-control" placeholder="Eğitim veren kurum adını giriniz.">
+                                            <p ng-show="frmEgitimVerenKurum.txtIK_EGITIM_VEREN_KURUM_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="col-lg-10">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="IkEgitimVerenKurumEkleGuncelle(Info)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <button class="btn btn-primary" ui-sref="tanimlamalar.ikegitimverenkurumlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

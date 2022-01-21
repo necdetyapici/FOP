@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/07/2019 12:08:22" ReportInfo.Modified="01/08/2019 12:11:36" ReportInfo.CreatorVersion="2018.3.17.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+    
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/iYJvbkClNjl/xIVseX0BvlQUkZ06T1CtAlendK/zA1ztHealQLXYdsRFGJdM8KINzvK6IYGlq2ot4EKjnfkjfJez1QfD9aOx3zV/8k82e/JvZCDraSF07NzZ+Z9uJMGJiDJdZ035Z9pAvgGf02C9hpg==">
+      <TableDataSource Name="IK_ZIMMET" DataType="System.Int32" Enabled="true" TableName="IK_ZIMMET" SelectCommand="SELECT Z.IK_ZIMMET_VERILME_TARIHI, Z.IK_ZIMMET_IADE_TARIHI, Z.IK_ZIMMET_TESLIM_EDEN_KISI_ID, Z.IK_ZIMMET_TESLIM_ALAN_KISI_ID, Z.IK_ZIMMET_IADE_ALAN_KISI_ID, D.IK_DEMIRBAS_MARKA_ADI, D.IK_DEMIRBAS_MODEL_ADI, D.IK_DEMIRBAS_SERI_NO, TE.AD_SOYAD, TA.AD_SOYAD, P.IK_TC_NO, IA.AD_SOYAD&#13;&#10;FROM ((((IK_ZIMMET Z INNER JOIN IK_DEMIRBAS D ON Z.IK_DEMIRBAS_ID = D.IK_DEMIRBAS_ID &#13;&#10;) LEFT JOIN KULLANICILAR TE ON Z.IK_ZIMMET_TESLIM_EDEN_KISI_ID = TE.KULLANICI_ID &#13;&#10;) LEFT JOIN KULLANICILAR TA ON Z.IK_ZIMMET_TESLIM_ALAN_KISI_ID = TA.KULLANICI_ID &#13;&#10;) LEFT JOIN IK_PERSONEL P ON TA.KULLANICI_ID = P.KULLANICI_ID &#13;&#10;) LEFT JOIN KULLANICILAR IA ON Z.IK_ZIMMET_IADE_ALAN_KISI_ID = IA.KULLANICI_ID WHERE &#13;&#10;	IK_ZIMMET_TESLIM_ALAN_KISI_ID = @IK_ZIMMET_TESLIM_ALAN_KISI_ID  AND ISNULL(Z.IK_ZIMMET_IADE_ALAN_KISI_ID,0)=0">
+        <Column Name="IK_ZIMMET_VERILME_TARIHI" DataType="System.DateTime"/>
+        <Column Name="IK_ZIMMET_IADE_TARIHI" DataType="System.DateTime"/>
+        <Column Name="IK_ZIMMET_TESLIM_EDEN_KISI_ID" DataType="System.Int32"/>
+        <Column Name="IK_ZIMMET_TESLIM_ALAN_KISI_ID" DataType="System.Int32"/>
+        <Column Name="IK_ZIMMET_IADE_ALAN_KISI_ID" DataType="System.Int32"/>
+        <Column Name="IK_DEMIRBAS_MARKA_ADI" DataType="System.String"/>
+        <Column Name="IK_DEMIRBAS_MODEL_ADI" DataType="System.String"/>
+        <Column Name="IK_DEMIRBAS_SERI_NO" DataType="System.String"/>
+        <Column Name="AD_SOYAD" DataType="System.String"/>
+        <Column Name="AD_SOYAD1" DataType="System.String"/>
+        <Column Name="IK_TC_NO" DataType="System.String"/>
+        <Column Name="AD_SOYAD2" DataType="System.String"/>
+        <CommandParameter Name="IK_ZIMMET_TESLIM_ALAN_KISI_ID " DataType="8" Expression="[IK_ZIMMET_TESLIM_ALAN_KISI_ID]" DefaultValue="1065"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="IK_ZIMMET_TESLIM_ALAN_KISI_ID" DataType="System.Int32" Expression="[IK_ZIMMET_TESLIM_ALAN_KISI_ID]"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="122.85">
+      <TableObject Name="Table1" Left="9.45" Top="18.9" Width="699.3" Height="85.05">
+        <TableColumn Name="Column1" Width="223.02"/>
+        <TableColumn Name="Column2" Width="137.97"/>
+        <TableColumn Name="Column3" Width="71.82"/>
+        <TableColumn Name="Column4" Width="71.82"/>
+        <TableColumn Name="Column5" Width="194.67"/>
+        <TableRow Name="Row1" Height="85.05">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Color="OrangeRed" Border.Width="2">
+            <PictureObject Name="Picture1" Top="3.78" Width="207.9" Height="75.6" Image="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"/>
+          </TableCell>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Color="OrangeRed" Border.Width="2" ColSpan="3">
+            <TextObject Name="txtRaporBaslik" Left="28.35" Top="47.25" Width="217.35" Height="18.9" AfterDataEvent="Text1_AfterData" Text="ZIMMET TUTANAĞI" HorzAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell3"/>
+          <TableCell Name="Cell4"/>
+          <TableCell Name="Cell5" Border.Lines="All" Border.Color="OrangeRed" Border.Width="2" Text="Form No: FRM_İMD_01&#13;&#10;Yayın Tarihi: &#13;&#10;Revizyon No: -&#13;&#10;Revizyon Tarihi: -" VertAlign="Center">
+            <TextObject Name="txtguncelTarih" Left="75.6" Top="24.57" Width="94.5" Height="18.9" Text="08.01.2019"/>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="126.85" Width="718.2" Height="113.4">
+      <TableObject Name="Table2" Left="37.8" Top="9.45" Width="633.15" Height="85.05" Border.Lines="All" Border.Width="2">
+        <TableColumn Name="Column6" Width="126.63"/>
+        <TableColumn Name="Column7" Width="79.38"/>
+        <TableColumn Name="Column8" Width="126.63"/>
+        <TableColumn Name="Column9" Width="126.63"/>
+        <TableColumn Name="Column10" Width="173.88"/>
+        <TableRow Name="Row2" Height="28.35">
+          <TableCell Name="Cell6" Border.Lines="All" Text="PERSONEL BİLGİLERİ" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold" ColSpan="5"/>
+          <TableCell Name="Cell7" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell8" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell9" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell10" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="28.35">
+          <TableCell Name="Cell11" Border.Lines="All" Text="Adı ve Soyadı" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell12" Border.Lines="All"/>
+          <TableCell Name="Cell13" Border.Lines="All" ColSpan="3">
+            <TextObject Name="Text19" Width="207.9" Height="28.35" Text="[IK_ZIMMET.AD_SOYAD1]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell14" Border.Lines="All"/>
+          <TableCell Name="Cell15" Border.Lines="All"/>
+        </TableRow>
+        <TableRow Name="Row4" Height="28.35">
+          <TableCell Name="Cell16" Border.Lines="All" Text="T.C Kimlik Numarası" HorzAlign="Center" VertAlign="Center" ColSpan="2"/>
+          <TableCell Name="Cell17" Border.Lines="All"/>
+          <TableCell Name="Cell18" Border.Lines="All" ColSpan="3">
+            <TextObject Name="Text20" Width="207.9" Height="28.35" Text="[IK_ZIMMET.IK_TC_NO]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableCell>
+          <TableCell Name="Cell19" Border.Lines="All"/>
+          <TableCell Name="Cell20" Border.Lines="All"/>
+        </TableRow>
+      </TableObject>
+      <GroupHeaderBand Name="GroupHeader1" Top="244.25" Width="718.2" Height="56.7" Condition="[IK_ZIMMET.IK_ZIMMET_TESLIM_EDEN_KISI_ID]">
+        <TableObject Name="tblZimmet" Left="37.8" Width="633.15" Height="56.7" Border.Lines="All" Border.Width="2">
+          <TableColumn Name="Column11" Width="177.66"/>
+          <TableColumn Name="Column12" Width="158.76"/>
+          <TableColumn Name="Column13" Width="149.31"/>
+          <TableColumn Name="Column14" Width="73.71"/>
+          <TableColumn Name="Column15" Width="73.71"/>
+          <TableRow Name="Row5" Height="28.35">
+            <TableCell Name="Cell21" Text="TESLİM EDİLEN EMTİA BİLGİLERİ" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold" ColSpan="5"/>
+            <TableCell Name="Cell22" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell23" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell24" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell25" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableRow>
+          <TableRow Name="Row6" Height="28.35">
+            <TableCell Name="Cell26" Border.Lines="All" Text="Marka" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell27" Border.Lines="All" Text="Model" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell28" Border.Lines="All" Text="Seri No" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell29" Border.Lines="All" Text="Verilme Tarih" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+            <TableCell Name="Cell30" Border.Lines="All" Font="Arial, 10pt, style=Bold"/>
+          </TableRow>
+        </TableObject>
+        <DataBand Name="Data2" Top="304.95" Width="718.2" Height="28.35" DataSource="IK_ZIMMET">
+          <TableObject Name="Table4" Left="37.8" Width="633.15" Height="28.35" Border.Lines="All" Border.Width="2">
+            <TableColumn Name="Column21" Width="177.66"/>
+            <TableColumn Name="Column22" Width="158.76"/>
+            <TableColumn Name="Column23" Width="149.31"/>
+            <TableColumn Name="Column24" Width="73.71"/>
+            <TableColumn Name="Column25" Width="73.71"/>
+            <TableRow Name="Row9" Height="28.35">
+              <TableCell Name="Cell51" Border.Lines="All" Text="[IK_ZIMMET.IK_DEMIRBAS_MARKA_ADI]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+              <TableCell Name="Cell52" Border.Lines="All" Text="[IK_ZIMMET.IK_DEMIRBAS_MODEL_ADI]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+              <TableCell Name="Cell53" Border.Lines="All" Text="[IK_ZIMMET.IK_DEMIRBAS_SERI_NO]" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+              <TableCell Name="Cell54" Border.Lines="All" Text="[FormatDateTime([IK_ZIMMET.IK_ZIMMET_VERILME_TARIHI],&quot;dd/MM/yyyy&quot;)]" VertAlign="Center" Font="Arial, 10pt, style=Bold" ColSpan="2"/>
+              <TableCell Name="Cell55" Border.Lines="All" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            </TableRow>
+          </TableObject>
+        </DataBand>
+        <GroupFooterBand Name="GroupFooter1" Top="337.3" Width="718.2" Height="113.4">
+          <TextObject Name="txtTeslimAlanBaslik" Left="47.25" Top="37.8" Width="170.1" Height="18.9" Text="Teslim Alan Personel" HorzAlign="Center" VertAlign="Center"/>
+          <TextObject Name="txtTeslimEdenBaslik" Left="425.25" Top="37.8" Width="217.35" Height="18.9" Text="Teslim Eden İşveren yada Vekili" HorzAlign="Center" VertAlign="Center"/>
+          <TextObject Name="txtTeslimAlanAdSoyad" Left="47.25" Top="56.7" Width="189" Height="18.9" Text="[IK_ZIMMET.AD_SOYAD1]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="txtTeslimEdenAdSoyad" Left="425.25" Top="56.7" Width="217.35" Height="18.9" Text="[IK_ZIMMET.AD_SOYAD]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TextObject Name="txtTeslimAlanImza" Left="85.05" Top="75.6" Width="94.5" Height="18.9" Text="İmza" HorzAlign="Center" TextFill.Color="Silver"/>
+          <TextObject Name="txtTeslimEdenImza" Left="481.95" Top="75.6" Width="94.5" Height="18.9" Text="İmza" HorzAlign="Center" TextFill.Color="Silver"/>
+        </GroupFooterBand>
+      </GroupHeaderBand>
+      <DataBand Name="Data3" Top="454.7" Width="718.2" Height="94.5">
+        <TextObject Name="txtTeslimTanim" Left="37.8" Top="9.45" Width="623.7" Height="85.05" Text="	Mülkiyeti Emfa Yazılım Danışmanlık A.Ş'ye ait yukarıda belirtilen malzemeyi çalışır durumda eksiksiz olarak teslim aldım. Demirbaş olarak aldığım bu malzemeyi emeklilik, istifa veya görevden ayrılma gibi durumlarda eksiksiz ve çalışır durumda görevlilere teslim edeceğim. Teslim sırasında çıkıcak hasarlardan şahsımın sorumlu olduğunu ve hasarın şahsım tarafından karşılanacağını kabul ve taahhüt ederim." HorzAlign="Justify" VertAlign="Center"/>
+      </DataBand>
+    </DataBand>
+  </ReportPage>
+</Report>

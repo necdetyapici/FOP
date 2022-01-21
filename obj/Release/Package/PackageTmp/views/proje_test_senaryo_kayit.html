@@ -1,0 +1,179 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-bolt"></i>  Test Senaryo Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Test Senaryo bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeTestSenaryo" id="frmProjeTestSenaryo" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset ng-disabled="InfoProjeTestSenaryo.DURUM != null">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Test Senaryo No <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtTEST_SENARYO_NO" ng-model="InfoProjeTestSenaryo.TEST_SENARYO_NO" class="formEkleDuzenleInput form-control" ng-maxlength="15" ng-minlength="1" placeholder="Test senaryo no giriniz." required>
+                                                <p ng-show="frmProjeTestSenaryo.txtTEST_SENARYO_NO.$invalid && formCalistirildiProjeTestSenaryo" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Test Senaryo Tipi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTEST_SENARYO_TEST_TIPI_ID" name="cmbTEST_SENARYO_TEST_TIPI_ID" ng-model="InfoProjeTestSenaryo.TEST_SENARYO_TEST_TIPI_ID"
+                                                    data-live-search="true" title="Test Senaryo Tipi Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in TestSenaryoTestTipiListesi" deep-watch="true" data-value="item.TEST_SENARYO_TEST_TIPI_ID">
+                                                        <a>
+                                                            {{item.TEST_SENARYO_TEST_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeTestSenaryo.cmbTEST_SENARYO_TEST_TIPI_ID.$invalid && formCalistirildiProjeTestSenaryo" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Gereksinim <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="pull-right">
+                                                    <button class=" btn btn-info " type="button" ng-click="GereksinimSec()">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <button class=" btn btn-danger " type="button" ng-click="GereksinimTemizle()">
+                                                        <i class="fa fa-eraser"></i>
+                                                    </button>
+                                                </div>
+
+                                                <textarea type="text" name="txtPROJE_GEREKSINIM_ADI" id="txtPROJE_GEREKSINIM_ADI" style="resize:none;" ng-model="InfoProjeTestSenaryo.PROJE_GEREKSINIM_ADI" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" ng-required="InfoProjeTestSenaryo.PROJE_GEREKSINIM_ID == null && InfoProjeTestSenaryo.PROJE_GEREKSINIM_ADI == null" readonly></textarea>
+                                                <p ng-show="frmProjeTestSenaryo.txtPROJE_GEREKSINIM_ADI.$invalid && formCalistirildiProjeTestSenaryo" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-disabled="InfoProjeTestSenaryo.DURUM != null" ng-click="ProjeTestSenaryoEkleGuncelle(InfoProjeTestSenaryo)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary"
+                                                    ui-sref="proje.projelerkayit.talepyonetimsistemi.projetestsenaryolistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig" ng-show="projeTestSenaryoID > 0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list table-emfa">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td><b>Sıra</b></td>
+                                                <td><b>Aktör</b></td>
+                                                <td><b>Giriş Koşulu</b></td>
+                                                <td><b>Açıklama</b></td>
+                                                <td><b>Beklenen Sonuç</b></td>
+                                                <td><b>Aktif/Pasif</b></td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-sm btn-primary " type="button" ng-click="TestSenaryoAdimEkle(null)">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr ng-repeat="post in ProjeTestSenaryoTestAdimListesi | filter:ignoreTurkish" ng-if="ProjeTestSenaryoTestAdimListesi.length > 0">
+                                                <td>
+                                                    <span class="label label-success">{{post.SIRA }}</span>
+                                                </td>
+                                                <td>
+                                                    {{post.AKTOR }}
+                                                </td>
+                                                <td>
+                                                    {{ post.GIRIS_KOSULU}}
+                                                </td>
+                                                <td>
+                                                    {{ post.ACIKLAMA}}
+                                                </td>
+                                                <td>
+                                                    {{ post.BEKLENEN_SONUC}}
+                                                </td>
+                                                <td>
+                                                    <a class=" btn btn-sm btn-primary" ng-show="post.AKTIF_PASIF == false" ng-click="ProjeTestSenaryoTestAdimAktifPasif(post, post.AKTIF_PASIF=true)" tooltip="Aktifleştir" tooltip-append-to-body="true"><i class="glyphicon glyphicon-ok"></i><!-- Aktifleştir --></a>
+                                                    <a class=" btn btn-sm btn-danger" ng-show="post.AKTIF_PASIF == true" ng-click="ProjeTestSenaryoTestAdimAktifPasif(post, post.AKTIF_PASIF = false)" tooltip="Pasifleştir" tooltip-append-to-body="true"><i class="glyphicon glyphicon-ban-circle"></i><!-- Pasifleştir --></a>
+                                                </td>
+                                                <td class="actions">
+                                                    <div class="text-center">
+                                                        <button ng-click="TestSenaryoAdimEkle(post.PROJE_TEST_SENARYO_ADIM_ID)"  class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</button>
+                                                    </div>
+                                                </td>
+                                                <td class="actions">
+                                                    <div class="text-center">
+                                                        <button  ng-click="modalSilmeOnayiProjeTestSenaryoTestAdim(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr ng-if="ProjeTestSenaryoTestAdimListesi.length == 0 || ProjeTestSenaryoTestAdimListesi  == null">
+                                                <td colspan="7">
+                                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                        <i class="fa fa-exclamation-circle"></i>
+                                                        &nbsp;Test senaryosu adımları kaydı <strong>bulunmamaktadır.</strong>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>

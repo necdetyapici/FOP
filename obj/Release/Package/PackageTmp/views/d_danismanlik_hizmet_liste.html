@@ -1,0 +1,115 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content animated fadeInUp">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                        <i class="fa fa-h-square"></i> Danışmanlık Hizmeti ({{ Danismanlik.FirmaAdi }} firması, {{ Danismanlik.DanismanlikAlaniInfo.ADI }} danışmanlığı)
+                    </h5>
+                </div>
+                
+
+                <div class="ibox-content">
+                    <div class="m-b-lg">                        
+                        <div class="m-t-md">
+                            <div class="pull-right">
+                                <a ng-click="KayitAc()" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="DDanismanlikHizmetGetData()"> <i class="fa fa-refresh"></i> </button>
+                                <button class="btn btn-sm btn-primary" ui-sref="danismanlik.firmakayit.danismanliklistesi({ danismanlik: post.D_FIRMA_ID})">
+                                    <i class="fa fa-reply-all">  Geri</i>
+                                </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+
+                        <div class="project-list">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>Hizmet Adı</b></td>
+                                        <td><b>Başlangıç Tarihi</b></td>
+                                        <td><b>Gerçekleşen Bitiş Tarihi</b></td>
+                                        <td><b>Durum</b></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="post in DDanismanlikHizmetListesi | filter:ignoreTurkish">
+                                        <td class="table-main">
+                                            <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                            <a ng-click="KayitAc(post.D_DANISMANLIK_HIZMET_ID)">{{post.HIZMET_ADI}} </a><br />
+                                        </td>
+                                        <td>
+                                            {{post.BASLANGIC_TARIHI | tarihYokIseTire}}
+                                        </td>
+                                        <td>
+                                            {{post.GERCEKLESEN_BITIS | tarihYokIseTire}}
+                                        </td>
+                                        <td>
+                                            <a ng-class="post.AKTIF == true ? 'label label-primary' : 'label label-danger'" ng-click="AktifPasifOnayi(post)">{{post.AKTIF == true ? 'Aktif' : 'Pasif'}}</a>
+                                        </td>
+                                        <td class="form-actions">
+                                            <div class="pull-right">
+                                                <a ng-click="danismanlariGoster(post.D_DANISMANLIK_HIZMET_ID)" class="btn btn-sm btn-success" tooltip="Danışmanlar" tooltip-append-to-body="true"><i class="fa fa-group"></i></a>
+                                                <a ng-click="KayitAc(post.D_DANISMANLIK_HIZMET_ID)" class="btn btn-sm btn-success" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-pencil"></i><!-- Düzenle --></a>
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="DanismanGoster == true">
+                                        <td>
+                                            <label class="label-important">Danışmanlar</label>
+                                        </td>
+                                        <td colspan="4">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Danışman</label>
+                                                <div class="col-lg-6">
+
+                                                    <div class="project-people" style="text-align:left;">
+                                                        <ul style="margin-left:-45px;">
+                                                            <li ng-repeat="post in Danismanlar | filter:ignoreTurkish" style="display:inline-block; float: none; margin: 0 0 0 5px;">
+                                                                <a tooltip="{{post.KULLANICI_ADI_SOYADI}}" tooltip-append-to-body="true" ng-click="modalSilmeOnayiDanissman(post)" class="btn btn-sm btn-circle">
+                                                                    <img id="kullaniciFoto" ng-src="{{post.AvatarBase64}}" ng-show="post.AvatarBase64" class="img-sm" />
+                                                                    <img ng-src="{{post.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="post.AvatarBase64" class="imageContent img-sm">
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="pull-right">
+                                                        <button class=" btn btn-info " type="button" ng-click="DanismanEkle()" tooltip="İlgili Kişi Ekle">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                                
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="9" class="text-center">
+                                            <pagination ng-model="AramaKriter.SayfaNo" ng-change="DDanismanlikHizmetGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                        items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

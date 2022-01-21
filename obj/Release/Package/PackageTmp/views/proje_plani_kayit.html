@@ -1,0 +1,335 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig" ">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i>  Planı Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Planı bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProjePlani" id="frmProjePlani" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Task No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="500" ng-minlength="1" id="txtTASK_NO" name="txtTASK_NO" ng-model="InfoProjePlani.TASK_NO" class="formEkleDuzenleInput form-control" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Task Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtTASK_ADI" ng-model="InfoProjePlani.TASK_ADI" class="formEkleDuzenleInput form-control" placeholder="Task adı giriniz." required ng-maxlength="255" ng-minlength="1">
+                                            <p ng-show="frmProjePlani.txtTASK_ADI.$invalid && formCalistirildiProjePlani" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Üst Proje Planı</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="cmbUST_PROJE_PLANI_ID" name="cmbUST_PROJE_PLANI_ID" ng-model="InfoProjePlani.UST_PROJE_PLANI_ID"
+                                                data-live-search="true" title="Üst Proje Planı Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in ProjePlaniListesi" deep-watch="true" data-value="item.PROJE_PLANI_ID">
+                                                    <a>
+                                                        {{item.TASK_NO}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Başlangıç Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtBASLANGIC_TARIHI" ng-model="InfoProjePlani.BASLANGIC_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput " required>
+                                            </div>
+                                            <p ng-show="frmProjePlani.txtBASLANGIC_TARIHI.$invalid && formCalistirildiProjePlani" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Bitiş Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtBITIS_TARIHI" ng-model="InfoProjePlani.BITIS_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput " required>
+                                            </div>
+                                            <p ng-show="frmProjePlani.txtBITIS_TARIHI.$invalid && formCalistirildiProjePlani" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Task Sahibi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbTASK_SAHIBI_PROJE_PERSONEL_ID" name="cmbTASK_SAHIBI_PROJE_PERSONEL_ID" ng-model="InfoProjePlani.TASK_SAHIBI_PROJE_PERSONEL_ID"
+                                                data-live-search="true" title="Task Sahibi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjePersonelListesiGenel" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                    <a>
+                                                        {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjePlani.cmbTASK_SAHIBI_PROJE_PERSONEL_ID.$invalid && formCalistirildiProjePlani" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Açıklama</label>
+                                        <div class="col-sm-10">
+                                            <textarea type="text" name="txtACIKLAMA" style="resize:none;"  ng-minlength="1" ng-model="InfoProjePlani.ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="ProjePlaniOnay(1)" class="btn btn-sm btn-primary" ng-hide="InfoProjePlani.IS_DURUMU_ID == 1 || InfoProjePlani.PROJE_PLANI_ID == null" tooltip="Aç" tooltip-append-to-body="true"><i class="fa fa-play-circle"></i> Aç</button>
+                                            <button ng-click="ProjePlaniOnay(2)" class="btn btn-sm btn-info" ng-hide="InfoProjePlani.IS_DURUMU_ID == 2 || InfoProjePlani.PROJE_PLANI_ID == null" tooltip="Gözden Geçir" tooltip-append-to-body="true"><i class="fa fa-eye"></i> Gözden Geçir</button>
+                                            <button ng-click="ProjePlaniOnay(3)" class="btn btn-sm btn-danger" ng-hide="InfoProjePlani.IS_DURUMU_ID == 3 || InfoProjePlani.PROJE_PLANI_ID == null" tooltip="Kapat" tooltip-append-to-body="true"><i class="fa fa-power-off"></i> Kapat</button>
+                                            <button ng-click="ProjePlaniOnay(4)" class="btn btn-sm btn-warning" ng-hide="InfoProjePlani.IS_DURUMU_ID == 4 || InfoProjePlani.PROJE_PLANI_ID == null" tooltip="Red" tooltip-append-to-body="true"><i class="fa fa-exclamation-triangle"></i> Red</button>
+
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjePlaniEkleGuncelle(InfoProjePlani)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary"
+                                               ui-sref="proje.projelerkayit.plan.projeplanilistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig" ng-show="projePlanID > 0">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-user-plus"></i>  Plan İlgili  Bilgileri
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeplaniplanilgili" id="frmProjeplaniplanilgili" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-12 control-label txt-algn-left">Task No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <input type="text" readonly name="txtTASK_NO" ng-model="InfoProjePlani.TASK_NO" class="form-control formEkleDuzenleInput">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-12 control-label  txt-algn-left">Personel Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-12">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_PERSONEL_ID" name="cmbPROJE_PERSONEL_ID" ng-model="InfoProjePlanIlgili.PROJE_PERSONEL_ID"
+                                                data-live-search="true" title="Personel Adı Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjePersonelListesiGenel" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                    <a>
+                                                        {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeplaniplanilgili.cmbPROJE_PERSONEL_ID.$invalid && formCalistirildiProjePlaniIlgili" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <a class=" btn btn-success " ng-click="ProjePlaniPlanIlgiliEkleGuncelle (InfoProjePlanIlgili)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig" ng-if="projePlanID> 0">
+    <div class="row">
+        <div class="col-lg-12">
+            <!--<div class="wrapper wrapper-content animated fadeInUp">-->
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Plan İlgili Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-ProjePlaniPersonelAta" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel Adı</label>
+                                        <div class="col-lg-5">
+                                            <input type="text" name="txtPROJE_PERSONEL_ADI" ng-model="AramaKriterIlgili.PROJE_PERSONEL_ADI" class="form-control formEkleDuzenleInput" placeholder="Personel adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="ProjePlaniPlanIlgiliGetData(AramaKriterIlgili, AramaKriterIlgili.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizleIlgili()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjePlaniPlanIlgiliListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="filtreTemizleIlgili()" data-ui-sref-opts="{reload:true}"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisiProjePlanIlgili }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Personel Adı</b></td>
+                                            <td><b>Task No</b></td>
+                                            <td><b>Kayıt Tarihi</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in ProjePlaniPlanIlgiliListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                {{post.PROJE_PERSONEL_ADI}}
+                                            </td>
+
+                                            <td>
+                                                {{post.PROJE_PLANI_ADI}}
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-primary label-kayit-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.KAYIT_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td class="form-actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="modalSilmeOnayiIlgili(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriterIlgili.SayfaNo" ng-change="ProjePlaniPlanIlgiliGetData(AramaKriterIlgili)" total-items="toplamKayitSayisiProjePlanIlgili"
+                                                            items-per-page="AramaKriterIlgili.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjePlaniPlanIlgiliListesi.length==0 || ProjePlaniPlanIlgiliListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="filtreTemizleIlgili()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İlgili kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

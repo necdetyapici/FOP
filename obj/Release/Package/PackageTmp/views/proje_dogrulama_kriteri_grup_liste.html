@@ -1,0 +1,103 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i>Doğrulama Kriteri Grup Listesi
+                    </h5>                   
+                </div>
+                <div class="ibox-content" ng-if="ProjeDogrulamaKriteriGrupListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="proje.projelerkayit.plan.projedogrulamakriterigrupkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Grup Adı</b></td>
+                                            <td><b>Süreç Adı</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in ProjeDogrulamaKriteriGrupListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td>
+                                                <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.projedogrulamakriterigrupkayit({ projeDogrulamaKriteriGrupID: post.PROJE_DOGRULAMA_KRITERI_GRUP_ID})">{{post.ADI}}</a><br />
+
+                                            </td>
+                                            <td>
+                                                {{post.TALEP_PROJE_SUREC_TIPI_ADI}}
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <button ui-sref="proje.projelerkayit.plan.projedogrulamakriterigrupkayit({ projeDogrulamaKriteriGrupID: post.PROJE_DOGRULAMA_KRITERI_GRUP_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</button>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <button ng-click="modalSilmeOnayi(post)" ng-disabled="post.DURUM != null" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjeDogrulamaKriteriGrupGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeDogrulamaKriteriGrupListesi.length==0 || ProjeDogrulamaKriteriGrupListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="proje.projelerkayit.plan.projedogrulamakriterigrupkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeDogrulamaKriteriGrupGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Proje doğrulam kriteri grup kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="proje.projelerkayit.plan.projedogrulamakriterigrupkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

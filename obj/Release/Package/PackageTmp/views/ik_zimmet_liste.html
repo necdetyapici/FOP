@@ -1,0 +1,256 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                İnsan Kaynakları
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-barcode"></i>
+                    Zimmet
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Zimmet Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkZimmet" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Marka</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_DEMIRBAS_MARKA_ADI" id="txtIK_DEMIRBAS_MARKA_ADI" ng-model="AramaKriter.IK_DEMIRBAS_MARKA_ADI" class="form-control formEkleDuzenleInput  " placeholder="Marka giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Model</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_DEMIRBAS_MODEL_ADI" id="txtIK_DEMIRBAS_MODEL_ADI" ng-model="AramaKriter.IK_DEMIRBAS_MODEL_ADI" class="form-control formEkleDuzenleInput   " placeholder="Model giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Seri No</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_DEMIRBAS_SERI_NO" id="txtIK_DEMIRBAS_SERI_NO" ng-model="AramaKriter.IK_DEMIRBAS_SERI_NO" class="form-control formEkleDuzenleInput " placeholder="Seri no giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Teslim Alan</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_ZIMMET_TESLIM_ALAN_KISI_ADI" id="txtIK_ZIMMET_TESLIM_ALAN_KISI_ADI" ng-model="AramaKriter.IK_ZIMMET_TESLIM_ALAN_KISI_ADI" class="form-control formEkleDuzenleInput " placeholder="Teslim alan giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Teslim Eden</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_ZIMMET_TESLIM_EDEN_KISI_ADI" id="txtIK_ZIMMET_TESLIM_EDEN_KISI_ADI" ng-model="AramaKriter.IK_ZIMMET_TESLIM_EDEN_KISI_ADI" class="form-control formEkleDuzenleInput " placeholder="Teslim eden giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="IkZimmetGetData(AramaKriter, AramaKriter.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkZimmetListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikzimmetkayit" data-ui-sref-opts="{reload:true}" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkZimmetGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+
+                            <div class="pull-right dropdown" dropdown="" style="margin-right:5px;">
+                                <a class="dropdown-toggle" dropdown-toggle="" href="" aria-haspopup="true" aria-expanded="false">
+                                    <span class="clear">
+                                        <span class="m-t-xs">
+                                            <button type="button" class="btn btn-sm btn-primary" tooltip="Zimmet Listesi"><i class="fa fa-print"></i></button>
+                                        </span>
+                                    </span>
+                                </a>
+
+                                <ul class="dropdown-menu animated fadeIn m-t-xs">
+                                    <li><a ng-click="ZimmetFormuYazdir(null, dokumanFormTipi.GenelZimetListesiFormu)">Rapor Al</a></li>
+                                    <li><a ng-click="ZimmetFormuYazdir(null, dokumanFormTipi.GenelZimmetEnvanterFormu)">Envanter Rapor Al</a></li>
+                                </ul>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Demirbaş Marka / Model / Seri No</b></td>
+                                            <td><b>Verilen Tarih</b></td>
+                                            <td><b>İade Tarih</b></td>
+                                            <td><b>Teslim Eden Kişi</b></td>
+                                            <td><b>Teslim Alan Kişi</b></td>
+                                            <td><b>İade Alan Kişi</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkZimmetListesi | filter:txtArama">
+                                            <td class="project-title">
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="editLink-Emfa">
+                                                <a ui-sref="insankaynaklari.ikzimmetkayit({ikZimmetID: post.IK_ZIMMET_ID})">{{post.IK_DEMIRBAS_MARKA_ADI}} / {{post.IK_DEMIRBAS_MODEL_ADI}} / {{post.IK_DEMIRBAS_SERI_NO}}</a><br />
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.IK_ZIMMET_VERILME_TARIHI | tarih}}
+
+                                                </span>
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-danger" ng-if="post.IK_ZIMMET_IADE_TARIHI != null">
+                                                    <i class="fa fa-calendar"> </i>
+                                                    {{ post.IK_ZIMMET_IADE_TARIHI | tarih }}
+
+                                                </span>
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                {{post.IK_ZIMMET_TESLIM_EDEN_KISI_ADI}}
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                {{post.IK_ZIMMET_TESLIM_ALAN_KISI_ADI}}
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                {{post.IK_ZIMMET_IADE_ALAN_KISI_ADI}}
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <button ng-click="ZimmetFormuYazdir(post.IK_ZIMMET_ID, dokumanFormTipi.KullaniciZimmetFormu)" class="btn btn-sm btn-info" tooltip="Zimmet Formu" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                    <button ng-click="ZimmetFormuYazdir(post.IK_ZIMMET_ID, dokumanFormTipi.KullaniciZimmetIadeFormu)" class="btn btn-sm btn-info" tooltip="İade Formu" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="insankaynaklari.ikzimmetkayit({ikZimmetID: post.IK_ZIMMET_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="IkZimmetGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="ibox-content" ng-if="IkZimmetListesi.length==0 || IkZimmetListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="insankaynaklari.ikzimmetkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkZimmetGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İnsan kaynaklarına bağlı zimmet kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="insankaynaklari.ikzimmetkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,31 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title"> Talep İlgili Kişi Ekle</h4>
+        
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmTalepIlgili" id="frmTalepIlgili" class="form-horizontal" accessible-form>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Talep İlgili<span class="text-danger">*</span></label>
+                <div class="col-lg-8">
+                    <ol class="nya-bs-select form-control" id="sel_TALEP_PROJE_ILGI_KULLANICI_ID" name="sel_TALEP_PROJE_ILGI_KULLANICI_ID" ng-model="InfoTalepIlgili.TALEP_PROJE_ILGI_KULLANICI"
+                        data-live-search="true" title="Talep İlgili Seçiniz" data-size="5" required="true">
+                        <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item">
+                            <a>
+                                {{item.AD_SOYAD}}
+                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                            </a>
+                        </li>
+                    </ol>
+                    <p ng-show="frmTalepIlgili.sel_TALEP_PROJE_ILGI_KULLANICI_ID.$invalid && formCalistirildiTalepProjeIlgili" class="validation">Bu alan boş bırakılamaz.</p>
+                </div>
+            </div>
+            </form>
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="TalepIlgiliEkleOnKontrol(InfoTalepIlgili, frmTalepIlgili)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="GeriTalepIlgili()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

@@ -1,0 +1,499 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Gündem Talep Ekle</h4>
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmToplantiGundemTalepProje" id="frmToplantiGundemTalepProje" novalidate class="form-horizontal" accessible-form>
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <fieldset ng-disabled="talepKapaliDurumu">
+                            <div class=" row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_TALEP_TIPI_ID" name="cmb_TALEP_TIPI_ID" ng-model="InfoGundemTalep.TALEP_TIPI_ID" ng-change="TalepTipi(InfoGundemTalep.TALEP_TIPI_ID)"
+                                                data-live-search="true" title="Talep Tipi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in TalepListesi" deep-watch="true" data-value="item.TALEP_TIPI_ID">
+                                                    <a>
+                                                        {{item.TALEP_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmToplantiGundemTalepProje.cmb_TALEP_TIPI_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <label class="col-lg-4 control-label">Proje Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ID" name="cmb_PROJE_ID" ng-model="InfoGundemTalep.PROJE_ID"
+                                                data-live-search="true" title="Proje Seçiniz" data-size="5" required="true" ng-change="ProjeSec()">
+                                                <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                    <a>
+                                                        {{item.PROJE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmToplantiGundemTalepProje.cmb_PROJE_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Modül</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_MODUL_ID" name="cmb_PROJE_MODUL_ID" allow-clear="true" ng-model="$parent.InfoGundemTalep.PROJE_MODUL_ID"
+                                                data-live-search="true" title="Modül Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                    <a>
+                                                        {{item.MODUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show="talepTipiId != 8 && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                        <label class="col-lg-4 control-label">İterasyon<span ng-show="talepTipiId == 6 || talepTipiId == 2 || talepTipiId == 3" class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ITERASYON_ID" name="cmb_PROJE_ITERASYON_ID" allow-clear="true" ng-model="InfoGundemTalep.PROJE_ITERASYON_ID" ng-required="(talepTipiId == 6 || talepTipiId == 2 || talepTipiId == 3) && InfoGundemTalep.PROJE_ITERASYON_ID == null && $storage.IS_KURUM_MUSTERI_KULLANICI == false"
+                                                data-live-search="true" title="İterasyon Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in ProjeIterasyonListesi" deep-watch="true" data-value="item.PROJE_ITERASYON_ID">
+                                                    <a>
+                                                        {{item.PROJE_ITERASYON_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmToplantiGundemTalepProje.cmb_PROJE_ITERASYON_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div ng-show="talepTipiGereksinimDurumu">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Gereksinim <span ng-hide="talepTipiId == 2" class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="pull-right">
+                                                    <button class=" btn btn-info " type="button" ng-click="TalepGereksinimListeGoster()" tooltip="Gereksinim Listesini Göster">
+                                                        <i class="fa fa-list"></i>
+                                                    </button>
+                                                    <button class=" btn btn-info " type="button" ng-click="GereksinimSec()" tooltip="Gereksinim Ekle">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+
+                                                <!--<textarea type="text" name="txtPROJE_GEREKSINIM_ADI" id="txtPROJE_GEREKSINIM_ADI" style="resize:none;" ng-model="InfoGundemTalep.PROJE_GEREKSINIM_ADI" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" readonly ng-required="(talepTipiId == 6 ||  talepTipiId == 3) && InfoGundemTalep.PROJE_GEREKSINIM_ADI == null && InfoGundemTalep.PROJE_GEREKSINIM_ID == null  && $storage.IS_KURUM_MUSTERI_KULLANICI == false"></textarea>-->
+
+                                                <br />
+                                                <div class="pull-left">
+                                                    <p ng-show="(talepTipiId == 6 ||  talepTipiId == 3) && InfoGundemTalep.TalepGereksinimListesi.length == 0 && $storage.IS_KURUM_MUSTERI_KULLANICI == false && formCalistirildiGundemTalep " class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Atayan <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtTALEP_ATAYAN_AD_SOYAD" readonly ng-model="$storage.AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Talep Atayan">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-if="($storage.IS_KURUM_MUSTERI_KULLANICI == true)">
+                                        <label class="col-lg-4 control-label">Talep Sahibi</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" readonly ng-maxlength="255" ng-minlength="1" name="txtTALEP_SAHIBI_ADI" ng-model="InfoGundemTalep.TALEP_SAHIBI_KULLANICI_ADI" class="formEkleDuzenleInput form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-if="InfoGundemTalep.TALEP_PROJE_ID == null && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                        <label class="col-lg-4 control-label">Talep Sahibi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_KULLANICI_ID" name="cmb_KULLANICI_ID" ng-model="InfoGundemTalep.KULLANICI_ID"
+                                                data-live-search="true" title="Talep Sahibi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmToplantiGundemTalepProje.cmb_KULLANICI_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-hide="kurumDurumu">
+                                        <label class="col-lg-4 control-label">Talep İlgili </label>
+                                        <div class="col-lg-6">
+
+                                            <div class="project-people" style="text-align:left;">
+                                                <ul style="margin-left:-45px;">
+                                                    <li ng-repeat=" postIlgili in TalepProjeIlgiListesi" style="display:inline-block; float: none; margin: 0 0 0 5px;">
+                                                        <a tooltip-append-to-body="true"  ng-click="modalSilmeOnayiTalepIlgili(postIlgili)" class="btn btn-sm btn-circle">
+                                                            <img id="kullaniciFoto" tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}" ng-src="{{postIlgili.AvatarBase64}}" ng-show="postIlgili.AvatarBase64" class="img-sm" />
+                                                            <img ng-src="{{postIlgili.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postIlgili.AvatarBase64" tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}" class="imageContent img-sm">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-info " type="button" ng-click="TalepIlgiliEkle()">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Konu<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtTALEP_PROJE_KONU" id="txtTALEP_PROJE_KONU" style="resize:none;" ng-maxlength="255" ng-minlength="1" ng-model="InfoGundemTalep.TALEP_PROJE_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep konu giriniz." required></textarea>
+                                            <p ng-show="frmToplantiGundemTalepProje.txtTALEP_PROJE_KONU.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="form-group" ng-hide="kurumDurumu">
+                                        <label class="col-lg-4 control-label">Talep Öngörülen Zaman(Saat)</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                                <input type="text" name="txtTALEP_ONGORULEN_ZAMAN" value="09:30" ng-model="InfoGundemTalep.TALEP_ONGORULEN_ZAMAN" clock-picker data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Talep öngörülen zaman(saat) giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="form-group" ng-hide="kurumDurumu">
+                                        <label class="col-lg-4 control-label">Planlanan Başlangıç Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" ng-model="InfoGundemTalep.TALEP_PLANLANAN_BASLANGIC_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" ng-required="(InfoGundemTalep.TALEP_PLANLANAN_BASLANGIC_TARIHI == null)  && ($storage.IS_KURUM_MUSTERI_KULLANICI == false)" ng-readonly=" $storage.IS_KURUM_MUSTERI_KULLANICI" />
+                                            </div>
+                                            <p ng-show="frmToplantiGundemTalepProje.txtTALEP_PLANLANAN_BASLANGIC_TARIHI.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-hide="kurumDurumu">
+                                        <label class="col-lg-4 control-label">Planlanan Bitiş Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_PLANLANAN_BITIS_TARIHI" ng-model="InfoGundemTalep.TALEP_PLANLANAN_BITIS_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" ng-required="(InfoGundemTalep.TALEP_PLANLANAN_BITIS_TARIHI == null)  && ($storage.IS_KURUM_MUSTERI_KULLANICI == false)" ng-readonly=" $storage.IS_KURUM_MUSTERI_KULLANICI" />
+                                            </div>
+                                            <p ng-show="frmToplantiGundemTalepProje.txtTALEP_PLANLANAN_BITIS_TARIHI.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show=" (talepTipiId == 3 || talepTipiId == 6 || talepTipiId == 7) && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                        <label class="col-lg-4 control-label">Süreç Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtSUREC_ADI" class="formEkleDuzenleInput form-control" ng-model="InfoGundemTalep.SurecAdi" readonly>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Döküman</label>
+                                        <div class="col-lg-8">
+                                            <label tooltip="Dökuman yüklemek için tıklayınız." for="fileupload" class="btn btn-sm btn-primary">
+                                                <input class="hide ng-isolate-scope" type="file" id="fileupload" name="fileupload" ng-file-model="$parent.InfoGundemTalep.InfoYeniDokumanListesi" multiple accept="image/x-png, image/gif, image/jpeg, application/*">
+                                                <i class="fa fa-cloud-upload"></i>&nbsp;Yeni Dosya Yükle
+                                            </label>
+                                            <div ng-repeat="file in $parent.InfoGundemTalep.InfoYeniDokumanListesi">
+                                                {{file.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="ibox-content">
+                                            <label class="control-label" style="padding-bottom:5px;">Açıklama</label>
+                                            <div summernote class="summernote" id="txtTALEP_PROJE_ACIKLAMA" config="$parent.options" ng-model="InfoGundemTalep.TALEP_PROJE_ACIKLAMA">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="ibox float-e-margins" ng-if="talepTipiId == 1">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-suitcase"></i>  DFI Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen DFI bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Süreç<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_SUREC_ID" name="cmb_SUREC_ID" ng-model="InfoGundemTalep.InfoDfi.SUREC_ID"
+                                            data-live-search="true" title="Süreç Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in SurecListesi" deep-watch="true" data-value="item.SUREC_ID">
+                                                <a>
+                                                    {{item.SUREC_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_SUREC_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+
+                        <div class=" row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">DFI Uygunsuzluk Neden Açıklama</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoGundemTalep.InfoDfi.TALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI uygunsuz neden açıklama giriniz."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">DFI Tekrar Engelleme Faaliyet Açıklama</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoGundemTalep.InfoDfi.TALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI tekrar engelleme faaliyet açıklama giriniz."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Kök Neden</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtKOK_NEDEN" style="resize:none;" ng-minlength="1" ng-model="InfoGundemTalep.InfoDfi.KOK_NEDEN" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI Kök neden giriniz."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins" ng-if="talepTipiId== 2 &&  $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-suitcase"></i>  Problem Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Problem bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Proje Etki<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_PROJE_ETKI_ID" name="cmb_PROJE_ETKI_ID" ng-model="InfoGundemTalep.InfoProblem.PROJE_ETKI_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData(InfoGundemTalep.InfoProblem.PROJE_ETKI_ID, InfoGundemTalep.InfoProblem.PROJE_ACILIYET_ID)"
+                                            data-live-search="true" title="Proje Etki Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in ProjeEtkiListesi" deep-watch="true" data-value="item.PROJE_ETKI_ID">
+                                                <a>
+                                                    {{item.PROJE_ETKI_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_PROJE_ETKI_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Proje Aciliyet<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_PROJE_ACILIYET_ID" name="cmb_PROJE_ACILIYET_ID" ng-model="InfoGundemTalep.InfoProblem.PROJE_ACILIYET_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData(InfoGundemTalep.InfoProblem.PROJE_ETKI_ID, InfoGundemTalep.InfoProblem.PROJE_ACILIYET_ID)"
+                                            data-live-search="true" title="Proje Aciliyet Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in ProjeAciliyetListesi" deep-watch="true" data-value="item.PROJE_ACILIYET_ID">
+                                                <a>
+                                                    {{item.PROJE_ACILIYET_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_PROJE_ACILIYET_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label"> Aciliyet Etki Sonucu <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <input type="text" ng-maxlength="255" ng-minlength="1" name="txtPROJE_ACILIYET_ETKI_SONUC_ID" ng-model="InfoProblemHesap.PROJE_ACILIYET_ETKI_SONUC_ADI" class="formEkleDuzenleInput form-control" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Sınıflandırma Tipi<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" name="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" ng-model="InfoGundemTalep.InfoProblem.TALEP_SINIFLANDIRMA_TIPI_ID"
+                                            data-live-search="true" title="Sınıflandırma Tipini Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in TalepSiniflandirmaListesi" deep-watch="true" data-value="item.TALEP_SINIFLANDIRMA_TIPI_ID">
+                                                <a>
+                                                    {{item.TALEP_SINIFLANDIRMA_TIPI_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_TALEP_SINIFLANDIRMA_TIPI_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Problem Açıklama</label>
+                                    <div class="col-sm-10">
+                                        <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_PROBLEM_ACIKLAMA" style="resize:none;" ng-model="InfoGundemTalep.InfoProblem.TALEP_PROJE_TALEP_TIPI_PROBLEM_ACIKLAMA" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Problem açıklama giriniz."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins" ng-if="talepTipiId == 3 && InfoGundemTalep.TALEP_PROJE_ID == null">
+
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-suitcase"></i>  Değişiklik Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Değişiklik bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Proje Etki<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_PROJE_ETKI_ID" name="cmb_PROJE_ETKI_ID" ng-model="InfoGundemTalep.InfoDegisiklik.PROJE_ETKI_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData(InfoGundemTalep.InfoDegisiklik.PROJE_ETKI_ID, InfoGundemTalep.InfoDegisiklik.PROJE_ACILIYET_ID)"
+                                            data-live-search="true" title="Proje Etki Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in ProjeEtkiListesi" deep-watch="true" data-value="item.PROJE_ETKI_ID">
+                                                <a>
+                                                    {{item.PROJE_ETKI_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_PROJE_ETKI_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Proje Aciliyet<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_PROJE_ACILIYET_ID" name="cmb_PROJE_ACILIYET_ID" ng-model="InfoGundemTalep.InfoDegisiklik.PROJE_ACILIYET_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData(InfoGundemTalep.InfoDegisiklik.PROJE_ETKI_ID, InfoGundemTalep.InfoDegisiklik.PROJE_ACILIYET_ID)"
+                                            data-live-search="true" title="Proje Aciliyet Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in ProjeAciliyetListesi" deep-watch="true" data-value="item.PROJE_ACILIYET_ID">
+                                                <a>
+                                                    {{item.PROJE_ACILIYET_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_PROJE_ACILIYET_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label"> Aciliyet Etki Sonucu <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <input type="text" ng-maxlength="255" ng-minlength="1" name="txtPROJE_ACILIYET_ETKI_SONUC_ADI" ng-model="InfoDegisiklikHesap.PROJE_ACILIYET_ETKI_SONUC_ADI " class="formEkleDuzenleInput form-control" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Sınıflandırma Tipi<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" name="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" ng-model="InfoGundemTalep.InfoDegisiklik.TALEP_SINIFLANDIRMA_TIPI_ID"
+                                            data-live-search="true" title="Sınıflandırma Tipini Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in TalepSiniflandirmaListesi" deep-watch="true" data-value="item.TALEP_SINIFLANDIRMA_TIPI_ID">
+                                                <a>
+                                                    {{item.TALEP_SINIFLANDIRMA_TIPI_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmToplantiGundemTalepProje.cmb_TALEP_SINIFLANDIRMA_TIPI_ID.$invalid && formCalistirildiGundemTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">Değişiklik Açıklama</label>
+                                    <div class="col-lg-10">
+                                        <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DEGISIKLIK_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoGundemTalep.InfoDegisiklik.TALEP_PROJE_TALEP_TIPI_DEGISIKLIK_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Değişiklik açıklama giriniz."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-success" ng-click="GundemTalepEkleGuncelle(InfoGundemTalep,frmToplantiGundemTalepProje)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <!--<button type="button" class="btn btn-sm btn-success" ng-show="talepTipi == 3 && InfoGundemTalep.TALEP_PROJE_ID == null" ng-click="GundemTalepEkleGuncelle(InfoGundemTalep, frmToplantiGundemTalepProje)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-sm btn-success" ng-show="talepTipi == 2 && InfoGundemTalep.TALEP_PROJE_ID == null" ng-click="GundemTalepEkleGuncelle(InfoGundemTalep, InfoProblem, frmToplantiGundemTalepProje)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-sm btn-success" ng-show="talepTipi == 1 && InfoGundemTalep.TALEP_PROJE_ID == null" ng-click="GundemTalepEkleGuncelle(InfoGundemTalep,dfiInfoGundemTalep,frmToplantiGundemTalepProje)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>-->
+        <button type="button" class="btn btn-primary" ng-click="GundemTalepEkleGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>
+
+
+
+
+

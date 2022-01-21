@@ -1,0 +1,24 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Neden Reddediyorsun !</h4>
+        
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmDokumanRed" id="frmDokumanRed" class="form-horizontal" accessible-form>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Reddet Kararı</label>
+                <div class="col-sm-8">
+                    <textarea type="text" name="txtTALEP_REDDET_ACIKLAMA" style="resize:none;" ng-model="InfoDokumanOnay.RED_ACIKLAMA" maxlength="500" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Neden reddetiyorsun !"></textarea>
+                    
+
+                </div>
+            </div>
+            </form>
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="DokumanOnay(InfoDokumanOnay, frmDokumanRed, InfoDokumanOnay.DOKUMAN_YAYIN_DURUMU_ID = 4)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Onayla</span></button>
+        <button type="button" class="btn btn-primary" ng-click="DokumanRedGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

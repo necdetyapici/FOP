@@ -1,0 +1,349 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <!--<h2>Proje İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                Doküman Yönetim Sistemi
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-truck"></i>
+                    Çalışma Alanım
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<style>
+    .ornek ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .ornek li {
+        /*width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid white;*/
+        display: inline-block;
+        position: relative;
+        /*box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.2);*/
+        -webkit-transition: .2s ease;
+        transition: .2s ease;
+    }
+
+
+        .ornek li:nth-child(n+2) {
+            margin-left: -20px;
+        }
+
+    .ornek ul:hover li:nth-child(n+2) {
+        margin-left: -10px;
+    }
+
+    .user-friends img {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+    @media all {
+        .page-break {
+            display: none;
+        }
+    }
+
+    @media print {
+        .page-break {
+            display: block;
+            page-break-before: always;
+        }
+    }
+</style>
+<div class="wrapper wrapper-content padding-bottom animated  fadeInUp">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Çalışmalarım
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <div class=" dropdown" dropdown="" style="margin-right:5px; margin-left: 5px;">
+                                            <a class="dropdown-toggle" dropdown-toggle="" href="" aria-haspopup="true" aria-expanded="false">
+                                                <span class="clear">
+                                                    <span class="m-t-xs">
+                                                        <button type="button" class="btn btn-sm btn-primary"><i class="fa fa-list"></i></button>
+                                                    </span>
+                                                </span>
+                                            </a>
+
+                                            <ul class="dropdown-menu animated fadeIn m-t-xs">
+                                                <li><a ng-click="DokumanBaslikEkleGuncelle(InfoBaslik)">Kaydet</a></li>
+                                                <li><a ng-click="DokumanFarkliKaydetAc()">Farklı Kaydet</a></li>
+                                                <li><a ng-click="RevAl(InfoBaslik)">Revizyon Al</a></li>
+                                                <li><a ng-click="DokumanEnSonRevDonSwert()">En Son Revizyon Dön</a></li>
+                                                <li><a ng-click="DokumanRevizyonListesiAc()">Revizyon Listele</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right">
+
+                                        <div class="project-people ornek" style="text-align:left;">
+                                            <ul>
+                                                <li ng-repeat=" post in DokumanKullaniciListesi">
+                                                    <a tooltip="{{post.AD_SOYAD}}" tooltip-append-to-body="true">
+                                                        <img id="kullaniciFoto" ng-src="{{post.AvatarBase64}}" ng-show="post.AvatarBase64" class="img-sm" />
+                                                        <img ng-src="{{post.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="post.AvatarBase64" class="imageContent img-sm">
+                                                    </a>
+
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                    <p>{{DokumanKullaniciAciklama}}</p>
+
+                                </div>
+
+                            </div>
+                            
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form class="form-horizontal" accessible-form>
+                                        <div class="formEkleDuzenleInputs">
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <!--<summernote config="options" id="summereditor" on-change="change(contents)" editor="editor" on-init="summernoteinit()" lang="tr-TR" ng-model="InfoBaslik.ACIKLAMA"></summernote>-->
+                                                    <textarea ui-tinymce="tinymceOptions" ng-model="InfoBaslik.ACIKLAMA"></textarea>
+                                                </div>
+
+
+                                            </div>
+
+                                            
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--<script>
+
+
+    (function ($) {
+        $.extend($.summernote.lang, {
+            'tr-TR': {
+                font: {
+                    bold: 'Kalın',
+                    italic: 'İtalik',
+                    underline: 'Altı çizili',
+                    clear: 'Temizle',
+                    height: 'Satır yüksekliği',
+                    name: 'Yazı Tipi',
+                    strikethrough: 'Üstü çizili',
+                    subscript: 'Alt Simge',
+                    superscript: 'Üst Simge',
+                    size: 'Yazı tipi boyutu',
+                },
+                image: {
+                    image: 'Resim',
+                    insert: 'Resim ekle',
+                    resizeFull: 'Orjinal boyut',
+                    resizeHalf: '1/2 boyut',
+                    resizeQuarter: '1/4 boyut',
+                    floatLeft: 'Sola hizala',
+                    floatRight: 'Sağa hizala',
+                    floatNone: 'Hizalamayı kaldır',
+                    shapeRounded: 'Şekil: Yuvarlatılmış Köşe',
+                    shapeCircle: 'Şekil: Daire',
+                    shapeThumbnail: 'Şekil: K.Resim',
+                    shapeNone: 'Şekil: Yok',
+                    dragImageHere: 'Buraya sürükleyin',
+                    dropImage: 'Resim veya metni bırakın',
+                    selectFromFiles: 'Dosya seçin',
+                    maximumFileSize: 'Maksimum dosya boyutu',
+                    maximumFileSizeError: 'Maksimum dosya boyutu aşıldı.',
+                    url: 'Resim bağlantısı',
+                    remove: 'Resimi Kaldır',
+                    original: 'Original',
+                },
+                video: {
+                    video: 'Video',
+                    videoLink: 'Video bağlantısı',
+                    insert: 'Video ekle',
+                    url: 'Video bağlantısı?',
+                    providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion veya Youku)',
+                },
+                link: {
+                    link: 'Bağlantı',
+                    insert: 'Bağlantı ekle',
+                    unlink: 'Bağlantıyı kaldır',
+                    edit: 'Bağlantıyı düzenle',
+                    textToDisplay: 'Görüntülemek için',
+                    url: 'Bağlantı adresi?',
+                    openInNewWindow: 'Yeni pencerede aç',
+                },
+                table: {
+                    table: 'Tablo',
+                    addRowAbove: 'Yukarı satır ekle',
+                    addRowBelow: 'Aşağı satır ekle',
+                    addColLeft: 'Sola sütun ekle',
+                    addColRight: 'Sağa sütun ekle',
+                    delRow: 'Satırı sil',
+                    delCol: 'Sütunu sil',
+                    delTable: 'Tabloyu sil',
+                },
+                hr: {
+                    insert: 'Yatay çizgi ekle',
+                },
+                style: {
+                    style: 'Biçim',
+                    p: 'p',
+                    blockquote: 'Alıntı',
+                    pre: 'Önbiçimli',
+                    h1: 'Başlık 1',
+                    h2: 'Başlık 2',
+                    h3: 'Başlık 3',
+                    h4: 'Başlık 4',
+                    h5: 'Başlık 5',
+                    h6: 'Başlık 6',
+                },
+                lists: {
+                    unordered: 'Madde işaretli liste',
+                    ordered: 'Numaralı liste',
+                },
+                options: {
+                    help: 'Yardım',
+                    fullscreen: 'Tam ekran',
+                    codeview: 'HTML Kodu',
+                },
+                paragraph: {
+                    paragraph: 'Paragraf',
+                    outdent: 'Girintiyi artır',
+                    indent: 'Girintiyi azalt',
+                    left: 'Sola hizala',
+                    center: 'Ortaya hizala',
+                    right: 'Sağa hizala',
+                    justify: 'Yasla',
+                },
+                color: {
+                    recent: 'Son renk',
+                    more: 'Daha fazla renk',
+                    background: 'Arka plan rengi',
+                    foreground: 'Yazı rengi',
+                    transparent: 'Seffaflık',
+                    setTransparent: 'Şeffaflığı ayarla',
+                    reset: 'Sıfırla',
+                    resetToDefault: 'Varsayılanlara sıfırla',
+                },
+                shortcut: {
+                    shortcuts: 'Kısayollar',
+                    close: 'Kapat',
+                    textFormatting: 'Yazı biçimlendirme',
+                    action: 'Eylem',
+                    paragraphFormatting: 'Paragraf biçimlendirme',
+                    documentStyle: 'Biçim',
+                    extraKeys: 'İlave anahtarlar',
+                },
+                help: {
+                    'insertParagraph': 'Paragraf ekler',
+                    'undo': 'Son komudu geri alır',
+                    'redo': 'Son komudu yineler',
+                    'tab': 'Girintiyi artırır',
+                    'untab': 'Girintiyi azaltır',
+                    'bold': 'Kalın yazma stilini ayarlar',
+                    'italic': 'İtalik yazma stilini ayarlar',
+                    'underline': 'Altı çizgili yazma stilini ayarlar',
+                    'strikethrough': 'Üstü çizgili yazma stilini ayarlar',
+                    'removeFormat': 'Biçimlendirmeyi temizler',
+                    'justifyLeft': 'Yazıyı sola hizalar',
+                    'justifyCenter': 'Yazıyı ortalar',
+                    'justifyRight': 'Yazıyı sağa hizalar',
+                    'justifyFull': 'Yazıyı her iki tarafa yazlar',
+                    'insertUnorderedList': 'Madde işaretli liste ekler',
+                    'insertOrderedList': 'Numaralı liste ekler',
+                    'outdent': 'Aktif paragrafın girintisini azaltır',
+                    'indent': 'Aktif paragrafın girintisini artırır',
+                    'formatPara': 'Aktif bloğun biçimini paragraf (p) olarak değiştirir',
+                    'formatH1': 'Aktif bloğun biçimini başlık 1 (h1) olarak değiştirir',
+                    'formatH2': 'Aktif bloğun biçimini başlık 2 (h2) olarak değiştirir',
+                    'formatH3': 'Aktif bloğun biçimini başlık 3 (h3) olarak değiştirir',
+                    'formatH4': 'Aktif bloğun biçimini başlık 4 (h4) olarak değiştirir',
+                    'formatH5': 'Aktif bloğun biçimini başlık 5 (h5) olarak değiştirir',
+                    'formatH6': 'Aktif bloğun biçimini başlık 6 (h6) olarak değiştirir',
+                    'insertHorizontalRule': 'Yatay çizgi ekler',
+                    'linkDialog.show': 'Bağlantı ayar kutusunu gösterir',
+                },
+                history: {
+                    undo: 'Geri al',
+                    redo: 'Yinele',
+                },
+                specialChar: {
+                    specialChar: 'ÖZEL KARAKTERLER',
+                    select: 'Özel Karakterleri seçin',
+                },
+            },
+        });
+    })(jQuery);
+
+
+
+
+</script>
+<script src="../js/plugins/summernote/docxhtml.js"></script>
+<script src="../js/plugins/summernote/htmldocx.js"></script>
+<script src="../js/plugins/summernote/emfaplugins.js"></script>
+<script src="../js/plugins/summernote/summernote-emfa-hr.js"></script>
+<script src="../js/plugins/summernote/summernote-emfa-font.js"></script>
+<script src="../js/plugins/summernote/summernote-emfa-basliklar.js"></script>
+<script src="../js/plugins/summernote/summernote-paper-size.js"></script>
+<script src="../js/plugins/summernote/summernote-pagebreak.js"></script>
+<script src="../js/plugins/summernote/summernote-ext-print.js"></script>
+<script src="../js/plugins/summernote/summernote-emfa-tutucu.js"></script>-->
+<script src="../js/plugins/signalr/jquery.signalR-2.4.1.js"></script>
+<script src="/signalr/hubs"></script>
+
+

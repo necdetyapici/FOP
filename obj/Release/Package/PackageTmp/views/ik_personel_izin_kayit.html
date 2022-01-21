@@ -1,0 +1,227 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-scissors"></i> Personel İzin Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen İzinler bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmPersonelIzin" id="frmPersonelIzin" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset >
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> İzin Süresi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8" ng-show="InfoPersonelIzin.IZIN_TURU_ID!= IzinTuru.KullanilamayanYillikIzin">
+                                                <label>{{InfoPersonelIzin.izinSuresi}}</label>
+                                            </div>
+                                            <div class="col-lg-7" ng-show="InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.KullanilamayanYillikIzin">
+                                                <input type="text" ng-disabled="(!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0)" required="required" ng-maxlength="50" ng-minlength="1" name="txtIK_PERSONEL_IZIN_SURESI" ng-model="InfoPersonelIzin.izinSuresi" class="formEkleDuzenleInput form-control" placeholder="İzin süresi giriniz.">
+                                                
+                                                <p ng-show="frmPersonelIzin.txtIK_PERSONEL_IZIN_SURESI.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                            <div class="col-lg-1" ng-show="InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.KullanilamayanYillikIzin">
+                                                <label> <i tooltip="Kullanılmayan izin ücretinde girilen değer gün olarak kabul edilmektedir." class="fa fa-info-circle"></i></label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" >
+                                            <label class="col-lg-4 control-label">İzin Türü<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbIZIN_TURU_ID" name="cmbIZIN_TURU_ID" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-model="InfoPersonelIzin.IZIN_TURU_ID"
+                                                    data-live-search="true" title="İzin Türü Seçiniz" data-size="5" required="true" ng-change="IzinTurDegistirme()">
+                                                    <li nya-bs-option="item in IzinTuruListesi" deep-watch="true" data-value="item.IZIN_TURU_ID">
+                                                        <a>
+                                                            {{item.IZIN_TURU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmPersonelIzin.cmbIZIN_TURU_ID.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group" ng-hide="InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.KullanilamayanYillikIzin">
+                                            <label class="col-lg-4 control-label">Yerine Görevli Personel</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbYERINE_GOREVLI_PERSONEL_KULLANIC_ID" name="cmbYERINE_GOREVLI_PERSONEL_KULLANIC_ID" ng-model="InfoPersonelIzin.YERINE_GOREVLI_PERSONEL_KULLANIC_ID"
+                                                    data-live-search="true" title="Yerine Görevli Personel Seçiniz" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" data-size="5">
+                                                    <li nya-bs-option="item in KullaniciListesiGenel" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                        <a>
+                                                            {{item.AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <!--<p ng-show=" Info.YERINE_GOREVLI_PERSONEL_KULLANIC_ID == null&&Info.YERINE_GOREVLI_PERSONEL_KULLANICI_AD_SOYAD ==null&&Info.IZIN_TURU_ID!=9 && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>-->
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.YillikIzin || InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.KullanilamayanYillikIzin">
+                                            <label class="col-lg-4 control-label"> İzin Yılı</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtIZIN_YILI" id="txtIZIN_YILI" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-model="InfoPersonelIzin.IZIN_YILI" class="formEkleDuzenleInput form-control" placeholder="İzin yılı giriniz.">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.YillikIzin">
+                                            <label class="col-lg-4 control-label">İzinde Bulunacağı Yer</label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtIZINDE_BULUNACAGI_YER" id="txtIZINDE_BULUNACAGI_YER" style="resize:none;" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-maxlength="500" ng-minlength="1" ng-model="InfoPersonelIzin.IZINDE_BULUNACAGI_YER" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="İzinde bulunacağı yeri giriniz."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.MazeretIzni">
+                                            <label class="col-lg-4 control-label">İzin Talep Nedeni</label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtIZIN_TALEP_NEDENI" id="txtIZIN_TALEP_NEDENI" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoPersonelIzin.IZIN_TALEP_NEDENI" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="İzin talep nedeni giriniz."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="InfoPersonelIzin.IZIN_TURU_ID!=IzinTuru.KullanilamayanYillikIzin">
+                                            <label class="col-lg-4 control-label"> İzin Başlangıç Tarihi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtIK_PERSONEL_IZIN_BASLANGIC_TARIHI" id="txtIK_PERSONEL_IZIN_BASLANGIC_TARIHI" ng-change="IzinHesapla(InfoPersonelIzin)" ng-model="InfoPersonelIzin.IK_PERSONEL_IZIN_BASLANGIC_TARIHI" ng-required="(InfoPersonelIzin.IZIN_TURU_ID!=IzinTuru.KullanilamayanYillikIzin)" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                                <p ng-show="frmPersonelIzin.txtIK_PERSONEL_IZIN_BASLANGIC_TARIHI.$invalid && formCalistirildiPersonelIzin" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="InfoPersonelIzin.IZIN_TURU_ID!=IzinTuru.KullanilamayanYillikIzin">
+                                            <label class="col-lg-4 control-label"> İzin Bitiş Tarihi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtIK_PERSONEL_IZIN_BITIS_TARIHI" id="txtIK_PERSONEL_IZIN_BITIS_TARIHI" ng-change="IzinHesapla(InfoPersonelIzin)" ng-model="InfoPersonelIzin.IK_PERSONEL_IZIN_BITIS_TARIHI" ng-disabled="bitisTarihiPasif || (!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0) " ng-required="(InfoPersonelIzin.IZIN_TURU_ID!=IzinTuru.KullanilamayanYillikIzin)" nextgen-date-time-picker class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                                <p ng-show="frmPersonelIzin.txtIK_PERSONEL_IZIN_BITIS_TARIHI.$invalid && formCalistirildiPersonelIzin" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="InfoPersonelIzin.IZIN_TURU_ID!=IzinTuru.KullanilamayanYillikIzin">
+                                            <label class="col-lg-4 control-label"> İşe Başlangıç Tarihi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtIK_PERSONEL_ISE_BASLANGIC_TARIHI" id="txtIK_PERSONEL_ISE_BASLANGIC_TARIHI" ng-model="InfoPersonelIzin.IK_PERSONEL_ISE_BASLANGIC_TARIHI" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-required="(InfoPersonelIzin.IZIN_TURU_ID!=IzinTuru.KullanilamayanYillikIzin)" nextgen-date-time-picker class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                                <p ng-show="frmPersonelIzin.txtIK_PERSONEL_ISE_BASLANGIC_TARIHI.$invalid && formCalistirildiPersonelIzin" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Departman Yöneticisi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtDEPARTMAN_YONETICI_KULLANICI_AD_SOYAD" ng-model="personelGenelIkYoneticiKullaniciAdSoyad" class="formEkleDuzenleInput form-control" ng-disabled="true">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="(InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.KullanilamayanYillikIzin||InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.UcretsizIzin)">
+                                            <label class="col-lg-4 control-label">İnsan Kaynakları Yöneticisi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbINSAN_KAYNAKLARI_YONETICI_KULLANICI_ID" name="cmbINSAN_KAYNAKLARI_YONETICI_KULLANICI_ID" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-model="InfoPersonelIzin.INSAN_KAYNAKLARI_YONETICI_KULLANICI_ID" ng-required="InfoPersonelIzin.IK_PERSONEL_IZIN_ID == null && (InfoPersonelIzin.IZIN_TURU_ID ==IzinTuru.KullanilamayanYillikIzin||InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.UcretsizIzin)"
+                                                    data-live-search="true" title="İnsan Kaynakları Yöneticisi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in KullaniciListesiGenel" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                        <a>
+                                                            {{item.AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show=" frmPersonelIzin.cmbINSAN_KAYNAKLARI_YONETICI_KULLANICI_ID.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" ng-show="InfoPersonelIzin.IK_PERSONEL_IZIN_ID > 0  && (InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.KullanilamayanYillikIzin||InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.UcretsizIzin)">
+                                            <label class="col-lg-4 control-label"> İnsan Kaynakları Yöneticisi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtINSAN_KAYNAKLARI_YONETICI_KULLANICI_AD_SOYAD"  ng-model="InfoPersonelIzin.INSAN_KAYNAKLARI_YONETICI_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" ng-disabled="true">
+
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" ng-show="(InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin ||InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.UcretsizIzin) ">
+                                            <label class="col-lg-4 control-label">Genel Müdür<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbGENEL_MUDUR_KULLANICI_ID" name="cmbGENEL_MUDUR_KULLANICI_ID" ng-model="InfoPersonelIzin.GENEL_MUDUR_KULLANICI_ID" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-required="InfoPersonelIzin.IK_PERSONEL_IZIN_ID == null &&  (InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin ||InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.UcretsizIzin)"
+                                                    data-live-search="true" title="Genel Müdür Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in KullaniciListesiGenel" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                        <a>
+                                                            {{item.AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmPersonelIzin.cmbGENEL_MUDUR_KULLANICI_ID.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" ng-show="InfoPersonelIzin.IK_PERSONEL_IZIN_ID > 0 && (InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin ||InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.UcretsizIzin)">
+                                            <label class="col-lg-4 control-label"> Genel Müdür <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtGENEL_MUDUR_KULLANICI_AD_SOYAD" ng-model="InfoPersonelIzin.GENEL_MUDUR_KULLANICI_AD_SOYAD" ng-required="(InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin ||InfoPersonelIzin.IZIN_TURU_ID==IzinTuru.UcretsizIzin) && InfoPersonelIzin.IK_PERSONEL_IZIN_ID != null && InfoPersonelIzin.GENEL_MUDUR_KULLANICI_AD_SOYAD == null" class="formEkleDuzenleInput form-control" ng-disabled="true">
+                                                <p ng-show="frmPersonelIzin.txtGENEL_MUDUR_KULLANICI_AD_SOYAD.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" ng-show="(InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin )">
+                                            <label class="col-lg-4 control-label">Muhasebe Yöneticisi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbMUHASEBE_YONETICISI_ID" name="cmbMUHASEBE_YONETICISI_ID" ng-model="InfoPersonelIzin.MUHASEBE_YONETICISI_ID" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi) && ikPersonelIzinID > 0" ng-required="InfoPersonelIzin.IK_PERSONEL_IZIN_ID == null && InfoPersonelIzin.MUHASEBE_YONETICISI_ID == null && (InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin )"
+                                                    data-live-search="true" title="Muhasebe Yöneticisi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in KullaniciListesiGenel" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                        <a>
+                                                            {{item.AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmPersonelIzin.cmbMUHASEBE_YONETICISI_ID.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" ng-show="InfoPersonelIzin.IK_PERSONEL_IZIN_ID > 0 && InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin">
+                                            <label class="col-lg-4 control-label"> Muhasebe Yöneticisi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtMUHASEBE_YONETICISI_AD_SOYAD" ng-model="InfoPersonelIzin.MUHASEBE_YONETICISI_AD_SOYAD" ng-required="InfoPersonelIzin.IZIN_TURU_ID == IzinTuru.KullanilamayanYillikIzin && InfoPersonelIzin.IK_PERSONEL_IZIN_ID != undefined && InfoPersonelIzin.MUHASEBE_YONETICISI_AD_SOYAD == null" class="formEkleDuzenleInput form-control" ng-disabled="true">
+                                                <p ng-show="frmPersonelIzin.txtMUHASEBE_YONETICISI_AD_SOYAD.$invalid && formCalistirildiPersonelIzin" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-sm btn-warning" ng-click="IkPersonelIzinOnaylama(InfoPersonelIzin, InfoPersonelIzin.IZIN_DURUMU_ID = IzinDurumu.OnayBekliyor)" ng-show="(InfoPersonelIzin.IK_PERSONEL_IZIN_ID > 0 && (InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi)) ">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Onaya Gönder</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-success" ng-disabled="!(InfoPersonelIzin.IZIN_DURUMU_ID == null || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Beklemede || InfoPersonelIzin.IZIN_DURUMU_ID == IzinDurumu.Reddedildi)" type="button" ng-click="IkPersonelIzinKayitOnKontrol(InfoPersonelIzin)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelizinlistesi">
+                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp; <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

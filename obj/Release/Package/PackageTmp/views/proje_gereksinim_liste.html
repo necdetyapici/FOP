@@ -1,0 +1,173 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Gereksinim Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-ProjeGereksinim" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gereksinim No</label>
+                                        <div class="col-lg-8">
+                                            <input type="number" name="txtPROJE_GEREKSINIM_NO" id="txtPROJE_GEREKSINIM_NO" ng-model="AramaKriter.PROJE_GEREKSINIM_NO" class="form-control formEkleDuzenleInput" placeholder="Gereksinim no giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gereksinim Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtPROJE_GEREKSINIM_ADI" id="txtPROJE_GEREKSINIM_ADI" ng-model="AramaKriter.PROJE_GEREKSINIM_ADI" class="form-control formEkleDuzenleInput" placeholder="Gereksinim adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Modülü</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="sel_PROJE_MODUL_ID" name="sel_PROJE_MODUL_ID" ng-model="AramaKriter.PROJE_MODUL_ID"
+                                                data-live-search="true" title="Proje Modülü Seçiniz" data-size="5" allow-clear="true">
+                                                <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                    <a>
+                                                        {{item.MODUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="ProjeGereksinimGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeGereksinimListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimkayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjeGereksinimGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Gereksinim No</b></td>
+                                            <td><b>Gereksinim Adı</b></td>
+                                            <td><b>Gereksinim Türü</b></td>
+                                            <td><b>Modül Adı</b></td>
+                                            <td><b>İterasyon Adı</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in ProjeGereksinimListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.PROJE_GEREKSINIM_NO}}<br />
+                                            </td>
+                                            <td>
+
+                                                <a class="editLink-Emfa" ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimkayit({ projeGereksinimID: post.PROJE_GEREKSINIM_ID})" tooltip="{{post.PROJE_GEREKSINIM_ADI}}">{{post.PROJE_GEREKSINIM_ADI | limitTo: 50}}{{post.PROJE_GEREKSINIM_ADI.length < 50 ? ' ' : '...'}}</a><br />
+                                            </td>
+                                            <td>
+                                                {{post.GEREKSINIM_TURU_ADI}}
+                                            </td>
+                                            <td>
+                                                {{post.MODUL_ADI}}
+                                            </td>
+                                            <td>
+                                                {{post.PROJE_ITERASYON_ADI}}
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimkayit({ projeGereksinimID: post.PROJE_GEREKSINIM_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjeGereksinimGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeGereksinimListesi.length==0 || ProjeGereksinimListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeGereksinimGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Gereksinim kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

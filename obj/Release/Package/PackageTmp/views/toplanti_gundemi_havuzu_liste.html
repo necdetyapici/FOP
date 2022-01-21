@@ -1,0 +1,191 @@
+﻿<div ng-init="init()"></div>
+    <div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+            <div class="col-lg-10">
+                <!--<h2>Proje İşlemleri</h2>-->
+                <ol class="breadcrumb">
+                    <li><a ui-sref="anasayfa"><i class="fa fa-home"></i> Ana Sayfa</a></li>
+                    <li><i class="fa fa-list"></i> Toplantı Gündemi Havuzu Listesi</li>
+                    <li class="active"><strong><i class="fa fa-newspaper-o"></i> Toplantı Gündemi Havuzu</strong></li>
+                </ol>
+            </div>
+            <div class="col-lg-2"> </div>
+    </div>
+
+    <div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i> Toplantı Gündemi Havuzu Listesi
+                        </h5>
+                    </div>
+
+                    <div class="ibox-content">
+                        <form name="src-Toplanti" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Gündem Türü</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="sel_TOPLANTI_GUNDEMI_TURU_ID" name="sel_TOPLANTI_GUNDEMI_TURU_ID" ng-model="AramaKriterListe.TOPLANTI_GUNDEMI_TURU_ID"
+                                                    data-live-search="true" title="Toplantı Gündem Türünü Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in ToplantiGundemiTuruListesi" deep-watch="true" data-value="item.TOPLANTI_GUNDEMI_TURU_ID">
+                                                        <a>
+                                                            {{item.TOPLANTI_GUNDEMI_TURU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Türü</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="sel_TOPLANTI_TURU_ID" name="sel_TOPLANTI_TURU_ID" ng-model="AramaKriterListe.TOPLANTI_TURU_ID"
+                                                    data-live-search="true" title="Toplantı Türü Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in ToplantiTuruListesi" deep-watch="true" data-value="item.TOPLANTI_TURU_ID">
+                                                        <a>
+                                                            {{item.TOPLANTI_TURU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button ng-click="ToplantiGundemiHavuzuGetData(AramaKriterListe, AramaKriterListe.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                    <i class="fa fa-filter"></i>&nbsp;
+                                                    <strong>Filtrele</strong>
+                                                </button>
+                                                <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <strong>Temizle</strong>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="ibox-content" ng-if="ToplantiGundemiHavuzuListesi.length>0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <a ui-sref="toplanti.toplantigundemihavuzukayit" data-ui-sref-opts="{reload:true}" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                    <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="filtreTemizle()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                                <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list table-emfa">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td><b>No</b></td>
+                                                    <td><b>Gündem Gerekçe</b></td>
+                                                    <td><b>Gündem Türü Adı</b></td>
+                                                    <td><b>Toplantı Türü Adı</b></td>
+                                                    <td><b>Gündem Durumu</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="post in ToplantiGundemiHavuzuListesi | filter:txtArama">
+                                                <tr>
+                                                    <td class="project-title">
+                                                        <span class="label label-success">{{ $index + 1 }}</span>
+                                                    </td>
+
+                                                    <td class="editLink-Emfa">
+                                                        <a ui-sref="toplanti.toplantigundemihavuzukayit({toplantiGundemiHavuzuID: post.TOPLANTI_GUNDEMI_HAVUZU_ID})">{{post.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE}}</a><br />
+                                                    </td>
+                                                    <td class="no-wrap">
+                                                        {{post.TOPLANTI_GUNDEMI_TURU_ADI}}
+                                                    </td>
+
+                                                    <td class="no-wrap">
+                                                        {{post.TOPLANTI_TURU_ADI}}
+                                                    </td>
+                                                    <td>
+                                                        {{post.TOPLANTI_GUNDEMI_DURUMU_ADI}}
+                                                    </td>
+                                                    <td class="actions">
+                                                        <a ng-show="post.TOPLANTI_GUNDEMI_DURUMU_ID == 1 || post.TOPLANTI_GUNDEMI_DURUMU_ID == 4" ng-click="karar = !karar" ng-class="{ 'btn-danger': karar, 'btn-info' : !karar}" class="btn btn-sm" tooltip="Karar Göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Karar Göster --></a>
+                                                    </td>
+                                                    <td class="actions">
+                                                        <a ng-disabled="post.TOPLANTI_GUNDEMI_DURUMU_ID != null" ng-hide="post.TOPLANTI_GUNDEMI_DURUMU_ID == 1" ui-sref="toplanti.toplantigundemihavuzukayit({toplantiGundemiHavuzuID: post.TOPLANTI_GUNDEMI_HAVUZU_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                    </td>
+                                                    <td class="actions">
+                                                        <div class="pull-left">
+                                                            <a ng-disabled="post.TOPLANTI_GUNDEMI_DURUMU_ID != null" ng-hide="post.TOPLANTI_GUNDEMI_DURUMU_ID == 1" ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr ng-show="karar">
+                                                    <td>
+                                                        <b>Karar</b>
+                                                    </td>
+                                                    <td colspan="8">
+                                                        <p>{{post.GUNDEM_KARAR}}</p>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="8" class="text-center">
+                                                        <pagination ng-model="AramaKriterListe.SayfaNo" ng-change="ToplantiGundemiHavuzuGetData(AramaKriterListe)" total-items="toplamKayitSayisi"
+                                                                    items-per-page="AramaKriterListe.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content" ng-if="ToplantiGundemiHavuzuListesi.length==0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <a ui-sref="toplanti.toplantigundemihavuzukayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                    <button type="button" class="btn btn-sm btn-white" ng-click="filtreTemizle()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br /><br />
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                    <i class="fa fa-exclamation-circle"></i>&nbsp;Toplantı bağlı toplantı gündem havuzu kaydı <strong>bulunmamaktadır.</strong> Eklemek için <a ui-sref="toplanti.toplantigundemihavuzukayit" class="alert-Link-Emfa alert-link">tıklayınız.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

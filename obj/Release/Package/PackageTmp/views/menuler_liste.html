@@ -1,0 +1,185 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-cogs"></i>
+                Yönetim İşlemleri
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-check-circle-o"></i>
+                    Menüler
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Menü Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-Menuler" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Menü Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtMENU_ADI" id="txtMENU_ADI" ng-model="AramaKriter.MENU_ADI" class="form-control formEkleDuzenleInput" placeholder="Menü adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="MenulerGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="MenulerListesi.length > 0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.menulerkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MenulerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Menü ID</b></td>
+                                            <td><b>Menü Adı</b></td>
+                                            <td><b>Durum</b></td>
+                                            <td><b>URL</b></td>
+                                            <td><b>Üst Menü</b></td>
+                                            <td><b>Kontrol Noktası Adı</b></td>
+                                            <td><b>Menü Sırası</b></td>
+                                            <!--<td><b>Açıklama</b></td>-->
+                                            <td><b>İkon</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in MenulerListesi  | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                {{post.MENU_ID}}
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <a class="editLink-Emfa" ui-sref="yonetim.menulerkayit({ menuID: post.MENU_ID})">{{post.MENU_ADI}}</a> <label class="label label-warning" ng-if="post.UST_MENU_ID==0"> Üst Menü</label><br />
+                                            </td>
+
+                                            <td class="table-main">
+                                                {{post.DURUM}}
+                                            </td>
+                                            <td class="table-main">
+                                                {{post.URL}}
+                                            </td>
+                                            <td class="table-main">
+                                                {{post.UST_MENU_ADI}}
+                                            </td>
+                                            <td class="table-main">
+                                                {{post.KONTROL_NOKTASI_ADI}}
+                                            </td>
+                                            <td class="table-main">
+                                                {{post.MENU_SIRASI}}
+                                            </td>
+                                            <!--<td class="table-main">
+                                                {{post.ACIKLAMA}}
+                                            </td>-->
+                                            <td>
+                                                <i class="{{post.IKON}}"></i>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="yonetim.menulerkayit({ menuID: post.MENU_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="11" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="MenulerGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" ng-if="MenulerListesi.length==0 || MenulerListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.menulerkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MenulerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Yönetim tanımlamalarına bağlı menü kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="yonetim.menulerkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

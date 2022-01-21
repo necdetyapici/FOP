@@ -1,0 +1,212 @@
+﻿
+
+<div ng-init="init()"></div>
+
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+</style>
+
+<div class="row wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        <i class="fa fa-building"></i>
+                        Firma Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen firma bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmFirma" id="frmFirma" class="form-horizontal" enctype="multipart/form-data" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                        <img id="firmaLogo" ng-src="{{Info.LogoBase}}" ng-show="Info.LogoBase" style="max-width:250px;max-height:250px" />
+                                                        <img ng-src="../img/logo.png" alt="Logo" ng-hide="Info.LogoBase" style="width:250px;height:250px;">
+
+                                                        <a tooltip="Logo yüklemek için tıklayınız." class="btn btn-sm btn-primary" ng-click="modalLogo()">
+                                                            <i class="fa fa-folder-open"></i>
+                                                            &nbsp;Yeni Logo
+                                                        </a>
+                                                        <a tooltip="Logoyu kaldırmak için tıklayınız." ng-click="resmiTemizle()" class="btn btn-sm btn-danger" ng-show="Info.LogoBase">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Firma Adı<span class="text-danger">*</span></label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" name="txtFIRMA_ADI" ng-model="Info.ADI" ng-maxlength="100" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Firma adını giriniz." required />
+                                            <p ng-show="frmFirma.txtFIRMA_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Firma E-Posta<span class="text-danger">*</span></label>
+                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-8">
+                                            <div class="input-group m-b-sm" style="margin-bottom:0px;">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                <input type="email" name="txtFIRMA_E_POSTA" ng-model="Info.EMAIL" ng-maxlength="254" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Firma E-Posta adresini giriniz." required>
+                                                <p ng-show="frmFirma.txtFIRMA_E_POSTA.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Firma Telefon</label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" name="txtFIRMA_TELEFON" ng-model="Info.TELEFON" ng-maxlength="20" class="formEkleDuzenleInput form-control" placeholder="Firma telefon numarasını giriniz." maxlength="15"
+                                                   mask="(999) 999 9999">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Firma Fax</label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" name="txtFIRMA_FAX" ng-model="Info.FAX" ng-maxlength="20" class="formEkleDuzenleInput form-control" placeholder="Firma fax numarasını giriniz." maxlength="15"
+                                                   mask="(999) 999 9999">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Yetkili Adı</label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" name="txtYETKILI_ADI" ng-model="Info.YETKILI_ADI" ng-maxlength="50" class="formEkleDuzenleInput form-control" placeholder="Firma yetkilisinin adını giriniz." />
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Yetkili Telefon</label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" name="txtYETKILI_TELEFON" ng-model="Info.YETKILI_TELEFON" ng-maxlength="20" class="formEkleDuzenleInput form-control" placeholder="Firma yetkilisi telefon numarasını giriniz." maxlength="15"
+                                                   mask="(999) 999 9999">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Yetkili E-Posta</label>
+                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-8">
+                                            <div class="input-group m-b-sm" style="margin-bottom:0px;">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                <input type="email" name="txtYETKILI_E_POSTA" ng-model="Info.YETKILI_EMAIL" ng-maxlength="254" class="formEkleDuzenleInput form-control" placeholder="Firma yetkilisi E-Posta adresini giriniz.">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">İl </label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbFIRMA_IL_ID" name="cmbFIRMA_IL_ID" ng-model="Info.IL"
+                                                data-live-search="true" title="Firma İli Seçiniz" data-size="5" ng-change="getIlce()">
+                                                <li nya-bs-option="item in IlListesi" deep-watch="true" data-value="item.IL_ILCE_ID">
+                                                    <a>
+                                                        {{item.IL_ILCE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">İlçe </label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbFIRMA_ILCE_ID" name="cmbFIRMA_ILCE_ID" ng-model="Info.ILCE"
+                                                data-live-search="true" title="Firma İlçe Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IlceListesi" deep-watch="true" data-value="item.IL_ILCE_ID">
+                                                    <a>
+                                                        {{item.IL_ILCE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Adres </label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <textarea type="text" name="txtADRES" id="txtADRES" style="resize:none;" ng-maxlength="255" ng-minlength="1" ng-model="Info.ADRES" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Adres giriniz."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-xs-4 col-sm-4 col-md-4 col-lg-4 control-label">Ek Bilgi </label>
+                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                            <textarea type="text" name="txtEKBILGI" id="txtEKBILGI" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="Info.EK_BILGI" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Ek Bilgi giriniz."></textarea>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-log-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="DFirmaEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>
+                                                Kaydet
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" href="#" ui-sref="danismanlik.firmalistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,255 @@
+﻿
+<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <a ui-sref="proje.bilgiguvenligirisklistesi"><i class="fa fa-newspaper-o"></i> Bilgi Güvenliği Risk Listesi</a>
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-wrench"></i>
+                    B.G Risk Uygulama Kontrol Kriteri İşlemleri
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-wrench"></i>  B.G Risk Uygulama Kontrol Kriteri Sayısı Bilgileri
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmBGRiskUygulamaKontrolKriteri" id="frmBGRiskUygulamaKontrolKriteri" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Bilgi Güvenliği Risk No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" ng-disabled="disabled" name="txtB_G_RISK_NO" ng-model="bgRiskNo" class="form-control" readonly>
+                                            <p ng-show="frmBGRiskUygulamaKontrolKriteri.txtB_G_RISK_NO.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri  Grup Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbUYGULAMA_KONTROL_KRITERI_GRUP_ID" name="cmbUYGULAMA_KONTROL_KRITERI_GRUP_ID" ng-model="Info.UYGULAMA_KONTROL_KRITERI_GRUP_ID" ng-change="UygulamaKontrolKriteriAltGrupGetData()"
+                                                data-live-search="true" title="Uygulama Kontrol Kriteri Grup Adı Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in UygulamaKontrolKriteriGrupListesi" deep-watch="true" data-value="item.UYGULAMA_KONTROL_KRITERI_GRUP_ID">
+                                                    <a>
+                                                        {{item.UYGULAMA_KONTROL_KRITERI_GRUP_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmBGRiskUygulamaKontrolKriteri.cmbUYGULAMA_KONTROL_KRITERI_GRUP_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Alt Grup Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbUST_UYGULAMA_KONTROL_KRITERI_GRUP_ID" name="cmbUST_UYGULAMA_KONTROL_KRITERI_GRUP_ID" ng-model="Info.UST_UYGULAMA_KONTROL_KRITERI_GRUP_ID" ng-change="UygulamaKontrolKriteriGetData()"
+                                                data-live-search="true" title="Uygulama Kontrol Kriteri Alt Menü Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in UygulamaKontrolKriteriAltGrupListesi" deep-watch="true" data-value="item.UYGULAMA_KONTROL_KRITERI_GRUP_ID">
+                                                    <a>
+                                                        {{item.UYGULAMA_KONTROL_KRITERI_GRUP_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmBGRiskUygulamaKontrolKriteri.cmbUST_UYGULAMA_KONTROL_KRITERI_GRUP_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbUYGULAMA_KONTROL_KRITERI_ID" name="cmbUYGULAMA_KONTROL_KRITERI_ID" ng-model="Info.UYGULAMA_KONTROL_KRITERI_ID"
+                                                data-live-search="true" title="Uygulama Kontrol Kriteri Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in UygulamaKontrolKriteriListesi" deep-watch="true" data-value="item.UYGULAMA_KONTROL_KRITERI_ID">
+                                                    <a>
+                                                        {{item.UYGULAMA_KONTROL_KRITERI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmBGRiskUygulamaKontrolKriteri.cmbUYGULAMA_KONTROL_KRITERI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="BGRiskUygulamaKontrolKriteriEkleGuncelle(Info)" ">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-primary" href="#" ui-sref="proje.bilgiguvenligirisklistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> B.G Risk Uygulama Kontrol Kriteri Sayısı Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-ProjeRiskUygulamaKontrolKriteriSayisi" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs col-lg-offset-1">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_ADI" ng-model="AramaKriter.UYGULAMA_KONTROL_KRITERI_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Uygulama Kontrol Kriteri adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="BGRiskUygulamaKontrolKriteriGetData(AramaKriter, AramaKriter.SayfaNo= 1 )" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="BGRiskUygulamaKontrolKriteriListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="filtreTemizle()" data-ui-sref-opts="{reload:true}"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{toplamKayitSayisi }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Uygulama Kontrol Kriteri No</b></td>
+                                            <td><b>Uygulama Kontrol Kriteri Adı</b></td>
+                                            <td><b>Uygulama Kontrol Kriteri Açıklama</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in BGRiskUygulamaKontrolKriteriListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.UYGULAMA_KONTROL_KRITERI_NO}}
+                                            </td>
+
+                                            <td>
+                                                {{post.UYGULAMA_KONTROL_KRITERI_ADI}}
+                                            </td>
+                                            <td>
+                                                {{post.UYGULAMA_KONTROL_KRITERI_ACIKLAMA}}
+                                            </td>
+                                            <td class="form-actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="BGRiskUygulamaKontrolKriteriGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-show="BGRiskUygulamaKontrolKriteriListesi.length==0||BGRiskUygulamaKontrolKriteriListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="filtreTemizle()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Bilgi güvenliği risk işlemlerine bağlı risk uygulama kontrol kriteri kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

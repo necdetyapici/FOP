@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/09/2019 18:28:32" ReportInfo.Modified="02/27/2019 12:11:05" ReportInfo.CreatorVersion="2018.3.17.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Drawing;
+using System.Data;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+
+   
+  }
+}
+</ScriptText>
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/iYJvbkClNjl/xIVseX0BvlQUkZ06T1CtAlendK/zA1ztHealQLXYdsRFGJdM8KINzvK6IYGlq2ot4EKjnfkjfJez1QfD9aOx3zV/8k82e/JvZCDraSF07NzZ+Z9uJMGJiYKVoSaT78JGIJ/+gnqNI5w==">
+      <TableDataSource Name="PROJE_RISK" DataType="System.Int32" Enabled="true" TableName="PROJE_RISK" SelectCommand="SELECT P.PROJE_RISK_ID, P.PROJE_RISK_NO, P.SUREC_ID, P.RISK_TURU_ID, P.TEDBIR_ONCESI_OLASILIK_DEGERI_ID, P.DEGERLENDIRME ,P.TEDBIR_ONCESI_ETKI_DEGERI_ID, P.TEDBIR_ACIKLAMA, P.TEDBIR_SONRASI_OLASILIK_DEGERI_ID, P.TEDBIR_SONRASI_ETKI_DEGERI_ID, P.RISK_DERECESI_ID, P.RISK_ISLEME_STRATEJISI_ID, P.AKSIYON_ACIKLAMA, P.RISK_DEGERLENDIRME_TARIHI, P.SORUMLU_ID, P.BUTCE, P.ARTIK_RISK_ONAYI, P.MUSTERI_ID, P.PROJE_ID, P.KULLANICI_ID, P.KAYIT_TARIHI, P.TEDBIR_ONCESI_RISK_PUANI, P.TEDBIR_SONRASI_RISK_PUANI, P.RISK_ADI, RD.RISK_DERECESI_ADI, RIS.RISK_ISLEME_STRATEJISI_ADI, RT.RISK_TURU_ADI, S.SUREC_ADI&#13;&#10;FROM (((&quot;PROJE_RISK&quot; P INNER JOIN &quot;RISK_DERECESI&quot; RD ON P.RISK_DERECESI_ID = RD.RISK_DERECESI_ID &#13;&#10;) INNER JOIN &quot;RISK_ISLEME_STRATEJISI&quot; RIS ON P.RISK_ISLEME_STRATEJISI_ID = RIS.RISK_ISLEME_STRATEJISI_ID &#13;&#10;) INNER JOIN &quot;RISK_TURU&quot; RT ON P.RISK_TURU_ID = RT.RISK_TURU_ID &#13;&#10;) INNER JOIN &quot;SUREC&quot; S ON P.SUREC_ID = S.SUREC_ID Where P.PROJE_ID = @PROJE_ID and P.PROJE_RISK_NO =   @PROJE_RISK_NO order by PROJE_RISK_ID&#13;&#10;&#13;&#10;&#13;&#10;">
+        <Column Name="PROJE_RISK_ID" DataType="System.Int32"/>
+        <Column Name="PROJE_RISK_NO" DataType="System.Int32"/>
+        <Column Name="SUREC_ID" DataType="System.Int32"/>
+        <Column Name="RISK_TURU_ID" DataType="System.Int32"/>
+        <Column Name="TEDBIR_ONCESI_OLASILIK_DEGERI_ID" DataType="System.Int32"/>
+        <Column Name="TEDBIR_ONCESI_ETKI_DEGERI_ID" DataType="System.Int32"/>
+        <Column Name="TEDBIR_ACIKLAMA" DataType="System.String"/>
+        <Column Name="TEDBIR_SONRASI_OLASILIK_DEGERI_ID" DataType="System.Int32"/>
+        <Column Name="TEDBIR_SONRASI_ETKI_DEGERI_ID" DataType="System.Int32"/>
+        <Column Name="RISK_DERECESI_ID" DataType="System.Int32"/>
+        <Column Name="RISK_ISLEME_STRATEJISI_ID" DataType="System.Int32"/>
+        <Column Name="AKSIYON_ACIKLAMA" DataType="System.String"/>
+        <Column Name="RISK_DEGERLENDIRME_TARIHI" DataType="System.DateTime"/>
+        <Column Name="SORUMLU_ID" DataType="System.Int32"/>
+        <Column Name="BUTCE" DataType="System.Decimal"/>
+        <Column Name="ARTIK_RISK_ONAYI" DataType="System.Boolean" BindableControl="CheckBox"/>
+        <Column Name="MUSTERI_ID" DataType="System.Int32"/>
+        <Column Name="PROJE_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="KAYIT_TARIHI" DataType="System.DateTime"/>
+        <Column Name="TEDBIR_ONCESI_RISK_PUANI" DataType="System.Decimal"/>
+        <Column Name="TEDBIR_SONRASI_RISK_PUANI" DataType="System.Decimal"/>
+        <Column Name="RISK_ADI" DataType="System.String"/>
+        <Column Name="RISK_DERECESI_ADI" DataType="System.String"/>
+        <Column Name="RISK_TURU_ADI" DataType="System.String"/>
+        <Column Name="SUREC_ADI" DataType="System.String"/>
+        <Column Name="RISK_ISLEME_STRATEJISI_ADI" DataType="System.String"/>
+        <Column Name="DEGERLENDIRME" DataType="System.String"/>
+        <CommandParameter Name="PROJE_ID" DataType="12" Expression="[PROJE_ID]" DefaultValue="0"/>
+        <CommandParameter Name="PROJE_RISK_NO" DataType="8" Expression="[PROJE_RISK_NO]" DefaultValue="0"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="PROJE_ID" DataType="System.Int32" Expression="[PROJE_ID]"/>
+    <Parameter Name="PROJE_RISK_NO" DataType="System.Int32" Expression="[PROJE_RISK_NO]"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" RawPaperSize="9" FirstPageSource="15" OtherPagesSource="15">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="115.4">
+      <TableObject Name="Table4" Top="9.45" Width="1045.17" Height="105.95" Border.ShadowColor="OrangeRed" Border.Lines="All" Border.Color="OrangeRed" Border.Width="2">
+        <TableColumn Name="Column22" Width="297.99"/>
+        <TableColumn Name="Column23" Width="477.54"/>
+        <TableColumn Name="Column24" Width="269.64"/>
+        <TableRow Name="Row5" Height="28.35">
+          <TableCell Name="Cell30" Border.Lines="All" Border.Color="OrangeRed" Border.Width="2" RowSpan="5">
+            <PictureObject Name="Picture1" Left="28.35" Top="13.23" Width="207.9" Height="75.6" Image="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"/>
+          </TableCell>
+          <TableCell Name="Cell31" RowSpan="3"/>
+          <TableCell Name="Cell32" Border.Lines="Left" Border.LeftLine.Color="OrangeRed" Border.LeftLine.Width="2" Text="Dok: TMP.20.RDR" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row6" Height="1">
+          <TableCell Name="Cell35"/>
+          <TableCell Name="Cell36"/>
+          <TableCell Name="Cell37"/>
+        </TableRow>
+        <TableRow Name="Row7" Height="28.35">
+          <TableCell Name="Cell40"/>
+          <TableCell Name="Cell41"/>
+          <TableCell Name="Cell42" Border.Lines="Left, Right" Border.Color="OrangeRed" Border.Width="2" Text="Rev: v1.0/ [FormatDateTime([Date],&quot;dd/MM/yyyy&quot;)]" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row8" Height="28.35">
+          <TableCell Name="Cell45"/>
+          <TableCell Name="Cell46" Text="RİSK DURUM RAPORU" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+          <TableCell Name="Cell47" Border.Lines="Left" Border.LeftLine.Color="OrangeRed" Border.LeftLine.Width="2" Text="Sayfa:[Page#]" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row9" Height="19.9">
+          <TableCell Name="Cell50"/>
+          <TableCell Name="Cell51"/>
+          <TableCell Name="Cell52" Border.Lines="Left" Border.LeftLine.Color="OrangeRed" Border.LeftLine.Width="2" VertAlign="Center"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="119.4" Width="1047.06" Height="47.25">
+      <TableObject Name="Table2" Left="9.45" Top="9.45" Width="1029.57" Height="37.8">
+        <TableColumn Name="Column6" Width="33.12"/>
+        <TableColumn Name="Column7" Width="89.82"/>
+        <TableColumn Name="Column8" Width="61.47"/>
+        <TableColumn Name="Column9" Width="70.92"/>
+        <TableColumn Name="Column10" Width="52.02"/>
+        <TableColumn Name="Column11" Width="80.37"/>
+        <TableColumn Name="Column12" Width="61.47"/>
+        <TableColumn Name="Column13" Width="70.92"/>
+        <TableColumn Name="Column25" Width="52.08"/>
+        <TableColumn Name="Column44" Width="57.33"/>
+        <TableColumn Name="Column45" Width="76.23"/>
+        <TableColumn Name="Column46" Width="76.23"/>
+        <TableColumn Name="Column47" Width="85.68"/>
+        <TableColumn Name="Column48" Width="47.88"/>
+        <TableColumn Name="Column49" Width="47.88"/>
+        <TableColumn Name="Column80"/>
+        <TableRow Name="Row2" Height="37.8">
+          <TableCell Name="Cell6" Border.Lines="All" Text="No" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="Risk Adı" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="Risk Derecesi" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="T.Ö Olasılık Değeri" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="T.Ö Etki Değeri" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell16" Border.Lines="All" Text="T.Ö Açıklama" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell17" Border.Lines="All" Text="T.Ö Risk Puanı" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" Text="T.S Olasılık Değeri" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell53" Border.Lines="All" Text="T.S Etki Değeri" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell72" Border.Lines="All" Text="T.S Risk Puanı" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell73" Border.Lines="All" Text="T.S Açıklama" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell74" Border.Lines="All" Text="Risk İşleme Stratejisi" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell75" Border.Lines="All" Text="Değerlendirme Tarihi" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell76" Border.Lines="All" Text="Türü" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell77" Border.Lines="All" Text="Süreç" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell108" Border.Lines="All" Text="Değerlendirme" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="170.65" Width="1047.06" Height="66.15" DataSource="PROJE_RISK">
+      <TableObject Name="Table8" Left="9.45" Width="1029.57" Height="66.15">
+        <TableColumn Name="Column81" Width="33.12"/>
+        <TableColumn Name="Column82" Width="89.82"/>
+        <TableColumn Name="Column83" Width="61.47"/>
+        <TableColumn Name="Column84" Width="70.92"/>
+        <TableColumn Name="Column85" Width="52.02"/>
+        <TableColumn Name="Column86" Width="80.37"/>
+        <TableColumn Name="Column87" Width="61.47"/>
+        <TableColumn Name="Column88" Width="70.92"/>
+        <TableColumn Name="Column89" Width="52.08"/>
+        <TableColumn Name="Column90" Width="57.33"/>
+        <TableColumn Name="Column91" Width="76.23"/>
+        <TableColumn Name="Column92" Width="76.23"/>
+        <TableColumn Name="Column93" Width="85.68"/>
+        <TableColumn Name="Column94" Width="47.88"/>
+        <TableColumn Name="Column95" Width="47.88"/>
+        <TableColumn Name="Column96"/>
+        <TableRow Name="Row13" Height="66.15">
+          <TableCell Name="Cell109" Border.Lines="All" Text="[PROJE_RISK.PROJE_RISK_NO]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell110" Border.Lines="All" Text="[PROJE_RISK.RISK_ADI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell111" Border.Lines="All" Text="[PROJE_RISK.RISK_DERECESI_ADI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell112" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_ONCESI_OLASILIK_DEGERI_ID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell113" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_ONCESI_ETKI_DEGERI_ID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell114" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_ACIKLAMA]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell115" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_ONCESI_RISK_PUANI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell116" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_SONRASI_OLASILIK_DEGERI_ID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell117" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_SONRASI_ETKI_DEGERI_ID]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell118" Border.Lines="All" Text="[PROJE_RISK.TEDBIR_SONRASI_RISK_PUANI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell119" Border.Lines="All" Text="[PROJE_RISK.AKSIYON_ACIKLAMA]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell120" Border.Lines="All" Text="[PROJE_RISK.RISK_ISLEME_STRATEJISI_ADI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell121" Border.Lines="All" Text="[FormatDateTime([PROJE_RISK.RISK_DEGERLENDIRME_TARIHI],&quot;dd/MM/yyyy&quot;)]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell122" Border.Lines="All" Text="[PROJE_RISK.RISK_TURU_ADI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell123" Border.Lines="All" Text="[PROJE_RISK.SUREC_ADI]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+          <TableCell Name="Cell124" Border.Lines="All" Text="[PROJE_RISK.DEGERLENDIRME]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+  </ReportPage>
+</Report>

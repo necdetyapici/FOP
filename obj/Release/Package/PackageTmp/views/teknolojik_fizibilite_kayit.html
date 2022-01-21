@@ -1,0 +1,90 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Teknolojik Fizibilite Kayıt</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-list"></i>
+                <a ui-sref="sistem.teknolojikfizibilitelistesi">Teknolojik Fizibilite Listesi</a>
+            </li>
+            <li class="active  animated bounceInRight">
+                <i class="fa fa-commenting-o"></i>
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-commenting-o"></i>
+                        Teknolojik Fizibilite Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            &nbsp;Lütfen Teknolojik Fizibilite bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmTeknolojikFizibilite" id="frmTeknolojikFizibilite" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Teknolojik Fizibilite Adı <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtTEKNOLOJIK_FIZIBILITE_ADI" ng-model="Info.TEKNOLOJIK_FIZIBILITE_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Teknolojik fizibilite giriniz." required>
+                                            <p ng-show="frmTeknolojikFizibilite.txtTEKNOLOJIK_FIZIBILITE_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Üst Teknolojik Fizibilite</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbUST_TEKNOLOJIK_FIZIBILITE_ID" name="cmbUST_TEKNOLOJIK_FIZIBILITE_ID" allow-clear="true" ng-model="Info.UST_TEKNOLOJIK_FIZIBILITE_ID"
+                                                data-live-search="true" title="Üst Teknolojik Fizibilite Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in TeknolojikFizibiliteListesi" deep-watch="true" data-value="item.TEKNOLOJIK_FIZIBILITE_ID">
+                                                    <a>
+                                                        {{item.TEKNOLOJIK_FIZIBILITE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="TeknolojikFizibiliteEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="sistem.teknolojikfizibilitelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

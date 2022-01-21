@@ -1,0 +1,95 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Uygulama Kontrol Kriteri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-list"></i>  <a ui-sref="sistem.uygulamakontrolkriterilistesi({uygulamaKontrolKriteriGrupID: Info.UYGULAMA_KONTROL_KRITERI_GRUP_ID, uygulamaKontrolKriteriGrupAdi: Info.UYGULAMA_KONTROL_KRITERI_GRUP_ADI})">Uygulama Kontrol Kriter Listesi</a>
+            </li>
+            <li class="active">
+                <strong><i class="fa fa-list-alt"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-list-alt"></i>
+                        Uygulama Kontrol Kriter Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            &nbsp;Lütfen Uygulama Kontrol Kriter bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmUygulamaKontrolKriteri" id="frmUygulamaKontrolKriteri" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Grup Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" placeholder="{{$state.uygulamaKontrolKriteriGrupAdi}}" required name="txtUYGULAMA_KONTROL_KRITERI_GRUP_ADI" ng-model="Info.UYGULAMA_KONTROL_KRITERI_GRUP_ADI" class="form-control" readonly>
+                                            <p ng-show="frmUygulamaKontrolKriteri.UYGULAMA_KONTROL_KRITERI_GRUP_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_NO" ng-model="Info.UYGULAMA_KONTROL_KRITERI_NO" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Uygulama kontrol kriteri no giriniz." required>
+                                            <p ng-show="frmUygulamaKontrolKriteri.txtUYGULAMA_KONTROL_KRITERI_NO.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_ADI" ng-model="Info.UYGULAMA_KONTROL_KRITERI_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Uygulama kontrol kriteri adı giriniz.">
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Kontrol Açıklama</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtUYGULAMA_KONTROL_KRITERI_KONTROL_ACIKLAMA" style="resize:none;" ng-model="Info.UYGULAMA_KONTROL_KRITERI_KONTROL_ACIKLAMA" maxlength="1000" rows="9" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder=" Uygulama kontrol kriteri kontrol açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="UygulamaKontrolKriteriEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="sistem.uygulamakontrolkriterilistesi({uygulamaKontrolKriteriGrupID: Info.UYGULAMA_KONTROL_KRITERI_GRUP_ID, uygulamaKontrolKriteriGrupAdi: Info.UYGULAMA_KONTROL_KRITERI_GRUP_ADI})"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

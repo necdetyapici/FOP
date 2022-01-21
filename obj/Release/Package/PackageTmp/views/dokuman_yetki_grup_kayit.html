@@ -1,0 +1,85 @@
+﻿
+<div ng-init="init()"></div>
+<div ui-view>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Doküman Proje Paketi Grup İşlemleri</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+                </li>
+                <li>
+                    <a ui-sref="tanimlamalar.dokumanprojepaketigruplistesi"><i class="fa fa-list"></i> Doküman Proje Paketi Grup Listesi</a>
+                </li>
+                <li class="active animated bounceInRight">
+                    <strong><i class="fa fa-university"></i> Kayıt</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2"> </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated padding-bottom fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-university"></i>
+                            Doküman Proje Paketi Grup Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>&nbsp; Doküman Yetki Grup bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="get" name="frmYetkiGrup" id="frmYetkiGrup" class="form-horizontal" accessible-form>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" required="required"  ng-minlength="1" name="txt_ADI" ng-model="Info.ADI" class="formEkleDuzenleInput form-control" placeholder="Kriter adını giriniz.">
+                                                <p ng-show="frmYetkiGrup.txt_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Açıklama<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <textarea name="txtACIKLAMA" ng-minlength="1" ng-model="Info.ACIKLAMA" placeholder="Açıklama giriniz." class="formEkleDuzenleInput form-control" required></textarea>
+                                                <p ng-show="frmYetkiGrup.txtACIKLAMA.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="DokumanYetkiGrupEkleGuncelle(Info, frmYetkiGrup)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <a class="btn btn-primary" href="#" ui-sref="tanimlamalar.dokumanyetkigruplistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+</div>
+

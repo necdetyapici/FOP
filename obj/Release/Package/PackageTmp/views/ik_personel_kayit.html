@@ -1,0 +1,128 @@
+﻿
+<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Personel Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i>
+                    Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikpersonellistesi">
+                    <i class="fa fa-list"></i>
+                    Personel Listesi
+                </a>
+            </li>
+            <li class="active animated bounceInRight">
+                <i class="fa fa-file-text"></i>
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content" style="background:#f3f3f4">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="clients-list">
+                                <ul class="ik-nav nav nav-tabs">
+
+                                    <li ng-class="{'active' : tab == 1}">
+                                        <a data-toggle="tab" ng-click="setTab(1)" ui-sref=".ikpersonelkart">
+                                            <i class="fa fa-id-card-o"></i>&nbsp;Personel Kartı
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 2}" ng-show="IsCreate" ui-sref=".ikpersoneleklerlistesi" >
+                                        <a data-toggle="tab" ng-click="setTab(2)">
+                                            <i class="fa fa-briefcase"></i> &nbsp;Ekler
+                                        </a>
+                                    </li>
+                                    <!--plan tabı teslim edilecek ürün ile gösterilmekte-->
+                                    <li ng-class="{'active' : tab == 3}" ng-show="IsCreate" ui-sref=".ikpersonelegitimlistesi" >
+                                        <a data-toggle="tab" ng-click="setTab(3)">
+                                            <i class="fa fa-graduation-cap"></i> &nbsp;Eğitimler
+                                        </a>
+                                    </li>
+
+                                    <li ng-class="{'active' : tab == 4}" ng-show="IsCreate" ui-sref=".ikpersoneltoplantilistesi">
+                                        <a data-toggle="tab" ng-click="setTab(4)">
+                                            <i class="fa fa-group"></i> &nbsp;Toplantılar
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 5}" ng-show="IsCreate" ui-sref=".ikdisgorevlistesi">
+                                        <a data-toggle="tab" ng-click="setTab(5)">
+                                            <i class="fa fa-suitcase"></i> &nbsp;Dış Görev
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 6}" ng-show="IsCreate" ui-sref=".ikpersonelizinlistesi">
+                                        <a data-toggle="tab" ng-click="setTab(6)">
+                                            <i class="fa fa-scissors"></i> &nbsp;İzinler
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 7}" ng-show="IsCreate" ui-sref=".ikpersonelprojelistesi" >
+                                        <a data-toggle="tab" ng-click="setTab(7)">
+                                            <i class="fa fa-file-zip-o"></i> &nbsp;Projeler
+                                        </a>
+                                    </li>
+
+                                    <li ng-class="{'active' : tab == 8}" ng-show="IsCreate" ui-sref=".ikpersonelgecmisfirmabilgilerilistesi">
+                                        <a data-toggle="tab" ng-click="setTab(8)">
+                                            <i class="fa fa-handshake-o"></i> &nbsp;Geçmiş Firma Bilgileri
+                                        </a>
+                                    </li>
+
+                                    <li ng-class="{'active' : tab == 9}" ng-show="IsCreate" ui-sref=".ikpersonelzimmetlistesi">
+                                        <a data-toggle="tab" ng-click="setTab(9)">
+                                            <i class="fa fa-barcode"></i> &nbsp;Zimmet Bilgileri
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 10}" ng-show="IsCreate" ui-sref=".ikpersonelokulegitimlistesi">
+                                        <a data-toggle="tab" ng-click="setTab(10)">
+                                            <i class="fa fa-university"></i> &nbsp;Okul Eğitimi
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 11}" ng-show="IsCreate" ui-sref=".ikpersonelavanslistesi">
+                                        <a data-toggle="tab" ng-click="setTab(11)">
+                                            <i class="fa fa-money"></i> &nbsp;Avans
+                                        </a>
+                                    </li>
+                                    <li ng-class="{'active' : tab == 12}" ng-show="IsCreate" ui-sref=".ikpersonelmasraflistesi">
+                                        <a data-toggle="tab" ng-click="setTab(12)">
+                                            <i class="fa fa-credit-card"></i> &nbsp;Masraf
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div ui-view></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

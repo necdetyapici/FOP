@@ -1,0 +1,106 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="sistem.etkidegerilistesi">
+                    <i class="fa fa-list"></i>
+                    Etki Değeri Listesi
+                </a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong>
+                    <i class="fa fa-sort-amount-asc"></i>
+                    Kayıt
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-sort-amount-asc"></i>
+                        Etki Değeri Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Etki Değeri bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmEtkiDegeri" id="frmEtkiDegeri" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Etki Değeri Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtETKI_DEGERI_ADI" ng-model="Info.ETKI_DEGERI_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Etki değeri adını giriniz." required />
+                                            <p ng-show="frmEtkiDegeri.txtETKI_DEGERI_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Varlık Olasılık Etki Değeri</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbVARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID" allow-clear="true" name="cmbVARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID" ng-model="Info.VARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID"
+                                                data-live-search="true" title="Varlık Olasılık Değeri Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in MetriklerListesi" deep-watch="true" data-value="item.VARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID">
+                                                    <a>
+                                                        {{item.VARLIK_OLASILIK_ETKI_DEGERI_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Etki Değeri Katsayı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="number" placeholder="Etki değeri katsayı giriniz." name="txtETKI_DEGERI_KATSAYISI" ng-model="Info.ETKI_DEGERI_KATSAYISI" class="formEkleDuzenleInput form-control" required>
+                                            <p ng-show="frmEtkiDegeri.txtETKI_DEGERI_KATSAYISI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Etki Değeri Periyot<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtETKI_DEGERI_PERIYOT" ng-maxlength="255" ng-minlength="1" ng-model="Info.ETKI_DEGERI_PERIYOT" class="formEkleDuzenleInput form-control" placeholder="Etki değeri periyot giriniz." required>
+                                            <p ng-show="frmEtkiDegeri.txtETKI_DEGERI_PERIYOT.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="EtkiDegeriEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="sistem.etkidegerilistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

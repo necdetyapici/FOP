@@ -1,0 +1,398 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                İnsan Kaynakları
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-phone"></i>
+                    Çağrı
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Çağrı Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkCagri" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Arayan</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_CAGRI_HIZMETI_ARAYAN" id="txtIK_CAGRI_HIZMETI_ARAYAN" ng-model="AramaKriter.IK_CAGRI_HIZMETI_ARAYAN" class="form-control formEkleDuzenleInput input-sm  " placeholder="Arayan adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Aranan</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_CAGRI_HIZMETI_ARANAN" id="txtIK_CAGRI_HIZMETI_ARANAN" ng-model="AramaKriter.IK_CAGRI_HIZMETI_ARANAN" class="form-control formEkleDuzenleInput input-sm  " placeholder="Aranan adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Telefon</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_CAGRI_HIZMETI_TELEFON" id="txtIK_CAGRI_HIZMETI_TELEFON" maxlength="17"
+                                                   mask="(999) 999 9999" ng-model="AramaKriter.IK_CAGRI_HIZMETI_TELEFON" class="formEkleDuzenleInput form-control" placeholder="Telefon numarası giriniz." />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Görüşme Konusu</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_CAGRI_HIZMETI_GORUSME_KONUSU" id="txtIK_CAGRI_HIZMETI_GORUSME_KONUSU" ng-model="AramaKriter.IK_CAGRI_HIZMETI_GORUSME_KONUSU" class="form-control formEkleDuzenleInput input-sm  " placeholder="Görüşme konusu giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkCagriGetData(AramaKriter, AramaKriter.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikcagrikayit" data-ui-sref-opts="{reload:true}" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkCagriGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="clients-list">
+                            <ul class="nav nav-tabs">
+                                <li ng-class="{'active' : tab == 1}" class="active"><a ng-click="tabClick(1)">&nbsp;Gelen Aramalarım</a></li>
+                                <li ng-class="{'active' : tab == 2}" class=""><a ng-click="tabClick(2)">&nbsp;Açtığım Aramalar</a></li>
+                                <li ng-class="{'active' : tab == 3}" class=""><a ng-click="tabClick(3);">&nbsp;Hepsi</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active" ng-show="tab == 1">
+                                <div class="panel-body">
+                                    <div class="row" ng-if="IkCagriListesi.length>0">
+                                        <div class="col-lg-12">
+                                            <div class="project-list table-emfa">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <td><b>No</b></td>
+                                                            <td><b>Arayan</b></td>
+                                                            <td><b>Telefon</b></td>
+                                                            <td><b>Tarihi</b></td>
+                                                            <td><b>Saati</b></td>
+                                                            <td><b>Ekleyen Kullanıcı</b></td>
+                                                            <td><b>Durum</b></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="post in IkCagriListesi | filter:ignoreTurkish">
+                                                        <tr>
+                                                            <td class="project-title">
+                                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                                            </td>
+
+                                                            <td class="editLink-Emfa">
+                                                                <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})">{{post.IK_CAGRI_HIZMETI_ARAYAN}}</a><br />
+                                                            </td>
+
+                                                            <td class="no-wrap">
+                                                                {{post.IK_CAGRI_HIZMETI_TELEFON}}
+                                                            </td>
+
+                                                            <td class="tarih">
+                                                                <span class="label label-primary">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    {{post.IK_CAGRI_HIZMETI_TARIHI | tarih}}
+
+                                                                </span>
+                                                            </td>
+
+                                                            <td class="no-wrap">
+                                                                {{post.IK_CAGRI_HIZMETI_SAATI}}
+                                                            </td>
+
+                                                            <td class="no-wrap">
+                                                                {{post.KULLANICI_ADI}}
+                                                            </td>
+                                                            <td>                                                               
+                                                                <label ng-show="post.CAGRI_ONAY_DURUM_ID==2" class="label label-primary ng-scope"> {{post.CAGRI_ONAY_DURUM_ADI}} </label>
+                                                                <label ng-show="post.CAGRI_ONAY_DURUM_ID==1" class="label label-warning ng-scope"> {{post.CAGRI_ONAY_DURUM_ADI}} </label>
+                                                                <label ng-show="post.CAGRI_ONAY_DURUM_ID==3" class="label label-danger ng-scope"> {{post.CAGRI_ONAY_DURUM_ADI}} </label>
+                                                            </td>
+                                                            <td class="actions">
+                                                                <div class="pull-right">
+                                                                    <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                                </div>
+                                                            </td>
+
+                                                            <td class="actions">
+                                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="10" class="text-center">
+                                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="IkCagriGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="IkCagriListesi.length==0 ||IkCagriListesi.length == null">
+                                        <div class="col-lg-12">
+                                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                <i class="fa fa-exclamation-circle"></i>
+                                                &nbsp;İnsan kaynaklarına bağlı çağrı kaydı <strong>bulunmamaktadır.</strong>
+                                                Eklemek için <a ui-sref="insankaynaklari.ikcagrikayit"
+                                                                class="alert-Link-Emfa alert-link">
+                                                    tıklayınız.
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-2" class="tab-pane active ng-hide" ng-show="tab == 2">
+                                <div class="panel-body">
+                                    <div class="row" ng-if="IkCagriListesi.length>0">
+                                        <div class="project-list table-emfa">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <td><b>No</b></td>
+                                                        <td><b>Aranan</b></td>
+                                                        <td><b>Arayan</b></td>
+                                                        <td><b>Telefon</b></td>
+                                                        <td><b>Tarihi</b></td>
+                                                        <td><b>Saati</b></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody ng-repeat="post in IkCagriListesi | filter:ignoreTurkish">
+                                                    <tr>
+                                                        <td class="project-title">
+                                                            <span class="label label-success">{{ $index + 1 }}</span>
+                                                        </td>
+
+                                                        <td class="editLink-Emfa">
+                                                            <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})">{{post.IK_CAGRI_HIZMETI_ARANAN}}</a><br />
+                                                        </td>
+                                                        <td class="editLink-Emfa">
+                                                            <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})">{{post.IK_CAGRI_HIZMETI_ARAYAN}}</a><br />
+                                                        </td>
+
+                                                        <td class="no-wrap">
+                                                            {{post.IK_CAGRI_HIZMETI_TELEFON}}
+                                                        </td>
+
+                                                        <td class="tarih">
+                                                            <span class="label label-primary">
+                                                                <i class="fa fa-calendar"></i>
+                                                                {{post.IK_CAGRI_HIZMETI_TARIHI | tarih}}
+
+                                                            </span>
+                                                        </td>
+
+                                                        <td class="no-wrap">
+                                                            {{post.IK_CAGRI_HIZMETI_SAATI}}
+                                                        </td>
+                                                        <td class="actions">
+                                                            <div class="pull-right">
+                                                                <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                            </div>
+                                                        </td>
+                                                        <td class="actions">
+                                                            <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td colspan="10" class="text-center">
+                                                            <pagination ng-model="AramaKriter.SayfaNo" ng-change="IkCagriGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                        items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="IkCagriListesi.length==0 || IkCagriListesi.length == null">
+                                        <div class="col-lg-12">
+                                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                <i class="fa fa-exclamation-circle"></i>
+                                                &nbsp;İnsan kaynaklarına bağlı çağrı kaydı <strong>bulunmamaktadır.</strong>
+                                                Eklemek için <a ui-sref="insankaynaklari.ikcagrikayit"
+                                                                class="alert-Link-Emfa alert-link">
+                                                    tıklayınız.
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-3" class="tab-pane active ng-hide" ng-show="tab == 3">
+                                <div class="panel-body">
+                                    <div class="row" ng-if="IkCagriListesi.length>0 ||IkCagriListesi.length == null">
+                                        <div class="col-lg-12">
+                                            <div class="project-list table-emfa">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <td><b>No</b></td>
+                                                            <td><b>Aranan</b></td>
+                                                            <td><b>Arayan</b></td>
+                                                            <td><b>Telefon</b></td>
+                                                            <td><b>Tarihi</b></td>
+                                                            <td><b>Saati</b></td>
+                                                            <td><b>Ekleyen Kullanıcı</b></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody ng-repeat="post in IkCagriListesi | filter:ignoreTurkish">
+                                                        <tr>
+                                                            <td class="project-title">
+                                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                                            </td>
+
+                                                            <td class="editLink-Emfa">
+                                                                <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})">{{post.IK_CAGRI_HIZMETI_ARANAN}}</a><br />
+                                                            </td>
+                                                            <td class="editLink-Emfa">
+                                                                <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})">{{post.IK_CAGRI_HIZMETI_ARAYAN}}</a><br />
+                                                            </td>
+
+                                                            <td class="no-wrap">
+                                                                {{post.IK_CAGRI_HIZMETI_TELEFON}}
+                                                            </td>
+
+                                                            <td class="tarih">
+                                                                <span class="label label-primary">
+                                                                    <i class="fa fa-calendar"></i>
+                                                                    {{post.IK_CAGRI_HIZMETI_TARIHI | tarih}}
+
+                                                                </span>
+                                                            </td>
+
+                                                            <td class="no-wrap">
+                                                                {{post.IK_CAGRI_HIZMETI_SAATI}}
+                                                            </td>
+
+                                                            <td class="no-wrap">
+                                                                {{post.KULLANICI_ADI}}
+                                                            </td>
+
+                                                            <td class="actions">
+                                                                <div class="pull-right">
+                                                                    <a ui-sref="insankaynaklari.ikcagrikayit({ikCagriID: post.IK_CAGRI_HIZMETI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                                </div>
+                                                            </td>
+
+                                                            <td class="actions">
+                                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="10" class="text-center">
+                                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="IkCagriGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="IkCagriListesi.length==0">
+                                        <div class="col-lg-12">
+                                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                <i class="fa fa-exclamation-circle"></i>
+                                                &nbsp;İnsan kaynaklarına bağlı çağrı kaydı <strong>bulunmamaktadır.</strong>
+                                                Eklemek için <a ui-sref="insankaynaklari.ikcagrikayit"
+                                                                class="alert-Link-Emfa alert-link">
+                                                    tıklayınız.
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

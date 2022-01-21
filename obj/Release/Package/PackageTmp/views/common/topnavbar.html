@@ -1,0 +1,417 @@
+﻿<div class="row border-bottom">
+    <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <span minimaliza-sidebar></span>
+            <form role="search" class="navbar-form-custom" method="post" action="views/search_results.html">
+                <div class="form-group">
+                    <!--<input type="text" placeholder="{{ 'SEARCH' | translate }}" class="form-control" name="top-search" id="top-search">-->
+                </div>
+            </form>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <!--
+            <li>
+                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+            </li>
+            <li class="dropdown" dropdown>
+                <a class="dropdown-toggle count-info" href dropdown-toggle>
+                    Language
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs" ng-controller="translateCtrl">
+                    <li><a ng-click="changeLanguage('en')">English</a></li>
+                    <li><a ng-click="changeLanguage('es')">Spanish</a></li>
+                </ul>
+            </li>
+            -->
+            <!--<li class="dropdown" dropdown>
+                <a class="dropdown-toggler count-info" href="" dropdown-toggle>
+                    <i class="fa fa-calendar-times-o"></i>
+                </a>
+
+                <ul class="dropdown-menu dropdown-messages" ng-show="!OutlookEntegrasyonVar">
+                    <li>
+                        <div class="text-center">
+                            Outlook'a bağlanmak için <a ng-click="" style="cursor:pointer">buraya</a> tıklayınız.
+                        </div>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu dropdown-messages" ng-show="OutlookEntegrasyonVar">
+                    <li ng-repeat="obj in WeeklyCalendar" >
+                        <div class="text-center" ng-show="EmailAdedi > 0">
+                            {{EmailAdedi}} adedi kadar okunmamış e-postanın bulunmaktadır.
+                        </div>
+                        <div class="text-center" ng-show="EmailAdedi == 0">
+                            Okunmamış e-postanız bulunmamaktadır.
+                        </div>
+                        <div>
+                            <span class="date">{{obj.startDate}}</span>
+                            <div ng-repeat="ev in obj.events">
+                                <span class="small">{{ev.startTime}}</span>&nbsp; {{ev.subject}}
+                            </div>
+                            <hr/>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown" dropdown>
+                <a class="dropdown-toggler count-info" href="" dropdown-toggle>
+                    <i class="fa fa-envelope-o"></i><span class="label label-danger" ng-show="EmailAdedi > 0">{{EmailAdedi}}</span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-messages" ng-show="!OutlookEntegrasyonVar">
+                    <li >
+                        <div class="text-center">
+                            Outlook'a bağlanmak için <a ng-click="" style="cursor:pointer">buraya</a> tıklayınız.
+                        </div>
+                    </li>
+                </ul>
+                <ul class="dropdown-menu dropdown-messages" ng-show="OutlookEntegrasyonVar">
+                    <li>
+                        <div class="text-center" ng-show="EmailAdedi > 0">
+                            {{EmailAdedi}} adedi kadar okunmamış e-postanın bulunmaktadır.
+                        </div>
+                        <div class="text-center" ng-show="EmailAdedi == 0">
+                            Okunmamış e-postanız bulunmamaktadır.
+                        </div>
+                    </li>
+                </ul>
+            </li>-->
+            
+
+
+            <!--<li class="dropdown" dropdown id="mydeneme">
+                <a class="dropdown-toggle count-info" href="" dropdown-toggle>
+                    <i class="fa fa-envelope"></i> <span class="label label-danger">{{getBildirimListesi().length}}</span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-messages bildirim-menu" ng-init="BildirimKontrol()">
+                    <li class="bildirim-item" ng-show="getBildirimListesi()==undefined">
+                        <div class="text-center">
+                            Okunmamış bildirim bulunmamaktadır
+                        </div>
+                    </li>
+                    <li class="bildirim-item" ng-repeat-start="post in getBildirimListesi() | orderBy:'-BILDIRIM_TARIHI' | limitTo:3">
+                        <div class="dropdown-messages-box" ui-sref="sistem.bildirimkayit({bildirimID: post.BILDIRIM_ID})">
+                            <div>
+                                <small class="pull-right text-danger m-l-xs m-t-n-xs"><i class="fa fa-flag bildirim-flag"></i></small>
+
+                                <div>
+                                    <strong>{{post.BILDIRIM_TURU_ADI}}:</strong><br />
+                                    {{post.KONU}}
+                                    <br />
+                                    <small class="text-muted">Gönderim Tarihi: {{post.BILDIRIM_TARIHI |  moment:'D/M/YYYY'}}</small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li ng-repeat-end class="divider"></li>
+
+                    <li class="bildirim-item">
+                <div class="dropdown-messages-box">
+                    <div>
+                        <small class="pull-right text-danger m-l-xs m-t-n-xs"><i class="fa fa-flag bildirim-flag"></i></small>
+                        <div>
+                            <strong>SMS Bildirimi:</strong><br />
+                            01.09.2015 tarihinde +90 (532) 321-7654 numaralı telefona göndermiş olduğunuz SMS başarı ile gitmiştir, güle güle!..<br>
+                            <small class="text-muted">Gönderim Tarihi: 10.06.2014 17:43</small>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="divider"></li>
+            <li class="bildirim-item">
+                <div class="dropdown-messages-box">
+                    <div>
+                        <small class="pull-right text-navy m-l-xs m-t-n-xs"><i class="fa fa-check bildirim-flag"></i></small>
+                        <div>
+                            <strong>Baro Bildirimi:</strong><br />
+                            01.09.2015 tarihinde baromuzda çok önemli bir toplantı olmakla birlikte siz davetli değilsiniz.  :)<br>
+                            <small class="text-muted">Gönderim Tarihi: 10.06.2014 17:43</small>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+                    <li class="divider"></li>
+                    <li class="bildirim-action">
+                        <div class="text-center link-block">
+                            <a ui-sref="sistem.bildirimlistesi()">
+                                <i class="fa fa-envelope"></i> <strong>Bütün Bildirimleri Göster</strong>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>-->
+
+
+
+
+
+
+
+            <!--<li class="dropdown" dropdown>
+                <a class="dropdown-toggle count-info" href="" dropdown-toggle>
+                    <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
+                </a>
+
+                <ul class="dropdown-menu dropdown-messages">
+                    <li>
+                        <div class="dropdown-messages-box">
+                            <a ui-sref="profile" class="pull-left">
+                                <img alt="image" class="img-circle" src="img/a7.jpg">
+                            </a>
+
+                            <div>
+                                <small class="pull-right">46h ago</small>
+                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <div class="dropdown-messages-box">
+                            <a ui-sref="profile" class="pull-left">
+                                <img alt="image" class="img-circle" src="img/a4.jpg">
+                            </a>
+
+                            <div>
+                                <small class="pull-right text-navy">5h ago</small>
+                                <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <div class="dropdown-messages-box">
+                            <a ui-sref="profile" class="pull-left">
+                                <img alt="image" class="img-circle" src="img/profile.jpg">
+                            </a>
+
+                            <div>
+                                <small class="pull-right">23h ago</small>
+                                <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="divider"></li>
+                    <li>
+                        <div class="text-center link-block">
+                            <a ui-sref="inbox">
+                                <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>-->
+
+            <!--<li class="dropdown" dropdown>
+                <a class="dropdown-toggle count-info" href dropdown-toggle>
+                    <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
+                </a>
+                <ul class="dropdown-menu dropdown-alerts">
+                    <li>
+                        <a ui-sref="inbox">
+                            <div>
+                                <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ui-sref="profile">
+                            <div>
+                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                <span class="pull-right text-muted small">12 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a ui-sref="grid_options">
+                            <div>
+                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                <span class="pull-right text-muted small">4 minutes ago</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <div class="text-center link-block">
+                            <a ui-sref="notifications_tooltips">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>-->
+
+            <li  id="mydeneme">
+                <a ng-click="logout()">
+                    <i class="fa fa-sign-out"></i> Çıkış
+                </a>
+            </li>
+
+            <!--<li>
+                <a ng-click="$root.rightSidebar = !$root.rightSidebar">
+                    <i class="fa fa-tasks"></i>
+                </a>
+            </li>-->
+        </ul>
+
+    </nav>
+</div>
+
+<div id="mydiv" style="z-index:0" ng-init="fixTopLinks()">
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown" dropdown ng-show="OutlookEntegrasyonVar">
+            <a class="dropdown-toggler count-info" href="" dropdown-toggle>
+                <i class="fa fa-calendar-times-o"></i>
+            </a>
+
+            <ul class="dropdown-menu dropdown-messages" ng-show="!WeeklyCalendar">
+                <li>
+                    <div class="text-center">
+                        Etkinlikler kontrol ediliyor...
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="dropdown-menu dropdown-messages" ng-show="WeeklyCalendar && WeeklyCalendar.length == 0">
+                <li>
+                    <div class="text-center">
+                        Önümüzdeki hafta boyunca bir etkinliğiniz gözükmüyor
+                    </div>
+                </li>
+            </ul>
+            <ul class="dropdown-menu dropdown-messages" ng-show="WeeklyCalendar && WeeklyCalendar.length > 0">
+                <li ng-repeat="obj in WeeklyCalendar">
+                    <!--<div class="text-center" ng-show="EmailAdedi > 0">
+                    {{EmailAdedi}} adedi kadar okunmamış e-postanın bulunmaktadır.
+                </div>
+                <div class="text-center" ng-show="EmailAdedi == 0">
+                    Okunmamış e-postanız bulunmamaktadır.
+                </div>-->
+                    <div>
+                        <span class="date">{{obj.startDate}}</span>
+                        <div ng-repeat="ev in obj.events">
+                            <span class="small">{{ev.startTime}}</span>&nbsp; {{ev.subject}}
+                        </div>
+                        <hr />
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown" dropdown>
+            <a class="dropdown-toggler count-info" href="" dropdown-toggle>
+                <i class="fa fa-envelope-o"></i><span class="label label-danger" ng-show="EmailAdedi > 0">{{EmailAdedi}}</span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-messages" ng-show="!OutlookEntegrasyonVar">
+                <li>
+                    <div class="text-center">
+                        Outlook'a bağlanmak için <a id="outlookConnectID" style="cursor:pointer">buraya</a> tıklayınız.
+                    </div>
+                </li>
+            </ul>
+            <ul class="dropdown-menu dropdown-messages" ng-show="OutlookEntegrasyonVar">
+                <li>
+                    <div class="text-center" ng-show="EmailAdedi > 0">
+                        Toplam <b>{{EmailAdedi}}</b> adet  okunmamış e-postanın bulunmaktadır.
+                    </div>
+                    <div class="text-center" ng-show="EmailAdedi == 0">
+                        Okunmamış e-postanız bulunmamaktadır.
+                    </div>
+                    <div class="text-center" ng-show="!(EmailAdedi >= 0)">
+                        E-posta kontro ediliyor...
+                    </div>
+                    
+                </li>
+            </ul>
+        </li>
+
+        <li class="dropdown" dropdown>
+            <a class="dropdown-toggle count-info" href="" dropdown-toggle>
+                <i class="fa fa-envelope"></i> <span class="label label-danger" ng-show="OkunmamisDuyuruAdedi > 0">{{OkunmamisDuyuruAdedi}}</span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-messages bildirim-menu" ng-init="BildirimKontrol()">
+                <li class="bildirim-item" ng-show="OkunmamisDuyuruAdedi == 0">
+                    <div class="text-center">
+                        Okunmamış bildirim bulunmamaktadır
+                    </div>
+                </li>
+                <li class="bildirim-item" ng-show="OkunmamisDuyuruAdedi > 10">
+                    <div>
+                        Son 10 Bildirim
+                    </div>
+                    <hr />
+                </li>
+               
+                <li class="bildirim-item" ng-repeat="post in Duyurular | orderBy:'-KAYIT_TARIHI' | limitTo:10">
+                    <div class="dropdown-messages-box">
+                        <div>
+                            <span>{{post.KONU}}</span>
+                            <a class="pull-right text-danger m-l-xs m-t-n-xs" ng-click="BildirimOku(post)"><i class="fa fa-arrow-circle-right"></i></a>
+                            <br />
+                            <small class="text-muted">Gönderim Tarihi: {{post.KAYIT_TARIHI |  moment:'D/M/YYYY'}}</small>
+                            <hr  ng-show="OkunmamisDuyuruAdedi - 1 != $index"/>
+                            
+                        </div>
+                    </div>
+                </li>
+<!-- 
+                <li ng-repeat-end class="divider"></li> -->
+
+                <!--<li class="bildirim-item">
+                <div class="dropdown-messages-box">
+                    <div>
+                        <small class="pull-right text-danger m-l-xs m-t-n-xs"><i class="fa fa-flag bildirim-flag"></i></small>
+                        <div>
+                            <strong>SMS Bildirimi:</strong><br />
+                            01.09.2015 tarihinde +90 (532) 321-7654 numaralı telefona göndermiş olduğunuz SMS başarı ile gitmiştir, güle güle!..<br>
+                            <small class="text-muted">Gönderim Tarihi: 10.06.2014 17:43</small>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="divider"></li>
+            <li class="bildirim-item">
+                <div class="dropdown-messages-box">
+                    <div>
+                        <small class="pull-right text-navy m-l-xs m-t-n-xs"><i class="fa fa-check bildirim-flag"></i></small>
+                        <div>
+                            <strong>Baro Bildirimi:</strong><br />
+                            01.09.2015 tarihinde baromuzda çok önemli bir toplantı olmakla birlikte siz davetli değilsiniz.  :)<br>
+                            <small class="text-muted">Gönderim Tarihi: 10.06.2014 17:43</small>
+                        </div>
+                    </div>
+                </div>
+            </li>-->
+
+                <li class="divider"></li>
+                <li class="bildirim-action">
+                    <div class="text-center link-block">
+                        <a ng-click="DuyuruListele()">
+                            <i class="fa fa-envelope"></i> <strong>Bütün Bildirimleri Göster</strong>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+
+    </ul>
+</div>

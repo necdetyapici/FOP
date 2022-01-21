@@ -1,0 +1,33 @@
+﻿
+
+
+<div class="row" style="margin-top:30px">
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                                <i class="fa fa-cubes"></i> Toplantı Ayarları
+                            </h5>
+                        </div>
+
+                        <div class="fizibilite ibox-content">
+                            <ul class="alt-nav-tabs nav nav-tabs">
+                                <li ng-class="{'active-altTab' : altTab == 1}"><a class="altTabMenuItem" ng-click="setAltTab(1)" ui-sref=".toplantikatilimcirolutipilistesi"><i class="fa fa-cubes"></i>&nbsp;Toplantı Katılımcı Rolü Tipi Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 2}"><a class="altTabMenuItem" ng-click="setAltTab(2)" ui-sref=".toplantiturulistesi"><i class="fa fa-cubes"></i>&nbsp;Toplantı Türü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 3}"><a class="altTabMenuItem" ng-click="setAltTab(3)" ui-sref=".toplantigundemiturulistesi"><i class="fa fa-cubes"></i>&nbsp;Toplantı Gündemi Türü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 4}"><a class="altTabMenuItem" ng-click="setAltTab(4)" ui-sref=".toplantiyerilistesi"><i class="fa fa-cubes"></i>&nbsp;Toplantı Yeri Ayarı</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div ui-view></div>
+    </div>
+</div>

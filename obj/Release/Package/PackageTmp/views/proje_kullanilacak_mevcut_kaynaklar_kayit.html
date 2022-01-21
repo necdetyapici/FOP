@@ -1,0 +1,78 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Kullanılacak Mevcut Kaynak Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <form method="get" name="frmProjeKullanilacakMevcutKaynaklar" id="frmProjeKullanilacakMevcutKaynaklar" class="form-horizontal" accessible-form>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kaynak Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtKAYNAK_ADI" ng-model="InfoProjeKullanilacakMevcutKaynaklar.KAYNAK_ADI" class="form-control formEkleDuzenleInput" ng-maxlength="255" ng-minlength="1" placeholder="Kaynak adını giriniz." required />
+                                            <p ng-show="frmProjeKullanilacakMevcutKaynaklar.txtKAYNAK_ADI.$invalid && formCalistirildiKullanilacakMevcutKaynaklar" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kullanıma Alınma Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="datetime" class="formEkleDuzenleInput form-control" name="txtKULLANIMA_ALINMA_TARIHI" nextgen-date-picker="" ng-model="InfoProjeKullanilacakMevcutKaynaklar.KULLANIMA_ALINMA_TARIHI" required>
+                                            </div>
+                                            <p ng-show="frmProjeKullanilacakMevcutKaynaklar.txtKULLANIMA_ALINMA_TARIHI.$invalid && formCalistirildiKullanilacakMevcutKaynaklar" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">                                  
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kullanılacağı Yer <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtKULLANICILACAGI_YER" ng-model="InfoProjeKullanilacakMevcutKaynaklar.KULLANICILACAGI_YER" ng-maxlength="255" ng-minlength="1" class="form-control formEkleDuzenleInput" placeholder="Kullanicilacagi yeri giriniz." required />
+                                            <p ng-show="frmProjeKullanilacakMevcutKaynaklar.txtKULLANICILACAGI_YER.$invalid && formCalistirildiKullanilacakMevcutKaynaklar" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeKullanilacakMevcutKaynaklarEkleGuncelle(InfoProjeKullanilacakMevcutKaynaklar)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.kullanilacakmevcutkaynaklarlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

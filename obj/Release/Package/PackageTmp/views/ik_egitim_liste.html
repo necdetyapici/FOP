@@ -1,0 +1,245 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <!--<h2>Proje İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                İnsan Kaynakları
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-graduation-cap"></i>
+                    Eğitim
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Eğitim Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkEgitim" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_EGITIM_ADI" id="txtIK_EGITIM_ADI" ng-model="AramaKriter.IK_EGITIM_ADI" class="form-control formEkleDuzenleInput " placeholder="Eğitim adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Başlangıç Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_EGITIM_BASLANGIC_TARIHI" id="txtIK_EGITIM_BASLANGIC_TARIHI" ng-model="AramaKriter.IK_EGITIM_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Bitiş Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_EGITIM_BITIS_TARIHI" id="txtIK_EGITIM_BITIS_TARIHI" ng-model="AramaKriter.IK_EGITIM_BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-pristine ng-untouched ng-valid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Veren Kurum</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_EGITIM_VEREN_KURUM_ADI" id="txtIK_EGITIM_VEREN_KURUM_ADI" ng-model="AramaKriter.IK_EGITIM_VEREN_KURUM_ADI" class="form-control formEkleDuzenleInput  " placeholder="Eğitim veren kurum giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitimen Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_EGITIM_EGITMEN_ADI" id="txtIK_EGITIM_EGITMEN_ADI" ng-model="AramaKriter.IK_EGITIM_EGITMEN_ADI" class="form-control formEkleDuzenleInput " placeholder="Eğitmen adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Konu</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_EGITIM_KONU" id="txtIK_EGITIM_KONU" ng-model="AramaKriter.IK_EGITIM_KONU" class="form-control formEkleDuzenleInput  " placeholder="Konu giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkEgitimGetData(AramaKriter, AramaKriter.SayfaNo = 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkEgitimListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikegitimkayit" data-ui-sref-opts="{reload:true}" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkEgitimGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Adı</b></td>
+                                            <td><b>Konu</b></td>
+                                            <td><b>Eğitim Veren Kurum</b></td>
+                                            <td><b>Eğitmen Adı Soyadı</b></td>
+                                            <td><b>Başlangıç Tarihi</b></td>
+                                            <td><b>Bitiş Tarihi</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkEgitimListesi | filter:txtArama">
+                                            <td class="project-title">
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="editLink-Emfa">
+                                                <a ui-sref="insankaynaklari.ikegitimkayit({ikEgitimID: post.IK_EGITIM_ID})">{{post.IK_EGITIM_ADI}}</a><br />
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.IK_EGITIM_KONU}}
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.IK_EGITIM_VEREN_KURUM_ADI}}
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.IK_EGITIM_EGITMEN_ADI}}
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.IK_EGITIM_BASLANGIC_TARIHI | tarih  }}
+                                                </span>
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-danger">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.IK_EGITIM_BITIS_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="insankaynaklari.ikegitimkayit({ikEgitimID: post.IK_EGITIM_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="IkEgitimGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="IkEgitimListesi.length==0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikegitimkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkEgitimGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İnsan kaynaklarına bağlı eğitim kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="insankaynaklari.ikegitimkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

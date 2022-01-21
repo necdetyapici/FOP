@@ -1,0 +1,242 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-cogs"></i>
+                Yönetim İşlemleri
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-group"></i>
+                    Müşteri
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                        <i class="fa fa-group"></i> Müşteri Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-Musteri" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Müşteri Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtMUSTERI_ADI" id="txtMUSTERI_ADI" ng-model="AramaKriter.MUSTERI_ADI" class="form-control formEkleDuzenleInput" placeholder="Müşteri adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Müşteri E-Posta</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group m-b-sm" style="margin-bottom:0px;">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                <input type="text" name="txtMUSTERI_E_POSTA" id="txtMUSTERI_E_POSTA" ng-model="AramaKriter.MUSTERI_E_POSTA" ng-maxlength="150" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Müşteri E-Posta adresini giriniz.">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Müşteri İl</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control formEkleDuzenleInput" id="sel_MUSTERI_IL_ID" name="sel_MUSTERI_IL_ID" ng-model="AramaKriter.MUSTERI_IL_ID"
+                                                data-live-search="true" title="Müşteri İl Seçiniz" data-size="5" ng-change="getIlce()">
+                                                <li nya-bs-option="item in IlListesi" deep-watch="true" data-value="item.IL_ILCE_ID">
+                                                    <a>
+                                                        {{item.IL_ILCE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Müşteri İlçe </label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="sel_MUSTERI_ILCE_ID" name="sel_MUSTERI_ILCE_ID" ng-model="AramaKriter.MUSTERI_ILCE_ID"
+                                                data-live-search="true" title="Müşteri İlçe Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IlceListesi" deep-watch="true" data-value="item.IL_ILCE_ID">
+                                                    <a>
+                                                        {{item.IL_ILCE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="MusteriGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="MusteriListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.musterikayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MusteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Müşteri Adı</b></td>
+                                            <td><b>Müşteri Telefon</b></td>
+                                            <td><b>Müşteri E-Posta</b></td>
+                                            <td><b>Sözleşme Başlama Tarihi</b></td>
+                                            <td><b>Sözleşme Bitiş Tarihi</b></td>
+                                            <td><b>Ayarlar</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in MusteriListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main ">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <a class="editLink-Emfa" ui-sref="yonetim.musterikayit({ musteriID: post.MUSTERI_ID})"> {{post.MUSTERI_ADI}} </a>
+                                            </td>
+                                            <td>
+                                                <span class="showPhone">
+                                                    <i class="fa fa-phone"></i>
+                                                    {{post.MUSTERI_TELEFON | telefon}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="showEmail">
+                                                    <a href="mailto:{{post.MUSTERI_E_POSTA}}">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </a>  {{post.MUSTERI_E_POSTA}}
+                                                </span>
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.SOZLESME_BASLAMA_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td class="tarih">
+                                                <span class=" label label-danger">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.SOZLESME_BITIS_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+
+                                            <td class="table-actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="yonetim.musteriayari.proje.projeturulistesi({ musteriID: post.MUSTERI_ID})" class="btn btn-sm btn-info" tooltip="Ayarlar" tooltip-append-to-body="true"><i class="fa fa-gears"></i></a>
+                                                </div>
+                                            </td>
+
+                                            <td class="table-actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="yonetim.musterikayit({ musteriID: post.MUSTERI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="table-actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="MusteriGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="ibox-content" ng-if="MusteriListesi.length==0 || MusteriListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.musterikayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MusteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Yönetim işlemlerine bağlı müşteri kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="yonetim.musterikayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/21/2019 15:38:40" ReportInfo.Modified="02/22/2019 16:00:30" ReportInfo.CreatorVersion="2018.3.17.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/iYJvbkClNjl/xIVseX0BvlQUkZ06T1CtAlendK/zA1ztHealQLXYdsRFGJdM8KINzvK6IYGlq2ot4EKjnfkjfJez1QfD9aOx3zV/8k82e/JvZCDraSF07NzZ+Z9uJMGJikkrfGB8ALEYMSoWds53ymw==">
+      <TableDataSource Name="TOPLANTI" DataType="System.Int32" Enabled="true" TableName="TOPLANTI" SelectCommand="Select T.TOPLANTI_ADI,T.TOPLANTI_TARIHI from TOPLANTI AS T WHERE TOPLANTI_ID=@TOPLANTI_ID">
+        <Column Name="TOPLANTI_ADI" DataType="System.String"/>
+        <Column Name="TOPLANTI_TARIHI" DataType="System.DateTime"/>
+        <CommandParameter Name="TOPLANTI_ID" DataType="8" Expression="[TOPLANTI_ID]"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <MsSqlDataConnection Name="Connection2" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/iYJvbkClNjl/xIVseX0BvlQUkZ06T1CtAlendK/zA1ztHealQLXYdsRFGJdM8KINzvK6IYGlq2ot4EKjnfkjfJez1QfD9aOx3zV/8k82e/JvZCDraSF07NzZ+Z9uJMGJixY2h0/p2zyN31R8F7dCirQ==">
+      <TableDataSource Name="TOPLANTI_KATILIMCI2" DataType="System.Int32" Enabled="true" TableName="TOPLANTI_KATILIMCI" SelectCommand="&#13;&#10;SELECT TK.TOPLANTI_ID, TK.AD_SOYAD,TK.E_POSTA,TKR.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI,K.KULLANICI_E_POSTA,K.AD_SOYAD  FROM TOPLANTI_KATILIMCI AS TK&#13;&#10;INNER JOIN TOPLANTI_KATILIMCI_ROLU_TIPI AS TKR ON TKR.TOPLANTI_KATILIMCI_ROLU_TIPI_ID=TK.TOPLANTI_KATILIMCI_ROLU_TIPI_ID&#13;&#10;LEFT JOIN KULLANICILAR AS K ON K.KULLANICI_ID=TK.KULLANICI_ID&#13;&#10;Where TOPLANTI_ID=@TOPLANTI_ID">
+        <Column Name="AD_SOYAD" DataType="System.String"/>
+        <Column Name="E_POSTA" DataType="System.String"/>
+        <Column Name="TOPLANTI_KATILIMCI_ROLU_TIPI_ADI" DataType="System.String"/>
+        <Column Name="KULLANICI_E_POSTA" DataType="System.String"/>
+        <Column Name="AD_SOYAD1" DataType="System.String"/>
+        <Column Name="TOPLANTI_ID" DataType="System.Int32"/>
+        <CommandParameter Name="TOPLANTI_ID" DataType="8" Expression="[TOPLANTI_ID]" DefaultValue="0"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <MsSqlDataConnection Name="Connection3" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/iYJvbkClNjl/xIVseX0BvlQUkZ06T1CtAlendK/zA1ztHealQLXYdsRFGJdM8KINzvK6IYGlq2ot4EKjnfkjfJez1QfD9aOx3zV/8k82e/JvZCDraSF07NzZ+Z9uJMGJiYbQ1e5A0FFXYPnZKLixFrQ==">
+      <TableDataSource Name="TOPLANTI_GUNDEM_TALEP_PROJE3" DataType="System.Int32" Enabled="true" TableName="TOPLANTI_GUNDEM_TALEP_PROJE" SelectCommand="SELECT TG.TOPLANTI_ID, TP.TALEP_PROJE_KONU,K.AD_SOYAD,TP.TALEP_PLANLANAN_BASLANGIC_TARIHI FROM TOPLANTI_GUNDEM_TALEP_PROJE AS TGTP&#13;&#10;INNER JOIN TALEP_PROJE AS TP ON TP.TALEP_PROJE_ID=TGTP.TALEP_PROJE_ID&#13;&#10;LEFT JOIN KULLANICILAR AS K ON K.KULLANICI_ID=TP.KULLANICI_ID INNER JOIN TOPLANTI_GUNDEM  TG ON TG.TOPLANTI_GUNDEM_ID =  TGTP.TOPLANTI_GUNDEM_ID&#13;&#10;WHERE TGTP.TOPLANTI_GUNDEM_ID=ANY(SELECT TOPLANTI_GUNDEM_ID FROM TOPLANTI_GUNDEM WHERE TOPLANTI_ID=@TOPLANTI_ID)">
+        <Column Name="TALEP_PROJE_KONU" DataType="System.String"/>
+        <Column Name="AD_SOYAD" DataType="System.String"/>
+        <Column Name="TALEP_PLANLANAN_BASLANGIC_TARIHI" DataType="System.DateTime"/>
+        <Column Name="TOPLANTI_ID" DataType="System.Int32"/>
+        <CommandParameter Name="TOPLANTI_ID" DataType="8" Expression="[TOPLANTI_ID]" DefaultValue="0"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <MsSqlDataConnection Name="Connection1" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/iYJvbkClNjl/xIVseX0BvlQUkZ06T1CtAlendK/zA1ztHealQLXYdsRFGJdM8KINzvK6IYGlq2ot4EKjnfkjfJez1QfD9aOx3zV/8k82e/JvZCDraSF07NzZ+Z9uJMGJiSxtjaXYeZpzEQcK04NKHmw==">
+      <TableDataSource Name="TOPLANTI_GUNDEM" DataType="System.Int32" Enabled="true" TableName="TOPLANTI_GUNDEM" SelectCommand="SELECT TG.TOPLANTI_ID, TGH.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE, TG.GORUSULEN_KONU FROM TOPLANTI_GUNDEM AS TG&#13;&#10;INNER JOIN TOPLANTI_GUNDEMI_HAVUZU AS TGH ON TGH.TOPLANTI_GUNDEMI_HAVUZU_ID=TG.TOPLANTI_GUNDEMI_HAVUZU_ID&#13;&#10;WHERE TG.TOPLANTI_ID=@TOPLANTI_ID&#13;&#10;">
+        <Column Name="GORUSULEN_KONU" DataType="System.String"/>
+        <Column Name="TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE" DataType="System.String"/>
+        <Column Name="TOPLANTI_ID" DataType="System.Int32"/>
+        <CommandParameter Name="TOPLANTI_ID" DataType="8" Expression="[TOPLANTI_ID]" DefaultValue="0"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="207.9">
+      <TableObject Name="Table8" Left="9.45" Top="9.45" Width="680.42" Height="94.5" Border.Lines="All" Border.Width="1.5" Fill.Color="White">
+        <TableColumn Name="Column25" Width="198.46"/>
+        <TableColumn Name="Column26" Width="481.96"/>
+        <TableRow Name="Row11" Height="94.5">
+          <TableCell Name="Cell35" Border.Lines="All">
+            <SVGObject Name="SVG1" Top="9.45" Width="198.45" Height="75.6" SvgData="PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIKCSB2aWV3Qm94PSIwIDAgMTY4IDgwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxNjggODA7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4KCS5zdDB7ZmlsbDojRjI2NTIyO30KCS5zdDF7ZmlsbDp1cmwoI1hNTElEXzU2Xyk7fQoJLnN0MntmaWxsOiMyMzFGMjA7fQoJLnN0M3tmaWxsOiNGMTc0MjM7fQo8L3N0eWxlPgo8ZyBpZD0iWE1MSURfNDNfIj4KCTxnIGlkPSJYTUxJRF8yMjRfIj4KCQk8cGF0aCBpZD0iWE1MSURfNDBfIiBjbGFzcz0ic3QwIiBkPSJNNTMuNSw0NC41YzAtNCwzLjItNy4yLDcuMi03LjJjMC43LDAsMS4zLDAuMSwxLjksMC4zYy0xLjMtOS45LTkuNy0xNy42LTIwLTE3LjYKCQkJYy0xMS4yLDAtMjAuMiw5LTIwLjIsMjAuMmMwLDExLjIsOSwyMC4yLDIwLjIsMjAuMmM3LDAsMTMuMS0zLjUsMTYuOC04LjlDNTYsNTAuOSw1My41LDQ4LDUzLjUsNDQuNXoiLz4KCQk8bGluZWFyR3JhZGllbnQgaWQ9IlhNTElEXzU2XyIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiIHgxPSI0Mi4xMTk1IiB5MT0iMjEuNzI0OCIgeDI9IjQyLjExOTUiIHkyPSI1Ny41Mzk1Ij4KCQkJPHN0b3AgIG9mZnNldD0iMCIgc3R5bGU9InN0b3AtY29sb3I6I0Y2OTM2NCIvPgoJCQk8c3RvcCAgb2Zmc2V0PSIxIiBzdHlsZT0ic3RvcC1jb2xvcjojRjI2NTIyIi8+CgkJPC9saW5lYXJHcmFkaWVudD4KCQk8cGF0aCBpZD0iWE1MSURfMzlfIiBjbGFzcz0ic3QxIiBkPSJNNDIuNiw1Ny44Yy05LjcsMC0xNy42LTcuOS0xNy42LTE3LjZjMC05LjcsNy45LTE3LjYsMTcuNi0xNy42YzcuNywwLDE0LjQsNSwxNi43LDEyLjEKCQkJYy00LjcsMC43LTguNCw0LjgtOC40LDkuN2MwLDMuMywxLjYsNi4zLDQuMiw4LjFDNTEuOCw1NS45LDQ3LjMsNTcuOCw0Mi42LDU3LjhMNDIuNiw1Ny44eiIvPgoJCTxnIGlkPSJYTUxJRF8yMzRfIj4KCQkJPHBhdGggaWQ9IlhNTElEXzM4XyIgY2xhc3M9InN0MiIgZD0iTTMuNCw0OC4yYzAtMjIuNywxOC40LTQxLjIsNDEuMi00MS4yYzE2LjYsMCwzMSw5LjksMzcuNSwyNC4xQzc3LjYsMTMuMyw2MS40LDAsNDIuMSwwCgkJCQlDMTkuNCwwLDEsMTguNCwxLDQxLjJjMCw2LjEsMS4zLDExLjgsMy43LDE3QzMuOSw1NSwzLjQsNTEuNywzLjQsNDguMnoiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzM3XyIgY2xhc3M9InN0MiIgZD0iTTQ3LjEsNzQuNmMtMTkuOSwwLTM1LjktMTYuMS0zNS45LTM1LjljMC00LjUsMC44LTguOCwyLjMtMTIuOGMtMy4xLDUuMy00LjksMTEuNS00LjksMTguMgoJCQkJQzguNiw2My45LDI0LjcsODAsNDQuNSw4MGMxNS40LDAsMjguNS05LjYsMzMuNi0yMy4yQzcxLjksNjcuNSw2MC4zLDc0LjYsNDcuMSw3NC42eiIvPgoJCQk8cGF0aCBpZD0iWE1MSURfMzZfIiBjbGFzcz0ic3QyIiBkPSJNNDUuNiwxMS4xYy0wLjcsMC0xLjQsMC0yLDAuMWMxNS44LDEsMjguMywxNC4yLDI4LjMsMzAuM2MwLDE2LjEtMTIuNSwyOS4yLTI4LjMsMzAuMwoJCQkJYzAuNywwLDEuNCwwLjEsMiwwLjFjMTYuOCwwLDMwLjQtMTMuNiwzMC40LTMwLjRDNzUuOSwyNC43LDYyLjMsMTEuMSw0NS42LDExLjF6Ii8+CgkJPC9nPgoJCTxnIGlkPSJYTUxJRF8yMjVfIj4KCQkJPGcgaWQ9IlhNTElEXzIzMF8iPgoJCQkJPHBhdGggaWQ9IlhNTElEXzIzMV8iIGNsYXNzPSJzdDIiIGQ9Ik00MC40LDMxLjNMMzkuNywzMnYxMC4ybC02LjYsNi42SDE3LjhsNi42LTYuNmg1LjFsMC43LTAuN2wtMi45LTIuOWg1Ljh2LTAuN0gyMS40CgkJCQkJbC02LjYtNi42SDQwLjR6IE0yMy42LDQyLjJsLTYuNiw2LjZoLTIuMmw2LjYtNi42SDIzLjZ6Ii8+CgkJCTwvZz4KCQkJPGcgaWQ9IlhNTElEXzIyNl8iPgoJCQkJPHBhdGggaWQ9IlhNTElEXzIyN18iIGNsYXNzPSJzdDIiIGQ9Ik00Mi42LDQ4LjdsMC43LTAuN1YzNy44bDYuNi02LjZoMTUuM2wtNi42LDYuNmgtNS4xbC0wLjcsMC43bDIuOSwyLjloLTUuOHYwLjdoMTEuNgoJCQkJCWw2LjYsNi42SDQyLjZ6IE01OS40LDM3LjhsNi42LTYuNmgyLjJsLTYuNiw2LjZINTkuNHoiLz4KCQkJPC9nPgoJCTwvZz4KCTwvZz4KCTxnIGlkPSJYTUxJRF80NF8iPgoJCTxnIGlkPSJYTUxJRF84NV8iPgoJCQk8cGF0aCBpZD0iWE1MSURfMjIyXyIgY2xhc3M9InN0MiIgZD0iTTg0LjYsNTguNWwwLjUtMC40YzAuMywwLjUsMC44LDAuOCwxLjQsMC44YzAuNiwwLDEuMS0wLjQsMS4xLTFjMC0wLjYtMC42LTAuOC0xLjMtMS4xCgkJCQljLTAuNy0wLjItMS41LTAuNS0xLjUtMS40YzAtMC44LDAuNy0xLjMsMS42LTEuM2MwLjcsMCwxLjIsMC4zLDEuNiwwLjhsLTAuNCwwLjNjLTAuMy0wLjQtMC42LTAuNi0xLjItMC42Yy0wLjYsMC0xLDAuNC0xLDAuOQoJCQkJYzAsMC42LDAuNiwwLjgsMS4yLDFjMC43LDAuMiwxLjUsMC41LDEuNSwxLjVjMCwwLjgtMC43LDEuNS0xLjcsMS41Qzg1LjYsNTkuNSw4NSw1OS4xLDg0LjYsNTguNXoiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzIxOV8iIGNsYXNzPSJzdDIiIGQ9Ik04OC45LDU3LjZjMC0xLDAuOC0xLjksMS44LTEuOWMxLDAsMS45LDAuOCwxLjksMS45YzAsMS0wLjgsMS45LTEuOSwxLjkKCQkJCUM4OS43LDU5LjUsODguOSw1OC42LDg4LjksNTcuNnogTTkyLDU3LjZjMC0wLjctMC42LTEuNC0xLjMtMS40Yy0wLjcsMC0xLjMsMC42LTEuMywxLjRjMCwwLjgsMC42LDEuNCwxLjMsMS40CgkJCQlDOTEuNCw1OSw5Miw1OC4zLDkyLDU3LjZ6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8yMTdfIiBjbGFzcz0ic3QyIiBkPSJNOTMsNTUuOGgwLjZ2LTAuM2MwLTEuMSwwLjMtMS40LDEuNC0xLjRoMC4xdjAuNWMtMC44LDAtMC44LDAuMS0wLjgsMC45djAuM2gwLjh2MC41aC0wLjgKCQkJCXYzLjFoLTAuNnYtMy4xSDkzVjU1Ljh6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8yMTVfIiBjbGFzcz0ic3QyIiBkPSJNOTUuNiw1NS44aDAuNlY1NWwwLjYtMC4zdjEuMmgwLjh2MC41aC0wLjhWNThjMCwwLjcsMC4xLDAuOCwwLjgsMC44djAuNWgtMC4xCgkJCQljLTEsMC0xLjMtMC4zLTEuMy0xLjR2LTEuN2gtMC42VjU1Ljh6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8yMTNfIiBjbGFzcz0ic3QyIiBkPSJNOTguMiw1NS44aDAuNmwwLjksMi44bDEuMS0yLjhoMC41bDEuMSwyLjhsMC45LTIuOGgwLjZsLTEuMiwzLjZoLTAuNWwtMS4xLTIuOGwtMS4xLDIuOAoJCQkJaC0wLjVMOTguMiw1NS44eiIvPgoJCQk8cGF0aCBpZD0iWE1MSURfMjEwXyIgY2xhc3M9InN0MiIgZD0iTTEwNC4zLDU3LjZjMC0xLDAuOC0xLjksMS44LTEuOWMwLjUsMCwxLDAuMiwxLjMsMC43di0wLjZoMC42djMuNmgtMC42di0wLjYKCQkJCWMtMC4zLDAuNC0wLjksMC43LTEuMywwLjdDMTA1LjEsNTkuNSwxMDQuMyw1OC42LDEwNC4zLDU3LjZ6IE0xMDcuNSw1Ny42YzAtMC43LTAuNi0xLjQtMS4zLTEuNGMtMC43LDAtMS4zLDAuNi0xLjMsMS40CgkJCQljMCwwLjgsMC42LDEuNCwxLjMsMS40QzEwNi45LDU5LDEwNy41LDU4LjMsMTA3LjUsNTcuNnoiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzIwOF8iIGNsYXNzPSJzdDIiIGQ9Ik0xMDksNTUuOGgwLjZ2MC41YzAuMi0wLjMsMC41LTAuNSwxLTAuNWgwLjR2MC41aC0wLjRjLTAuNywwLTEsMC40LTEsMS4ydjEuOEgxMDlWNTUuOHoiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzIwNV8iIGNsYXNzPSJzdDIiIGQ9Ik0xMTEuNCw1Ny42YzAtMS4xLDAuOC0xLjksMS44LTEuOWMxLDAsMS44LDAuNywxLjgsMS44djAuMkgxMTJjMC4xLDAuNywwLjYsMS4yLDEuMywxLjIKCQkJCWMwLjYsMCwxLTAuMywxLjItMC43bDAuNSwwLjJjLTAuMywwLjYtMC45LDEtMS43LDFDMTEyLjIsNTkuNSwxMTEuNCw1OC43LDExMS40LDU3LjZ6IE0xMTIsNTcuM2gyLjVjLTAuMS0wLjYtMC42LTEtMS4zLTEKCQkJCUMxMTIuNiw1Ni4yLDExMi4xLDU2LjcsMTEyLDU3LjN6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8yMDJfIiBjbGFzcz0ic3QyIiBkPSJNMTIxLjEsNTguOWMtMC40LDAuMy0wLjksMC42LTEuNSwwLjZjLTEuNSwwLTItMC45LTItMS43YzAtMC43LDAuNC0xLjIsMS0xLjYKCQkJCWMtMC4yLTAuMy0wLjMtMC41LTAuMy0wLjljMC0wLjcsMC41LTEuMiwxLjMtMS4yYzAuNiwwLDEsMC4zLDEuMywwLjdsLTAuNSwwLjNjLTAuMi0wLjItMC40LTAuNS0wLjgtMC41Yy0wLjUsMC0wLjgsMC4zLTAuOCwwLjcKCQkJCWMwLDAuNCwwLjIsMC43LDAuOSwxLjNsMS41LDEuNWMwLjMtMC40LDAuNS0wLjksMC42LTEuNGgtMC44di0wLjVoMS40djAuMmMwLDAuNi0wLjMsMS40LTAuOCwybDAuOSwwLjloLTAuOEwxMjEuMSw1OC45egoJCQkJIE0xMjAuOCw1OC41bC0xLjYtMS42Yy0wLjEtMC4xLTAuMy0wLjItMC40LTAuNGMtMC41LDAuMy0wLjcsMC42LTAuNywxLjJjMCwwLjYsMC41LDEuMiwxLjUsMS4yQzEyMC4xLDU5LDEyMC41LDU4LjgsMTIwLjgsNTguNQoJCQkJeiIvPgoJCQk8cGF0aCBpZD0iWE1MSURfMjAwXyIgY2xhc3M9InN0MiIgZD0iTTEyNC44LDU2LjhjMC0xLjUsMS4yLTIuNywyLjctMi43YzEsMCwxLjksMC41LDIuMywxLjNsLTAuNSwwLjNjLTAuNC0wLjYtMS0xLjEtMS44LTEuMQoJCQkJYy0xLjIsMC0yLjEsMS0yLjEsMi4xczAuOSwyLjEsMi4xLDIuMWMwLjksMCwxLjYtMC41LDEuOS0xLjJsMC41LDAuM2MtMC41LDAuOS0xLjMsMS40LTIuNCwxLjRDMTI2LDU5LjUsMTI0LjgsNTguMywxMjQuOCw1Ni44egoJCQkJIi8+CgkJCTxwYXRoIGlkPSJYTUxJRF8xODBfIiBjbGFzcz0ic3QyIiBkPSJNMTMwLjUsNTcuNmMwLTEsMC44LTEuOSwxLjgtMS45YzEsMCwxLjksMC44LDEuOSwxLjljMCwxLTAuOCwxLjktMS45LDEuOQoJCQkJQzEzMS4zLDU5LjUsMTMwLjUsNTguNiwxMzAuNSw1Ny42eiBNMTMzLjcsNTcuNmMwLTAuNy0wLjYtMS40LTEuMy0xLjRjLTAuNywwLTEuMywwLjYtMS4zLDEuNGMwLDAuOCwwLjYsMS40LDEuMywxLjQKCQkJCUMxMzMuMSw1OSwxMzMuNyw1OC4zLDEzMy43LDU3LjZ6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8xNzdfIiBjbGFzcz0ic3QyIiBkPSJNMTM1LDU1LjhoMC41djAuNWMwLjItMC40LDAuNy0wLjYsMS4yLTAuNmMxLDAsMS41LDAuNiwxLjUsMS43djJoLTAuNnYtMgoJCQkJYzAtMC43LTAuNC0xLjItMS4xLTEuMmMtMC42LDAtMS4xLDAuNS0xLjEsMS4ydjJIMTM1VjU1Ljh6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8xNzVfIiBjbGFzcz0ic3QyIiBkPSJNMTM5LDU4LjhsMC40LTAuNGMwLjMsMC4zLDAuNiwwLjYsMS4xLDAuNmMwLjUsMCwwLjgtMC4zLDAuOC0wLjZjMC0wLjQtMC41LTAuNC0xLTAuNgoJCQkJYy0wLjYtMC4xLTEuMi0wLjMtMS4yLTFjMC0wLjUsMC41LTEsMS4zLTFjMC41LDAsMSwwLjIsMS40LDAuNmwtMC40LDAuM2MtMC4yLTAuMy0wLjUtMC40LTAuOS0wLjRjLTAuNSwwLTAuOCwwLjMtMC44LDAuNgoJCQkJYzAsMC40LDAuNSwwLjUsMC45LDAuNmMwLjYsMC4xLDEuMiwwLjMsMS4yLDFjMCwwLjUtMC40LDEuMS0xLjQsMS4xQzEzOS45LDU5LjUsMTM5LjQsNTkuMiwxMzksNTguOHoiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzExNF8iIGNsYXNzPSJzdDIiIGQ9Ik0xNDIuNiw1Ny44di0yaDAuNnYyYzAsMC43LDAuNCwxLjIsMS4xLDEuMmMwLjYsMCwxLjEtMC41LDEuMS0xLjJ2LTJoMC42djMuNmgtMC41di0wLjUKCQkJCWMtMC4zLDAuNC0wLjcsMC42LTEuMiwwLjZDMTQzLjIsNTkuNSwxNDIuNiw1OC44LDE0Mi42LDU3Ljh6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8xMTBfIiBjbGFzcz0ic3QyIiBkPSJNMTQ2LjksNTQuMmgwLjZ2NS4yaC0wLjZWNTQuMnoiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzEwOF8iIGNsYXNzPSJzdDIiIGQ9Ik0xNDguMiw1NS44aDAuNlY1NWwwLjYtMC4zdjEuMmgwLjh2MC41aC0wLjhWNThjMCwwLjcsMC4xLDAuOCwwLjgsMC44djAuNWgtMC4xCgkJCQljLTEsMC0xLjMtMC4zLTEuMy0xLjR2LTEuN2gtMC42VjU1Ljh6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF8xMDJfIiBjbGFzcz0ic3QyIiBkPSJNMTUwLjcsNTcuNmMwLTEsMC44LTEuOSwxLjgtMS45YzAuNSwwLDEsMC4yLDEuMywwLjd2LTAuNmgwLjZ2My42aC0wLjZ2LTAuNgoJCQkJYy0wLjMsMC40LTAuOSwwLjctMS4zLDAuN0MxNTEuNSw1OS41LDE1MC43LDU4LjYsMTUwLjcsNTcuNnogTTE1My45LDU3LjZjMC0wLjctMC42LTEuNC0xLjMtMS40Yy0wLjcsMC0xLjMsMC42LTEuMywxLjQKCQkJCWMwLDAuOCwwLjYsMS40LDEuMywxLjRDMTUzLjQsNTksMTUzLjksNTguMywxNTMuOSw1Ny42eiIvPgoJCQk8cGF0aCBpZD0iWE1MSURfOThfIiBjbGFzcz0ic3QyIiBkPSJNMTU1LjQsNTUuOGgwLjV2MC41YzAuMi0wLjQsMC43LTAuNiwxLjItMC42YzEsMCwxLjUsMC42LDEuNSwxLjd2MmgtMC42di0yCgkJCQljMC0wLjctMC40LTEuMi0xLjEtMS4yYy0wLjYsMC0xLjEsMC41LTEuMSwxLjJ2MmgtMC41VjU1Ljh6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF85M18iIGNsYXNzPSJzdDIiIGQ9Ik0xNTkuNSw1Ny42YzAtMS4xLDAuOC0xLjksMS45LTEuOWMwLjgsMCwxLjQsMC40LDEuNywxLjFsLTAuNSwwLjJjLTAuMi0wLjUtMC42LTAuOC0xLjItMC44CgkJCQljLTAuOCwwLTEuMywwLjYtMS4zLDEuNGMwLDAuOCwwLjYsMS40LDEuMywxLjRjMC42LDAsMS0wLjQsMS4yLTAuOGwwLjUsMC4yYy0wLjMsMC42LTAuOCwxLjEtMS43LDEuMQoJCQkJQzE2MC4zLDU5LjUsMTU5LjUsNTguNiwxNTkuNSw1Ny42eiIvPgoJCQk8cGF0aCBpZD0iWE1MSURfODhfIiBjbGFzcz0ic3QyIiBkPSJNMTY1LDU5LjJsLTEuNS0zLjRoMC42bDEuMiwyLjdsMS4xLTIuN2gwLjZsLTIuMiw1LjJoLTAuNkwxNjUsNTkuMnoiLz4KCQk8L2c+CgkJPGcgaWQ9IlhNTElEXzQ1XyI+CgkJCTxwYXRoIGlkPSJYTUxJRF84MF8iIGNsYXNzPSJzdDIiIGQ9Ik04OC40LDQzdjMuOGgxNS4zdjMuOEg4NC42VjMxLjVoMTkuMXYzLjhIODguNHYzLjhoOS41VjQzSDg4LjR6Ii8+CgkJCTxwYXRoIGlkPSJYTUxJRF83Nl8iIGNsYXNzPSJzdDIiIGQ9Ik0xMDkuMSw0MC4zdjEwLjNoLTMuOFYzMy40aDQuOGw1LjcsOS42bDUuOC05LjZoNC44djE3LjJoLTMuOFY0MC4ybC01LjksMTAuNGgtMS44CgkJCQlMMTA5LjEsNDAuM3oiLz4KCQkJPHBhdGggaWQ9IlhNTElEXzYwXyIgY2xhc3M9InN0MyIgZD0iTTEzMS43LDQzdjcuNmgtMy44VjMxLjVIMTQ3djMuOGgtMTUuM3YzLjhoOS41VjQzSDEzMS43eiIvPgoJCQk8cGF0aCBpZD0iWE1MSURfNDhfIiBjbGFzcz0ic3QzIiBkPSJNMTUxLjcsNDYuOGwtMS45LDMuOGgtNC44bDguNi0xNy4yaDQuNmw4LjcsMTcuMmgtNC44bC0xLjktMy44SDE1MS43eiBNMTUzLjYsNDNoNC44CgkJCQlsLTIuNC00LjlMMTUzLjYsNDN6Ii8+CgkJPC9nPgoJPC9nPgo8L2c+Cjwvc3ZnPgo="/>
+          </TableCell>
+          <TableCell Name="Cell36" Border.Lines="All" Text="TOPLANTI TUTANAĞI" HorzAlign="Center" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <TableObject Name="Table1" Left="9.45" Top="122.85" Width="680.4" Height="85.05" Border.Lines="All">
+        <TableColumn Name="Column1" Width="151.2"/>
+        <TableColumn Name="Column2" Width="529.2"/>
+        <TableRow Name="Row1" Height="28.35">
+          <TableCell Name="Cell1" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver" Text="TOPLANTI ADI" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver" Text="[TOPLANTI.TOPLANTI_ADI]" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row2" Height="28.35">
+          <TableCell Name="Cell6" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver" Text="TARİH" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver" Text="[TOPLANTI.TOPLANTI_TARIHI]" VertAlign="Center"/>
+        </TableRow>
+        <TableRow Name="Row3" Height="28.35">
+          <TableCell Name="Cell11" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver" Text="RAPORTÖR" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver" VertAlign="Center"/>
+        </TableRow>
+      </TableObject>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="211.9" Width="718.2" Height="37.8" Condition="[TOPLANTI_KATILIMCI2.TOPLANTI_ID]">
+      <TableObject Name="Table3" Left="9.45" Top="9.45" Width="680.16" Height="28.35" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver">
+        <TableColumn Name="Column7" Width="188.94"/>
+        <TableColumn Name="Column8" Width="160.59"/>
+        <TableColumn Name="Column9" Width="198.39"/>
+        <TableColumn Name="Column10" Width="132.24"/>
+        <TableRow Name="Row5" Height="28.35">
+          <TableCell Name="Cell17" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="Katılımcının İsmi" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell18" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="Ünvan" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell19" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="E-Posta Adresi" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell20" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="İmza" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <DataBand Name="Data4" Top="253.7" Width="718.2" Height="28.35" DataSource="TOPLANTI_KATILIMCI2">
+        <TableObject Name="Table4" Left="9.45" Width="680.16" Height="28.35" Border.Lines="All" Border.Width="1.5" Fill.Color="Silver">
+          <TableColumn Name="Column11" Width="188.94"/>
+          <TableColumn Name="Column12" Width="160.59"/>
+          <TableColumn Name="Column13" Width="198.39"/>
+          <TableColumn Name="Column14" Width="132.24"/>
+          <TableRow Name="Row6" Height="28.35">
+            <TableCell Name="Cell21" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="[TOPLANTI_KATILIMCI2.AD_SOYAD][TOPLANTI_KATILIMCI2.AD_SOYAD1]" VertAlign="Center"/>
+            <TableCell Name="Cell22" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="[TOPLANTI_KATILIMCI2.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI]" VertAlign="Center"/>
+            <TableCell Name="Cell23" Border.Lines="All" Border.Width="1.5" Fill.Color="White" Text="[TOPLANTI_KATILIMCI2.KULLANICI_E_POSTA][TOPLANTI_KATILIMCI2.E_POSTA]" VertAlign="Center"/>
+            <TableCell Name="Cell24" Border.Lines="All" Border.Width="1.5" Fill.Color="White" VertAlign="Center"/>
+          </TableRow>
+        </TableObject>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader2" Top="286.05" Width="718.2" Height="37.8" Condition="[TOPLANTI_GUNDEM.TOPLANTI_ID]">
+      <TableObject Name="Table2" Left="9.45" Top="9.45" Width="678.48" Height="28.35" Border.Lines="All" Border.Width="1.5" Fill.Color="White">
+        <TableColumn Name="Column15" Width="240.08"/>
+        <TableColumn Name="Column16" Width="438.4"/>
+        <TableRow Name="Row7" Height="28.35">
+          <TableCell Name="Cell25" Border.Lines="All" Border.Width="1.5" Text="GÜNDEM KONULARI" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell26" Border.Lines="All" Border.Width="1.5" Text="GÖRÜŞÜLEN KONULAR" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <DataBand Name="Data5" Top="327.85" Width="718.2" Height="66.15" DataSource="TOPLANTI_GUNDEM">
+        <TableObject Name="Table5" Left="9.45" Width="678.48" Height="66.15" Border.Lines="All" Border.Width="1.5" Fill.Color="White">
+          <TableColumn Name="Column17" Width="240.08"/>
+          <TableColumn Name="Column18" Width="438.4"/>
+          <TableRow Name="Row8" Height="66.15">
+            <TableCell Name="Cell27" Border.Lines="All" Border.Width="1.5" Text="[TOPLANTI_GUNDEM.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE]" HorzAlign="Center" VertAlign="Center"/>
+            <TableCell Name="Cell28" Border.Lines="All" Border.Width="1.5" Text="[TOPLANTI_GUNDEM.GORUSULEN_KONU]" HorzAlign="Center" VertAlign="Center"/>
+          </TableRow>
+        </TableObject>
+      </DataBand>
+    </GroupHeaderBand>
+    <GroupHeaderBand Name="GroupHeader3" Top="398" Width="718.2" Height="37.8" Condition="[TOPLANTI_GUNDEM_TALEP_PROJE3.TOPLANTI_ID]">
+      <TableObject Name="Table6" Left="9.45" Top="9.45" Width="680.4" Height="28.35" Border.Lines="All" Border.Width="1.5" Fill.Color="White">
+        <TableColumn Name="Column19" Width="239.4"/>
+        <TableColumn Name="Column20" Width="220.5"/>
+        <TableColumn Name="Column21" Width="220.5"/>
+        <TableRow Name="Row9" Height="28.35">
+          <TableCell Name="Cell29" Border.Lines="All" Border.Width="1.5" Text="AKSİYON" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell30" Border.Lines="All" Border.Width="1.5" Text="SORUMLU KİŞİ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell31" Border.Lines="All" Border.Width="1.5" Text="YAPILACAK TARİH" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <DataBand Name="Data6" Top="439.8" Width="718.2" Height="28.35" DataSource="TOPLANTI_GUNDEM_TALEP_PROJE3">
+        <TableObject Name="Table7" Left="9.45" Width="680.4" Height="28.35" Border.Lines="All" Border.Width="1.5" Fill.Color="White">
+          <TableColumn Name="Column22" Width="239.4"/>
+          <TableColumn Name="Column23" Width="220.5"/>
+          <TableColumn Name="Column24" Width="220.5"/>
+          <TableRow Name="Row10" Height="28.35">
+            <TableCell Name="Cell32" Border.Lines="All" Border.Width="1.5" Text="[TOPLANTI_GUNDEM_TALEP_PROJE3.TALEP_PROJE_KONU]" VertAlign="Center"/>
+            <TableCell Name="Cell33" Border.Lines="All" Border.Width="1.5" Text="[TOPLANTI_GUNDEM_TALEP_PROJE3.AD_SOYAD]" VertAlign="Center"/>
+            <TableCell Name="Cell34" Border.Lines="All" Border.Width="1.5" Text="[TOPLANTI_GUNDEM_TALEP_PROJE3.TALEP_PLANLANAN_BASLANGIC_TARIHI]" VertAlign="Center"/>
+          </TableRow>
+        </TableObject>
+      </DataBand>
+    </GroupHeaderBand>
+    <PageFooterBand Name="PageFooter1" Top="472.15" Width="718.2" Height="37.8">
+      <TextObject Name="Text2" Left="519.75" Top="9.45" Width="170.1" Height="28.35" Fill.Color="White" Text="F-026/ 07.05.2018 v1.0" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

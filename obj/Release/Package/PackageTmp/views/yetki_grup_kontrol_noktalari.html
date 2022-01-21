@@ -1,0 +1,148 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Yetki Grubu Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="yonetim.yetkilendirmeislemleri">Yetki Grubu Listesi</a>
+            </li>
+            <li class="active">
+                Kontrol Noktaları
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Yetki Grup Listesi</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-YetkiGrupKontrol" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kontrol Noktası Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtKONTROL_NOKTASI_ADI" ng-model="txtArama" class="form-control formEkleDuzenleInput" placeholder="Kontrol noktası adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="yetkiGruplariListesiniGetir(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref="yonetim.yetkigrubukayit()" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="filtreTemizle()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ YetkiGrupKontrolNoktalariListesi.length }} kayıt</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Yetki Grubu</b></td>
+                                            <td><b>Kontrol Noktası Adı</b></td>
+                                            <td><b>Açıklama</b></td>
+                                            <td><b>Görme</b></td>
+                                            <td><b>Ekleme</b></td>
+                                            <td><b>Güncelleme</b></td>
+                                            <td><b>Silme</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="kontrol in YetkiGrupKontrolNoktalariListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                {{kontrol.YETKI_GRUP_ADI}}
+                                            </td>
+                                            <td class="table-main">
+                                                {{kontrol.KONTROL_NOKTASI_ADI}}
+                                            </td>
+                                            <td class="table-main">
+                                                {{kontrol.KONTROL_NOKTASI_ACIKLAMA}}
+                                            </td>
+                                            <td class="table-main">
+                                                <div class="mt-first-cb">
+                                                    <input icheck type="checkbox" ng-model="kontrol.SELECT">
+                                                </div>
+                                            </td>
+                                            <td class="table-main">
+                                                <div class="mt-first-cb">
+                                                    <input icheck type="checkbox" ng-model="kontrol.INSERT">
+                                                </div>
+                                            </td>
+                                            <td class="table-main">
+                                                <div class="mt-first-cb">
+                                                    <input icheck type="checkbox" ng-model="kontrol.UPDATE">
+                                                </div>
+                                            </td>
+                                            <td class="table-main">
+                                                <div class="mt-first-cb">
+                                                    <input icheck type="checkbox" ng-model="kontrol.DELETE">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="8">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-sm btn-success " type="button" ng-click="yetkiGrupKontrolNoktalariKaydet(YetkiGrupKontrolNoktalariListesi)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                    </button>
+                                                    <a class="btn btn-sm btn-primary" href="#" ui-sref="yonetim.yetkilendirmeislemleri"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

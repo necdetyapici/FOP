@@ -1,0 +1,150 @@
+﻿
+<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Doküman Gözden Geçirme Kriteri İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="tanimlamalar.dokumangozdengecirmekriterilistesi"><i class="fa fa-list"></i> Doküman Gözden Geçirme Kriteri Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-university"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-university"></i>
+                        Doküman Gözden Geçirme Kriteri Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp; Doküman Gözden Geçirme Kriteri bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmKriter" id="frmKriter" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kriter Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtKRITER_ADI" ng-model="Info.KRITER_ADI" class="formEkleDuzenleInput form-control" placeholder="Kriter adını giriniz.">
+                                            <p ng-show="frmKriter.txtKRITER_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="DokumanGozdenGecirmeKriteriEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-primary" href="#" ui-sref="tanimlamalar.dokumangozdengecirmekriterilistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig" ng-show="dokumanGozdenGecirmeKriteriID > 0">
+    <fieldset>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <strong>Toplam {{ toplamKayitSayisiDokumanGozdenGecirmeKriterAdim }} kayıt</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list table-emfa">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td><b>No</b></td>
+                                                <td><b>Kriter</b></td>
+                                                <td><b>Aktif/Pasif</b></td>
+                                                <td class="pull-right">
+                                                    <button class="btn btn-sm btn-primary " type="button" ng-click="DokumanGozdenGecirmeKriteriAdimEkle(null)">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr ng-repeat="post in DokumanGozdenGecirmeKriterAdimListesi | filter:ignoreTurkish" ng-if="DokumanGozdenGecirmeKriterAdimListesi.length > 0">
+                                                <td class="project-title">
+                                                    <span class="label label-success">{{ $index + 1 }}</span>
+                                                </td>
+                                                <td>
+                                                    {{post.KRITER }}
+                                                </td>
+                                                <td class="actions">
+                                                    <a class=" btn btn-sm btn-primary" ng-show="post.AKTIF_PASIF == false" ng-click="DokumanGozdenGecirmeKriteriAdimAktifPasif(post, post.AKTIF_PASIF=true)" tooltip="Aktifleştir" tooltip-append-to-body="true"><i class="glyphicon glyphicon-ok"></i><!-- Aktifleştir --></a>
+                                                    <a class=" btn btn-sm btn-danger" ng-show="post.AKTIF_PASIF == true" ng-click="DokumanGozdenGecirmeKriteriAdimAktifPasif(post, post.AKTIF_PASIF = false)" tooltip="Pasifleştir" tooltip-append-to-body="true"><i class="glyphicon glyphicon-ban-circle"></i><!-- Pasifleştir --></a>
+
+                                                </td>
+                                                <td class="actions">
+                                                    <div class="text-center">
+                                                        <button ng-click="DokumanGozdenGecirmeKriteriAdimEkle(post.DOKUMAN_GOZDEN_GECIRME_KRITER_ADIM_ID)" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</button>
+                                                    </div>
+                                                </td>
+                                                <td class="actions">
+                                                    <div class="text-center">
+                                                        <button ng-click="modalSilmeOnayiDokumanGozdenGecirmeKriteriAdim(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr ng-if="DokumanGozdenGecirmeKriterAdimListesi.length == 0 || DokumanGozdenGecirmeKriterAdimListesi  == null">
+                                                <td colspan="7">
+                                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                        <i class="fa fa-exclamation-circle"></i>
+                                                        &nbsp;Doküman Gözden Geçirme Kriteri Adim kaydı <strong>bulunmamaktadır.</strong>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+
+
+
+

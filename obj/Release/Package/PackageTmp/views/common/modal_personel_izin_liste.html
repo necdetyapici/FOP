@@ -1,0 +1,174 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Personel İzinleri Listesi</h4>
+
+    </div>
+    <div class="modal-body">
+        <div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="tab-content">
+
+                        <div class="panel-body">
+                            <div class="ibox-content">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="project-list table-emfa">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <td><b># İzin Türü</b></td>
+                                                        <td><b>Toplam Gün Sayısı</b></td>
+                                                        <td><b>Toplam Saat Sayısı</b></td>
+
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Yıllık İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.YILLIK_IZIN_GUN + InfoPersonelToplamIzin.KULLANILMAYAN_IZIN_UCRETI}} Gün
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.YILLIK_IZIN_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Kalan Yıllık İzni
+                                                            </b>
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.KALAN_YILLIK_IZIN}} Gün
+                                                        </td>
+                                                        <td> 0 Saat</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Kullanılan Toplam Mazeret İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.MAZERET_IZNI_TOPLAM_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.MAZERET_IZNI_TOPLAM_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Bu Ay Kullanılan Mazeret İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.MAZERET_IZNI_AY_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.MAZERET_IZNI_AY_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                İdari İzin
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.IDARI_IZNI_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.IDARI_IZNI_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>Evlilik İzni</b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.EVLILIK_IZNI_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.EVLILIK_IZNI_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Doğum İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.DOGUM_IZNI_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.DOGUM_IZNI_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Vefat İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.VEFAT_IZNI_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.VEFAT_IZNI_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Ücretsiz İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.UCRETSIZ_IZNI_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.UCRETSIZ_IZNI_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b>
+                                                                Hastalık İzni
+                                                            </b>
+                                                        </td>
+                                                        <td>
+                                                            {{InfoPersonelToplamIzin.HASTALIK_IZNI_GUN}} Gün
+                                                        </td>
+                                                        <td class="table-main">
+                                                            {{InfoPersonelToplamIzin.HASTALIK_IZNI_SAAT}} Saat
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="Geri()"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>

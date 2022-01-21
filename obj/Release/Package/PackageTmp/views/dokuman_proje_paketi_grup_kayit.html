@@ -1,0 +1,304 @@
+﻿
+<div ng-init="init()"></div>
+<div ui-view>
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Doküman Proje Paketi Grup İşlemleri</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+                </li>
+                <li>
+                    <a ui-sref="tanimlamalar.dokumanprojepaketigruplistesi"><i class="fa fa-list"></i> Doküman Proje Paketi Grup Listesi</a>
+                </li>
+                <li class="active animated bounceInRight">
+                    <strong><i class="fa fa-university"></i> Kayıt</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2"> </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-university"></i>
+                            Doküman Proje Paketi Grup Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>&nbsp; Doküman Proje Paketi Grup bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="get" name="frmPaketGrup" id="frmPaketGrup" class="form-horizontal" accessible-form>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txt_ADI" ng-model="Info.ADI" class="formEkleDuzenleInput form-control" placeholder="Kriter adını giriniz.">
+                                                <p ng-show="frmPaketGrup.txt_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="DokumanProjePaketiGrupEkleGuncelle(Info, frmPaketGrup)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <a class="btn btn-primary" href="#" ui-sref="tanimlamalar.dokumanprojepaketigruplistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig" ng-show="dokumanProjePaketiGrupID > 0">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe"><i class="fa fa-list"></i> Doküman Proje Paketi Klasör Listesi</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="get" name="frmPaketKlasor" id="frmPaketKlasor" class="form-horizontal" accessible-form>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Üst Klasör</label>
+                                            <div class="col-lg-6">
+                                                <ol class="nya-bs-select form-control" id="cmbB_G_RISK_TEHDIT_ID" name="cmbB_G_RISK_TEHDIT_ID" ng-model="InfoProjePaketiKlasor.UST_DOKUMAN_PROJE_PAKETI_KLASOR_ID"
+                                                    data-live-search="true" title="Klasör Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in DokumanProjePaketiKlasorDosyaListesi" deep-watch="true" data-value="item.DOKUMAN_PROJE_PAKETI_KLASOR_ID">
+                                                        <a>
+                                                            {{item.ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Tipi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <label>
+                                                    <input type="radio" id="rdDOKUMAN_KLASOR_TIPI" icheck ng-change="tipiDegistir()" ng-model="InfoProjePaketiKlasor.DOKUMAN_KLASOR_TIPI" ng-value="true"> Klasör
+                                                </label>
+
+                                                <label>
+                                                    <input type="radio" id="rdDOKUMAN_KLASOR_TIPI" icheck ng-change="tipiDegistir()" ng-model="InfoProjePaketiKlasor.DOKUMAN_KLASOR_TIPI" ng-value="false"> Doküman
+                                                </label>
+                                                <p ng-show="frmPaketKlasor.rdDOKUMAN_KLASOR_TIPI.$invalid && formCalistirildiProjePaketiKlasor" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="InfoProjePaketiKlasor.DOKUMAN_KLASOR_TIPI == false">
+                                            <label class="col-lg-4 control-label">Doküman <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <ol class="nya-bs-select form-control" id="cmbDOKUMAN_ID" name="cmbDOKUMAN_ID" ng-model="InfoProjePaketiKlasor.DOKUMAN" ng-change="dokumanSec()"
+                                                    data-live-search="true" title="Dokuman Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in DokumanListesi" deep-watch="true" data-value="[item.DOKUMAN_ID, item.ADI]">
+                                                        <a>
+                                                            {{item.ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="text" required="required"  ng-minlength="1" name="txt_ADI" ng-model="InfoProjePaketiKlasor.ADI" class="formEkleDuzenleInput form-control" placeholder="Kriter adını giriniz.">
+                                                <p ng-show="frmPaketKlasor.txt_ADI.$invalid && formCalistirildiProjePaketiKlasor" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="DokumanProjePaketiKlasorEkleGuncelle(InfoProjePaketiKlasor, frmPaketKlasor)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ibox-content">
+                        <form name="src-ProjePaketi" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Üst Klasör</label>
+                                            <div class="col-lg-6">
+                                                <ol class="nya-bs-select form-control" id="cmbB_G_RISK_TEHDIT_ID" name="cmbB_G_RISK_TEHDIT_ID" ng-model="AramaKriterProjeKlasor.UST_DOKUMAN_PROJE_PAKETI_KLASOR_ID"
+                                                    data-live-search="true" title="Klasör Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in DokumanProjePaketiKlasorDosyaListesi" deep-watch="true" data-value="item.DOKUMAN_PROJE_PAKETI_KLASOR_ID">
+                                                        <a>
+                                                            {{item.ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Adı</label>
+                                            <div class="col-lg-6">
+                                                <input type="text" name="txtADI" id="txtADI" ng-model="AramaKriterProjeKlasor.ADI" class="form-control formEkleDuzenleInput " placeholder="Kriter adını giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button ng-click="DokumanProjePaketiKlasorGetData(AramaKriterProjeKlasor, AramaKriterProjeKlasor.SayfaNo = 1)" class="btn btn-sm btn-warning" type="submit">
+                                                    <i class="fa fa-filter"></i>&nbsp;
+                                                    <strong>Filtrele</strong>
+                                                </button>
+                                                <button ng-click="filtreTemizleProeKlasor()" class="btn btn-sm btn-danger" type="submit">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <strong>Temizle</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ibox-content" ng-show="DokumanProjePaketiKlasorListesi.length>0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <!--<a ui-sref="tanimlamalar.bgaciklikkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                    <button type="button" class="btn btn-sm btn-white" ng-click="DokumanProjePaketiKlasorGetData()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                                <strong>Toplam {{ toplamKayitSayisiProjePaketiKlasor }} kayıt</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list table-emfa">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td><b>No</b></td>
+                                                <td><b>Tipi</b></td>
+                                                <td><b>Adı</b></td>
+                                                <td><b>Ust Klasör</b></td>
+                                                <td><b>Doküman Adı</b></td>
+                                                <td><b>Aktif/Pasif</b></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="post in DokumanProjePaketiKlasorListesi | filter:ignoreTurkish">
+                                                <td>
+                                                    <span class="label label-success">{{ $index + 1}}</span>
+                                                </td>
+                                                <td>
+                                                    <label class="label label-primary input-lg ng-scope" ng-show="post.DOKUMAN_KLASOR_TIPI==true"> Klasör</label>
+                                                    <label class="label label-info input-lg ng-scope" ng-show="post.DOKUMAN_KLASOR_TIPI==false"> Doküman</label>
+                                                </td>
+                                                <td>
+                                                    {{post.ADI}}
+                                                </td>
+                                                <td>
+                                                    {{post.UST_DOKUMAN_PROJE_PAKETI_KLASOR_ADI}}
+                                                </td>
+                                                <td>
+                                                    {{post.DOKUMAN_ADI}}
+                                                </td>
+                                                <td>
+                                                    <a class=" btn btn-sm btn-primary" ng-show="post.AKTIF_PASIF == false" ng-click="DokumanProjePaketiKlasorAktifPasif(post, post.AKTIF_PASIF=true)" tooltip="Aktifleştir" tooltip-append-to-body="true"><i class="glyphicon glyphicon-ok"></i><!-- Aktifleştir --></a>
+                                                    <a class=" btn btn-sm btn-danger" ng-show="post.AKTIF_PASIF == true" ng-click="DokumanProjePaketiKlasorAktifPasif(post, post.AKTIF_PASIF = false)" tooltip="Pasifleştir" tooltip-append-to-body="true"><i class="glyphicon glyphicon-ban-circle"></i><!-- Pasifleştir --></a>
+                                                </td>
+                                                <td class="actions">
+                                                    <div class="pull-right">
+                                                        <a ui-sref="tanimlamalar.dokumanprojepaketigrupkayit.dokumanprojepaketiklasorkayit({  dokumanProjePaketiKlasorID: post.DOKUMAN_PROJE_PAKETI_KLASOR_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                    </div>
+                                                </td>
+                                                <td class="actions">
+                                                    <a ng-click="modalSilmeOnayiProjePaketKlasor(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="7" class="text-center">
+                                                    <pagination ng-model="AramaKriterProjeKlasor.SayfaNo" ng-change="DokumanProjePaketiKlasorGetData(AramaKriterProjeKlasor)" total-items="toplamKayitSayisiProjePaketiKlasor"
+                                                                items-per-page="AramaKriterProjeKlasor.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content" ng-show="DokumanProjePaketiKlasorListesi.length==0||DokumanProjePaketiKlasorListesi==undefined">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <!--<a ui-sref="tanimlamalar.bgaciklikkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                    <button type="button" class="btn btn-sm btn-white" ng-click="DokumanProjePaketiKlasorGetData()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    &nbsp;Doküman Proje Paketi Grup kaydı <strong>bulunmamaktadır.</strong>
+                                    <!--Eklemek için <a ui-sref="tanimlamalar.bgaciklikkayit"
+                                                    class="alert-Link-Emfa alert-link">
+                                        tıklayınız.
+                                    </a>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

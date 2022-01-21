@@ -1,0 +1,175 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-building"></i> Firmalar
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInUp">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                        <i class="fa fa-building-o"></i> Firma Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-Firma" class="form-horizontal" autocomplete="off">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Firma Adı</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group m-b-sm" style="margin-bottom:0px;">
+                                                <span class="input-group-addon"><i class="fa fa-building-o"></i></span>
+                                                <input type="text" name="txtFIRMA_ADI" id="txtFIRMA_ADI" ng-model="AramaKriter.FIRMA_ADI" class="form-control formEkleDuzenleInput" placeholder="Firma adını giriniz." autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Firma E-Posta</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group m-b-sm" style="margin-bottom:0px;">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                <input type="text" name="txtFIRMA_E_POSTA" id="txtMUSTERI_E_POSTA" ng-model="AramaKriter.FIRMA_EPOSTA" ng-maxlength="150" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Firma E-Posta adresini giriniz." autocomplete="off">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Firma Durum </label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input icheck type="radio" name="rd_DURUM" ng-change="DFirmaGetData(AramaKriter.DURUM, AramaKriter.SayfaNo=1)" class="formEkleDuzenleInput" value="aktif" ng-model="AramaKriter.DURUM"> Aktif
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_DURUM" ng-change="DFirmaGetData(AramaKriter.DURUM, AramaKriter.SayfaNo=1)" value="pasif" ng-model="AramaKriter.DURUM"> Pasif
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_DURUM" ng-change="DFirmaGetData(AramaKriter.DURUM, AramaKriter.SayfaNo=1)" value="tumu" ng-model="AramaKriter.DURUM"> Tümü
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="DFirmaGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content">
+                    <div class="m-b-lg">
+                        <div class="m-t-md">
+                            <div class="pull-right">
+                                <a ui-sref="danismanlik.firmaduzenle" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="DFirmaGetData()" > <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+
+                        <div class="project-list">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b ng-click="sirala('D_FIRMA_ID')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">No</b></td>
+                                        <td><b ng-click="sirala('ADI')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">Adı</b></td>
+                                        <td><b ng-click="sirala('ILADI')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">İl</b></td>
+                                        <td><b ng-click="sirala('ILCEADI')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">İlçe</b></td>
+                                        <td><b ng-click="sirala('EMAIL')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">Email</b></td>
+                                        <td><b ng-click="sirala('TELEFON')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">Telefon</b></td>
+                                        <td><b ng-click="sirala('DURUM')" ng-mouseover="tdStyle={'cursor':'pointer'}" ng-mouseleave="tdStyle={}" ng-style="tdStyle">Firma Durum</b></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="post in DFirmaListesi | filter:ignoreTurkish | orderBy:listesirala:duzters" >
+                                        <td>
+                                            <span class="label label-success" >{{ post.D_FIRMA_ID}}</span>
+                                        </td>
+                                        <td class="table-main">
+                                            <a class="editLink-Emfa" ui-sref="danismanlik.firmakayit.firmakart({ dFirmaID: post.D_FIRMA_ID})">{{post.ADI}} </a><br />
+                                        </td>
+
+                                        <td>
+                                            {{post.ILADI}}
+                                        </td>
+                                        <td>
+                                            {{post.ILCEADI}}
+                                        </td>
+                                        <td>
+                                            {{post.EMAIL}}
+                                        </td>
+                                        <td>
+                                            {{post.TELEFON | telefon}}
+                                        </td>
+                                        <td>
+                                            <a ng-click="DFirmaPasif(post)" ng-hide="post.DURUM == false" class="btn btn-sm btn-primary" tooltip="Pasif Yap" tooltip-append-to-body="true" ng-disabled="post.DANISMANLIK_ADEDI > 0">Aktif</a>
+                                            <a ng-click="DFirmaAktif(post)" ng-hide="post.DURUM == true" class="btn btn-small btn-danger" tooltip="Aktif Yap" tooltip-append-to-body="true" ng-disabled="post.DANISMANLIK_ADEDI > 0">Pasif</a>
+                                        </td>
+                                        <td>
+                                            <a ui-sref="danismanlik.firmaduzenle({dFirmaID: post.D_FIRMA_ID})" class=" btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                        </td>
+                                        <td class="form-actions">
+                                            <div class="pull-right">
+                                                <a ui-sref="danismanlik.firmakayit.firmakart({ dFirmaID: post.D_FIRMA_ID})" class="btn btn-sm btn-info" tooltip="Firma Kartı" tooltip-append-to-body="true"><i class="fa fa-id-card"></i></a>
+                                                <!-- <a ui-sref="danismanlik.firmaduzenle({dFirmaID: post.D_FIRMA_ID})" class=" btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a> -->
+                                                <!-- <a ui-sref="danismanlik.firmakayit.firmakart({ dFirmaID: post.D_FIRMA_ID})" class="btn btn-sm btn-info" tooltip="Danışmanlık Listesi" tooltip-append-to-body="true"><i class="fa fa-bars"></i></a> -->
+                                                <!-- <a ng-click="DFirmaPasif(post)" ng-hide="post.DURUM == false" class="btn btn-sm btn-danger" tooltip="Pasif Yap" tooltip-append-to-body="true" ng-disabled="post.DANISMANLIK_ADEDI > 0"><i class="fa fa-remove"></i></a> -->
+                                                <!-- <a ng-click="DFirmaAktif(post)" ng-hide="post.DURUM == true" class="btn btn-sm btn-danger" tooltip="Aktif Yap" tooltip-append-to-body="true" ng-disabled="post.DANISMANLIK_ADEDI > 0"><i class="fa fa-check"></i></a> -->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="15" class="text-center">
+                                            <pagination ng-model="AramaKriter.SayfaNo" ng-change="DFirmaGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                        items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

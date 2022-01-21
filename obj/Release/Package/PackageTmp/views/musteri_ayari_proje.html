@@ -1,0 +1,41 @@
+﻿
+
+
+<div class="row" style="margin-top:30px">
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                                <i class="fa fa-cubes"></i> Proje Ayarları
+                            </h5>
+                        </div>
+
+                        <div class="fizibilite ibox-content">
+                            <ul class="alt-nav-tabs nav nav-tabs">
+                                <li ng-class="{'active-altTab' : altTab == 1}"><a class="altTabMenuItem" ng-click="setAltTab(1)" ui-sref=".projeturulistesi"><i class="fa fa-cubes"></i>&nbsp;Proje Türü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 2}"><a class="altTabMenuItem" ng-click="setAltTab(2)" ui-sref=".projemusteritipilistesi"><i class="fa fa-cubes"></i>&nbsp;Proje Müşteri Tipi Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 3}"><a class="altTabMenuItem" ng-click="setAltTab(3)" ui-sref=".riskislemestratejisilistesi"><i class="fa fa-cubes"></i>&nbsp;Risk İşleme Stratejisi Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 4}"><a class="altTabMenuItem" ng-click="setAltTab(4)" ui-sref=".finanskaynagiturulistesi"><i class="fa fa-cubes"></i>&nbsp;Finans Kaynağı Türü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 5}"><a class="altTabMenuItem" ng-click="setAltTab(5)" ui-sref=".ticarikosullistesi"><i class="fa fa-cubes"></i>&nbsp;Ticari Koşul Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 6}"><a class="altTabMenuItem" ng-click="setAltTab(6)" ui-sref=".yasamdongusulistesi"><i class="fa fa-cubes"></i>&nbsp;Yaşam Döngüsü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 7}"><a class="altTabMenuItem" ng-click="setAltTab(7)" ui-sref=".personeltipilistesi"><i class="fa fa-cubes"></i>&nbsp;Personel Tipi Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 8}"><a class="altTabMenuItem" ng-click="setAltTab(8)" ui-sref=".olcmeturulistesi"><i class="fa fa-cubes"></i>&nbsp;Ölçme Türü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 9}"><a class="altTabMenuItem" ng-click="setAltTab(9)" ui-sref=".testsenaryotesttipilistesi"><i class="fa fa-cubes"></i>&nbsp;Test Senaryo Test Tipi Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 10}"><a class="altTabMenuItem" ng-click="setAltTab(10)" ui-sref=".gereksinimtipilistesi"><i class="fa fa-cubes"></i>&nbsp;Gereksinim Tipi Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 11}"><a class="altTabMenuItem" ng-click="setAltTab(11)" ui-sref=".gereksinimturulistesi"><i class="fa fa-cubes"></i>&nbsp;Gereksinim Türü Ayarı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 12}"><a class="altTabMenuItem" ng-click="setAltTab(12)" ui-sref=".projedokumandosyatipilistesi"><i class="fa fa-cubes"></i>&nbsp;Proje Dokuman Dosya Tipi Ayarı</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div ui-view></div>
+    </div>
+</div>

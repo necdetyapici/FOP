@@ -1,0 +1,551 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="tanimlamalar.globalsablonlistesi"><i class="fa fa-list"></i> Global Şablon Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-square-o"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-square-o"></i>
+                        Global Şablon Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            &nbsp;Lütfen Global Şablon bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmGlobalSablon" id="frmGlobalSablon" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset ng-disabled="(Info.AKTIF== true && Info.AKTIF_KULLANICI_ID != $storage.KULLANICI_ID) || (Info.AKTIF == false)">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Adı<span class="text-danger">*</span> </label>
+                                            <div class="col-lg-8">
+                                                <input ng-maxlength="150" name="txtADI" required ng-model="Info.ADI" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Adını giriniz.">
+                                                <p ng-show="frmGlobalSablon.txtADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Başlık Boyutu<span class="text-danger">*</span> </label>
+                                            <div class="col-lg-8">
+                                                <input type="number" name="txtBASLIK_BOYUTU" required ng-model="Info.BASLIK_BOYUTU" class="formEkleDuzenleInput form-control" placeholder="Başlık boyutunu giriniz.">
+                                                <p ng-show="frmGlobalSablon.txtBASLIK_BOYUTU.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Başlık Rengi<span class="text-danger">*</span> </label>
+                                            <div class="col-lg-8">
+                                                <!--<input colorpicker type="text" ng-model="Info.BASLIK_RENGI" name="txtBASLIK_RENGI" required class="formEkleDuzenleInput form-control" placeholder="Başlık rengini giriniz." />-->
+                                                <input ng-model="Info.BASLIK_RENGI" id="txtBASLIK_RENGI" name="txtBASLIK_RENGI" required class="formEkleDuzenleInput form-control" placeholder="Başlık rengini giriniz." />
+
+
+                                                <p ng-show="frmGlobalSablon.txtBASLIK_RENGI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Dokuman Tipi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbDOKUMAN_TIPI_ID" allow-clear="true" name="cmbDOKUMAN_TIPI_ID" ng-model="Info.DOKUMAN_TIPI_ID"
+                                                    data-live-search="true" title="Dokuman Tipi Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in DokumanTipiListesi" deep-watch="true" data-value="item.DOKUMAN_TIPI_ID">
+                                                        <a>
+                                                            {{item.ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Başlık Yazı Tipi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbDOKUMAN_BASLIK_YAZI_TIPI_ID" allow-clear="true" name="cmbDOKUMAN_BASLIK_YAZI_TIPI_ID" ng-model="Info.DOKUMAN_BASLIK_YAZI_TIPI_ID"
+                                                    data-live-search="true" title="Başlık Yazı Tipi Seçiniz" data-size="5" required="true" ng-change="YaziTipiDegisti(Info.DOKUMAN_BASLIK_YAZI_TIPI_ID)">
+                                                    <li nya-bs-option="item in DokumanBaslikYaziTipiListesi" deep-watch="true" data-value="item.DOKUMAN_BASLIK_YAZI_TIPI_ID">
+                                                        <a>
+                                                            {{item.ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmGlobalSablon.cmbDOKUMAN_BASLIK_YAZI_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <label class="label-important text-center">Ön İzleme</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p style="font-family:{{FONTADI}};font-size:{{Info.BASLIK_BOYUTU}}px;color:{{Info.BASLIK_RENGI}}">1. Başlık</p>
+                                    <p style="font-family:{{FONTADI}};font-size:{{Info.BASLIK_BOYUTU}}px;color:{{Info.BASLIK_RENGI}}">2. Başlık</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-info " ng-show="Info.AKTIF == false && globalSablonID > 0" type="button" ng-click="GlobalSablonAlBirak()">
+                                                <i class="fa fa-user"></i>&nbsp;&nbsp;<span class="bold">Dokuman Al</span>
+                                            </button>
+                                            <button class=" btn btn-danger " ng-show="Info.AKTIF_KULLANICI_ID == $storage.KULLANICI_ID && Info.AKTIF == true && globalSablonID > 0" type="button" ng-click="GlobalSablonAlBirak()">
+                                                <i class="fa fa-unlock"></i>&nbsp;&nbsp;<span class="bold">Dokuman Bırak</span>
+                                            </button>
+                                            <button class=" btn btn-success " type="button" ng-show="globalSablonID > 0" ng-disabled="(Info.AKTIF== true && Info.AKTIF_KULLANICI_ID != $storage.KULLANICI_ID) || (Info.AKTIF == false)" ng-click="GlobalSablonEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class=" btn btn-success " type="button" ng-show="globalSablonID == 0" ng-click="GlobalSablonEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="tanimlamalar.globalsablonlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="ibox-content" ng-if="globalSablonID > 0">
+                    <fieldset ng-disabled="(Info.AKTIF== true && Info.AKTIF_KULLANICI_ID != $storage.KULLANICI_ID) || (Info.AKTIF == false)">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" tooltip="Üst Bilgi Ekle" ng-click="GlobalSablonUstAltBilgiEkleSelect(2)"><i class="fa fa-hand-o-up"></i> </a>
+                                            <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" tooltip="Alt Bilgi Ekle" ng-click="GlobalSablonUstAltBilgiEkleSelect(3)"><i class="fa fa-hand-o-down"></i> </a>
+                                            <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" tooltip="Ön İzleme" ui-sref="tanimlamalar.globalsablononizleme({ globalSablonID: globalSablonID, rev: 0})"><i class="fa fa-eye"></i> </a>
+                                            <a href="" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" tooltip="Başlık Ekle" ng-click="GlobalBaslikEkle()"><i class="fa fa-plus"></i> </a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <!--<script type="text/ng-template" id="nodes_renderer.html">
+                                            <div class="tree-node">
+                                                <div class="pull-left" ui-tree-handle="">
+                                                   <span class="fa fa-arrows-alt"></span>
+                                                </div>
+                                                
+                                                <div class="tree-node-content" data-nodrop-enabled='true'>
+                                                    <a class="pull-right btn btn-white btn-xs" style="margin-bottom: 0px !important" data-nodrag ng-click="modalSilmeOnayiGlobalBaslik(this)"><span class="fa fa-trash"></span></a>
+                                                    <a class="pull-right btn btn-white btn-xs" style="margin-bottom: 0px !important" data-nodrag ng-click="newSubItem(this)"><span class="fa fa-plus"></span></a>
+                                                    <a class="btn btn-primary btn-xs" style="margin-bottom: 0px !important" data-nodrag ng-click="BaslikAcKapa(this)"><span class="fa" ng-class="{'fa-angle-down': collapsed, 'fa-angle-right': !collapsed}"></span></a>
+                                                    <a data-nodrag ng-click="GlobalSablonBaslikSelect(node.GLOBAL_SABLON_BASLIK_ID)">{{node.BASLIK_ADI}}</a>
+                                                </div>
+                                            </div>
+                                            <ol ui-tree-nodes="" ng-model="node.ALT_BASLIK" ng-class="{hidden: collapsed}">
+                                                <li ng-repeat="node in node.ALT_BASLIK" ui-tree-node ng-include="'nodes_renderer.html'">
+                                                </li>
+                                            </ol>
+                                        </script>-->
+
+
+                                        <script type="text/ng-template" id="nodes_renderer.html">
+                                            
+                                            <div class="tree-node tree-node-content" data-nodrop-enabled='true'>
+                                                <a class="pull-right btn btn-white btn-xs" style="margin-bottom: 0px !important" ui-tree-handle><span class="fa fa-arrows-alt"></span></a>
+                                                <a class="pull-right btn btn-white btn-xs" style="margin-bottom: 0px !important" data-nodrag ng-click="modalSilmeOnayiGlobalBaslik(this)"><span class="fa fa-trash"></span></a>
+                                                <a class="pull-right btn btn-white btn-xs" style="margin-bottom: 0px !important" data-nodrag ng-click="newSubItem(this)"><span class="fa fa-plus"></span></a>
+                                                <a class="btn btn-primary btn-xs" style="margin-bottom: 0px !important" data-nodrag ng-click="BaslikAcKapa(this)"><span class="fa" ng-class="{'fa-angle-down': collapsed, 'fa-angle-right': !collapsed}"></span></a>
+                                                <a data-nodrag ng-click="GlobalSablonBaslikSelect(node.GLOBAL_SABLON_BASLIK_ID)">{{node.BASLIK_ADI}}</a>
+
+                                            </div>
+                                            <ol ui-tree-nodes="" ng-model="node.ALT_BASLIK" ng-class="{hidden: collapsed}">
+                                                <li ng-repeat="node in node.ALT_BASLIK" ui-tree-node ng-include="'nodes_renderer.html'">
+                                                </li>
+                                            </ol>
+                                        </script>
+                                        <div ui-tree="treeOptions" id="tree-root" data-nodrop-enabled='true'>
+                                            <ol ui-tree-nodes ng-model="GlobalSablonBaslikMenuListesi">
+                                                <li ng-repeat="node in GlobalSablonBaslikMenuListesi" ui-tree-node ng-include="'nodes_renderer.html'"></li>
+                                            </ol>
+                                        </div>
+                                        <!--<div ui-tree="treeOptions" id="tree-root" data-nodrop-enabled='true'>
+                                            <ol ui-tree-nodes="" ng-model="GlobalSablonBaslikMenuListesi">
+                                                <li ng-repeat="node in GlobalSablonBaslikMenuListesi" ui-tree-node="" ng-include="'nodes_renderer.html'" class="angular-ui-tree-node" collapsed="false" expand-on-hover="false"></li>
+                                            </ol>
+                                        </div>-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <form class="form-horizontal" accessible-form>
+                                    <div class="formEkleDuzenleInputs" ng-hide="Info.AKTIF == false || InfoBaslik.GLOBAL_SABLON_BASLIK_ID == null || InfoBaslik.GLOBAL_SABLON_BASLIK_ID == undefined">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Başlık<span class="text-danger">*</span> </label>
+                                                    <div class="col-lg-9">
+                                                        <input ng-maxlength="150" name="txtBASLIK_ADI" id="txtBASLIK_ADI" ng-blur="GlobalSablonBaslikEkleGuncelle(InfoBaslik)" ng-model="InfoBaslik.BASLIK_ADI" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Adını giriniz.">
+                                                        <!--<p ng-show="frmGlobalSablon.txtBASLIK_ADI.$invalid && formCalistirildiBaslik" class="validation">Bu alan boş bırakılamaz.</p>-->
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-3 control-label">Başlık Bölüm Tipi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-9">
+                                                        <b>{{InfoBaslik.DOKUMAN_BASLIK_BOLUM_TIPI_ADI}}</b>
+                                                    </div>
+                                                </div>
+
+                                                <!--<div summernote class="summernote"  config="options" ng-model="InfoBaslik.ACIKLAMA">
+
+    </div>-->
+                                                <summernote config="options" on-blur="blur(evt)" lang="tr-TR" ng-model="InfoBaslik.ACIKLAMA"></summernote>
+                                                <!--<textarea ui-tinymce="tinymceOptions" id="editor" ng-model="InfoBaslik.ACIKLAMA"></textarea>-->
+                                                <button class=" btn btn-info btn-sm " type="button">
+                                                    <i class="fa fa-save"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-actions">
+                                    <div class="pull-right">
+                                        <button class=" btn btn-info " ng-show=" globalSablonID > 0" type="button" ng-click="RevizyonAl()">
+                                            <i class="fa fa-handshake-o"></i>&nbsp;&nbsp;<span class="bold">Yayınla</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig" ng-if="globalSablonID > 0">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Revizyon Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content" ng-show="GlobalSablonRevizyonListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" tooltip="Şablon Geçmişi" ng-click="GlobalSablonLog()"> <i class="fa fa-search"></i> </button>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" tooltip="Yenile" ng-click="GlobalSablonRevizyonGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisiGlobalSablonRevizyon }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Rev No</b></td>
+                                            <td><b>Rev Alan</b></td>
+                                            <td><b>Rev Tarih</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in GlobalSablonRevizyonListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.REV}}<br />
+                                            </td>
+                                            <td>
+                                                {{post.KULLANICI_AD_SOYAD}}<br />
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary label-kayit-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.KAYIT_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td class="form-actions">
+                                                <button ui-sref="tanimlamalar.globalsablononizleme({ globalSablonID: post.GLOBAL_SABLON_ID, rev: post.REV})" class="btn btn-sm btn-info" tooltip="Ön İzleme" tooltip-append-to-body="true">
+                                                    <i class="fa fa-eye"></i>
+                                                    <!-- Sil -->
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriterListeGlobalSablonRevizyon.SayfaNo" ng-change="GlobalSablonRevizyonGetData(AramaKriterListeGlobalSablonRevizyon)" total-items="toplamKayitSayisiGlobalSablonRevizyon"
+                                                            items-per-page="AramaKriterListeGlobalSablonRevizyon.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="GlobalSablonRevizyonListesi.length==0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" tooltip="Şablon Geçmişi" ng-click="GlobalSablonLog()"> <i class="fa fa-search"></i> </button>
+                                <button type="button" class="btn btn-sm btn-white" tooltip="Yenile" ng-click="GlobalSablonRevizyonGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Global Şablon Revizyon kayıt <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtBASLIK_RENGI").colorpicker({
+            hideButton: false,
+            history: false,
+            color: " #000000",
+            strings: 'Tema Rengi,Standart Renk,Web Renk,Tema Renk,Palete Geri Dön,Geçmiş, Geçmiş Kaydı Yok.',
+            showOn: "both"
+        });
+
+
+
+
+
+    });
+</script>
+
+<script>
+    (function ($) {
+        $.extend($.summernote.lang, {
+            'tr-TR': {
+                font: {
+                    bold: 'Kalın',
+                    italic: 'İtalik',
+                    underline: 'Altı çizili',
+                    strike: 'Üstü çizili',
+                    clear: 'Temizle',
+                    height: 'Satır yüksekliği',
+                    size: 'Yazı tipi boyutu'
+                },
+                image: {
+                    image: 'Resim',
+                    insert: 'Resim ekle',
+                    resizeFull: 'Orjinal boyut',
+                    resizeHalf: '1/2 boyut',
+                    resizeQuarter: '1/4 boyut',
+                    floatLeft: 'Sola hizala',
+                    floatRight: 'Sağa hizala',
+                    floatNone: 'Hizalamayı kaldır',
+                    dragImageHere: 'Buraya sürükleyin',
+                    selectFromFiles: 'Dosya seçin',
+                    url: 'Resim bağlantısı'
+                },
+                link: {
+                    link: 'Bağlantı',
+                    insert: 'Bağlantı ekle',
+                    unlink: 'Bağlantıyı kaldır',
+                    edit: 'Bağlantıyı düzenle',
+                    textToDisplay: 'Görüntülemek için',
+                    url: 'Bağlantı adresi?'
+                },
+                video: {
+                    video: 'Video',
+                    videoLink: 'Video bağlantısı',
+                    insert: 'Video ekle',
+                    url: 'Video bağlantısı?',
+                    providers: '(YouTube, Vimeo, Vine, Instagram veya DailyMotion)'
+                },
+                table: {
+                    table: 'Tablo'
+                },
+                hr: {
+                    insert: 'Yatay çizgi ekle'
+                },
+                style: {
+                    style: 'Biçim',
+                    normal: 'Normal',
+                    blockquote: 'Alıntı',
+                    pre: 'Önbiçimli',
+                    h1: 'Başlık 1',
+                    h2: 'Başlık 2',
+                    h3: 'Başlık 3',
+                    h4: 'Başlık 4',
+                    h5: 'Başlık 5',
+                    h6: 'Başlık 6'
+                },
+                lists: {
+                    unordered: 'Madde işaretli liste',
+                    ordered: 'Numaralı liste'
+                },
+                options: {
+                    help: 'Yardım',
+                    fullscreen: 'Tam ekran',
+                    codeview: 'HTML Kodu'
+                },
+                paragraph: {
+                    paragraph: 'Paragraf',
+                    outdent: 'Girintiyi artır',
+                    indent: 'Girintiyi azalt',
+                    left: 'Sola hizala',
+                    center: 'Ortaya hizala',
+                    right: 'Sağa hizala',
+                    justify: 'Yasla'
+                },
+                color: {
+                    recent: 'Son renk',
+                    more: 'Daha fazla renk',
+                    background: 'Arka plan rengi',
+                    foreground: 'Yazı rengi',
+                    transparent: 'Seffaflık',
+                    setTransparent: 'Şeffaflığı ayarla',
+                    reset: 'Sıfırla',
+                    resetToDefault: 'Varsayılanlara sıfırla'
+                },
+                shortcut: {
+                    shortcuts: 'Kısayollar',
+                    close: 'Kapat',
+                    textFormatting: 'Yazı biçimlendirme',
+                    action: 'Eylem',
+                    paragraphFormatting: 'Paragraf biçimlendirme',
+                    documentStyle: 'Biçim'
+                },
+                history: {
+                    undo: 'Geri al',
+                    redo: 'Yeniden yap'
+                }
+
+            }
+        });
+    })(jQuery);
+</script>
+
+
+<style>
+    .angular-ui-tree-handle {
+        /*background: none repeat scroll 0 0 #f3f3f4;*/
+      
+        color: inherit;
+        /*padding: 2px 2px 2px 2px;*/
+        font-weight: normal;
+        line-height:initial;
+    }        
+
+    .angular-ui-tree-placeholder {
+        background: #f0f9ff;
+        border: 1px dashed #bed2db;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .group-title {
+        background-color: #687074 !important;
+        color: #FFF !important;
+    }
+
+   .tree-node {
+        background: none repeat scroll 0 0 #f3f3f4;
+        border: 1px solid #e7eaec;
+        color: inherit;
+        padding: 5px;
+       border-radius: 3px;
+    }
+
+        .tree-node .btn {
+            /*min-width: 22px;*/
+            margin-right: 4px;
+        }
+
+    .tree-node-content {
+        margin: 5px 5px 5px 0;
+    }
+
+    
+
+    /*.tree-handle {
+        background: none repeat scroll 0 0 #f3f3f4;
+        border: 1px dashed #e7eaec;
+        color: inherit;
+        padding: 10px;
+    }*/
+
+    .angular-ui-tree-handle:hover {
+    }
+
+    .angular-ui-tree-placeholder {
+        background: #f0f9ff;
+        border: 1px dashed #bed2db;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+</style>

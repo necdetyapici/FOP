@@ -1,0 +1,69 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-briefcase"></i> Planlanan Personel Sayısı Bilgileri
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProjePlanlananPersonelSayisi" id="frmProjePlanlananPersonelSayisi" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbPERSONEL_TIPI_ID" name="cmbPERSONEL_TIPI_ID" ng-model="InfoProjePlanlananPersonelSayisi.PERSONEL_TIPI_ID"
+                                                data-live-search="true" title="Personel Tipini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in PersonelTipiListesi" deep-watch="true" data-value="item.PERSONEL_TIPI_ID">
+                                                    <a>
+                                                        {{item.PERSONEL_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjePlanlananPersonelSayisi.cmbPERSONEL_TIPI_ID.$invalid && formCalistirildiProjePlanlananPersonelSayisi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Adet<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="number" name="txtSAYI" ng-model="InfoProjePlanlananPersonelSayisi.SAYI" class="formEkleDuzenleInput form-control" required placeholder="Adet giriniz.">
+                                            <p ng-show="frmProjePlanlananPersonelSayisi.txtSAYI.$invalid && formCalistirildiProjePlanlananPersonelSayisi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjePlanlananPersonelSayisiEkleGuncelle(InfoProjePlanlananPersonelSayisi)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary"
+                                               ui-sref="proje.projelerkayit.fizibilite.planlananpersonelsayisilistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

@@ -1,0 +1,93 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-retweet"></i>  DFI Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Dfi bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmTalepTipiDfi" id="frmTalepTipiDfi" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset ng-disabled="$parent.talepKapaliDurumu">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Süreç<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_SUREC_ID" name="cmb_SUREC_ID" ng-model="InfoDfi.SUREC_ID"
+                                                    data-live-search="true" title="Süreç Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in SurecListesi" deep-watch="true" data-value="item.SUREC_ID">
+                                                        <a>
+                                                            {{item.SUREC_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmTalepTipiDfi.cmb_PROJE_GEREKSINIM_ID.$invalid && formCalistirildiTalepTipiDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">DFI Uygunsuzluk Neden Açıklama</label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoDfi.TALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI uygunsuz neden açıklama giriniz."></textarea>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">DFI Tekrar Engelleme Faaliyet Açıklama</label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoDfi.TALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI tekrar engelleme faaliyet açıklama giriniz."></textarea>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Kök Neden</label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtKOK_NEDEN" style="resize:none;" ng-minlength="1" ng-model="InfoDfi.KOK_NEDEN" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI Kök neden giriniz."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class=" pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeTalepTipiDfiEkleGuncelle(InfoDfi)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

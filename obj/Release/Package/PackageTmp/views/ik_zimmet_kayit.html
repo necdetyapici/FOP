@@ -1,0 +1,151 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Zimmet İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikzimmetlistesi"><i class="fa fa-list"></i> Zimmet Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-barcode"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-barcode"></i>
+                        Zimmet Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen zimmet bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmZimmet" id="frmZimmet" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Demirbaş Marka / Model / Seri No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_DEMIRBAS_ID" name="cmbIK_DEMIRBAS_ID" ng-model="Info.IK_DEMIRBAS_ID"
+                                                data-live-search="true" title="Marka / Model / Seri No Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkDemirbasListesi" deep-watch="true" data-value="item.IK_DEMIRBAS_ID">
+                                                    <a>
+                                                        {{item.IK_DEMIRBAS_MARKA_ADI}} / {{item.IK_DEMIRBAS_MODEL_ADI}} / {{item.IK_DEMIRBAS_SERI_NO}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmZimmet.cmbIK_DEMIRBAS_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Verilme Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_ZIMMET_VERILME_TARIHI" ng-model="Info.IK_ZIMMET_VERILME_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+                                            </div>
+                                            <p ng-show="frmZimmet.txtIK_ZIMMET_VERILME_TARIHI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> İade Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_ZIMMET_IADE_TARIHI" ng-model="Info.IK_ZIMMET_IADE_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Teslim Eden Kişi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_ZIMMET_TESLIM_EDEN_KISI_ID" name="cmbIK_ZIMMET_TESLIM_EDEN_KISI_ID" ng-model="Info.IK_ZIMMET_TESLIM_EDEN_KISI_ID"
+                                                data-live-search="true" title="Teslim Eden Kişi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmZimmet.cmbIK_ZIMMET_TESLIM_EDEN_KISI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Teslim Alan Kişi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_ZIMMET_TESLIM_ALAN_KISI_ID" name="cmbIK_ZIMMET_TESLIM_ALAN_KISI_ID" ng-model="Info.IK_ZIMMET_TESLIM_ALAN_KISI_ID"
+                                                data-live-search="true" title="Teslim Alan Kişi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmZimmet.cmbIK_ZIMMET_TESLIM_ALAN_KISI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show="Info.IK_ZIMMET_IADE_TARIHI != null ">
+                                        <label class="col-lg-4 control-label"> İade Alan Kişi<span class="text-danger">*</span> </label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_ZIMMET_IADE_ALAN_KISI_ID" name="cmbIK_ZIMMET_IADE_ALAN_KISI_ID" ng-model="Info.IK_ZIMMET_IADE_ALAN_KISI_ID" ng-required="Info.IK_ZIMMET_IADE_TARIHI != null && Info.IK_ZIMMET_IADE_ALAN_KISI_ID==null"
+                                                data-live-search="true" title="Teslim Alan Kişi Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmZimmet.cmbIK_ZIMMET_IADE_ALAN_KISI_ID.$invalid  && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button"  ng-click="IkZimmetEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-primary" href="#" ui-sref="insankaynaklari.ikzimmetlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

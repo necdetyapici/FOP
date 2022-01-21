@@ -1,0 +1,266 @@
+﻿
+
+<div ng-init="init()"></div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <h5 class="panelHeaderListe" style="padding-top:5px;">
+                                <i class="fa fa-list"></i> Personel İzin Listesi
+                            </h5>
+                        </div>
+                        <div class="col-lg-9 ">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="IkPersonelToplamIzinGetData()" class="btn btn-sm btn-primary" type="submit">
+                                                <i class="fa fa-external-link"></i>&nbsp;
+                                                <strong>Kullanılan İzinler</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-PersonelIzin " class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İzin Türü</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="sel_IZIN_TURU_ID" name="sel_IZIN_TURU_ID" allow-clear="true" ng-model="AramaKriterListe.IZIN_TURU_ID"
+                                                data-live-search="true" title="İzin Türü Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IzinTuruListesi" deep-watch="true" data-value="item.IZIN_TURU_ID">
+                                                    <a>
+                                                        {{item.IZIN_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="padding-right:0px;" class="col-sm-4 control-label">Başlangıç Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtIK_PERSONEL_IZIN_BASLANGIC_TARIHI" id="txtIK_PERSONEL_IZIN_BASLANGIC_TARIHI" ng-model="AramaKriterListe.IK_PERSONEL_IZIN_BASLANGIC_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="padding-right:0px;" class="col-sm-4 control-label">Bitiş Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtIK_PERSONEL_IZIN_BITIS_TARIHI" id="txtIK_PERSONEL_IZIN_BITIS_TARIHI" ng-model="AramaKriterListe.IK_PERSONEL_IZIN_BITIS_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label style="padding-right:0px;" class="col-sm-4 control-label">İşe Başlangıç Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtIK_PERSONEL_ISE_BASLANGIC_TARIHI" ng-model="AramaKriterListe.IK_PERSONEL_ISE_BASLANGIC_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkPersonelIzinGetData(AramaKriterListe, AramaKriterListe.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkPersonelIzinListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IzinFormuYazdir(null, null, kullaniciID)"> <i class="fa fa-print"></i> </button>
+                                <button ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelizinkayit" class="btn-create-shadow btn btn-sm btn-success" ng-show="$storage.KULLANICI_ID == kullaniciID"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkPersonelIzinGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>İzin Süresi</b></td>
+                                            <td><b>İzin Türü Adı</b></td>
+                                            <td><b>İzin Başlangıç Tarihi</b></td>
+                                            <td><b>İzin Bitiş Tarihi</b></td>
+                                            <td><b>İşe Başlangıç Tarihi</b></td>
+                                            <td><b>Durumu</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="post in IkPersonelIzinListesi | filter:ignoreTurkish">
+                                        <tr>
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <a class="editLink-Emfa" ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelizinkayit({ ikPersonelIzinID: post.IK_PERSONEL_IZIN_ID})">{{post.IK_PERSONEL_IZIN_SURESI_ADI}}</a><br />
+                                            </td>
+                                            <td>
+                                                {{post.IZIN_TURU_ADI}}
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.IK_PERSONEL_IZIN_BASLANGIC_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-danger">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.IK_PERSONEL_IZIN_BITIS_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-warning">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.IK_PERSONEL_ISE_BASLANGIC_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <label class="label label-info input-large ng-scope" ng-show="post.IZIN_DURUMU_ID!=IzinDurumu.Onayladi&&post.IZIN_DURUMU_ID!=IzinDurumu.Reddedildi"> {{post.IZIN_DURUMU_ADI}}</label>
+                                                <label class="label label-primary input-large ng-scope" ng-show="post.IZIN_DURUMU_ID==IzinDurumu.Onayladi"> {{post.IZIN_DURUMU_ADI}}</label>
+                                                <label class="label label-danger input-large ng-scope" ng-show="post.IZIN_DURUMU_ID==IzinDurumu.Reddedildi"> {{post.IZIN_DURUMU_ADI}}</label>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="nedenReddildi = !nedenReddildi" ng-show="post.IZIN_DURUMU_ID == 5" ng-class="{ 'btn-danger': nedenReddildi, 'btn-info' : !nedenReddildi}" class="btn btn-sm" tooltip="Neden Reddeildi?" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- İzin Reddet --></a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <button ng-click="IzinFormuYazdir(post.IK_PERSONEL_IZIN_ID, post.IZIN_TURU_ID, post.KULLANICI_ID)" class="btn btn-sm btn-info" tooltip="Yazdır" tooltip-append-to-body="true"><i class="fa fa-print"></i></button>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelizinkayit({ ikPersonelIzinID: post.IK_PERSONEL_IZIN_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <button ng-click="modalSilmeOnayi(post)" ng-disabled="post.IZIN_DURUMU_ID == 4 || post.IZIN_DURUMU_ID == 5" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-show="nedenReddildi">
+                                            <td></td>
+                                            <td colspan="2"><b>Neden Reddildi?</b></td>
+                                            <td colspan="9">
+                                                {{post.IZIN_REDDET}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriterListe.SayfaNo" ng-change="IkPersonelIzinGetData(AramaKriterListe)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriterListe.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="IkPersonelIzinListesi.length==0 || IkPersonelIzinListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelizinkayit" class="btn btn-sm btn-success" ng-show="$storage.KULLANICI_ID == kullaniciID"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkPersonelIzinGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Personel izin kaydı <strong>bulunmamaktadır.</strong>
+                                <span ng-show="$storage.KULLANICI_ID == kullaniciID">
+                                    Eklemek için <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelizinkayit"
+                                                    class="alert-Link-Emfa alert-link">
+                                        tıklayınız.
+                                    </a>
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="ibox-content ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <iframe name="pdff" id="pdff" class="pdf-object-container"></iframe>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>

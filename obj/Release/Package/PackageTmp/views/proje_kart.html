@@ -1,0 +1,147 @@
+﻿<!--<div ng-init="init()"></div>-->
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-circle"></i> Proje Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Proje bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProje" id="frmProje" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label">Proje Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7">
+                                            <input name="txtPROJE_ADI" ng-model="$parent.InfoProje.PROJE_ADI" class="formEkleDuzenleInput form-control" ng-maxlength="255" ng-minlength="1" placeholder="Proje adını giriniz." required />
+                                            <p ng-show="frmProje.txtPROJE_ADI.$invalid && formCalistirildiProje" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label">Proje Türü <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7">
+                                            <ol class="nya-bs-select form-control" id="sel_PROJE_TURU_ID" name="sel_PROJE_TURU_ID" ng-model="$parent.InfoProje.PROJE_TURU_ID"
+                                                data-live-search="true" title="Proje Türünü Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjeTuruListesi" deep-watch="true" data-value="item.PROJE_TURU_ID">
+                                                    <a>
+                                                        {{item.PROJE_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProje.sel_PROJE_TURU_ID.$invalid && formCalistirildiProje" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label">Proje Yöneticisi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7">
+                                            <ol class="nya-bs-select form-control" id="sel_PROJE_YONETICISI_ID" name="sel_PROJE_YONETICISI_ID" ng-model="$parent.InfoProje.PROJE_YONETICISI_ID"
+                                                data-live-search="true" title="Proje Yöneticisi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProje.sel_PROJE_YONETICISI_ID.$invalid && formCalistirildiProje" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label">Proje Müşteri Tipi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7">
+                                            <ol class="nya-bs-select form-control" id="sel_PROJE_MUSTERI_TIPI_ID" name="sel_PROJE_MUSTERI_TIPI_ID" ng-model="$parent.InfoProje.PROJE_MUSTERI_TIPI_ID"
+                                                data-live-search="true" title="Müşteri Tipini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjeMusteriTipiListesi" deep-watch="true" data-value="item.PROJE_MUSTERI_TIPI_ID">
+                                                    <a>
+                                                        {{item.PROJE_MUSTERI_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProje.sel_PROJE_MUSTERI_TIPI_ID.$invalid && formCalistirildiProje" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label">Finans Kaynağı Türü </label>
+                                        <div class="col-lg-7">
+                                            <ol class="nya-bs-select form-control" id="sel_FINANS_KAYNAGI_TURU_ID" name="sel_FINANS_KAYNAGI_TURU_ID" ng-model="$parent.InfoProje.FINANS_KAYNAGI_TURU_ID"
+                                                data-live-search="true" title="Finans Türünü Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in FinansKaynagiTuruListesi" deep-watch="true" data-value="item.FINANS_KAYNAGI_TURU_ID">
+                                                    <a>
+                                                        {{item.FINANS_KAYNAGI_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-5 control-label">Ticari Koşul <span class="text-danger">*</span></label>
+                                        <div class="col-lg-7">
+                                            <ol class="nya-bs-select form-control" id="sel_TICARI_KOSUL_ID" name="sel_TICARI_KOSUL_ID" ng-model="$parent.InfoProje.TICARI_KOSUL_ID"
+                                                data-live-search="true" title="Ticari Koşul Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in TicariKosulListesi" deep-watch="true" data-value="item.TICARI_KOSUL_ID">
+                                                    <a>
+                                                        {{item.TICARI_KOSUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProje.sel_TICARI_KOSUL_ID.$invalid && formCalistirildiProje" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjelerEkleGuncelle($parent.InfoProje, frmProje)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-sm btn-primary"  ui-sref="proje.projelerlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

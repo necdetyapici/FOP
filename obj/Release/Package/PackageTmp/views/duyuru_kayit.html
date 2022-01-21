@@ -1,0 +1,105 @@
+﻿<div ng-init="init()"></div>
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+        }
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Duyuru Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="yonetim.duyurulistesi">Duyuru Listesi</a>
+            </li>
+            <li class="active">
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="row wrapper wrapper-content padding-bottom animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle panelHeaderMusteriEkleDuzenle">
+                        &nbsp; <i class="fa fa-group"></i> Duyuru Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen duyuru bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content ">
+                    <form method="get" name="form" id="form" class="form-horizontal " accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Duyuru Konusu <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtKONU" ng-model="Info.KONU" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Lütfen Duyuru Konusunu Giriniz." required />
+                                            <p ng-show="form.txtKONU.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Duyuru Metni<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtMETNI" ng-model="Info.METNI" rows="10" ng-maxlength="300" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Lütfen Duyuru Metnini Giriniz." required />
+                                            <p ng-show="form.txtKONU.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success " type="button" tooltip="Kaydet" ng-click="DuyuruEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>
+                                                Kaydet
+                                            </button>
+
+                                            <button class="btn btn-sm btn-primary " type="button" tooltip="Geri" href="#" ui-sref="yonetim.duyurulistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                Geri
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+

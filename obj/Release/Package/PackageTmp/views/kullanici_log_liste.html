@@ -1,0 +1,228 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <h2>Kullanıcı İşlem Geçmişi</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li class="active">
+                İşlem Geçmişi Listesi
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<!-- Arama ve Sonuç Listeleme Kutusu -->
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Kullanıcı İşlem Geçmişi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-KullaniciLog" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label style="padding-right:0px;" class="col-lg-4 control-label">Başlangıç Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtBASLANGIC_TARIHI" id="txtBASLANGIC_TARIHI" ng-model="AramaKriter.BASLANGIC_TARIH" nextgen-date-time-picker="" class="form-control formEkleDuzenleInput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Bitiş Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtBITIS_TARIHI" id="txtBITIS_TARIHI" ng-model="AramaKriter.BITIS_TARIH" nextgen-date-time-picker="" class="form-control formEkleDuzenleInput">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ad Soyad</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtAD_SOYAD" id="txtAD_SOYAD" ng-model="AramaKriter.AD_SOYAD" class="form-control formEkleDuzenleInput" placeholder="Ad ve soyadını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--<div class="col-sm-4 b">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Form Adı</label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control formEkleDuzenleInput" id="sel_FORM_ID" name="sel_FORM_ID" ng-model="AramaKriter.FORM_ID"
+                                                data-live-search="true" title="Form Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in FormListesi" deep-watch="true" data-value="item.FORM_ID">
+                                                    <a>
+                                                        {{item.FORM_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İşlem Türü</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control formEkleDuzenleInput" id="sel_KULLANICI_ISLEM_TURU_ID" name="sel_KULLANICI_ISLEM_TURU_ID" ng-model="AramaKriter.KULLANICI_ISLEM_TURU_ID"
+                                                data-live-search="true" title="Kullanıcı İşlem Türü Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in KullaniciIslemTuruListesi" deep-watch="true" data-value="item.KULLANICI_ISLEM_TURU_ID">
+                                                    <a>
+                                                        {{item.KULLANICI_ISLEM_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Açıklama</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtACIKLAMA" id="txtACIKLAMA" ng-model="AramaKriter.ACIKLAMA" class="form-control formEkleDuzenleInput" placeholder="Açıklama giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="KullaniciLogGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="KullaniciLogListesi.length >0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="KullaniciLogGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Ad Soyad</b></td>
+                                            <td style="white-space:nowrap"><b>Kullanıcı Adı</b></td>
+                                            <td style="white-space:nowrap"><b>Form Adı</b></td>
+                                            <td style="white-space:nowrap"><b>İşlem Türü</b></td>
+                                            <td><b>Tarih</b></td>
+                                            <td style="white-space:nowrap"><b>Erişilen IP</b></td>
+                                            <td><b>Açıklama</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in KullaniciLogListesi">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td class="project-title spring" style="white-space:nowrap">
+                                                {{post.AD_SOYAD}}
+                                            </td>
+                                            <td class="project-title spring">
+                                                {{post.KULLANICI_ADI}}
+                                            </td>
+                                            <td>
+                                                {{post.FORM_ADI}}
+                                            </td>
+                                            <td>
+
+                                                <div class="{{post.KULLANICI_ISLEM_TURU_STYLE}}" style="display:block">
+                                                    {{post.KULLANICI_ISLEM_TURU_ADI}}
+                                                </div>
+                                            </td>
+                                            <td class="project-title spring">
+                                                {{post.ISLEM_TARIHI | tarihsaat }}
+                                            </td>
+                                            <td class="project-title spring">
+                                                {{post.ERISILEN_IP}}
+                                            </td>
+                                            <td>
+                                                {{post.ACIKLAMA}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="KullaniciLogGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="KullaniciLogListesi.length == 0 || KullaniciLogListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="KullaniciLogGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp; Kullanıcı log kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,178 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Menü İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="yonetim.menulerlistesi"><i class="fa fa-list"></i> Menü Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-barcode"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-barcode"></i>
+                            Menü Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>&nbsp;   Lütfen Menu bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <form method="get" name="frmMenuler" id="frmMenuler" class="form-horizontal" accessible-form>
+
+
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Menü ID <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="number" required="required" ng-disabled="$storage.IS_PICT_YONETICI != true" ng-maxlength="255" ng-minlength="1" name="txtMENU_ID" ng-model="Info.MENU_ID" class="formEkleDuzenleInput form-control" placeholder="Menü ID giriniz.">
+
+                                                <p ng-show="frmMenuler.txtMENU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+
+                                        </div>
+
+                                        <input type="hidden" name="txtYENI_MENU_ID" ng-model="Info.YENI_MENU_ID" class="formEkleDuzenleInput form-control">
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Menü Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-maxlength="150" ng-minlength="1" name="txtMENU_ADI" ng-model="Info.MENU_ADI" class="formEkleDuzenleInput form-control" placeholder="Menü adını giriniz.">
+                                                <p ng-show="frmMenuler.txtMENU_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Menü Durum <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-disabled="$storage.IS_PICT_YONETICI != true" ng-maxlength="50" ng-minlength="1" name="txtDURUM" ng-model="Info.DURUM" class="formEkleDuzenleInput form-control" placeholder="Menü durum adını giriniz.">
+                                                <p ng-show="frmMenuler.txtDURUM.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Menü URL <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-maxlength="300" ng-disabled="$storage.IS_PICT_YONETICI != true" ng-minlength="1" name="txtURL" ng-model="Info.URL" class="formEkleDuzenleInput form-control" placeholder="Menü URL adını giriniz.">
+                                                <p ng-show="frmMenuler.txtURL.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="form-group">
+                                            <label class="col-sm-4 control-label">Üst Menü ID <span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtUST_MENU_ID" ng-model="Info.UST_MENU_ID" class="formEkleDuzenleInput form-control" placeholder="Üst Menü ID  giriniz.">
+                                                <p ng-show="frm_menuler.txtUST_MENU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>-->
+
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Üst Menü Adı</label>
+                                            <div class="col-lg-8">
+
+                                                <ol class="nya-bs-select form-control" allow-clear="true" id="cmbUST_MENU_ID" name="cmbUST_MENU_ID" ng-model="Info.UST_MENU_ID"
+                                                    data-live-search="true" title="Üst Menü Seçiniz" data-size="5">
+                                                    <!--<li nya-bs-option="" deep-watch="true" data-value="">
+                                                        <a>
+                                                           kadir
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>-->
+                                                    <li nya-bs-option="item in MenulerListesi" deep-watch="true" data-value="item.MENU_ID">
+                                                        <a ng-if="item.UST_MENU_ID==0">
+                                                            {{item.MENU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Kontrol Noktası Adı</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="255" ng-minlength="1" name="txtKONTROL_NOKTASI_ADI" ng-disabled="$storage.IS_PICT_YONETICI != true" ng-model="Info.KONTROL_NOKTASI_ADI" class="formEkleDuzenleInput form-control" placeholder="Kontrol noktası adını giriniz.">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Menü Sırası <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="number" required="required" ng-maxlength="255" ng-minlength="1" name="txtMENU_SIRASI" ng-model="Info.MENU_SIRASI" class="formEkleDuzenleInput form-control" placeholder="Menü Sırası giriniz.">
+                                                <p ng-show="frmMenuler.txtMENU_SIRASI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> İkon Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIKON" ng-disabled="$storage.IS_PICT_YONETICI != true" ng-model="Info.IKON" class="formEkleDuzenleInput form-control" placeholder="İkon adını giriniz.">
+                                                <p ng-show="frmMenuler.txtIKON.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="form-group">
+                                            <label class="col-sm-4 control-label"> Menü Adı <span class="text-danger">*</span></label>
+                                            <div class="col-sm-8">
+                                                <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtDEMIRBAS_DURUMU_ADI" ng-model="Info.DEMIRBAS_DURUMU_ADI" class="formEkleDuzenleInput form-control" placeholder="Demirbaş durumu adını giriniz.">
+                                                <p ng-show="frm_menuler.txtDEMIRBAS_DURUMU_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Menü Açıklama</label>
+                                            <div class="col-lg-8">
+                                                <textarea name="txtACIKLAMA" ng-model="Info.ACIKLAMA" ng-maxlength="500" ng-minlength="1" rows="3" style="resize: none" class="formEkleDuzenleInput form-control" placeholder="Menü Açıklama giriniz."></textarea>
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="MenulerEkleGuncelle(Info)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <a class="btn btn-primary" href="#" ui-sref="yonetim.menulerlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

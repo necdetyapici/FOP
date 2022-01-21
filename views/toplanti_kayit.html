@@ -1,0 +1,116 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Toplantı</h2>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a></li>
+            <li><a ui-sref="toplanti.toplantilistesi"><i class="fa fa-list"></i> Toplantı Listesi</a></li>
+            <li class="active animated bounceInRight"><strong><i class="fa fa-group"></i> Kayıt</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-group"></i>
+                        Toplantı  Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen toplantı bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmToplanti" id="frmToplanti" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-maxlength="255" name="txtTOPLANTI_ADI" ng-model="InfoToplanti.TOPLANTI_ADI" class="formEkleDuzenleInput form-control" placeholder="Toplantı adını giriniz.">
+                                                <p ng-show="frmToplanti.txtTOPLANTI_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Tarihi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtTOPLANTI_TARIHI" ng-model="InfoToplanti.TOPLANTI_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required="required">
+                                                </div>
+                                                <p ng-show="frmToplanti.txtTOPLANTI_TARIHI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Başlangıç Saati <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    <input type="text" name="txtTOPLANTI_BASLANGIC_SAATI" ng-model="InfoToplanti.TOPLANTI_BASLANGIC_SAATI" clock-picker="" data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı başlangıç saatini giriniz." required="required">
+                                                </div>
+                                                <p ng-show="frmToplanti.txtTOPLANTI_BASLANGIC_SAATI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Bitiş Saati <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    <input type="text" name="txtBITIS_SAATI" ng-model="InfoToplanti.BITIS_SAATI" clock-picker="" data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı bitiş saatini giriniz." required="required">
+                                                </div>
+                                                <p ng-show="frmToplanti.txtBITIS_SAATI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Toplantı Açıklama <span class="text-danger">*</span></label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" name="txtTOPLANTI_ACIKLAMA" style="resize:none;" ng-model="InfoToplanti.TOPLANTI_ACIKLAMA" maxlength="500" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı açıklama giriniz." required="required"></textarea>
+                                                <p ng-show="frmToplanti.txtTOPLANTI_ACIKLAMA.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+
+                                                <button ng-show="toplantiID == 0" class="btn btn-info" type="button" ng-click="ToplantiKatilimciEkle()">
+                                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold"> Katılımcı Ekle</span>
+                                                </button>
+                                                <button class=" btn btn-success " href="#" ui-sref="toplanti.toplantilistesi" type="button"  ng-click="ToplantiEkleGuncelle(InfoToplanti)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <a class="btn btn-primary" href="#" ui-sref="toplanti.toplantilistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

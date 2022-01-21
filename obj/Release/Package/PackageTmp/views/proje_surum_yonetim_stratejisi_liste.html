@@ -1,0 +1,97 @@
+﻿<div ng-init="init()"></div>
+
+    <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--kayıt-->
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i> Sürüm Yönetim Stratejisi
+                        </h5>
+                        <div class="pull-right" ng-show="ProjeSurumYonetimStratejisi ===null||ProjeSurumYonetimStratejisi===Undefined">
+                            <button ui-sref="proje.projelerkayit.plan.surumyonetimstratejisikayit" class="btn-create-shadow btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                        </div>
+                        <div class="pull-right" ng-show="ProjeSurumYonetimStratejisi !==null&&ProjeSurumYonetimStratejisi!==Undefined">
+                            <button ui-sref="proje.projelerkayit.plan.surumyonetimstratejisikayit({ surumyonetimstratejisiNo: ProjeSurumYonetimStratejisi.PROJE_SURUM_YONETIM_STRATEJISI_ID})" class="surum-yonetim-operation-button no-padding-top-bottom btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</button>
+                            <button ng-click="modalSilmeOnayi(ProjeSurumYonetimStratejisi)" class="surum-yonetim-operation-button no-padding-top-bottom btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content" ng-show="ProjeSurumYonetimStratejisi !==null&&ProjeSurumYonetimStratejisi!==Undefined">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="feed-activity-list">
+
+                                    <div class="feed-element">
+                                        <!--majör-->
+                                        <div class="media-body ">
+                                            <div class="surum-yonetim-periyot pull-right label label-info"
+                                                 ng-if="ProjeSurumYonetimStratejisi.MAJOR_PERIYOT !==null && ProjeSurumYonetimStratejisi.MAJOR_PERIYOT_ADI!=null"
+                                                 tooltip="Periyot" tooltip-append-to-body="true">
+                                                <i class="fa fa-clock-o"></i>
+                                                {{ProjeSurumYonetimStratejisi.MAJOR_PERIYOT}} {{ProjeSurumYonetimStratejisi.MAJOR_PERIYOT_ADI}}
+                                            </div>
+                                            <strong class="surum-yonetim-header-show">Majör</strong>
+                                            <div class="surum-yonetim-content well">
+                                                {{ProjeSurumYonetimStratejisi.MAJOR_STRATEJI}}
+                                            </div>
+                                        </div>
+                                    </div><!--majör-->
+                                    <div class="feed-element">
+                                        <!--minör-->
+                                        <div class="media-body ">
+                                            <div class="surum-yonetim-periyot pull-right label label-info"
+                                                 ng-if="ProjeSurumYonetimStratejisi.MINOR_PERIYOT !==null && ProjeSurumYonetimStratejisi.MINOR_PERIYOT_ADI!=null"
+                                                 tooltip="Periyot" tooltip-append-to-body="true">
+                                                <i class="fa fa-clock-o"></i>
+                                                {{ProjeSurumYonetimStratejisi.MINOR_PERIYOT}} {{ProjeSurumYonetimStratejisi.MINOR_PERIYOT_ADI}}
+                                            </div>
+                                            <strong class="surum-yonetim-header-show">Minör</strong>
+                                            <div class="surum-yonetim-content well">
+                                                {{ProjeSurumYonetimStratejisi.MINOR_STRATEJI}}
+                                            </div>
+                                        </div>
+                                    </div><!--minör-->
+                                    <div class="feed-element">
+                                        <!--yama-->
+                                        <div class="media-body ">
+                                            <div class="surum-yonetim-periyot pull-right label label-info"
+                                                 ng-if="ProjeSurumYonetimStratejisi.YAMA_PERIYOT !==null && ProjeSurumYonetimStratejisi.YAMA_PERIYOT_ADI!=null"
+                                                 tooltip="Periyot" tooltip-append-to-body="true">
+                                                <i class="fa fa-clock-o"></i>
+                                                {{ProjeSurumYonetimStratejisi.YAMA_PERIYOT}} {{ProjeSurumYonetimStratejisi.YAMA_PERIYOT_ADI}}
+                                            </div>
+                                            <strong class="surum-yonetim-header-show">Yama</strong>
+                                            <div class="surum-yonetim-content well">
+                                                {{ProjeSurumYonetimStratejisi.YAMA_STRATEJI}}
+                                            </div>
+                                        </div>
+                                    </div><!--yama-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content" ng-show="ProjeSurumYonetimStratejisi.length===0||ProjeSurumYonetimStratejisi===Undefined||ProjeSurumYonetimStratejisi===null">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    &nbsp;Projeye ait kayıt <strong>bulunmamaktadır.</strong>
+                                    Eklemek için <a ui-sref="proje.projelerkayit.plan.surumyonetimstratejisikayit"
+                                                    class="alert-Link-Emfa alert-link">
+                                        tıklayınız.
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

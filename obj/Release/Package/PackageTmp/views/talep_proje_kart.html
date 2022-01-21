@@ -1,0 +1,1337 @@
+﻿<!--<div ng-init="init()"></div>-->
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div ng-class="{'col-lg-8' : talepProjeID > 0 , 'col-lg-12': talepProjeID == 0}">
+            <form method="get" name="frm_TalepProje" id="frm_TalepProje" class="form-horizontal" accessible-form>
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-suitcase"></i>  Talep Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen Talep bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset ng-disabled="talepKapaliDurumu">
+                                <div class=" row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Talep No</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtTALEP_PROJE_TALEP_NO" ng-model="$parent.InfoTalep.TALEP_PROJE_TALEP_NO" class="formEkleDuzenleInput form-control" placeholder="" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="$parent.InfoTalep.TALEP_PROJE_ID == null">
+                                            <label class="col-lg-4 control-label">Talep Tipi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_TALEP_TIPI_ID" name="cmb_TALEP_TIPI_ID" ng-model="$parent.InfoTalep.TALEP_TIPI_ID" ng-change="TalepTipi($parent.InfoTalep.TALEP_TIPI_ID)"
+                                                    data-live-search="true" title="Talep Tipi Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in TalepListesi" deep-watch="true" data-value="item.TALEP_TIPI_ID">
+                                                        <a>
+                                                            {{item.TALEP_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frm_TalepProje.cmb_TALEP_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="$parent.InfoTalep.TALEP_PROJE_ID > 0">
+                                            <label class="col-lg-4 control-label"> Talep Tipi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="255" ng-minlength="1" name="txtTALEP_TIPI_ADI" ng-model="$parent.InfoTalep.TALEP_TIPI_ADI" class="formEkleDuzenleInput form-control" placeholder="" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="$parent.InfoTalep.TALEP_PROJE_ID > 0">
+                                            <label class="col-lg-4 control-label"></label>
+                                            <div class="col-lg-8">
+                                                <button class="btn btn-primary col-lg-12" type="button" ng-click="yeniTalepTipiGoster()">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold"> Tipini Değiştir</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+                                        <div ng-if="talepTipiKayit && $parent.InfoTalep.TALEP_PROJE_ID > 0">
+                                            <ng-form method="get" name="frmYeniTalepTipi" id="frmYeniTalepTipi" class="form-horizontal" novalidate>
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Yeni Talep Tipi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <ol class="nya-bs-select form-control" id="cmb_YENI_TALEP_TIPI_ID" name="cmb_YENI_TALEP_TIPI_ID" ng-model="$parent.InfoYeniTalepTipi.YENI_TALEP_TIPI_ID"
+                                                            data-live-search="true" title="Yeni Talep Tipi Seçiniz" data-size="5" required="true">
+                                                            <li nya-bs-option="item in TalepListesi" deep-watch="true" data-value="item.TALEP_TIPI_ID">
+                                                                <a>
+                                                                    {{item.TALEP_TIPI_ADI}}
+                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ol>
+                                                        <p ng-show="frmYeniTalepTipi.cmb_YENI_TALEP_TIPI_ID.$invalid && formCalistirildiYeniTalepTipi" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Açıklama </label>
+                                                    <div class="col-lg-8">
+                                                        <textarea type="text" name="txtACIKLAMA" id="txtACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoYeniTalepTipi.ACIKLAMA" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <div class="pull-right">
+                                                            <button class=" btn btn-success " type="submit" ng-click="YeniTalepTipiKaydet($parent.InfoYeniTalepTipi, frmYeniTalepTipi)">
+                                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                            </button>
+                                                            <button class=" btn btn-primary " type="button" ng-click="yeniTalepTipiGizle()">
+                                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-form>
+                                        </div>
+
+
+
+                                        <div class="form-group " ng-show="$parent.InfoTalep.TALEP_PROJE_ID == null  || $storage.IS_KURUM_MUSTERI_KULLANICI == false ">
+                                            <label class="col-lg-4 control-label">Proje Adı<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_PROJE_ID" name="cmb_PROJE_ID" ng-model="$parent.InfoTalep.PROJE_ID"
+                                                    data-live-search="true" title="Proje Seçiniz" data-size="5" required="true" ng-change="ProjeSec()">
+                                                    <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                        <a>
+                                                            {{item.PROJE_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frm_TalepProje.cmb_PROJE_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="$parent.InfoTalep.TALEP_PROJE_ID > 0 && $storage.IS_KURUM_MUSTERI_KULLANICI == true">
+                                            <label class="col-lg-4 control-label"> Proje Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtPROJE_ADI" ng-model="$parent.InfoTalep.PROJE_ADI" class="formEkleDuzenleInput form-control" placeholder="" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="talepTipiId != 8 && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                            <label class="col-lg-4 control-label">Modül</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_PROJE_MODUL_ID" name="cmb_PROJE_MODUL_ID" ng-model="$parent.InfoTalep.PROJE_MODUL_ID"
+                                                    data-live-search="true" title="Modül Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                        <a>
+                                                            {{item.MODUL_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+
+                                        <!-- iterasyon tipi diğer tipler için görünmesi gerekiyor. Sadece talep tipi genel hariiç -->
+                                        <div class="form-group" ng-show="talepTipiId != 8 && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                            <label class="col-lg-4 control-label">İterasyon <span ng-show="talepTipiId == 6 || talepTipiId == 2 || talepTipiId == 3" class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_PROJE_ITERASYON_ID" name="cmb_PROJE_ITERASYON_ID" ng-model="$parent.InfoTalep.PROJE_ITERASYON_ID"
+                                                    data-live-search="true" title="İterasyon Seçiniz" data-size="5" ng-required="(talepTipiId == 6 || talepTipiId == 2 || talepTipiId == 3) && $parent.InfoTalep.PROJE_ITERASYON_ID == null && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                                    <li nya-bs-option="item in ProjeIterasyonListesi" deep-watch="true" data-value="item.PROJE_ITERASYON_ID">
+                                                        <a>
+                                                            {{item.PROJE_ITERASYON_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frm_TalepProje.cmb_PROJE_ITERASYON_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div ng-show="talepTipiGereksinimDurumu">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Gereksinim <span ng-hide="talepTipiId == 2" class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <div class="pull-right">
+                                                        <button class=" btn btn-info " type="button" ng-click="TalepGereksinimListeGoster()" tooltip="Gereksinim Listesini Göster">
+                                                            <i class="fa fa-list"></i>
+                                                        </button>
+                                                        <button class=" btn btn-info " type="button" ng-click="GereksinimSec()" tooltip="Gereksinim Ekle">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                        <!--<button class=" btn btn-danger " type="button" ng-click="GereksinimTemizle()">
+                                                            <i class="fa fa-eraser"></i>
+                                                        </button>-->
+                                                    </div>
+
+                                                    <!--<textarea type="text" name="txtPROJE_GEREKSINIM_ADI" id="txtPROJE_GEREKSINIM_ADI" style="resize:none;" ng-model="$parent.InfoTalep.PROJE_GEREKSINIM_ADI" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" readonly ng-required="(talepTipiId == 6 ||  talepTipiId == 3) && $parent.InfoTalep.PROJE_GEREKSINIM_ADI == null && $parent.InfoTalep.PROJE_GEREKSINIM_ID == null  && $storage.IS_KURUM_MUSTERI_KULLANICI == false"></textarea>-->
+                                                    <br />
+                                                    <div class="pull-left">
+                                                        <p ng-show="(talepTipiId == 6 ||  talepTipiId == 3) && TalepGereksinimListesi.length == 0 && $storage.IS_KURUM_MUSTERI_KULLANICI == false && formCalistirildi " class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Talep Atayan </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtTALEP_ATAYAN_KULLANICI_ADI" readonly ng-model="$parent.InfoTalep.TALEP_ATAYAN_KULLANICI_ADI" class="formEkleDuzenleInput form-control" placeholder="Talep Atayan">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="($parent.InfoTalep.TALEP_PROJE_ID > 0) || ($storage.IS_KURUM_MUSTERI_KULLANICI == true)">
+                                            <label class="col-lg-4 control-label">Talep Sahibi</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" readonly ng-maxlength="255" ng-minlength="1" name="txtTALEP_SAHIBI_ADI" ng-model="$parent.InfoTalep.TALEP_SAHIBI_KULLANICI_ADI" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-if="$parent.InfoTalep.TALEP_PROJE_ID > 0 && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                            <label class="col-lg-4 control-label"></label>
+                                            <div class="col-lg-8">
+                                                <button class="btn btn-primary col-lg-12" type="button" ng-click="yeniTalepSahibiGoster()">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold"> Sahibini Değiştir</span>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div ng-if="talepSahibiKayit && $parent.InfoTalep.TALEP_PROJE_ID > 0 ">
+                                            <ng-form method="get" name="frmYeniTalepSahibi" id="frmYeniTalepSahibi" class="form-horizontal" novalidate>
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Yeni Talep Sahibi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <ol class="nya-bs-select form-control" id="cmb_YENI_TALEP_SAHIBI_KULLANICI_ID" name="cmb_YENI_TALEP_SAHIBI_KULLANICI_ID" ng-model="$parent.InfoYeniTalepSahibi.TALEP_PROJE_SAHIBI_LOG_ONCEKI_ATANAN_KULLANICI_ID"
+                                                            data-live-search="true" title="Yeni Talep Sahibi Seçiniz" data-size="5" required="true">
+                                                            <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                                <a>
+                                                                    {{item.AD_SOYAD}}
+                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ol>
+                                                        <p ng-show="frmYeniTalepSahibi.cmb_YENI_TALEP_SAHIBI_KULLANICI_ID.$invalid && formCalistirildiYeniTalepSahibi " class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Açıklama <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <textarea type="text" name="txtTALEP_PROJE_SAHIBI_LOG_ACIKLAMA" id="txtTALEP_PROJE_SAHIBI_LOG_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoYeniTalepSahibi.TALEP_PROJE_SAHIBI_LOG_ACIKLAMA" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz." required></textarea>
+                                                        <p ng-show="frmYeniTalepSahibi.cmb_YENI_TALEP_SAHIBI_KULLANICI_ID.$invalid && formCalistirildiYeniTalepSahibi " class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-12">
+                                                        <div class="pull-right">
+                                                            <button class=" btn btn-success " type="submit" ng-click="YeniTalepSahibiKaydet($parent.InfoYeniTalepSahibi,frmYeniTalepSahibi)">
+                                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                            </button>
+                                                            <button class=" btn btn-primary " type="button" ng-click="yeniTalepSahibiGizle()">
+                                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-form>
+                                        </div>
+
+                                        <div class="form-group" ng-show="$parent.InfoTalep.TALEP_PROJE_ID == null && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                                            <label class="col-lg-4 control-label">Talep Sahibi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_KULLANICI_ID" name="cmb_KULLANICI_ID" ng-model="$parent.InfoTalep.KULLANICI_ID"
+                                                    data-live-search="true" title="Talep Sahibi Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                        <a>
+                                                            {{item.AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frm_TalepProje.cmb_KULLANICI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-hide="kurumDurumu">
+                                            <label class="col-lg-4 control-label">Talep İlgili </label>
+                                            <div class="col-lg-6">
+
+                                                <div class="project-people" style="text-align:left;">
+                                                    <ul style="margin-left:-45px;">
+                                                        <li ng-repeat=" postIlgili in TalepProjeIlgiListesi" style="display:inline-block; float: none; margin: 0 0 0 5px;">
+                                                            <a tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}" tooltip-append-to-body="true" ng-click="modalSilmeOnayiTalepIlgili(postIlgili)" class="btn btn-sm btn-circle">
+                                                                <img id="kullaniciFoto" ng-src="{{postIlgili.AvatarBase64}}" ng-show="postIlgili.AvatarBase64" class="img-sm" />
+                                                                <img ng-src="{{postIlgili.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postIlgili.AvatarBase64" class="imageContent img-sm">
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="pull-right">
+                                                    <button class=" btn btn-info " type="button" ng-click="TalepIlgiliEkle()" tooltip="İlgili Kişi Ekle">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Talep Konu<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtTALEP_PROJE_KONU" id="txtTALEP_PROJE_KONU" style="resize:none;" ng-maxlength="255" ng-minlength="1" ng-model="$parent.InfoTalep.TALEP_PROJE_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep konu giriniz." required></textarea>
+                                                <p ng-show="frm_TalepProje.txtTALEP_PROJE_KONU.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="form-group" ng-hide="kurumDurumu">
+                                            <label class="col-lg-4 control-label">Talep Öngörülen Zaman(Saat)</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                                    <input type="text" name="txtTALEP_ONGORULEN_ZAMAN" value="09:30" ng-model="$parent.InfoTalep.TALEP_ONGORULEN_ZAMAN" clock-picker data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Talep öngörülen zaman(saat) giriniz." ng-readonly=" $storage.IS_KURUM_MUSTERI_KULLANICI">
+                                                </div>
+                                            </div>
+                                        </div>-->
+
+                                        <div class="form-group" ng-hide="kurumDurumu">
+                                            <label class="col-lg-4 control-label">Planlanan Başlangıç Tarihi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" ng-model="$parent.InfoTalep.TALEP_PLANLANAN_BASLANGIC_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" ng-required="($parent.InfoTalep.TALEP_PLANLANAN_BASLANGIC_TARIHI == null)  && ($storage.IS_KURUM_MUSTERI_KULLANICI == false)" ng-readonly=" $storage.IS_KURUM_MUSTERI_KULLANICI" />
+                                                </div>
+                                                <p ng-show="frm_TalepProje.txtTALEP_PLANLANAN_BASLANGIC_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-hide="kurumDurumu">
+                                            <label class="col-lg-4 control-label">Planlanan Bitiş Tarihi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtTALEP_PLANLANAN_BITIS_TARIHI" ng-model="$parent.InfoTalep.TALEP_PLANLANAN_BITIS_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" ng-required="($parent.InfoTalep.TALEP_PLANLANAN_BITIS_TARIHI == null)  && ($storage.IS_KURUM_MUSTERI_KULLANICI == false)" ng-readonly=" $storage.IS_KURUM_MUSTERI_KULLANICI" />
+                                                </div>
+                                                <p ng-show="frm_TalepProje.txtTALEP_PLANLANAN_BITIS_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" ng-show="(talepTipiId == 3 || talepTipiId == 6 || talepTipiId == 7)">
+                                            <label class="col-lg-4 control-label">Süreç Tipi</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" readonly ng-maxlength="255" ng-minlength="1" name="txtTALEP_PROJE_SUREC_TIPI_ADI" ng-model="$parent.InfoTalep.TALEP_PROJE_SUREC_TIPI_ADI" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="form-group" ng-if="$parent.InfoTalep.TALEP_PROJE_ID == null">
+                                            <label class="col-lg-4 control-label">Döküman</label>
+
+                                            <div class="col-lg-8">
+                                                <label tooltip="Dökuman yüklemek için tıklayınız." for="fileupload" class="btn btn-sm btn-primary">
+                                                    <input class="hide ng-isolate-scope" type="file" id="fileupload" name="fileupload" ng-file-model="$parent.InfoTalep.InfoYeniDokumanListesi" multiple accept="image/x-png, image/gif, image/jpeg, application/*">
+                                                    <i class="fa fa-cloud-upload"></i>&nbsp;Yeni Dosya Yükle
+                                                </label>
+                                                <div ng-repeat="file in $parent.InfoTalep.InfoYeniDokumanListesi">
+                                                    {{file.name}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" ng-show="talepProjeID > 0">
+                                    <div class="col-lg-12">
+
+                                        <div class="form-group" ng-show="(talepTipiId == 6 ||  talepTipiId == 7 || talepTipiId == 3) ">
+                                            <label class="col-lg-2 control-label">Süreç</label>
+                                            <div class="col-lg-10">
+                                                <div class="progress progress-striped active m-b-sm">
+                                                    <div ng-style="$parent.InfoSurecProgres.progressStyle" class="progress-bar progress-bar-success"></div>
+                                                </div>
+                                                <small>Talep sürecin <strong>{{$parent.InfoSurecProgres.progressValue}}%</strong> tamamlandı.</small>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-show="talepTipiId == 6 ||  talepTipiId == 7 || talepTipiId == 3">
+                                            <label class="col-lg-2 control-label">Akış</label>
+                                            <div class="col-lg-10">
+                                                <div class="progress progress-striped active m-b-sm">
+                                                    <div ng-style="$parent.InfoSurecAkisProgres.progressStyle" class="progress-bar progress-bar-info"></div>
+                                                </div>
+                                                <small>Talep akışın veya süreç akış <strong>{{$parent.InfoSurecAkisProgres.progressValue}}%</strong> tamamlandı.</small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <div class="ibox-content">
+                                                <label class="control-label" style="padding-bottom:5px;">Açıklama</label>
+                                                <div summernote class="summernote" id="txtTALEP_PROJE_ACIKLAMA" config="$parent.options" ng-model="$parent.InfoTalep.TALEP_PROJE_ACIKLAMA">
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </fieldset>
+
+                            <div class="row" ng-if="$parent.InfoTalep.TALEP_PROJE_ID > 0">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="col-lg-12 ">
+                                            <div class="pull-right ">
+                                                <span>
+                                                    <button class="btn btn-sm btn-success" type="submit" ng-show="($parent.InfoTalep.TALEP_DURUM_TIPI_ID == 2) && ($parent.InfoTalep.KULLANICI_ID ==$storage.KULLANICI_ID )" ng-click="TalepProjeEkleGuncelle($parent.InfoTalep,frm_TalepProje)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                    </button>
+                                                    <a class="btn btn-sm btn-primary " href="#" ui-sref="talep.talepprojelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+
+                                                    <button class="btn btn-sm btn-warning" type="button" ng-click="TalepProjeReddet()" ng-show="($parent.InfoTalep.TALEP_DURUM_TIPI_ID!=3 && $parent.InfoTalep.TALEP_DURUM_TIPI_ID != 5) && ($parent.InfoTalep.KULLANICI_ID==$storage.KULLANICI_ID || $parent.InfoTalep.TALEP_ATAYAN_KULLANICI_ID == $storage.KULLANICI_ID)" tooltip="">
+                                                        <i class="fa fa-exclamation"></i>&nbsp;&nbsp;<span class="bold">Reddet</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-warning" type="button" ng-click="TalepProjeReddet()" ng-show="InfoTalep.TALEP_DURUM_TIPI_ID == 5" tooltip="">
+                                                        <i class="fa fa-exclamation"></i>&nbsp;&nbsp;<span class="bold">Neden Reddedildi?</span>
+                                                    </button>
+                                                    <button ng-show="($parent.InfoTalep.TALEP_DURUM_TIPI_ID ==4 && $parent.InfoTalep.KULLANICI_ID==$storage.KULLANICI_ID)" class="btn btn-sm btn-info" type="button" ng-click="TalepProjeOnaylama($parent.InfoTalepOnay.TALEP_DURUM_TIPI_ID =2)" tooltip="">
+                                                        <i class="fa fa-th-large"></i>&nbsp;&nbsp;<span class="bold ng-binding">Başlat</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger" type="button" ng-click="TalepProjeOnaylama($parent.InfoTalepOnay.TALEP_DURUM_TIPI_ID =3)" ng-show="$parent.InfoTalep.TALEP_DURUM_TIPI_ID == 2 && $parent.InfoTalep.KULLANICI_ID==$storage.KULLANICI_ID && (!($parent.InfoTalep.TALEP_TIPI_ID == 3 || $parent.InfoTalep.TALEP_TIPI_ID == 6 || $parent.InfoTalep.TALEP_TIPI_ID == 7) || (($parent.InfoTalep.TALEP_TIPI_ID == 3 || $parent.InfoTalep.TALEP_TIPI_ID == 6 || $parent.InfoTalep.TALEP_TIPI_ID == 7) && $parent.InfoTalep.TALEP_PROJE_SUREC_TIPI_ID == 5 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 3 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_SUREC_LOG_ID == $parent.InfoTalep.EN_SON_TALEP_SUREC_LOG_ID))" tooltip="">
+                                                        <i class="fa fa-times"></i>&nbsp;&nbsp;<span class="bold">Kapat</span>
+                                                    </button>
+                                                </span>
+                                                <span ng-show="($parent.InfoTalep.TALEP_TIPI_ID == 3 || $parent.InfoTalep.TALEP_TIPI_ID == 6 || $parent.InfoTalep.TALEP_TIPI_ID == 7) && !($parent.InfoTalep.TALEP_DURUM_TIPI_ID == 5 || $parent.InfoTalep.TALEP_DURUM_TIPI_ID == 3 ||  $parent.InfoTalep.TALEP_DURUM_TIPI_ID == 4) && !($parent.InfoTalep.TALEP_PROJE_SUREC_TIPI_ID == 5 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 3 && ($parent.InfoTalep.YENI_SUREC_AKIS_TIPI_SUREC_LOG_ID == $parent.InfoTalep.EN_SON_TALEP_SUREC_LOG_ID)) &&  $parent.InfoTalep.KULLANICI_ID==$storage.KULLANICI_ID">
+                                                    <button class="btn btn-sm btn-info" type="button" ng-hide="($parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 2)" ng-click="YeniTalepSurecAkisKaydet(InfoYeniTalepSurecAkis, null, null, InfoYeniTalepSurecAkis.YENI_SUREC_AKIS_TIPI_ID = 2)" tooltip="Süreci Başlat">
+                                                        <i class="fa fa-play"></i>&nbsp;&nbsp;<span class="bold ng-binding">S. Başlat</span>
+                                                    </button>
+
+                                                    <!--<button class="btn btn-sm btn-info" ng-show="$parent.InfoTalep.EN_SON_TALEP_SUREC_LOG_ID > 0 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 2" type="button" ng-click="YeniTalepSurecAkisKaydet(InfoYeniTalepSurecAkis, InfoYeniTalepSurecAkis.YENI_SUREC_AKIS_TIPI_ID = 3)" tooltip="">
+                                                        <i class="fa fa-th-large"></i>&nbsp;&nbsp;<span class="bold ng-binding">S. Tamamla</span>
+                                                    </button>-->
+                                                    <button class="btn btn-sm btn-info" ng-show="$parent.InfoTalep.EN_SON_TALEP_SUREC_LOG_ID > 0 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 2" type="button" ng-click="SurecAkisTamamla()" tooltip="Süreci Tamamla">
+                                                        <i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;<span class="bold ng-binding">S. Tamamla</span>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-info" ng-show="$parent.InfoTalep.EN_SON_TALEP_SUREC_LOG_ID > 0 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 2" type="button" ng-click="YeniTalepSurecAkisKaydet(InfoYeniTalepSurecAkis,null, null, InfoYeniTalepSurecAkis.YENI_SUREC_AKIS_TIPI_ID = 1)" tooltip="Süreci Beklet">
+                                                        <i class="fa fa-pause"></i>&nbsp;&nbsp;<span class="bold ng-binding">S. Beklet</span>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-info" ng-show="$parent.InfoTalep.EN_SON_TALEP_SUREC_LOG_ID > 0 && $parent.InfoTalep.YENI_SUREC_AKIS_TIPI_ID == 2" type="button" ng-click="TalepProjeSurecAkisRed()" tooltip="Süreci Reddet">
+                                                        <i class="fa fa-rotate-left"></i>&nbsp;&nbsp;<span class="bold ng-binding">S. Reddet</span>
+                                                    </button>
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" ng-show="$parent.InfoTalep.TALEP_PROJE_ID == null && talepTipiId != 1 && talepTipiId != 2 && talepTipiId != 3">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class=" pull-right">
+                                            <button class="btn btn-sm btn-success" type="submit" ng-hide="$parent.InfoTalep.TALEP_DURUM_TIPI_ID == 3" ng-click="TalepProjeEkleGuncelle($parent.InfoTalep,frm_TalepProje)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <buttton class="btn btn-sm btn-primary " ui-sref="talep.talepprojelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></buttton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" ng-if="$parent.InfoTalep.TALEP_PROJE_ID == null  && talepTipiId == 2 && $storage.IS_KURUM_MUSTERI_KULLANICI">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class=" pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeEkleGuncelle($parent.InfoTalep, frm_TalepProje)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary " ui-sref="talep.talepprojelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br /> <br /><br />
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="ibox float-e-margins" ng-if="talepTipiId == 1 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-suitcase"></i>  DFI Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen DFI bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Süreç<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_SUREC_ID" name="cmb_SUREC_ID" ng-model="$parent.InfoTalep.InfoDfi.SUREC_ID"
+                                                data-live-search="true" title="Süreç Seçiniz" data-size="5" ng-required="talepTipiId == 1 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in SurecListesi" deep-watch="true" data-value="item.SUREC_ID">
+                                                    <a>
+                                                        {{item.SUREC_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_SUREC_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">DFI Uygunsuzluk Neden Açıklama</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoTalep.InfoDfi.TALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI uygunsuz neden açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">DFI Tekrar Engelleme Faaliyet Açıklama</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoTalep.InfoDfi.TALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI tekrar engelleme faaliyet açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kök Neden</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtKOK_NEDEN" style="resize:none;" ng-minlength="1" ng-model="$parent.InfoTalep.InfoDfi.KOK_NEDEN" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI Kök neden giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class=" pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeEkleGuncelle($parent.InfoTalep,frm_TalepProje)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary " ui-sref="talep.talepprojelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins" ng-if="talepTipiId == 2 && $parent.InfoTalep.TALEP_PROJE_ID == null && $storage.IS_KURUM_MUSTERI_KULLANICI == false">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-suitcase"></i> Problem Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen Problem bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Etki<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ETKI_ID" name="cmb_PROJE_ETKI_ID" ng-model="$parent.InfoTalep.InfoProblem.PROJE_ETKI_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData($parent.InfoTalep.InfoProblem.PROJE_ETKI_ID, $parent.InfoTalep.InfoProblem.PROJE_ACILIYET_ID)"
+                                                data-live-search="true" title="Proje Etki Seçiniz" data-size="5" ng-required="talepTipiId == 2 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in ProjeEtkiListesi" deep-watch="true" data-value="item.PROJE_ETKI_ID">
+                                                    <a>
+                                                        {{item.PROJE_ETKI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_PROJE_ETKI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Aciliyet<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ACILIYET_ID" name="cmb_PROJE_ACILIYET_ID" ng-model="$parent.InfoTalep.InfoProblem.PROJE_ACILIYET_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData($parent.InfoTalep.InfoProblem.PROJE_ETKI_ID, $parent.InfoTalep.InfoProblem.PROJE_ACILIYET_ID)"
+                                                data-live-search="true" title="Proje Aciliyet Seçiniz" data-size="5" ng-required="talepTipiId== 2 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in ProjeAciliyetListesi" deep-watch="true" data-value="item.PROJE_ACILIYET_ID">
+                                                    <a>
+                                                        {{item.PROJE_ACILIYET_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_PROJE_ACILIYET_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Öncelik Değeri <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtPROJE_ACILIYET_ETKI_SONUC_ID" ng-model="$parent.InfoProblemHesap.PROJE_ACILIYET_ETKI_SONUC_ADI" class="formEkleDuzenleInput form-control" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Sınıflandırma Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" name="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" ng-model="$parent.InfoTalep.InfoProblem.TALEP_SINIFLANDIRMA_TIPI_ID"
+                                                data-live-search="true" title="Sınıflandırma Tipini Seçiniz" data-size="5" ng-required="talepTipiId == 2 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in TalepSiniflandirmaListesi" deep-watch="true" data-value="item.TALEP_SINIFLANDIRMA_TIPI_ID">
+                                                    <a>
+                                                        {{item.TALEP_SINIFLANDIRMA_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_TALEP_SINIFLANDIRMA_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class=" row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Problem Açıklama</label>
+                                        <div class="col-sm-10">
+                                            <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_PROBLEM_ACIKLAMA" style="resize:none;" ng-model="$parent.InfoTalep.InfoProblem.TALEP_PROJE_TALEP_TIPI_PROBLEM_ACIKLAMA" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Problem açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class=" pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeEkleGuncelle($parent.InfoTalep, frm_TalepProje)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary " ui-sref="talep.talepprojelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox float-e-margins" ng-if="talepTipiId == 3 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-suitcase"></i>  Değişiklik Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen Değişiklik bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Etki<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ETKI_ID" name="cmb_PROJE_ETKI_ID" ng-model="$parent.InfoTalep.InfoDegisiklik.PROJE_ETKI_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData($parent.InfoTalep.InfoDegisiklik.PROJE_ETKI_ID, $parent.InfoTalep.InfoDegisiklik.PROJE_ACILIYET_ID)"
+                                                data-live-search="true" title="Proje Etki Seçiniz" data-size="5" ng-required="talepTipiId == 3 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in ProjeEtkiListesi" deep-watch="true" data-value="item.PROJE_ETKI_ID">
+                                                    <a>
+                                                        {{item.PROJE_ETKI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_PROJE_ETKI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Aciliyet<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ACILIYET_ID" name="cmb_PROJE_ACILIYET_ID" ng-model="$parent.InfoTalep.InfoDegisiklik.PROJE_ACILIYET_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData($parent.InfoTalep.InfoDegisiklik.PROJE_ETKI_ID, $parent.InfoTalep.InfoDegisiklik.PROJE_ACILIYET_ID)"
+                                                data-live-search="true" title="Proje Aciliyet Seçiniz" data-size="5" ng-required="talepTipiId == 3 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in ProjeAciliyetListesi" deep-watch="true" data-value="item.PROJE_ACILIYET_ID">
+                                                    <a>
+                                                        {{item.PROJE_ACILIYET_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_PROJE_ACILIYET_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Öncelik Değeri <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtPROJE_ACILIYET_ETKI_SONUC_ADI" ng-model="$parent.InfoDegisiklikHesap.PROJE_ACILIYET_ETKI_SONUC_ADI " class="formEkleDuzenleInput form-control" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Sınıflandırma Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" name="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" ng-model="$parent.InfoTalep.InfoDegisiklik.TALEP_SINIFLANDIRMA_TIPI_ID"
+                                                data-live-search="true" title="Sınıflandırma Tipini Seçiniz" data-size="5" ng-required="talepTipiId == 3 && $parent.InfoTalep.TALEP_PROJE_ID == null">
+                                                <li nya-bs-option="item in TalepSiniflandirmaListesi" deep-watch="true" data-value="item.TALEP_SINIFLANDIRMA_TIPI_ID">
+                                                    <a>
+                                                        {{item.TALEP_SINIFLANDIRMA_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_TalepProje.cmb_TALEP_SINIFLANDIRMA_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Değişiklik Açıklama</label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DEGISIKLIK_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoTalep.InfoDegisiklik.TALEP_PROJE_TALEP_TIPI_DEGISIKLIK_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Değişiklik açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class=" pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeEkleGuncelle($parent.InfoTalep, frm_TalepProje)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary " ui-sref="talep.talepprojelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="col-lg-4" ng-if="talepProjeID > 0">
+            <fieldset ng-disabled="talepKapaliSagTaraf">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5 class="panelHeaderEkleDuzenle">
+                                    &nbsp; <i class="fa fa-suitcase"></i>  Açıklama Ekle
+                                </h5>
+                                <div class="ibox-tools">
+                                    <small class="text-danger"> * işareti alan zorunludur.</small>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form method="get" name="frmTalepAciklama" id="frmTalepAciklama" class="form-horizontal" accessible-form>
+                                    <div class="formEkleDuzenleInputs">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-lg-12">Açıklama <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-12">
+                                                        <textarea type="text" name="txtTALEP_PROJE_ACIKLAMA_ACIKLAMA" id="txtTALEP_PROJE_ACIKLAMA_ACIKLAMA" style="resize:none;" ng-minlength="1" ng-model="InfoTalepAciklama.TALEP_PROJE_ACIKLAMA_ACIKLAMA" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" required placeholder="Açıklama giriniz."></textarea>
+                                                        <p ng-show="frmTalepAciklama.txtTALEP_PROJE_ACIKLAMA_ACIKLAMA.$invalid && formCalistirildiTalepAciklama" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-actions">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeAciklamaEkleGuncelle(InfoTalepAciklama,frmTalepAciklama)">
+                                                            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <hr />
+                                <div class="client-detail" style="height:200px;">
+                                    <div class="full-height-scroll" full-scroll>
+
+                                        <strong>Açıklamalar</strong>
+                                        <div id="vertical-timeline" class="vertical-container dark-timeline" ng-if="TalepProjeAciklamaListesi.length > 0">
+                                            <div class="vertical-timeline-block" ng-repeat="postTalepAciklama in TalepProjeAciklamaListesi">
+                                                <div class="vertical-timeline-icon gray-bg">
+                                                    <a href="" tooltip="{{postTalepAciklama.KULLANICI_AD_SOYAD}}" class="pull-left project-people">
+                                                        <img id="kullaniciFoto" ng-src="{{postTalepAciklama.AvatarBase64}}" ng-show="postTalepAciklama.AvatarBase64" class="img-sm" />
+                                                        <img ng-src="{{postTalepAciklama.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postTalepAciklama.AvatarBase64" class="imageContent img-sm img-circle">
+                                                    </a>
+                                                </div>
+                                                <div class="vertical-timeline-content">
+                                                    <div class="row">
+                                                        <span style="margin-right:10px;" class="pull-right"> <span class="label label-primary">{{postTalepAciklama.TALEP_PROJE_YENI_SUREC_TIPI_ADI}}</span> </span>
+                                                        <!--<div class="pull-right"><b></b></div>-->
+
+                                                    </div>
+                                                    <p style="white-space: pre-wrap;">
+                                                        {{postTalepAciklama.TALEP_PROJE_ACIKLAMA_ACIKLAMA}}
+                                                    </p>
+                                                    <span class="vertical-date small text-muted"> {{postTalepAciklama.KAYIT_TARIHI | moment3}} </span>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <pagination ng-model="AramaKriterTalepAciklama.SayfaNo" ng-change="TalepProjeAciklamaGetData(AramaKriterTalepAciklama)" total-items="toplamKayitSayisiTalepAciklama"
+                                                            items-per-page="AramaKriterTalepAciklama.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </div>
+
+                                        </div>
+                                        <div class="alert-Emfa alert alert-danger  animated bounceIn" ng-if="TalepProjeAciklamaListesi.length == 0 || TalepProjeAciklamaListesi == null">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                            &nbsp;Kayıt <strong>bulunmamaktadır.</strong>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5 class="panelHeaderEkleDuzenle">
+                                    &nbsp; <i class="fa fa-suitcase"></i>  Talebi Bağla
+                                </h5>
+                                <div class="ibox-tools">
+                                    <small class="text-danger"> * işareti alan zorunludur.</small>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <form method="get" name="frmBagliTalep" id="frmBagliTalep" class="form-horizontal" accessible-form>
+                                    <div class="formEkleDuzenleInputs">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-lg-6">Talep Konu <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-6">
+                                                        <div class="pull-right">
+                                                            <button class=" btn btn-info " type="button" ng-click="BagliTalepSec()">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+                                                            <button class=" btn btn-danger " type="button" ng-click="BagliTalepTemizle()">
+                                                                <i class="fa fa-eraser"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <textarea type="text" name="txtUST_TALEP_PROJE_KONU" id="txtUST_TALEP_PROJE_KONU" style="resize:none;" ng-model="InfoBagliTalepYeniKayit.UST_TALEP_PROJE_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" required readonly></textarea>
+
+                                                        <p ng-show="frmBagliTalep.txtUST_TALEP_PROJE_KONU.$invalid  && formCalistirildiBagliTalep" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-actions">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-sm btn-success" type="button" ng-click="TalepBagliOlduguTaleplerEkleGuncelle(InfoBagliTalepYeniKayit,frmBagliTalep)">
+                                                            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-suitcase"></i> Doküman Ekle
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti alan zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <fieldset ng-disabled="talepKapaliSagTaraf">
+                                <form method="get" name="frmTalepDokuman" id="frmTalepDokuman" class="form-horizontal" accessible-form>
+                                    <div class="formEkleDuzenleInputs">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-lg-12">Döküman<span class="text-danger">*</span></label>
+
+                                                    <div class="col-lg-12">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="$parent.InfoTalepDokuman.TALEP_PROJE_DOKUMAN_ADI" name="txtDosyaAdi" readonly="" required="">
+                                                            <div class="input-group-btn">
+                                                                <label ng-show="!$parent.InfoTalepDokuman.TALEP_PROJE_DOKUMAN_ADI" for="fileupload" class="btn  btn-primary" tooltip="Yeni dosya yüklemek için tıklayınız." tooltip-append-to-body="true">
+                                                                    <input class="hide ng-isolate-scope" type="file" id="fileupload" name="fileupload" fileread="$scope.$parent.InfoTalepDokuman.TALEP_DOKUMAN_DOKUMAN_DOSYA_BOYUTU" accept="image/x-png, image/gif, image/jpeg, application/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" required="" multiple>
+                                                                    <i class="fa fa-cloud-upload"></i>&nbsp;Dosya Yükle
+                                                                </label>
+                                                                <button ng-show="$parent.InfoTalepDokuman.TALEP_PROJE_DOKUMAN_ADI" class="btn  btn-danger ng-hide" type="button" ng-click="talepDokumanSifirla()" tooltip="Dosya yüklemekten vazgeçmek ve dosya bilgilerini sıfırlamak için tıklayınız." tooltip-append-to-body="true">
+                                                                    <i class="fa fa-eraser"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <p ng-show="frmTalepDokuman.txtDosyaAdi.$invalid &amp;&amp; formCalistirildiTalepDosya" class="validation ng-hide">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-actions">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeDokumanEkleGuncelle(InfoTalepDokuman,frmTalepDokuman)">
+                                                            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </fieldset>
+                            <hr />
+                            <h3>Talep Dosyaları</h3>
+                            <div style="height: 200px;" ng-if="TalepProjeDokumanListesi.length > 0">
+                                <div class="full-height-scroll" full-scroll>
+                                    <ul class="list-unstyled file-list">
+                                        <li ng-repeat="postTalepDokuman in TalepProjeDokumanListesi">
+                                            <sa-dosyaindir tablo="TALEP_PROJE_DOKUMAN" dosyaid="postTalepDokuman.TALEP_PROJE_DOKUMAN_ID" rel="İndir">{{postTalepDokuman.TALEP_PROJE_DOKUMAN_ADI}}</sa-dosyaindir>
+                                            
+                                            <div class="talep-dokuman-sil pull-right">
+                                                <fieldset ng-disabled="talepKapaliSagTaraf">
+                                                    <button class="close toast-close-button fileinput-exists " data-dismiss="fileinput" style="float: none;" tooltip="Sil" ng-click="modalSilmeOnayiTalepDokuman(postTalepDokuman)"><i class="fa fa-remove"></i></button>
+                                                </fieldset>
+                                            </div>
+                                               
+                                                <div class=" pull-right">
+                                                    <button class="close toast-info fileinput-exist " ng-if="postTalepDokuman.TALEP_DOKUMAN_DOKUMAN_DOSYA_TIPI == 'image/jpeg' || postTalepDokuman.TALEP_DOKUMAN_DOKUMAN_DOSYA_TIPI == 'image/png' || postTalepDokuman.TALEP_DOKUMAN_DOKUMAN_DOSYA_TIPI == 'application/pdf'" data-dismiss="fileinput" style="float: none; margin-top:-2px;" ng-click="TalepDokumanGoster(postTalepDokuman.TALEP_PROJE_DOKUMAN_ID)"><i class="fa fa-print"></i></button>
+                                                </div>
+
+</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn" ng-if="TalepProjeDokumanListesi.length == 0 || TalepProjeDokumanListesi == null">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Kayıt <strong>bulunmamaktadır.</strong>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-users"></i> Toplantı
+                            </h5>
+                        </div>
+
+
+                        <div class="ibox-content text-center" ng-if="$parent.InfoTalep.TOPLANTI_ID > 0">
+
+                            <h3>{{$parent.InfoTalep.TOPLANTI_ADI}}</h3>
+                            <span class="small">
+                                <strong>Karar: </strong> {{$parent.InfoTalep.TOPLANTI_GUNDEM_KARAR}}
+                            </span>
+                            <div class="m-t text-right">
+                                <a ng-click="ToplantiAc()" class="btn btn-xs btn-outline btn-primary">Toplantı <i class="fa fa-long-arrow-right"></i> </a>
+                            </div>
+                        </div>
+                        <div class="ibox-content" ng-if="$parent.InfoTalep.TOPLANTI_ID == 0">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Toplantı bilgileri <strong>bulunmamaktadır.</strong>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--Kontrol Edildi.-->
+
+        </div>
+    </div>
+    <div class="row" ng-if="talepProjeID > 0">
+        <div class="col-lg-8">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="clients-list">
+                        <ul class="nav nav-tabs">
+                            <li ng-class="{'active' : tabAltMenu == 1}"><a class="emfa-talep-kart-menu" ng-click="[tabAltMenu = 1, TalepProjeGenelLogGetData()]" ng-init="tabAltMenu = 1"><i class="fa fa-user"></i>Hepsi</a></li>
+                            <li ng-class="{'active' : tabAltMenu == 3}"><a class="emfa-talep-kart-menu" ng-click="[tabAltMenu = 3, BagliMenuSec()]"><i class="fa fa-briefcase"></i>Bağlı Talep</a></li>
+                            <li ng-class="{'active' : tabAltMenu == 4}"><a class="emfa-talep-kart-menu" ng-click="[tabAltMenu = 4, SurecMenuSec()]"><i class="fa fa-user"></i>Süreç Log</a></li>
+                            <li ng-class="{'active' : tabAltMenu == 5}"><a class="emfa-talep-kart-menu" ng-click="[tabAltMenu = 5, SahibiMenuSec()]"><i class="fa fa-user"></i>Sahibi Log</a></li>
+                            <li ng-class="{'active' : tabAltMenu == 6}"><a class="emfa-talep-kart-menu" ng-click="[tabAltMenu = 6, TipMenuSec()]"><i class="fa fa-user"></i>Tip Log</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active" ng-show="tabAltMenu == 1">
+                                <br />
+                                <div class="full-height-scroll" full-scroll>
+                                    <div class="feed-element" ng-repeat="postTalepGenelLog in TalepProjeGenelLogListesi">
+                                        <a href="" class="pull-left project-people">
+                                            <img id="kullaniciFoto" ng-src="{{postTalepGenelLog.KULLANICI_AvatarBase64}}" ng-show="postTalepGenelLog.KULLANICI_AvatarBase64" class="img-sm" />
+                                            <img ng-src="{{postTalepGenelLog.KULLANICI_CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postTalepGenelLog.KULLANICI_AvatarBase64" class="imageContent img-sm img-circle">
+                                        </a>
+
+                                        <div class="media-body ">
+                                            <small class="pull-right">{{postTalepGenelLog.KAYIT_TARIHI | moment2}}</small>
+                                            <strong>{{postTalepGenelLog.KULLANICI_ADSOYAD}}</strong>&nbsp;<span ng-bind-html="postTalepGenelLog.ACIKLAMA"></span><br>
+                                            <small class="text-muted">{{postTalepGenelLog.KAYIT_TARIHI | moment3}}</small>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <pagination ng-model="AramaKriterGenelLog.SayfaNo" ng-change="TalepProjeGenelLogGetData(AramaKriterGenelLog)" total-items="toplamKayitSayisiTalepGenelLog"
+                                                    items-per-page="AramaKriterGenelLog.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div id="tab-3" class="tab-pane active" ng-show="tabAltMenu == 3">
+                                <br />
+                                <div class="full-height-scroll" full-scroll ng-if="TalepBagliOlduguUstTaleplerListesi.length > 0">
+                                    <table class="table table-striped table-hover">
+                                        <tbody>
+                                            <tr ng-repeat="postTalepBagli in TalepBagliOlduguUstTaleplerListesi">
+                                                <td>
+                                                    <span class="text-navy"><i class="fa fa-level-down" ng-show="talepProjeID == postTalepBagli.TALEP_PROJE_ID"></i></span>
+                                                    <span class="text-warning"><i class="fa fa-level-up" ng-show="talepProjeID == postTalepBagli.UST_TALEP_PROJE_ID"></i></span>
+                                                </td>
+                                                <td><a ng-click="BagliTalepBilgisi(postTalepBagli)" class="client-link">{{talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_PROJE_KONU : postTalepBagli.ALT_TALEP_PROJE_KONU }}</a></td>
+                                                <td>{{talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_TIPI_ADI : postTalepBagli.ALT_TALEP_TIPI_ADI}}</td>
+                                                <td class="client-avatar">
+                                                    <a href="" class="pull-left project-people">
+
+                                                        <img id="kullaniciFoto" ng-src="{{talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_SAHIBI_AvatarBase64 : postTalepBagli.ALT_TALEP_SAHIBI_AvatarBase64 }}" ng-show="talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_SAHIBI_AvatarBase64 : postTalepBagli.ALT_TALEP_SAHIBI_AvatarBase64" class="img-sm" />
+                                                        <img ng-src="{{talepProjeID == postTalepBagli.TALEP_PROJE_ID ? (postTalepBagli.UST_TALEP_SAHIBI_CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png') : postTalepBagli.ALT_TALEP_SAHIBI_CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_SAHIBI_AvatarBase64 : postTalepBagli.ALT_TALEP_SAHIBI_AvatarBase64" class="imageContent img-sm img-circle">
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_SAHIBI_AD_SOYAD : postTalepBagli.ALT_TALEP_SAHIBI_AD_SOYAD}}
+                                                </td>
+                                                <td class="client-status"><span class="label label-primary">{{talepProjeID == postTalepBagli.TALEP_PROJE_ID ? postTalepBagli.UST_TALEP_DURUM_TIPI_ADI : postTalepBagli.ALT_TALEP_DURUM_TIPI_ADI}}</span></td>
+                                                <td>
+                                                    <a ng-click="modalSilmeOnayiTalepBagli(postTalepBagli)" ng-disabled="talepKapaliDurumu" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i> <!--Sil--> </a>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-center">
+                                                    <pagination ng-model="AramaKriterTalepBagli.SayfaNo" ng-change="TalepBagliOlduguTaleplerGetData(AramaKriterTalepBagli)" total-items="toplamKayitSayisiTalepBagli"
+                                                                items-per-page="AramaKriterTalepBagli.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                </td>
+                                            </tr>
+
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn" ng-if="TalepBagliOlduguUstTaleplerListesi.length == 0 || TalepBagliOlduguUstTaleplerListesi == null">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    &nbsp;Kayıt <strong>bulunmamaktadır.</strong>
+
+                                </div>
+                            </div>
+                            <div id="tab-4" class="tab-pane active" ng-show="tabAltMenu == 4">
+                                <br />
+                                <div class="full-height-scroll" full-scroll ng-if="TalepProjeSurecLogListesi.length > 0">
+                                    <div class="project-list table-emfa">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Durumu</th>
+                                                    <th>Önceki Süreç</th>
+                                                    <th>Yeni Süreç</th>
+                                                    <th></th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="postTalepSurecLog in TalepProjeSurecLogListesi | filter:ignoreTurkish">
+                                                <tr>
+                                                    <td>
+                                                        <span class="label label-primary" ng-show="postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ID == 1"><i class="fa fa-check"></i> {{postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ADI}}</span>
+                                                        <span class="label label-warning" ng-show="postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ID == 2"><i class="fa fa-check"></i> {{postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ADI}}</span>
+                                                        <span class="label label-danger" ng-show="postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ID == 3"><i class="fa fa-check"></i> {{postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ADI}}</span>
+                                                    </td>
+                                                    <td>
+                                                        {{postTalepSurecLog.TALEP_PROJE_ONCEKI_SUREC_TIPI_ADI}}
+                                                    </td>
+                                                    <td>
+                                                        {{postTalepSurecLog.TALEP_PROJE_YENI_SUREC_TIPI_ADI}}
+                                                    </td>
+
+                                                    <!--<td>
+                                                        <p class="small">
+                                                            {{postTalepSurecLog.TALEP_PROJE_SUREC_LOG_ACIKLAMA}}
+                                                        </p>
+                                                    </td>-->
+                                                    <td>
+                                                        <a ng-click="nedenDogrunlanmadiSurecLog = !nedenDogrunlanmadiSurecLog" ng-hide="postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ID == 1 || postTalepSurecLog.TALEP_PROJE_SUREC_LOG_KONTROL_SONUC_ID == 2" ng-class="{ 'btn-danger': nedenDogrunlanmadiSurecLog, 'btn-info' : !nedenDogrunlanmadiSurecLog}" class="btn btn-sm" tooltip="Neden Doğrulanmadi" tooltip-append-to-body="true"><i class="fa fa-eye"></i></a>
+                                                    </td>
+                                                    <td>
+                                                        <a ng-click="surecDogrulamaKriterGrup(AramaKriterTalepDogrulama.TALEP_PROJE_SUREC_LOG_ID = postTalepSurecLog.TALEP_PROJE_SUREC_LOG_ID)" class="btn btn-sm btn-info" tooltip="Doğrulama Grupları Göster" tooltip-append-to-body="true"><i class="fa fa-file-archive-o"></i></a>
+                                                    </td>
+                                                </tr>
+                                                <tr ng-show="nedenDogrunlanmadiSurecLog">
+                                                    <td></td>
+                                                    <td colspan="2"><b>Neden Doğrulanmadi</b></td>
+                                                    <td colspan="4">
+                                                        <p>{{postTalepSurecLog.TALEP_PROJE_SUREC_LOG_NEDEN_DOGRULANMADI}}</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10" class="text-center">
+                                                        <pagination ng-model="AramaKriterTalepSurecLog.SayfaNo" ng-change="TalepProjeSurecLogGetData(AramaKriterTalepSurecLog)" total-items="toplamKayitSayisiSurecLog"
+                                                                    items-per-page="AramaKriterTalepSurecLog.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                    </td>
+                                                </tr>
+
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn" ng-if="TalepProjeSurecLogListesi.length == 0 || TalepProjeSurecLogListesi == null">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    &nbsp;Kayıt <strong>bulunmamaktadır.</strong>
+
+                                </div>
+                            </div>
+                            <div id="tab-5" class="tab-pane active" ng-show="tabAltMenu == 5">
+                                <br />
+                                <div class="full-height-scroll" full-scroll>
+
+                                    <div class="feed-element" ng-repeat="postTalepSahibiLog in TalepProjeSahibiLogListesi">
+                                        <a href="" class="pull-left project-people">
+                                            <img id="kullaniciFoto" ng-src="{{postTalepSahibiLog.AvatarBase64}}" ng-show="postTalepSahibiLog.AvatarBase64" class="img-sm" />
+                                            <img ng-src="{{postTalepSahibiLog.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postTalepSahibiLog.AvatarBase64" class="imageContent img-sm img-circle">
+                                        </a>
+
+                                        <div class="media-body ">
+                                            <small class="pull-right">{{postTalepSahibiLog.KAYIT_TARIHI | moment2}}</small>
+                                            <strong>{{postTalepSahibiLog.TALEP_PROJE_SAHIBI_LOG_DEGISIKLIK_YAPAN_KULLANICI_ADI}}</strong> tarafından <strong>{{postTalepSahibiLog.TALEP_PROJE_SAHIBI_LOG_ONCEKI_ATAYAN_KULLANICI_ADI}}</strong> talep sahibini <strong>{{postTalepSahibiLog.TALEP_PROJE_SAHIBI_LOG_ONCEKI_ATANAN_KULLANICI_ADI}}</strong> değiştirildi. <br>
+                                            <small class="text-muted">{{postTalepSahibiLog.KAYIT_TARIHI | moment3}}</small>
+                                            <div class="well">
+                                                {{postTalepSahibiLog.TALEP_PROJE_SAHIBI_LOG_ACIKLAMA}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <pagination ng-model="AramaKriterTalepSahibiLog.SayfaNo" ng-change="TalepProjeSahibiLogGetData(AramaKriterTalepSahibiLog)" total-items="toplamKayitSayisiTalepSahibiLog"
+                                                    items-per-page="AramaKriterTalepSahibiLog.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-6" class="tab-pane active" ng-show="tabAltMenu == 6">
+                                <br />
+                                <div class="full-height-scroll" full-scroll>
+                                    <div class="feed-element" ng-repeat="postTalepTipiLog in TalepProjeTalepTipiLogListesi">
+                                        <a href="" class="pull-left project-people">
+                                            <img id="kullaniciFoto" ng-src="{{postTalepTipiLog.AvatarBase64}}" ng-show="postTalepTipiLog.AvatarBase64" class="img-sm" />
+                                            <img ng-src="{{postTalepTipiLog.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postTalepTipiLog.AvatarBase64" class="imageContent img-sm img-circle">
+                                        </a>
+
+                                        <div class="media-body ">
+                                            <small class="pull-right">{{postTalepTipiLog.KAYIT_TARIHI | moment2}}</small>
+                                            <strong>{{postTalepTipiLog.DEGISIKLIK_YAPAN_KULLANICI_AD_SOYAD}}</strong> tarafından <strong>{{postTalepTipiLog.ONCEKI_TALEP_TIPI_ADI}}</strong> talep tipinin <strong>{{postTalepTipiLog.YENI_TALEP_TIPI_ADI}}</strong> değiştirildi. <br>
+                                            <small class="text-muted">{{postTalepTipiLog.KAYIT_TARIHI | moment3}}</small>
+                                            <div class="well">
+                                                {{postTalepTipiLog.ACIKLAMA}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <pagination ng-model="AramaKriterTalepTipiLog.SayfaNo" ng-change="TalepProjeTalepTipiLogGetData(AramaKriterTalepTipiLog)" total-items="toplamKayitSayisiTalepTipiLog"
+                                                    items-per-page="AramaKriterTalepTipiLog.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4" ng-show="InfoBagliTalep.TALEP_PROJE_ID > 0">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="tab-content">
+                        <div id="contact-3" class="tab-pane active">
+                            <div class="row m-b-lg">
+                                <div class="col-lg-4 text-center">
+                                    <h2>{{InfoBagliTalep.TALEP_SAHIBI_AD_SOYAD}}</h2>
+                                    <div class="m-b-sm">
+                                        <img id="kullaniciFoto" ng-src="{{InfoBagliTalep.TALEP_SAHIBI_AvatarBase64}}" ng-show="InfoBagliTalep.TALEP_SAHIBI_AvatarBase64" class="img-sm" />
+                                        <img ng-src="{{InfoBagliTalep.TALEP_SAHIBI_CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="InfoBagliTalep.TALEP_SAHIBI_AvatarBase64" class="imageContent img-sm img-circle">
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-8">
+                                    <strong>
+                                        Talep Konu
+                                    </strong>
+                                    <p>
+                                        {{InfoBagliTalep.TALEP_PROJE_KONU}}
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div ng-show="InfoBagliTalep.TALEP_TIPI_ID == 3 || InfoBagliTalep.TALEP_TIPI_ID == 6 || InfoBagliTalep.TALEP_TIPI_ID == 7">
+                                <small>Sürecin {{InfoBagliTalep.SurecBar}}% tamamlanmıştır.</small>
+                                <div class="progress progress-mini">
+                                    <div ng-style="InfoBagliTalep.SurecBarStyle" class="progress-bar"></div>
+                                </div>
+                                <div>
+                                    <small>Süreç akışın {{InfoBagliTalep.SurecAkisBar}}% tamamlanmıştır.</small>
+                                    <div class="progress progress-mini">
+                                        <div ng-style="InfoBagliTalep.SurecAkisBarStyle" class="progress-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="client-detail">
+                                <div class="full-height-scroll" full-scroll>
+                                    <strong>İlgili Kişiler</strong>
+                                    <div ng-show="TalepProjeIlgiliBagliListesi.length > 0 " class="project-people" style="text-align:left;">
+                                        <ul style="margin-left:-45px;">
+                                            <li ng-repeat=" postBagliTalepIlgili in TalepProjeIlgiliBagliListesi" style="display:inline-block; float: none; margin: 0 0 0 5px;">
+                                                <a tooltip="{{postBagliTalepIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}" tooltip-append-to-body="true" class="btn btn-sm btn-circle">
+                                                    <img id="kullaniciFoto" ng-src="{{postBagliTalepIlgili.AvatarBase64}}" ng-show="postBagliTalepIlgili.AvatarBase64" class="img-sm" />
+                                                    <img ng-src="{{postBagliTalepIlgili.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postBagliTalepIlgili.AvatarBase64" class="imageContent img-sm">
+                                                </a>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                    <hr />
+                                    <strong>Süreç Aşamaları</strong>
+                                    <div ng-show="BagliTalepAciklamaListesi.length > 0 " id="vertical-timeline" class="vertical-container dark-timeline">
+                                        <div ng-repeat="postBagliTalepAciklama in BagliTalepAciklamaListesi" class="vertical-timeline-block">
+                                            <div class="vertical-timeline-icon navy-bg">
+                                                <!--<i ng-show="postBagliTalepSurec.TALEP_PROJE_YENI_SUREC_TIPI_ID == 1" class="fa fa-handshake-o"></i>-->
+                                                <i class="fa fa-puzzle-piece"></i>
+                                                <!--<i ng-show="postBagliTalepSurec.TALEP_PROJE_YENI_SUREC_TIPI_ID == 3" class="fa fa-gears"></i>
+                                                <i ng-show="postBagliTalepSurec.TALEP_PROJE_YENI_SUREC_TIPI_ID == 4" class="fa fa-flash"></i>
+                                                <i ng-show="postBagliTalepSurec.TALEP_PROJE_YENI_SUREC_TIPI_ID == 5" class="fa fa-check-square"></i>-->
+                                            </div>
+                                            <div class="vertical-timeline-content">
+                                                <p ng-show="postBagliTalepAciklama.TALEP_PROJE_SUREC_LOG_ID != null">
+                                                    <small><strong>Süreç : </strong>{{postBagliTalepAciklama.TALEP_PROJE_YENI_SUREC_TIPI_ADI}}</small>
+                                                </p>
+                                                <p>
+                                                    {{postBagliTalepAciklama.TALEP_PROJE_ACIKLAMA_ACIKLAMA}}
+                                                </p>
+                                                <span class="vertical-date small text-muted"> {{postBagliTalepAciklama.KAYIT_TARIHI | moment3}} </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

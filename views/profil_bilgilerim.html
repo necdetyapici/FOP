@@ -1,0 +1,215 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Profil Bilgilerim</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                <i class="fa fa-home"></i>
+                    Ana Sayfa
+                </a>
+            </li>
+            <li class="active">
+                <strong>
+                <i class="fa fa-info-circle"></i>
+                    Bilgi
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<form method="get" name="form" class="form-horizontal">
+
+    <div class="wrapper wrapper-content">
+        <div class="row animated fadeInLeft">
+            <div class="col-md-4">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            <i class="fa fa-id-card"></i>
+                            {{Kullanici.KULLANICI_ADI}}
+                        </h5>
+
+                        <div class="ibox-tools">
+
+                            <label class="label label-primary">{{Kullanici.KULLANICI_TIPI_ADI}}</label>
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <div class="text-center ibox-content no-padding border-left-right">
+
+
+
+                            <div class="container">
+                                <!--<img src="../img/avatar/avatar-2.png" alt="Avatar" class="image imageContent">-->
+                                <img id="kullaniciFoto" ng-src="{{Kullanici.AvatarBase64}}" ng-show="Kullanici.AvatarBase64" class="user-photo" />
+                                <img ng-src="{{Kullanici.CINSIYET=='K' ?'../img/avatar/avatar-2.png':'../img/avatar/avatar-1.png'}}" alt="Avatar" ng-hide="Kullanici.AvatarBase64" class="image imageContent">
+
+                                <div class="overlay">
+                                    <!--<a class="overlaybtn btn btn-danger"><i class="fa fa-plus-circle"></i></a>-->
+                                    <div class="overlaybtn text-center">
+                                        <a tooltip="Yeni profil resmi yüklemek için tıklayınız." class="btn btn-sm btn-primary" ng-click="modalKullaniciResmi()">
+                                            <i class="fa fa-folder-open"></i>
+                                            &nbsp;Yeni Resim
+                                        </a>
+                                        <a tooltip="Mevcut resmi kaldırmak için tıklayınız." ng-click="resmiTemizle()" class="btn btn-sm btn-danger" ng-show="Kullanici.AvatarBase64">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+
+                                    </div>
+                                  
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="text-center ibox-content profile-content">
+                            <h4>
+                                <strong>{{Kullanici.AD_SOYAD}}</strong>
+
+                            </h4>
+                            <div class="row m-t-xs">
+                                <div class="text-center">
+                                    <span style="color: #777a7c;
+    font-size: 14px;"><i class="fa fa-envelope fa-fw" style="font-size: 12px;"></i>&nbsp;{{Kullanici.KULLANICI_E_POSTA}}</span>
+                                </div>
+                            </div>
+
+                            <div class="row m-t-xs">
+                                <div class="col-md-4">
+                                    <span class="label label-default">
+                                        <i class="fa fa-map-marker"></i>
+                                        {{Kullanici.MUSTERI_ADI}}
+                                    </span>
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="label label-primary" tooltip="İşe Başlama Tarihi">
+                                        <i class="fa fa-calendar"></i>
+                                        {{Kullanici.ISE_BASLAMA_TARIHI | tarih}}
+                                    </span>
+
+                                </div>
+                                <div class="col-md-4">
+                                    <span ng-show="Kullanici.ISTEN_AYRILMA_TARIHI" class="label label-danger" tooltip="İşten Çıkış Tarihi">
+                                        <i class="fa fa-calendar"></i>
+                                        {{Kullanici.ISTEN_AYRILMA_TARIHI | tarih}}
+                                    </span>
+                                    <span ng-hide="Kullanici.ISTEN_AYRILMA_TARIHI" class="badge badge-success" >
+                                        <i class="fa fa-user"></i>
+                                        Çalışan
+                                    </span>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            <i class="fa fa-info-circle"></i>
+                            Profil Bilgileri
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="formEkleDuzenleInputs">
+                            <div class="feed-activity-list">
+
+                                <div class="feed-element">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Doğum Tarihi</label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="datetime" class="formEkleDuzenleInput form-control" nextgen-date-picker="" ng-model="Kullanici.DOGUM_TARIHI">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+
+
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Telefon</label>
+                                        <div class="col-sm-8">
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-phone"></i></span><input type="text" name="txtKULLANICI_TELEFON" maxlength="17"
+                                                                                                                         mask="(999) 999 9999" ng-model="Kullanici.KULLANICI_TELEFON" class="formEkleDuzenleInput form-control" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="feed-element">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Şifre <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                                <input type="password" class="formEkleDuzenleInput form-control" ng-model="Kullanici.KULLANICI_SIFRE_ACIK" name="txtKULLANICI_SIFRE_ACIK" maxlength="70" required>
+                                                <p ng-show="frm_Kullanici.txtKULLANICI_SIFRE_ACIK.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row" style="margin-top:15px;">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right  ">
+                                                <button class="btn btn-sm btn-danger" type="button" ng-show="kullaniciID > 0" ng-click="kullaniciTemizle()">
+                                                    <i class="fa fa-remove"></i>&nbsp;&nbsp;<span class="bold">Temizle</span>
+                                                </button>
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="profilKaydet(Kullanici)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    </form>
+
+
+
+
+

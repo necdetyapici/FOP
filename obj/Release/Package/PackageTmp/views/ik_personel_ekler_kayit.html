@@ -1,0 +1,89 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-briefcase"></i> Personel Ekler Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Ekler bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmIkPersonelEkler" id="frmIkPersonelEkler" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel Dosya Tipi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_DOSYA_TIPI_ID" name="cmbIK_DOSYA_TIPI_ID" ng-model="InfoIkPersonelEkler.IK_DOSYA_TIPI_ID"
+                                                data-live-search="true" title="Personel Dosya Tipini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkDosyaTipiListesi" deep-watch="true" data-value="item.IK_DOSYA_TIPI_ID">
+                                                    <a>
+                                                        {{item.IK_DOSYA_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkPersonelEkler.cmbIK_DOSYA_TIPI_ID.$invalid && formCalistirildiPersonelEkler" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Döküman Yükleme<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="InfoIkPersonelEkler.IK_PERSONEL_EKLER_DOSYA_ADI" name="flIK_PERSONEL_EKLER_DOSYA1" id="flIK_PERSONEL_EKLER_DOSYA1" readonly="" required="">
+                                                <div class="input-group-btn">
+                                                    <label ng-show="!InfoIkPersonelEkler.IK_PERSONEL_EKLER_DOSYA_ADI"  for="flIK_PERSONEL_EKLER_DOSYA" class="btn btn-primary" tooltip="Yeni dosya yüklemek için tıklayınız." tooltip-append-to-body="true">
+                                                        <input class="hide ng-isolate-scope" type="file" id="flIK_PERSONEL_EKLER_DOSYA" name="flIK_PERSONEL_EKLER_DOSYA" fileread="$scope.InfoIkPersonelEkler.IK_PERSONEL_EKLER_DOSYA_BOYUT" accept="image/x-png, image/gif, image/jpeg, application/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" required="" multiple>
+                                                        <i class="fa fa-cloud-upload"></i>&nbsp;Dosya Yükle
+                                                    </label>
+                                                    <button ng-show="InfoIkPersonelEkler.IK_PERSONEL_EKLER_DOSYA_ADI" class="btn  btn-danger ng-hide" type="button" ng-click="eklerDokumanSifirla()" tooltip="Dosya yüklemekten vazgeçmek ve dosya bilgilerini sıfırlamak için tıklayınız." tooltip-append-to-body="true">
+                                                        <i class="fa fa-eraser"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <p ng-show="(InfoIkPersonelEkler.IK_PERSONEL_EKLER_DOSYA_ADI == null || InfoIkPersonelEkler.IK_PERSONEL_EKLER_DOSYA_ADI == '') && formCalistirildiPersonelEkler" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="IkPersonelEklerEkleGuncelle(InfoIkPersonelEkler)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary"
+                                                    ui-sref="insankaynaklari.ikpersonelkayit.ikpersoneleklerlistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

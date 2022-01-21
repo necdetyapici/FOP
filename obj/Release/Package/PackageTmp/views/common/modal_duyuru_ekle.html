@@ -1,0 +1,41 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Duyuru Ekle</h4>
+
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmDuyuru" id="frmDuyuru" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Konu<span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <textarea type="text" name="txtKONU" style="resize:none;" ng-maxlength="250" ng-minlength="1" ng-model="InfoDuyuru.KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Konu giriniz."></textarea>
+                                <p ng-show="frmDuyuru.txtKONU.$invalid && formCalistirildiDuyuruEkle" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Duyuru Metni<span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <textarea type="text" name="txtMETNI" style="resize:none;" ng-minlength="1" ng-model="InfoDuyuru.METNI" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Duyuru metni giriniz."></textarea>
+                                <p ng-show="frmDuyuru.txtMETNI.$invalid && formCalistirildiDuyuruEkle" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="DuyuruEkleGuncelle(InfoDuyuru, frmDuyuru)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span></button>
+        <button type="button" class="btn btn-primary" ng-click="DuyuruEkleKapat()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>

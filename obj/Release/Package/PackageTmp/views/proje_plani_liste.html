@@ -1,0 +1,166 @@
+﻿<div ng-init="init()"></div>
+    <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i> Planı Listesi
+                        </h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form name="src-ProjePlani" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Task No</label>
+                                            <div class="col-lg-8">
+                                                <input type="number" name="txtTASK_NO" id="txtTASK_NO" ng-model="AramaKriter.TASK_NO" class="form-control formEkleDuzenleInput">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Task Adı</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" name="txtTASK_ADI" id="txtTASK_ADI" ng-model="AramaKriter.TASK_ADI" class="form-control formEkleDuzenleInput" placeholder="Task adı giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button ng-click="ProjePlaniGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                    <i class="fa fa-filter"></i>&nbsp;
+                                                    <strong>Filtrele</strong>
+                                                </button>
+                                                <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <strong>Temizle</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="ibox-content" ng-if="ProjePlaniListesi.length>0">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <a ui-sref="proje.projelerkayit.plan.projeplanikayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                    <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjePlaniGetData()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                                <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list table-emfa">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td><b>No</b></td>
+                                                <td><b>Task No</b></td>
+                                                <td><b>Task Adi</b></td>
+                                                <td><b>Üst Proje Planı Adi</b></td>
+                                                <td><b>Ön Koşul Belirle</b></td>
+                                                <td><b>İş Durumu</b></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="post in ProjePlaniListesi | filter:ignoreTurkish">
+                                                <td>
+                                                    <span class="label label-success">{{ $index + 1}}</span>
+                                                </td>
+                                                <td class="table-main">
+                                                    <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                    {{post.TASK_NO}} <br />
+                                                </td>
+                                                <td>
+                                                    <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.projeplanikayit({ projePlanID: post.PROJE_PLANI_ID})">{{post.TASK_ADI}} </a><br />
+                                                </td>
+                                                <td>
+                                                    <b>{{post.UST_TASK_NO}}</b>
+                                                </td>
+
+                                                <td>
+                                                    <a ui-sref="proje.projelerkayit.plan.projeplanionkosullistesi({ projePlanID: post.PROJE_PLANI_ID, planTaskNo: post.TASK_NO})" class="btn btn-info btn-sm" tooltip="Ön Koşul Belirle" style="float:left; margin-bottom:2px;" tooltip-append-to-body="true"><i class="fa fa-arrows-h"></i></a>
+
+                                                    <span ng-repeat="item_on in ProjePlaniPlanOnKosulListesi | filter:ignoreTurkish" ng-if="item_on.PROJE_PLANI_ID==post.PROJE_PLANI_ID" style="float:left;padding: 0px 2px 4px 2px;"><label class="label label-info">{{item_on.PROJE_PLANI_PLAN_ON_KOSUL_PROJE_PLANI_ADI}}</label><br /></span>
+
+                                                </td>
+                                                <td>
+                                                    {{post.IS_DURUMU_ADI}}
+                                                </td>
+                                                <td class="actions">
+                                                    <div class="pull-right">
+                                                        <a ui-sref="proje.projelerkayit.plan.projeplanikayit({ projePlanID: post.PROJE_PLANI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                    </div>
+                                                </td>
+                                                <td class="actions">
+
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-center">
+                                                    <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjePlaniGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content" ng-if="ProjePlaniListesi.length==0 || ProjePlaniListesi== null">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <button ui-sref="proje.projelerkayit.plan.projeplanikayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                    <button type="button" class="btn btn-sm btn-white" ng-click="ProjePlaniGetData()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br /><br />
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    &nbsp;Plan kaydı <strong>bulunmamaktadır.</strong>
+                                    Eklemek için <a ui-sref="proje.projelerkayit.plan.projeplanikayit"
+                                                    class="alert-Link-Emfa alert-link">
+                                        tıklayınız.
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+

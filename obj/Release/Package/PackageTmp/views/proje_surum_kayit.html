@@ -1,0 +1,58 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Proje Sürüm Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Proje Sürüm bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeSurum" id="frmProjeSurum" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Sürüm Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtPROJE_SURUM_ADI" ng-model="InfoProjeSurum.PROJE_SURUM_ADI" class="formEkleDuzenleInput form-control" placeholder="Proje sürüm adını giriniz.">
+                                            <p ng-show="frmProjeSurum.txtPROJE_SURUM_ADI.$invalid && formCalistirildiProjeSurum" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeSurumEkleGuncelle(InfoProjeSurum)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.projesurumlistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

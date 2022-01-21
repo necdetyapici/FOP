@@ -1,0 +1,540 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>İş Başvuru İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikisbasvurularilistesi"><i class="fa fa-list"></i> İş Başvuru Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-street-view"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content  animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-street-view"></i>
+                        İş Başvuru Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen iş başvuru bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmIsBasvurulari" id="frmIsBasvurulari" class="form-horizontal" novalidate>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-maxlength="50" ng-minlength="1" name="txtIK_IS_BASVURULARI_ADI" ng-model="Info.IK_IS_BASVURULARI_ADI" class="formEkleDuzenleInput form-control" placeholder="Adını giriniz.">
+                                            <p ng-show="frmIsBasvurulari.txtIK_IS_BASVURULARI_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Soyadı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-maxlength="50" ng-minlength="1" name="txtIK_IS_BASVURULARI_SOYADI" ng-model="Info.IK_IS_BASVURULARI_SOYADI" class="formEkleDuzenleInput form-control" placeholder="Soyadını giriniz.">
+                                            <p ng-show="frmIsBasvurulari.txtIK_IS_BASVURULARI_SOYADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Telefon<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_IS_BASVURULARI_TELEFON" maxlength="17"
+                                                   mask="(999) 999 9999" ng-model="Info.IK_IS_BASVURULARI_TELEFON" class="formEkleDuzenleInput form-control" placeholder="Telefon numarasını giriniz." required />
+                                            <p ng-show="frmIsBasvurulari.txtIK_IS_BASVURULARI_TELEFON.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">E-Posta <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">@</span>
+                                                <input type="email" name="txtIK_IS_BASVURULARI_MAIL" ng-maxlength="150" ng-minlength="1" ng-model="Info.IK_IS_BASVURULARI_MAIL" class="formEkleDuzenleInput form-control" placeholder="E-posta adresini giriniz." required />
+                                            </div>
+                                            <p ng-show="frmIsBasvurulari.txtIK_IS_BASVURULARI_MAIL.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Departman<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_DEPARTMAN_ID" name="cmbIK_DEPARTMAN_ID" ng-model="Info.IK_DEPARTMAN_ID"
+                                                data-live-search="true" title="Departman Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkDepartmanListesi" deep-watch="true" data-value="item.IK_DEPARTMAN_ID">
+                                                    <a>
+                                                        {{item.IK_DEPARTMAN_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIsBasvurulari.cmbIK_DEPARTMAN_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Durum Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIS_BASVURULARI_DURUM_TIPI_ID" name="cmbIS_BASVURULARI_DURUM_TIPI_ID" ng-model="Info.IS_BASVURULARI_DURUM_TIPI_ID"
+                                                data-live-search="true" title="Durum Tipi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IsBasvurulariDurumTipiListesi" deep-watch="true" data-value="item.IS_BASVURULARI_DURUM_TIPI_ID">
+                                                    <a>
+                                                        {{item.IS_BASVURULARI_DURUM_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIsBasvurulari.cmbIS_BASVURULARI_DURUM_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Değerlendirme Puanı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="number" required="required" name="txtIK_IS_BASVURULARI_DEGERLENDIRME_PUANI" ng-model="Info.IK_IS_BASVURULARI_DEGERLENDIRME_PUANI" placeholder="Değerlendirme puanı giriniz." class="formEkleDuzenleInput form-control">
+                                            <p ng-show="frmIsBasvurulari.txtIK_IS_BASVURULARI_DEGERLENDIRME_PUANI.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Randevu Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_IS_BASVURULARI_RANDEVU_TARIHI" ng-model="Info.IK_IS_BASVURULARI_RANDEVU_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+                                            </div>
+                                            <p ng-show="frmIsBasvurulari.txtIK_IS_BASVURULARI_RANDEVU_TARIHI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Açıklama</label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="txtIK_IS_BASVURULARI_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="Info.IK_IS_BASVURULARI_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+
+                                            <button class=" btn btn-success " data-ui-sref-opts="{reload:true}" ng-click="IkIsBasvurulariEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="insankaynaklari.ikisbasvurularilistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig" ng-show="ikIsBasvurulariID > 0">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> İş Başvurusu Görüşmeler Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmIkIsBasvurulariGorusmeler" id="frmIkIsBasvurulariGorusmeler" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs col-md-offset-0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!--iş başvruları görüşmeler alanı-->
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Görüşme Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_IS_BASVURULARI_GORUSME_TARIHI" id="txtIK_IS_BASVURULARI_GORUSME_TARIHI" ng-model="InfoIkIsBasvurulariGorusmeler.IK_IS_BASVURULARI_GORUSME_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required="true">
+                                            </div>
+                                            <p ng-show="frmIkIsBasvurulariGorusmeler.txtIK_IS_BASVURULARI_GORUSME_TARIHI.$invalid && formIkIsBasvurulariGorusmelerCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Açıklama<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtIK_IS_BASVURULARI_GORUSME_ACIKLAMA" style="resize:none;" ng-model="InfoIkIsBasvurulariGorusmeler.IK_IS_BASVURULARI_GORUSME_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz." required="true"></textarea>
+                                            <p ng-show="frmIkIsBasvurulariGorusmeler.txtIK_IS_BASVURULARI_GORUSME_ACIKLAMA.$invalid && formIkIsBasvurulariGorusmelerCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="IkIsBasvurulariGorusmelerEkleGuncelle(InfoIkIsBasvurulariGorusmeler)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkIsBasvurulariGorusme" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs  ">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Görüşme Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_IS_BASVURULARI_GORUSME_TARIH" id="txtIK_IS_BASVURULARI_GORUSME_TARIH" ng-model="AramaKriterListeIsbasvurulari.IK_IS_BASVURULARI_GORUSME_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="IkIsBasvurulariGorusmelerGetData(AramaKriterListeIsbasvurulari, AramaKriterListeIsbasvurulari.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizleGorusme()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkIsBasvurulariGorusmelerListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkIsBasvurulariGorusmelerGetData()" data-ui-sref-opts="{reload:true}"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisi }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Görüşme Tarihi</b></td>
+                                            <td><b>Açıklama</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkIsBasvurulariGorusmelerListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.IK_IS_BASVURULARI_GORUSME_TARIHI | tarih}}<br />
+                                            </td>
+
+                                            <td class="table-main">
+                                                {{post.IK_IS_BASVURULARI_GORUSME_ACIKLAMA}}<br />
+                                            </td>
+
+                                            <td class="actions">
+                                                <!--<div class="pull-right">
+                                                    <a ui-sref="insankaynaklari.ikisbasvurularigorusmelerkayit({ ikIsBasvurulariGorusmelerID: post.IK_IS_BASVURULARI_GORUSMELER_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>-->
+                                            </td>
+
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayiIsBasvurulariGorusmeler(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriterListeIsbasvurulari.SayfaNo" ng-change="IkIsBasvurulariGorusmelerGetData(AramaKriterListeIsbasvurulari)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriterListeIsbasvurulari.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-show="IkIsBasvurulariGorusmelerListesi.length==0||IkIsBasvurulariGorusmelerListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkIsBasvurulariGorusmelerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İş Başvurusu Görüşmelere ait kayıt ait kayıt <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> İş Başvurusu Görüşme Ekler Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmIsBasvurulariGorusmeEkler" id="frmIsBasvurulariGorusmeEkler" class="form-horizontal" novalidate>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_DOSYA_TIPI_ID" name="cmbIK_DOSYA_TIPI_ID" ng-model="InfoIsBasvurusuGorusmelerEkler.IK_DOSYA_TIPI_ID"
+                                                data-live-search="true" title="Dosya Tipi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkDosyaTipiListesi" deep-watch="true" data-value="item.IK_DOSYA_TIPI_ID">
+                                                    <a>
+                                                        {{item.IK_DOSYA_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIsBasvurulariGorusmeEkler.cmbIK_DOSYA_TIPI_ID.$invalid && formIkIsBasvurulariGorusmelerEklerCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <!--<div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                <div class="form-control" data-trigger="fileinput">
+                                                    <i class="glyphicon glyphicon-file fileinput-exists"></i>
+                                                    <span class="fileinput-filename"></span>
+                                                </div>
+                                                <span class="input-group-addon btn btn-file btn-primary">
+                                                    <span class="fileinput-new"><i class="fa fa-cloud-upload"></i>&nbsp;Yeni Dosya Yükle</span>
+                                                    <span class="fileinput-exists">Değiştir</span>
+                                                    <input type="file" required id="flIS_BASVURU_DOSYA" name="flIS_BASVURU_DOSYA" ng-model="InfoIsBasvurusuGorusmelerEkler.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_ADI" ng-o accept="image/x-png, image/gif, image/jpeg, .doc, .docx, video/mp4,video/x-m4v,video/*, application/*" upload />
+                                                </span>
+                                                <a href="#" id="fileKaldir" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Kaldır</a>
+                                            </div>-->
+
+                                            <div class="input-group">
+                                                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="InfoIsBasvurusuGorusmelerEkler.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_ADI" name="flIS_BASVURU_DOSYA1" id="flIS_BASVURU_DOSYA1" readonly="" required="">
+                                                <div class="input-group-btn">
+                                                    <label ng-show="!InfoIsBasvurusuGorusmelerEkler.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_ADI" for="flIS_BASVURU_DOSYA" class="btn btn-primary" tooltip="Yeni dosya yüklemek için tıklayınız." tooltip-append-to-body="true">
+                                                        <input class="hide ng-isolate-scope" type="file" id="flIS_BASVURU_DOSYA" ng-model="InfoIsBasvurusuGorusmelerEkler.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_ADI" name="flIS_BASVURU_DOSYA" fileread="$scope.InfoIsBasvurusuGorusmelerEkler.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_BOYUTU" accept="image/x-png, image/gif, image/jpeg, application/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" required="" multiple>
+                                                        <i class="fa fa-cloud-upload"></i>&nbsp;Dosya Yükle
+                                                    </label>
+                                                    <button ng-show="InfoIsBasvurusuGorusmelerEkler.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_ADI" class="btn  btn-danger ng-hide" type="button" ng-click="isBasvurulariGorusmeEklerDosyaDokumanSifirla()" tooltip="Dosya yüklemekten vazgeçmek ve dosya bilgilerini sıfırlamak için tıklayınız." tooltip-append-to-body="true">
+                                                        <i class="fa fa-eraser"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <p ng-show="frmIsBasvurulariGorusmeEkler.flIS_BASVURU_DOSYA.$invalid && formIkIsBasvurulariGorusmelerEklerCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " ng-click="IkIsBasvurulariGorusmelerEklerEkleGuncelle(InfoIsBasvurusuGorusmelerEkler)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkEgitimPersonelDosya" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_IS_BASVURULARI_GORUSME_EKLER_ADI" id="txtIK_IS_BASVURULARI_GORUSME_EKLER_ADI" ng-model="AramaKriterIsbasvurulariGorusmeEkler.IK_IS_BASVURU_GORUSMELER_DOSYA_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Dosya adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkIsBasvurulariGorusmelerEklerGetData(AramaKriterIsbasvurulariGorusmeEkler, AramaKriterIsbasvurulariGorusmeEkler.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizleEkler()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkIsBasvurulariGorusmelerEklerListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkIsBasvurulariGorusmelerEklerGetData()" data-ui-sref-opts="{reload:true}"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisiGorusmeEkler }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Dosya Adı</b></td>
+                                            <td><b>Dosya Tipi Adı</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkIsBasvurulariGorusmelerEklerListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <sa-dosyaindir tablo="IK_IS_BASVURULARI_GORUSMELER_EKLER" dosyaid="post.IK_IS_BASVURULARI_GORUSMELER_EKLER_ID" tooltip="Döküman İndir">{{post.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_ADI}}</sa-dosyaindir><br />
+                                            </td>
+
+                                            <td class="table-main">
+                                                {{post.IK_DOSYA_TIPI_ADI}}<br />
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right" ng-if="post.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_TIPI == 'image/jpeg' || post.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_TIPI == 'image/png' || post.IK_IS_BASVURU_GORUSMELER_EKLER_DOSYA_TIPI == 'application/pdf'">
+                                                    <button ng-click="IkIsBasvurulariGorusmeEklerDosyaGoster(post.IK_IS_BASVURULARI_GORUSMELER_EKLER_ID)" class="btn btn-sm btn-info" tooltip="Göster" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayiIsBasvurulariGorusmelerEkler(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriterIsbasvurulariGorusmeEkler.SayfaNo" ng-change="IkIsBasvurulariGorusmelerEklerGetData(AramaKriterIsbasvurulariGorusmeEkler)" total-items="toplamKayitSayisiGorusmeEkler"
+                                                            items-per-page="AramaKriterIsbasvurulariGorusmeEkler.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="ibox-content" ng-if="IkIsBasvurulariGorusmelerEklerListesi.length==0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkIsBasvurulariGorusmelerEklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İnsan Kaynakları İş Başvurusu Görüşmeler Ekler ait kayıt <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

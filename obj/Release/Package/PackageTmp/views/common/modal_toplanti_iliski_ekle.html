@@ -1,0 +1,59 @@
+﻿<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Toplantı İlişki Ekle</h4>
+
+    </div>
+    <div class="modal-body">
+
+        <form method="get" name="frmToplantiIliski" id="frmToplantiIliski" class="form-horizontal" accessible-form>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content ">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Ana Toplantı Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select col-lg-5 form-control" id="cmbTOPLANTI_ID" name="cmbTOPLANTI_ID" ng-model="AramaKriter.TOPLANTI_ID"
+                                                    data-live-search="true" title="Toplantı Seçiniz.." data-size="5">
+                                                    <li nya-bs-option="item in ToplantiListesi" deep-watch="true" data-value="item.TOPLANTI_ANA_ID">
+                                                        <a>
+                                                            {{item.TOPLANTI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success " type="button" tooltip="Kaydet" ng-click="ToplantiIliskiEkleGuncelle(Info,frmToplantiIliski) ">
+                                                    <i class="fa fa-check"></i>
+                                                    Kaydet
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-danger" ng-click="ToplantiIliskiKaydet()">
+                                                    <i class="fa fa-times"></i>
+                                                    Kapat
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

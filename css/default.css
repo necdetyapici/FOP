@@ -1,0 +1,281 @@
+﻿img.login-background {
+    min-height: 100%;
+    min-width: 1366px;
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity:0.8;
+}
+
+div.login-body {
+    overflow-x: hidden;
+}
+
+div.login-screen {
+    position: relative;
+    margin: 50px auto;
+    padding: 20px;
+    -moz-box-shadow: 0 0 20px black;
+    -webkit-box-shadow: 0 0 20px black;
+    box-shadow: 0 0 20px black;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+@media screen and (max-width: 1366px) {
+    img.login-background {
+        left: 50%;
+        margin-left: -683px;
+    }
+}
+
+
+.login-screen h3{
+    font-weight:bold;
+    color:#464646;
+}
+.login-screen h3 span{
+    color:#676a6c;
+}
+
+.validasyon_uyari {
+    color: #cc5965;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.horizantal_li {
+    display: inline;
+}
+
+.project-title .red {
+  font-size: 14px;
+  color: #cc3333;
+  font-weight: 600;
+}
+
+.eylem-center {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.fullChosen{
+    width: 100%;
+    display: block;
+}
+
+
+
+.loginBody {
+  background-image: url(/img/login/1.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
+
+
+.Center-Container {
+  position: relative;
+}
+
+.Absolute-Center {
+  width: 50%;
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+
+@media (max-width: 350px) {
+    .hidden-350px {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    .hidden-500px {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hidden-768px {
+        display: none;
+    }
+}
+
+@media (max-width: 960px) {
+    .hidden-960px {
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+.sayfayukleniyor {
+	display: block !important;
+    position: fixed;
+	top: 0;
+	left: 0;
+	height:100%;
+	width:100%;	
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+	background: #000;
+    z-index: 5000;
+}
+
+/*.sayfayukleniyor .modal {
+  width: 50%;
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;	
+}*/
+
+.sayfayukleniyor .icerik {
+  width: 40%;
+  height: 80%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;	
+
+  margin-left: auto;
+  margin-right: auto;
+
+  filter: alpha(opacity=3);
+  opacity: 1;
+  text-align: center;
+  font-size: 1em;
+  color:white;		
+}
+
+.sayfayukleniyor h2 {
+	text-align: center;
+	font-size: 4em;
+	color:white;			
+}
+.sayfayukleniyor image {
+}
+
+.avukaticon{
+   position:absolute;
+   top:50%;
+   left:50%;
+   margin-top:-25px;
+   margin-left:-25px;
+   width: 60px;
+   height: 60px;
+}
+
+
+
+/* Görsel Eklentiler - Emre */
+
+i.ws-fa {
+    min-width: 16px;
+}
+
+.table-main a {
+    font-size: 14px;
+    color: #676a6c;
+    font-weight: 600;
+}
+
+.table-actions {
+    text-align: right;
+    vertical-align: middle;
+}
+
+.validation {
+    color: #cc5965;
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.mt-first-cb {
+    margin-top:6px;
+}
+
+.buro-default-table table tr td {
+    border-top: none;
+    border-bottom: 1px solid #e7eaec;
+    /*padding: 15px 10px;*/
+    vertical-align: middle;
+}
+
+.buro-default-table table tr td.right {
+    text-align:right;
+    padding-right:10px;
+}
+
+.buro-default-table table tr td.spring {
+    width:99%;
+}
+
+.buro-default-table table tr td.no-wrap {
+    white-space: nowrap;
+}
+
+.buro-default-table table tr td.actions {
+    text-align: right;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+div.wrapper-content.padding-bottom {
+    padding-bottom:80px;
+}
+
+
+/* Ana Ekran Profil Resmi Begin */
+.nav-header-profile-picture {
+    border-radius: 5px;
+}
+
+.profile-element {
+    text-align: center;
+}
+
+.nav-header {
+    padding: 35px 25px 25px 25px;
+}
+/* Ana Ekran Profil Resmi End */
+
+
+/* Resim Yükleme Begin */
+img.user-photo {
+    /*width: 200px;
+    height: 200px;*/
+    width: 100%;
+    height: auto;
+}
+
+div.cropArea {
+    border: solid 1px #ccf;
+    background: #ccc;
+    overflow: hidden;
+    width: 450px;
+    height: 300px;
+    margin-top: 5px;
+}
+/* Resim Yükleme End */

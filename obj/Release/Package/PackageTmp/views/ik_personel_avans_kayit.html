@@ -1,0 +1,250 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-money"></i>
+                        Personel Avans Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i> Lütfen Personel Avans bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmIkPersonelAvans" id="frmIkPersonelAvans" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Avans No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="50" ng-disabled="true" ng-minlength="1" name="txtAVANS_NO" ng-model="InfoPersonelAvans.AVANS_NO" class="formEkleDuzenleInput form-control">
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Avans Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtAVANS_ADI" ng-model="InfoPersonelAvans.AVANS_ADI" class="formEkleDuzenleInput form-control" placeholder="Avans adını giriniz." required ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID) ">
+                                            <p ng-show="frmIkPersonelAvans.txtAVANS_ADI.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Eden<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtTALEP_EDEN_KULLANICI_ADI" ng-model="InfoPersonelAvans.TALEP_EDEN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Talep Eden giriniz.">
+                                            <p ng-show="frmIkPersonelAvans.txtTALEP_EDEN_KULLANICI_ADI.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gözden Geçiren<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtGOZDEN_GECIREN_KULLANICI_AD_SOYAD" ng-model="personelGenelIkYoneticiKullaniciAdSoyad" class="formEkleDuzenleInput form-control" placeholder="Gözden Geçiren giriniz.">
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="form-group" >
+                                        <label class="col-lg-4 control-label">Muhasebe Yöneticisi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" id="cmbMUHASEBE_KULLANICI_ID" name="cmbMUHASEBE_KULLANICI_ID" ng-model="InfoPersonelAvans.MUHASEBE_KULLANICI_ID"
+                                                data-live-search="true" title="Muhasebe Yöneticisini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesiGenel" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkPersonelAvans.cmbMUHASEBE_KULLANICI_ID.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                   
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Görevlendirilme Yeri<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input icheck type="radio" name="rd_GOREVLENDIRME_YERI" class="formEkleDuzenleInput" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" value="1" ng-model="InfoPersonelAvans.GOREVLENDIRME_YERI"> Şehir İçi
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" name="rd_GOREVLENDIRME_YERI" ng-required="InfoPersonelAvans.GOREVLENDIRME_YERI==null" value="2" ng-model="InfoPersonelAvans.GOREVLENDIRME_YERI"> Şehir Dışı
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_GOREVLENDIRME_YERI" value="3" ng-model="InfoPersonelAvans.GOREVLENDIRME_YERI" ng-required="InfoPersonelAvans.GOREVLENDIRME_YERI==null" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)"> Yurt Dışı
+                                            </label><br />
+                                            <p ng-show="frmIkPersonelAvans.rd_GOREVLENDIRME_YERI.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Miktarı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-4">
+                                            <div class="input-group col-lg-12">
+                                                <input type="text" name="txtTALEP_EDILEN_MIKTAR" ui-number-mask="2" ng-model="InfoPersonelAvans.TALEP_EDILEN_MIKTAR" class="formEkleDuzenleInput form-control" placeholder="Talep miktarı giriniz." required ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)">
+                                            </div>
+                                            <p ng-show="frmIkPersonelAvans.txtTALEP_EDILEN_MIKTAR.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <ol class="nya-bs-select form-control" id="cmbPARA_BIRIMI_ID" name="cmbPARA_BIRIMI_ID" ng-model="InfoPersonelAvans.PARA_BIRIMI_ID"
+                                                data-live-search="true" title="Para Birimi Seçiniz" data-size="5" required="true" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)">
+                                                <li nya-bs-option="item in ParaBirimiListesi" deep-watch="true" data-value="item.PARA_BIRIMI_ID">
+                                                    <a>
+                                                        {{item.PARA_BIRIMI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkPersonelAvans.cmbPARA_BIRIMI_ID.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ödeme Şekli<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input icheck type="radio" name="rd_ODEME_SEKLI" class="formEkleDuzenleInput" value="1" ng-model="InfoPersonelAvans.ODEME_SEKLI" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" ng-required="InfoPersonelAvans.ODEME_SEKLI==null"> Banka Havalesi
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_ODEME_SEKLI" value="2" ng-model="InfoPersonelAvans.ODEME_SEKLI" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" ng-required="InfoPersonelAvans.ODEME_SEKLI==null"> Elden Nakit
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_ODEME_SEKLI" value="3" ng-model="InfoPersonelAvans.ODEME_SEKLI" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" ng-required="InfoPersonelAvans.ODEME_SEKLI==null"> Kredi Kartı
+                                            </label><br />
+                                            <p ng-show="frmIkPersonelAvans.rd_ODEME_SEKLI.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Banka Hesap No <span ng-show="(InfoPersonelAvans.ODEME_SEKLI == 1 || InfoPersonelAvans.ODEME_SEKLI == 3)" class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="50" ng-minlength="1" name="txtBANKA_HESAP_NO" ng-model="InfoPersonelAvans.BANKA_HESAP_NO" class="formEkleDuzenleInput form-control" placeholder="Banka Hesap Numaranızı giriniz." ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" ng-required="((InfoPersonelAvans.ODEME_SEKLI == 1 || InfoPersonelAvans.ODEME_SEKLI == 3)&& InfoPersonelAvans.BANKA_HESAP_NO==null)">
+                                            <p ng-show="frmIkPersonelAvans.txtBANKA_HESAP_NO.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Talep Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_TARIHI" ng-model="InfoPersonelAvans.TALEP_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)">
+                                            </div>
+                                            <p ng-show="frmIkPersonelAvans.txtTALEP_TARIHI.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Avans Türü <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" id="cmbAVANS_TURU_ID" name="cmbAVANS_TURU_ID" ng-model="InfoPersonelAvans.AVANS_TURU_ID"
+                                                data-live-search="true" title="Avans Türü Seçiniz" data-size="5" required="true" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)">
+                                                <li nya-bs-option="item in AvansTuruListesi" deep-watch="true" data-value="item.AVANS_TURU_ID">
+                                                    <a>
+                                                        {{item.AVANS_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkPersonelAvans.cmbAVANS_TURU_ID.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Adı </label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ID" name="cmb_PROJE_ID" allow-clear="true" ng-model="InfoPersonelAvans.PROJE_ID"
+                                                data-live-search="true" title="Proje Seçiniz" data-size="5" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)" ng-change="GetProjeEtiket(InfoPersonelAvans.PROJE_ID,true)">
+                                                <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                    <a>
+                                                        {{item.PROJE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkPersonelAvans.cmb_PROJE_ID.$invalid && formCalistirildiPersonelAvans" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-hide="InfoPersonelAvans.PROJE_ID == null || InfoPersonelAvans.PROJE_ID == 0">
+                                        <label class="col-lg-4 control-label">Etiket</label>
+                                        <div class="col-lg-8">
+                                            <ui-select multiple ng-model="InfoPersonelAvans.SeciliEtiketler" tagging="etiketOlustur" tagging-label="(Yeni)" theme="bootstrap" style="width: 300px;">
+                                                <ui-select-match placeholder="Etiket seçimi yapınız...">{{$item.ADI}}</ui-select-match>
+                                                <ui-select-choices repeat="item in ProjeEtiketListesi | filter: $select.search">
+                                                    {{item.ADI}}
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show="InfoPersonelAvans.AVANS_ID > 0">
+
+                                        <label class="col-lg-4 control-label">Onaylanan Miktar</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtONAYLANAN_MIKTAR" ui-number-mask="2" ng-model="InfoPersonelAvans.ONAYLANAN_MIKTAR" class="formEkleDuzenleInput form-control" placeholder="Onaylanan miktarı giriniz." ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Talep Nedeni <span class="text-danger">*</span></label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="txtTALEP_NEDENI" ng-maxlength="500" ng-minlength="1" style="resize:none;" ng-model="InfoPersonelAvans.TALEP_NEDENI" rows="8" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep nedenini giriniz." required ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)"></textarea>
+                                            <p ng-show="frmIkPersonelAvans.txtTALEP_NEDENI.$invalid &amp;&amp; formCalistirildiPersonelAvans" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Açıklama <span class="text-danger">*</span></label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="txtACIKLAMA" ng-maxlength="500" ng-minlength="1" style="resize:none;" ng-model="InfoPersonelAvans.ACIKLAMA" rows="8" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz." required ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)"></textarea>
+                                            <p ng-show="frmIkPersonelAvans.txtACIKLAMA.$invalid &amp;&amp; formCalistirildiPersonelAvans" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-warning" ng-click="IkPersonelAvansOnaylama(InfoPersonelAvans)" ng-show="(InfoPersonelAvans.AVANS_ID > 0 && (InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Onaya Gönder</span>
+                                            </button>
+                                            <button class=" btn btn-success " href="#" data-ui-sref-opts="{reload:true}" ng-click="AvansEkleGuncelle(InfoPersonelAvans)" ng-disabled="(InfoPersonelAvans.AVANS_ID > 0 && !(InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 1 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 4)) ||  (kullaniciID != $storage.KULLANICI_ID)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelavanslistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

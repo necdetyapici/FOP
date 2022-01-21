@@ -1,0 +1,22 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Gündem Kararı Değiştir</h4>
+
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmToplantiGundemKarar" id="frmToplantiGundemKarar" class="form-horizontal" accessible-form>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Toplantı Karar</label>
+                <div class="col-sm-8">
+                    <textarea type="text" name="txtGUNDEM_KARAR" style="resize:none;" ng-model="InfoToplantiGundem.GUNDEM_KARAR"  rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı gündem kararı giriniz."></textarea>
+                    <p ng-show="frmToplantiGundemKarar.cmbTOPLANTI_GUNDEM_HAVUZU_GEREKCE.$invalid &amp;&amp; formCalistirildiToplantiGundemKarar" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="ToplantiGundemDurumu(InfoToplantiGundem, InfoToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ID = InfoToplantiGundem.gundemDurumu, frmToplantiGundemKarar)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="GeriGundemKarar()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

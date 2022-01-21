@@ -1,0 +1,290 @@
+﻿<div ng-init="init()"></div>
+<div ui-view>
+    <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+        <div class="row">
+            <div class="col-lg-12" >
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">Proje Risk Listesi</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <form name="src-ProjeRisk" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk No</label>
+                                            <div class="col-sm-8">
+                                                <input type="number" name="txtRISK_NO" id="txtRISK_NO" ng-model="AramaKriter.PROJE_RISK_NO" class="form-control formEkleDuzenleInput">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtRISK_ADI" id="txtRISK_ADI" ng-model="AramaKriter.RISK_ADI" class="form-control formEkleDuzenleInput" placeholder="Risk giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk Türü</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtRISK_TURU_ADI" id="txtRISK_TURU_ADI" ng-model="AramaKriter.RISK_TURU_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Risk türü giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Artık Risk Onayı</label>
+                                            <div class="col-lg-8">
+                                                <label>
+                                                    <input icheck type="radio" name="rd_ARTIK_RISK_ONAYI" class="formEkleDuzenleInput" value="aktif" ng-model="AramaKriter.ARTIK_RISK_ONAYI"> Aktif
+                                                </label>
+                                                <label>
+                                                    <input icheck type="radio" name="rd_ARTIK_RISK_ONAYI" value="pasif" ng-model="AramaKriter.ARTIK_RISK_ONAYI"> Pasif
+                                                </label>
+                                                <label>
+                                                    <input icheck type="radio" name="rd_ARTIK_RISK_ONAYI" value="tumu" ng-model="AramaKriter.ARTIK_RISK_ONAYI"> Tümü
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button ng-click="ProjeRiskGetData(AramaKriter,AramaKriter.SayfaNo = 1)" class="btn btn-sm btn-warning" type="submit">
+                                                    <i class="fa fa-filter"></i>&nbsp;
+                                                    <strong>Filtrele</strong>
+                                                </button>
+                                                <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <strong>Temizle</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--<div >-->
+                        <div class="ibox-content" >
+                            <div class="row">
+                                <div ng-class="{ 'col-lg-12': !grupLogGoster, 'col-lg-8' : grupLogGoster}">
+                                    <div class="row" ng-if="ProjeRiskListesi.length > 0">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="pull-right">
+                                                        <button ng-click="ProjeRiskFormuYazdir(dokumanFormTipi.ProjeRiskFormu, null)" class="btn btn-sm btn-info" tooltip="Risk Formu" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                        <button ui-sref="proje.projelerkayit.risk.projeriskkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                                        <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRiskGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                    </div>
+                                                    <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="project-list ">
+                                                        <div class="table table-responsive ">
+                                                            <table class="table table-striped table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td><b>Risk No</b></td>
+                                                                        <td><b>Risk Derecesi</b></td>
+                                                                        <td><b>T.Ö. Puani</b></td>
+                                                                        <td><b>T.S. Puani</b></td>
+                                                                        <td><b>R. Tehdit Gerçekleştirme</b></td>
+                                                                        <td><b>Artık Risk</b></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <!--<td></td>-->
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="post in ProjeRiskListesi | filter:ignoreTurkish">
+
+                                                                        <td class="table-main">
+                                                                            <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                                            <a ui-sref="proje.projelerkayit.risk.projeriskkayit({ projeRiskID: post.PROJE_RISK_ID})">{{post.PROJE_RISK_NO}} </a><br />
+                                                                        </td>
+                                                                        <td>
+                                                                            {{post.RISK_DERECESI_ADI}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{post.TEDBIR_ONCESI_RISK_PUANI}}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{post.TEDBIR_SONRASI_RISK_PUANI}}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a ui-sref="proje.projelerkayit.risk.projerisklistesi.projerisktehditgerceklesmesayisilistesi({ projeRiskID: post.PROJE_RISK_ID })" ng-click="projeRiskAta(post.PROJE_RISK_NO)" class=" btn btn-primary btn-sm" tooltip="Tehdit Gercekleşme Sayısı Ekle" tooltip-append-to-body="true"><i class="fa fa-bomb"></i></a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <span class="label label-primary" ng-show="post.ARTIK_RISK_ONAYI == true">Aktif</span>
+                                                                            <span class="label label-danger" ng-show="post.ARTIK_RISK_ONAYI == false">Pasif</span>
+                                                                        </td>
+                                                                        <td>
+                                                                            <button class="btn btn-sm btn-circle btn-info" ng-click="ProjeRiskEkleGuncelle(post)" tooltip="Yeniden Değerlendir" style="margin: 0px 10px 5px 10px;" tooltip-append-to-body="true"><i class="fa fa-eye"></i></button>
+                                                                        </td>
+                                                                        <td>
+                                                                            <button class="btn btn-sm btn-circle btn-primary" ng-click="ProjeRiskLogGoster(post.PROJE_RISK_NO)" tooltip="Risk Sonuçları Göster" tooltip-append-to-body="true"><i class="fa fa-list"></i></button>
+                                                                        </td>
+                                                                        <td class="actions">
+                                                                            <a ui-sref="proje.projelerkayit.risk.projeriskkayit({ projeRiskID: post.PROJE_RISK_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                                        </td>
+                                                                        <!--<td class="actions">
+                                                                            <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i></a>
+                                                                        </td>-->
+                                                                    </tr>
+                                                                </tbody>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <td colspan="9" class="text-center">
+                                                                            <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjeRiskGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                                        items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" ng-if="ProjeRiskListesi.length == 0 || ProjeRiskListesi.length == undefined">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="pull-right">
+                                                        
+                                                        <button ui-sref="proje.projelerkayit.risk.projeriskkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                                        <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRiskGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <br /><br />
+
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                        <i class="fa fa-exclamation-circle"></i>
+                                                        &nbsp;Proje işlemlerine bağlı risk kaydı <strong>bulunmamaktadır.</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div ng-class="{ 'col-lg-4': grupLogGoster}" ng-hide="grupLogGoster == false">
+                                    <div class="client-detail">
+                                        <div class="full-height-scroll" full-scroll>
+                                            <div class="row" ng-if="ProjeRiskLogListesi.length>0">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="pull-right">
+                                                                <button ng-click="ProjeRiskFormuYazdir(dokumanFormTipi.RiskDegerlendirmeFormu, seciliRiskNo)" class="btn btn-sm btn-info" tooltip="Risk Formu" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRiskGetData(AramaKriter,AramaKriter.RIKS_LOG = false)"> <i class="fa fa-refresh"></i> </button>
+                                                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRiskLogGizle()"> <i class="fa fa-close"></i> </button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="pull-left">
+                                                                <strong>Toplam {{ toplamKayitSayisiLog }} kayıt</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="project-list">
+                                                                <div class="table table-responsive ">
+                                                                    <table class="table table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td><b>Risk No</b></td>
+                                                                                <td></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="post in ProjeRiskLogListesi | filter: ignoreTurkish">
+
+                                                                                <td>{{post.PROJE_RISK_NO}}</td>
+                                                                                <td><a ui-sref="proje.projelerkayit.risk.projeriskkayit({ projeRiskID: post.PROJE_RISK_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i></a></td>
+                                                                                <td class="actions">
+                                                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" ng-if="ProjeRiskLogListesi.length==0 || ProjeRiskLogListesi == null">
+                                                <div class="col-lg-12">
+
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="pull-right">
+                                                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRiskGetData(AramaKriter,AramaKriter.RIKS_LOG = false)"> <i class="fa fa-refresh"></i> </button>
+                                                                
+                                                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRiskLogGizle()"> <i class="fa fa-close"></i> </button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <br /><br />
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                                <i class="fa fa-exclamation-circle"></i>
+                                                                &nbsp;Proje risk log kayıtları <strong>bulunmamaktadır.</strong>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+﻿<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Toplantı Yeri Ekle</h4>
+
+    </div>
+    <div class="modal-body">
+
+        <form method="get" name="frmToplantiYeri" id="frmToplantiYeri" class="form-horizontal" accessible-form>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content ">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Yeri Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" name="txtTOPLANTI_YERI_ADI" ng-model="Info.TOPLANTI_YERI_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Lütfen Toplantı Yeri Adını Giriniz." required />
+                                                <p ng-show="frmToplantiYeri.txtTOPLANTI_YERI_ADI.$invalid && formToplantiYeriCalistirildi" class="validation">Bu alan boş bırakılamaz. </p>
+                                                <p class="validation">{{frmToplantiYeriHata}} </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success " type="button" tooltip="Kaydet" ng-click="ToplantiYeriEkleGuncelle(Info,frmToplantiYeri) ">
+                                                    <i class="fa fa-check"></i>
+                                                    Kaydet
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-danger" ng-click="ToplantiYeriListesiKaydet()">
+                                                    <i class="fa fa-times"></i>
+                                                    Kapat
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,460 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Kullanıcı Kayıt İşlemleri</h2>
+
+
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i>
+                    Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <a ui-sref="yonetim.kullanicitanimla">
+                    <i class="fa fa-users"></i>
+                    Kullanıcı Listesi
+                </a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong>
+                    <i class="fa fa-user"></i>
+                    Kullanıcı
+                </strong>
+            </li>
+        </ol>
+
+
+
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-user"></i> Kullanıcı Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Kullanıcı bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frm_Kullanici" id="frm_Kullanici" class="form-horizontal" accessible-form>
+
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="fileavatar" class="col-sm-12 control-label-center">Profil Resmi</label>
+                                                <div class="col-lg-12">
+                                                    <!--<div class="m-b-xs" ng-show="Kullanici.AvatarBase64">-->
+                                                    <div class="m-b-xs">
+                                                        <input type="hidden" ng-model="Kullanici.KULLANICI_RESIM_ID" />
+                                                        <img id="kullaniciFoto" ng-src="{{Kullanici.AvatarBase64}}" ng-show="Kullanici.AvatarBase64" class="user-photo" />
+                                                        <img ng-src="{{Kullanici.CINSIYET=='K' ?'../img/avatar/avatar-2.png':'../img/avatar/avatar-1.png'}}" alt="Avatar" ng-hide="Kullanici.AvatarBase64" class="image imageContent">
+                                                    </div>
+                                                    <a tooltip="Yeni profil resmi yüklemek için tıklayınız." class="btn btn-sm btn-primary m-r-xs" ng-click="modalKullaniciResmi()"><i class="fa fa-photo"></i>&nbsp;Yeni Resim Yükle</a><a tooltip="Mevcut resmi kaldırmak için tıklayınız." ng-click="resmiTemizle()" class="btn btn-sm btn-danger" ng-show="Kullanici.AvatarBase64"><i class="fa fa-eraser"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class=" row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Ad Soyad<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="txtAD_SOYAD" ng-model="Kullanici.AD_SOYAD" ng-maxlength="150" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Adınızı ve soyadınızı giriniz." required>
+                                                    <p ng-show="frm_Kullanici.txtAD_SOYAD.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Kullanıcı Adı <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" id="txtKULLANICI_ADI" name="txtKULLANICI_ADI" ng-model="Kullanici.KULLANICI_ADI" ng-maxlength="50" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Kullanıcı adınızı giriniz." required>
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_ADI.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Şifre <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="password" class="formEkleDuzenleInput form-control" ng-model="Kullanici.KULLANICI_SIFRE_ACIK" name="txtKULLANICI_SIFRE_ACIK" maxlength="70" placeholder="Şifrenizi giriniz." required>
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_SIFRE_ACIK.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">E-Posta <span class="text-danger">*</span></label>
+
+                                                <div class="col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">@</span>
+                                                        <input type="email" name="txtKULLANICI_E_POSTA" ng-model="Kullanici.KULLANICI_E_POSTA" ng-maxlength="150" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="E-posta adresinizi giriniz." required />
+
+                                                    </div>
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_E_POSTA.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Telefon<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="txtKULLANICI_TELEFON" maxlength="17" mask="(999) 999 9999" ng-model="Kullanici.KULLANICI_TELEFON" class="formEkleDuzenleInput form-control" placeholder="Telefon numarnızı giriniz." required />
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_TELEFON.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="form-group" ng-show="$storage.IS_PICT_YONETICI">
+                                                <label class="col-lg-4 control-label">Müsteri <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+
+                                                    <ol class="nya-bs-select form-control" id="svrMUSTERI_ID" name="svrMUSTERI_ID" ng-model="Kullanici.MUSTERI_ID"
+                                                        data-live-search="true" title="Müsteri Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in MusteriListesi" deep-watch="true" data-value="item.MUSTERI_ID">
+                                                            <a>
+                                                                {{item.MUSTERI_ADI}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frm_Kullanici.svrMUSTERI_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Kullanıcı Tipi <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <ol class="nya-bs-select form-control"  id="sel_KULLANICI_TIPI_ID" name="sel_KULLANICI_TIPI_ID" ng-model="Kullanici.KULLANICI_TIPI_ID"
+                                                        data-live-search="true" title="Kullanıcı Tipini Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in KullaniciTipiListesi" deep-watch="true" data-value="item.KULLANICI_TIPI_ID">
+                                                            <a>
+                                                                {{item.KULLANICI_TIPI_ADI}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frm_Kullanici.sel_KULLANICI_TIPI_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Cinsiyet</label>
+                                                <div class="col-lg-8">
+                                                    <label>
+                                                        <input type="radio" icheck ng-model="Kullanici.BoolCinsiyet" ng-value="false" ng-checked="!Kullanici.BoolCinsiyet"> Kadın
+                                                    </label>
+
+                                                    <label>
+                                                        <input type="radio" icheck ng-model="Kullanici.BoolCinsiyet" ng-value="true" ng-checked="Kullanici.BoolCinsiyet"> Erkek
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Doğum Tarihi</label>
+
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="datetime" class="formEkleDuzenleInput form-control" nextgen-date-picker="" ng-model="Kullanici.DOGUM_TARIHI">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">İşe Başlangıç Tarihi<span class="text-danger">*</span></label>
+
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="datetime" name="txtISE_BASLAMA_TARIHI" ng-model="Kullanici.ISE_BASLAMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control" required />
+
+                                                    </div>
+                                                    <p ng-show="frm_Kullanici.txtISE_BASLAMA_TARIHI.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">İşten Ayrılma Tarihi</label>
+
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="datetime" name="txtISTEN_AYRILMA_TARIHI" ng-model="Kullanici.ISTEN_AYRILMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control" />
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class=" pull-right">
+                                            <!--ng-class="{'col-sm-3' kullaniciID<=0, 'col-sm-4' kullaniciID > 0"-->
+
+                                            <button class="btn btn-sm btn-danger" type="button" ng-show="kullaniciID > 0" ng-click="kullaniciTemizle()">
+                                                <i class="fa fa-remove"></i>&nbsp;&nbsp;<span class="bold">Temizle</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="kullaniciKaydet(Kullanici)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-sm btn-primary " href="#" ui-sref="yonetim.kullanicitanimla"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="Kullanici.KULLANICI_ID>0">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-users"></i>  Kullanıcı Yetki Grupları
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form class="form-horizontal" name="frmKullaniciYetki" id="frmKullaniciYetki">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Yetki Grubu <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" allow-clear="true" id="sel_YETKI_GRUP_ID" name="sel_YETKI_GRUP_ID" ng-model="KullaniciYetki.YETKI_GRUP_ID"
+                                            data-live-search="true" title="Yetki Grubunu Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in YetkiGruplariListesi" deep-watch="true" data-value="item.YETKI_GRUP_ID">
+                                                <a>
+                                                    {{item.YETKI_GRUP_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmKullaniciYetki.sel_YETKI_GRUP_ID.$invalid && formCalistirildiKullaniciYetki" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-actions">
+                                    <div class="pull-right ">
+                                        <button class="btn btn-success pull-right" type="button" ng-click="kullaniciYetkiGrubuKaydet(KullaniciYetki)">
+                                            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="KullaniciYetkiGruplari.length > 0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="getKullaniciYetkiGruplari()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{toplamKayitSayisiKullaniciYetkiGrup}} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Grup Adı</b></td>
+                                            <td class="hidden-500px"><b>Açıklama</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="yetkiGrup in KullaniciYetkiGruplari">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="table-main">
+                                                {{yetkiGrup.YETKI_GRUP_ADI}}
+                                            </td>
+                                            <td class="hidden-500px">
+                                                {{yetkiGrup.YETKI_GRUP_ACIKLAMA}}
+                                            </td>
+                                            <td class="table-actions">
+                                                <a class=" btn btn-danger btn-sm" ng-click="modalKullaniciYetkiGrubuSilOnayi(yetkiGrup.KULLANICI_YETKI_GRUP_ID)" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i> <!--Sil--> </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" ng-if="KullaniciYetkiGruplari.length==0 ||KullaniciYetkiGruplari == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="getKullaniciYetkiGruplari()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Kullanıcı yetki grubu kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-users"></i>  Kullanıcı Proje
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal" name="frmKullaniciProje" id="frmKullaniciProje">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Kullanıcı Proje <span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" allow-clear="true" id="sel_PROJE_ID" name="sel_PROJE_ID" ng-model="KullaniciProje.PROJE_ID"
+                                            data-live-search="true" title="Proje Seçiniz" data-size="5" required="true">
+                                            <li nya-bs-option="item in ProjelerListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                <a>
+                                                    {{item.PROJE_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmKullaniciProje.sel_PROJE_ID.$invalid && formCalistirildiKullaniciProje" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-actions">
+                                    <div class="pull-right">
+                                        <button class="btn btn-success pull-right" type="button" ng-click="KullaniciProjeEkleGuncelle(KullaniciProje)">
+                                            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="KullaniciProjeListesi.length > 0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="KullaniciProjeGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{toplamKayitSayisiKullaniciProje}} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Proje Adı</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="projeKullanici in KullaniciProjeListesi">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="table-main">
+                                                {{projeKullanici.PROJE_ADI}}
+                                            </td>
+                                            <td class="table-actions">
+                                                <a class=" btn btn-danger btn-sm" ng-click="modalKullaniciProjeSilmeOnayi(projeKullanici.KULLANICI_PROJE_ID)" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i> <!--Sil--> </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriterListe.SayfaNo" ng-change="KullaniciProjeGetData(AramaKriterListe)" total-items="toplamKayitSayisiKullaniciProje"
+                                                            items-per-page="AramaKriterListe.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" ng-if="KullaniciProjeListesi.length==0 ||KullaniciProjeListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="KullaniciProjeGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Kullanıcı proje kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

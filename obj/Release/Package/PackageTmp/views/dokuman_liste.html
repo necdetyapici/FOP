@@ -1,0 +1,98 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <!--<h2>Proje İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                Doküman Yönetim Sistemi
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-truck"></i>
+                    Dokümanlar
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Dokümanlar
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <a class="btn btn-sm btn-success" ng-show="DOKUMAN_CINSI_ID != 0 && DOKUMAN_CINSI_ID != null " ui-sref="dokuman.dokumanyetkikullanicilistesi({ dokumanKlasorID: DOKUMAN_KLASOR_ID})"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;<span class="bold">Yetki</span></a>
+                                        <button class="btn btn-sm btn-warning" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != null" ng-click="DokumanTalepAc()"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;<span class="bold">Talep</span></button>
+                                        <a class="btn btn-sm btn-success" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != null" ui-sref="dokuman.revizyonlistesi({dokumanID: DOKUMAN_ID})"><i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;<span class="bold">Revizyonlar</span></a>
+                                        <button class="btn btn-sm btn-info" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != null" ui-sref="dokuman.dokumanyayinlistesi({ dokumanID: DOKUMAN_ID})"><i class="fa fa-info"></i>&nbsp;&nbsp;<span class="bold">Versiyonlar</span></button>
+                                        <!--<button class="btn btn-sm btn-info" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != null" ng-click="YayinAc()"><i class="fa fa-info"></i>&nbsp;&nbsp;<span class="bold">Yayınla</span></button>-->
+                                        <button class="btn btn-sm btn-danger" ng-show="DOKUMAN_CINSI_ID != 0 && DOKUMAN_CINSI_ID != null" ng-click="modalSilmeOnayi()"><i class="fa fa-close"></i>&nbsp;&nbsp;<span class="bold">Sil</span></button>
+                                        <a class="btn btn-sm btn-success" ui-sref="dokuman.calismaalanim ({ dokumanID: DOKUMAN_ID})" ng-show="DOKUMAN_CINSI_ID == dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != null"><i class="fa fa-edit"></i>&nbsp;&nbsp;<span class="bold">Düzenle</span></a>
+                                        <button class="btn btn-sm btn-success" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != null" ng-click="DokumanIndirGetData(DOKUMAN_ID)"><i class="fa fa-download"></i>&nbsp;&nbsp;<span class="bold">İndir</span></button>
+                                        <button class="btn btn-sm btn-success" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != null" ng-click="DokumanYukle(DOKUMAN_ID)"><i class="fa fa-upload"></i>&nbsp;&nbsp;<span class="bold">Güncelle</span></button>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ng-show="DOKUMAN_CINSI_GOSTER == true && DOKUMAN_CINSI_ID == dokumanCinsi.emfadokuman" id="onizleme">
+                                        <textarea ui-tinymce="tinymceOptions" ng-model="DOKUMAN_ON_IZLEME"></textarea>
+                                    </div>
+                                    <iframe  ng-show="DOKUMAN_CINSI_GOSTER == true && DOKUMAN_CINSI_ID != dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != dokumanCinsi.klasor" id="pdf"  class="pdf-object-container"></iframe>
+                                    <img ng-show="DOKUMAN_CINSI_GOSTER == false" style="width:100%; height:auto;" id = "imgpdf"  alt="Alternate Text" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3" id="agac">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul style="list-style-type: none; margin: 0px; overflow: hidden; padding: 0px;">
+                                        <li style="margin: 0px 5px 0px 0px;float: left;"><a class="btn btn-primary btn-sm " ng-click="DokumanEkle()"><i class="fa fa-plus"></i> Doküman </a> </li>
+                                        <li style="margin: 0px 5px 0px 0px;float: left;"><a class="btn btn-primary btn-sm " ng-click="KlasorEkle()"><i class="fa fa-plus"></i> Klasör </a> </li>
+                                        <li style="float: left;"><a class="btn btn-primary btn-sm " ng-click="DokumanYukle()"><i class="fa fa-paper-plane"></i> Yükle </a></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                           
+                            <div class="hr-line-dashed"></div>
+                            <div id="tree"></div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    
+</script>
+
+
+

@@ -1,0 +1,197 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <h2>Bilgi Güvenliği Açıklık</h2>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i> <a ui-sref="anasayfa"> Ana Sayfa</a></li>
+            <li><i class="fa fa-briefcase"></i> Tanımlamalar</li>
+            <li class="active"><strong><i class="fa fa-university"></i> Bilgi Güvenliği Açıklık</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-university"></i>
+                        Açıklık Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp; Açıklık bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmAciklik" id="frmAciklik" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Açıklık Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtB_G_ACIKLIK_ADI" id="txtB_G_ACIKLIK_ADI" ng-model="Info.B_G_ACIKLIK_ADI" class="formEkleDuzenleInput form-control" placeholder="Açıklık adını giriniz.">
+                                            <p ng-show="frmAciklik.txtB_G_ACIKLIK_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="BGAciklikEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </button>
+                                            <!--<a class="btn btn-primary" href="#" ui-sref="tanimlamalar.bgacikliklistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe"><i class="fa fa-list"></i> Açıklık Listesi</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-BgAciklik" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Açıklık Adı</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtB_G_ACIKLIK_ADI" id="txtB_G_ACIKLIK_ADI" ng-model="AramaKriter.B_G_ACIKLIK_ADI" class="form-control formEkleDuzenleInput " placeholder="Açıklık adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="BGAciklikGetData(AramaKriter, AramaKriter.SayfaNo = 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-show="BGAciklikListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref="tanimlamalar.bgaciklikkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="BGAciklikGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Açıklık Adı</b></td>
+                                            <td><b>Kayıt Tarihi</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in BGAciklikListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <a class="editLink-Emfa" ui-sref="tanimlamalar.bgaciklikkayit({ bgAciklikID: post.B_G_ACIKLIK_ID})">{{post.B_G_ACIKLIK_ADI}}</a><br />
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary label-kayit-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.KAYIT_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="tanimlamalar.bgaciklikkayit({ bgAciklikID: post.B_G_ACIKLIK_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="BGAciklikGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" ng-show="BGAciklikListesi.length==0||BGAciklikListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref="tanimlamalar.bgaciklikkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="BGAciklikGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Bilgi Güvenliği bağlı açıklık kaydı <strong>bulunmamaktadır.</strong>
+                                <!--Eklemek için <a ui-sref="tanimlamalar.bgaciklikkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

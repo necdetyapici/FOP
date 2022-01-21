@@ -1,0 +1,25 @@
+﻿<div class="wrapper wrapper-content" style="padding-bottom:20px!important;">
+    <div class="row">
+        <div class="col-lg-12 basvuru-evrak">
+            <iframe id="pdf" src="{{RaporData.Dosya}}" class="pdf-object-container"></iframe>
+            <!--<iframe id="pdf"  class="pdf-object-container"></iframe>-->
+        </div>
+    </div>
+    <div class="row m-t-sm">
+        <div class="col-sm-6">
+            <button class="btn btn-success" ng-show="RaporData.canPrint" onclick="var PDF = document.getElementById('pdf'); PDF.focus(); PDF.contentWindow.print();"><i class="fa fa-print"></i>&nbsp;&nbsp;Yazdır</button>
+
+            <!--<button class="btn btn-primary" ng-show="RaporData.ekUzanti == 'pdf'" ng-click="RaporData.Ek='pdf'; exportReport()"><i class="fa fa-download"></i>&nbsp;&nbsp;PDF</button>-->
+            <button class="btn btn-primary" ng-show="RaporData.ekUzantiIki == 'doc' || RaporData.ekUzantiIki == 'docx'" ng-click="exportReport(RaporData.Dosya, RaporData.ekUzantiIki )"><i class="fa fa-download"></i>&nbsp;&nbsp;Doc</button>
+            <button class="btn btn-primary" ng-show="RaporData.ekUzantiIki == 'xls' || RaporData.ekUzantiIki == 'xlsx'" ng-click="exportReport(RaporData.Dosya, RaporData.ekUzantiIki )"><i class="fa fa-download"></i>&nbsp;&nbsp;Excel</button>
+
+            <a href="{{RaporData.Dosya}}" ng-show="RaporData.ekUzanti == 'pdf'" target="_blank" class="btn btn-primary" download=""><i class="fa fa-download"></i>&nbsp;&nbsp;PDF</a>
+
+        </div>
+        <div class="col-sm-6">
+            <div class="pull-right">
+                <button class="btn btn-primary" ng-click="modalDokumanGizle()"><i class="fa fa-close"></i>&nbsp;&nbsp;Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>

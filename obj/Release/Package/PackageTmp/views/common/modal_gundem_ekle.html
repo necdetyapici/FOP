@@ -1,0 +1,20 @@
+﻿<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Gündem Ekle</h4>
+        
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmToplantiGundem" id="frmToplantiGundem" class="form-horizontal" accessible-form>
+            <select name="cmbTOPLANTI_GUNDEM_HAVUZU_GEREKCE" id="cmbTOPLANTI_GUNDEM_HAVUZU_GEREKCE" ng-options="c.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE  for c in ToplantiGundemiHavuzuListesi"
+                    multiple
+                    ng-model="InfoToplantiGundem"
+                    bs-duallistbox required></select>
+            <p ng-show="frmToplantiGundem.cmbTOPLANTI_GUNDEM_HAVUZU_GEREKCE.$invalid &amp;&amp; formCalistirildiToplantiGundemHavuzuGerekce" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+        </form>
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success"  ng-click="ToplantiGundemEkle(InfoToplantiGundem , frmToplantiGundem)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="Geri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

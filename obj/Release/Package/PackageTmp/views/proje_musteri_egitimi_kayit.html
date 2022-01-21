@@ -1,0 +1,79 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Müşteri Eğitimi Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Proje Müşteri Eğitim bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeMusteriEgitimi" id="frmProjeMusteriEgitimi" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitmen<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_PERSONEL_ID" name="cmbPROJE_PERSONEL_ID" ng-model="InfoProjeMusteriEgitimi.PROJE_PERSONEL_ID"
+                                                data-live-search="true" title="Eğitmen Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjePersonelListesi" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                    <a>
+                                                        {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeMusteriEgitimi.cmbPROJE_PERSONEL_ID.$invalid && formCalistirildiProjeMusteriEgitimi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Aracı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <textarea name="txtEGITIM_ARACI" style="resize:none;" rows="3"  ng-model="InfoProjeMusteriEgitimi.EGITIM_ARACI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Egitim aracı giriniz." required />
+                                            <p ng-show="frmProjeMusteriEgitimi.txtEGITIM_ARACI.$invalid && formCalistirildiProjeMusteriEgitimi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>                                   
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Yeri <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <textarea name="txtEGITIM_YERI" style="resize:none;" rows="3" ng-model="InfoProjeMusteriEgitimi.EGITIM_YERI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Egitim yeri giriniz." required> </textarea>
+                                            <p ng-show="frmProjeMusteriEgitimi.txtEGITIM_YERI.$invalid && formCalistirildiProjeMusteriEgitimi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeMusteriEgitimiEkleGuncelle(InfoProjeMusteriEgitimi)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.musteriegitimilistesi">
+                                                <i class="fa fa-reply-all"></i> &nbsp;&nbsp; <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

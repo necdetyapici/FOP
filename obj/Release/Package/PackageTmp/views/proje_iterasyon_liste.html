@@ -1,0 +1,328 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> İterasyon Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen İterasyon bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeiterasyon" id="frmProjeiterasyon" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtPROJE_ITERASYON_ADI" id="txtPROJE_ITERASYON_ADI" ng-model="InfoProjeiterasyon.PROJE_ITERASYON_ADI" class="formEkleDuzenleInput form-control" ng-maxlength="50" ng-minlength="1" placeholder="İterasyon adını giriniz." required>
+                                            <p ng-show="frmProjeiterasyon.txtPROJE_ITERASYON_ADI.$invalid && formCalistirildiProjeiterasyon" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon Sürüm<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_SURUM_ID" name="cmbPROJE_SURUM_ID" ng-model="InfoProjeiterasyon.PROJE_SURUM_ID"
+                                                data-live-search="true" title="Proje Sürüm Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjeSurumListesi" deep-watch="true" data-value="item.PROJE_SURUM_ID">
+                                                    <a>
+                                                        {{item.PROJE_SURUM_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeiterasyon.cmbPROJE_SURUM_ID.$invalid && formCalistirildiProjeiterasyon" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon Durum Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbITERASYON_DURUM_TIPI_ID" name="cmbITERASYON_DURUM_TIPI_ID" ng-model="InfoProjeiterasyon.ITERASYON_DURUM_TIPI_ID"
+                                                data-live-search="true" title="İterasyon Durum Tipi Seçiniz" data-size="5" allow-clear="true" required="true">
+                                                <li nya-bs-option="item in IterasyonDurumListesi" deep-watch="true" data-value="item.ITERASYON_DURUM_TIPI_ID">
+                                                    <a>
+                                                        {{item.ITERASYON_DURUM_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeiterasyon.cmbITERASYON_DURUM_TIPI_ID.$invalid && formCalistirildiProjeiterasyon" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Başlangıç Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="datetime" name="txtPROJE_ITERASYON_BASLANGIC_TARIHI" id="txtPROJE_ITERASYON_BASLANGIC_TARIHI" ng-model="InfoProjeiterasyon.PROJE_ITERASYON_BASLANGIC_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput" required>
+                                            <p ng-show="frmProjeiterasyon.txtPROJE_ITERASYON_BASLANGIC_TARIHI.$invalid && formCalistirildiProjeiterasyon" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Bitiş Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="datetime" name="txtPROJE_ITERASYON_BITIS_TARIHI" id="txtPROJE_ITERASYON_BITIS_TARIHI" ng-model="InfoProjeiterasyon.PROJE_ITERASYON_BITIS_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput" required>
+                                            <p ng-show="frmProjeiterasyon.txtPROJE_ITERASYON_BITIS_TARIHI.$invalid && formCalistirildiProjeiterasyon" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Modülü</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_MODUL_ID" name="cmbPROJE_MODUL_ID" allow-clear="true" ng-model="InfoProjeiterasyon.PROJE_MODUL_ID"
+                                                data-live-search="true" title="Proje Modülü Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                    <a>
+                                                        {{item.MODUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeIterasyonEkleGuncelle(InfoProjeiterasyon)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </button>
+                                            <!--<a class="btn btn-sm btn-primary"
+                                               href="#"
+                                               ui-sref="proje.projelerkayit.talepyonetimsistemi.projeiterasyonlistesi"
+                                               data-ui-sref-opts="{reload:true}">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> İterasyon Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-ProjeIterasyon" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtPROJE_ITERASYON_ADI" id="txtPROJE_ITERASYON_ADI" ng-model="AramaKriter.PROJE_ITERASYON_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="İterasyon adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon Sürüm</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtPROJE_SURUM_ADI" id="txtPROJE_SURUM_ADI" ng-model="AramaKriter.PROJE_SURUM_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Proje sürümünü giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Modülü</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="sel_PROJE_MODUL_ID" name="sel_PROJE_MODUL_ID" ng-model="AramaKriter.PROJE_MODUL_ID"
+                                                data-live-search="true" title="Proje Modülü Seçiniz" data-size="5" allow-clear="true" required="true">
+                                                <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                    <a>
+                                                        {{item.MODUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Başlangıç Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtPROJE_ITERASYON_BASLANGIC_TARIH" id="txtPROJE_ITERASYON_BASLANGIC_TARIH" ng-model="AramaKriter.PROJE_ITERASYON_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Bitiş Tarihi </label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtPROJE_ITERASYON_BITIS_TARIH" id="txtPROJE_ITERASYON_BITIS_TARIH" ng-model="AramaKriter.PROJE_ITERASYON_BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="ProjeIterasyonGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="ProjeIterasyonListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="proje.projelerkayit.talepyonetimsistemi.projeiterasyonkayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjeIterasyonGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>İterasyon Adı</b></td>
+                                            <td><b>İterasyon Durum</b></td>
+                                            <td><b>Modül Adı</b></td>
+                                            <td><b>Başlangıç Tarihi</b></td>
+                                            <td><b>Bitiş Tarihi</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in ProjeIterasyonListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <a class="editLink-Emfa" ui-sref="proje.projelerkayit.talepyonetimsistemi.projeiterasyonkayit({ projeIterasyonID: post.PROJE_ITERASYON_ID})">{{post.PROJE_ITERASYON_ADI}}</a><br />
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.PROJE_DURUM_TIPI_ADI}}<br />
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.MODUL_ADI}}<br />
+                                            </td>
+
+
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.PROJE_ITERASYON_BASLANGIC_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-danger">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.PROJE_ITERASYON_BITIS_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="proje.projelerkayit.talepyonetimsistemi.projeiterasyonkayit({ projeIterasyonID: post.PROJE_ITERASYON_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjeIterasyonGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeIterasyonListesi.length==0||ProjeIterasyonListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="proje.projelerkayit.talepyonetimsistemi.projeiterasyonkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeIterasyonGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Proje işlemlerine bağlı iterasyon kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

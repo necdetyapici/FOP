@@ -1,0 +1,645 @@
+<div ng-init="init()"></div>
+
+
+
+
+
+
+
+
+<!-- Wrapper-->
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div ng-include="'views/common/navigation.html'"></div>
+
+    <!-- Page wraper -->
+    <div id="page-wrapper" class="gray-bg {{$state.current.name}}">
+
+        <!-- Page wrapper -->
+        <div ng-include="'views/common/topnavbar.html'"></div>
+
+        <div class="row  border-bottom white-bg dashboard-header">
+
+            <div class="col-sm-3">
+                <h4>Ana Sayfa</h4>
+                <small>{{$storage.AD_SOYAD}}, PICT'e hoşgeldiniz.</small>
+
+            </div>
+
+            <div class="col-sm-9">
+
+
+
+
+            </div>
+        </div>
+        <div class="wrapper padding-bottom wrapper-content">
+            <div class="animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div ng-class="{ 'col-lg-3': !$storage.IS_KURUM_MUSTERI_KULLANICI, 'col-lg-6' : $storage.IS_KURUM_MUSTERI_KULLANICI}">
+                                <div class="widget lazur-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-bell fa-4x"></i>
+                                        <h1 class="m-xs">{{InfoTalepProjeCount.AKTIF_COUNT}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Aktif Taleplerim
+                                        </h3>
+                                        <br />
+                                        <a class="btn btn-xs anasayfa-widget-button-lazur" ng-click="TalepleriListele('AktifTalep')"><i class="fa fa-search"></i> Listele </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-class="{ 'col-lg-3': !$storage.IS_KURUM_MUSTERI_KULLANICI, 'col-lg-6' : $storage.IS_KURUM_MUSTERI_KULLANICI}">
+                                <div class="widget red-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-exclamation-triangle fa-4x"></i>
+                                        <h1 class="m-xs">{{InfoTalepProjeCount.KAPALI_COUNT}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Kapalı Taleplerim
+                                        </h3>
+                                        <br />
+                                        <a class="btn btn-xs anasayfa-widget-button-red" ng-click="TalepleriListele('KapaliTalep')"><i class="fa fa-search"></i> Listele </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3" ng-show="!$storage.IS_KURUM_MUSTERI_KULLANICI">
+                                <div class="widget navy-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-bell fa-4x"></i>
+                                        <h1 class="m-xs">{{InfoProjePlaniCount.AKTIF_COUNT_PLAN}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Aktif Planlarım
+                                        </h3>
+                                        <br />
+                                        <a class="btn btn-xs anasayfa-widget-button-lazur" ng-click="PlanlarimListele('AktifPlanlarim')"><i class="fa fa-search"></i> Listele </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3" ng-show="!$storage.IS_KURUM_MUSTERI_KULLANICI">
+                                <div class="widget blue-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-eye fa-4x"></i>
+                                        <h1 class="m-xs">{{InfoProjePlaniCount.GOZDEN_GECIRILEN_COUNT_PLAN}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Gözden Geçirilen Planlarım
+                                        </h3>
+                                        <br />
+                                        <a class="btn btn-xs anasayfa-widget-button-blue" ng-click="PlanlarimListele('GozdenGecirilenPlanlarim')"><i class="fa fa-search"></i> Listele </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div>
+                                    <br />
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 1)" tooltip="DFI taleplerimi listele.">{{TalepTipiDfi}}</button>
+                                                    DFI
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-success m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 2)" tooltip="Problem taleplerimi listele.">{{TalepTipiProblem}}</button>
+                                                    Problem
+                                                </td>
+
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-info m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 3)" tooltip="Değişiklik taleplerimi listele.">{{TalepTipiDegisiklik}}</button>
+                                                    Değişiklik
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-default m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 4)" tooltip="Test taleplerimi listele.">{{TalepTipiTest}}</button>
+                                                    Test
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-warning m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 5)" tooltip="Risk taleplerimi listele.">{{TalepTipiRisk}}</button>
+                                                    Risk
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 6)" tooltip="Geliştirme taleplerimi listele.">{{TalepTipiGelistirme}}</button>
+                                                    Geliştirme
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 7)" tooltip="Yeni İstek taleplerimi listele.">{{TalepTipiYeniIstek}}</button>
+                                                    Yeni İstek
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-info m-r-sm" ng-click="TalepleriListele('SeciliTalepTipi',TALEP_TIPI_ID = 8)" tooltip="Genel taleplerimi listele.">{{TalepTipiGenel}}</button>
+                                                    Genel
+                                                </td>
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" ng-show="!$storage.IS_KURUM_MUSTERI_KULLANICI">
+                                <div class="widget lazur-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-bell fa-4x"></i>
+                                        <h1 class="m-xs">{{InfoProjePlaniCount.ILGILI_COUNT_PLAN}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            İlgili Olduğu Planlar
+                                        </h3>
+                                        <br />
+                                        <a class="btn btn-xs anasayfa-widget-button-lazur" ng-click="PlanlarimListele('IlgiliPlanlarim')"><i class="fa fa-search"></i> Listele </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3" ng-show="!$storage.IS_KURUM_MUSTERI_KULLANICI">
+                                <div class="widget yellow-bg p-lg text-center">
+                                    <div class="m-b-md">
+                                        <i class="fa fa-exclamation-triangle fa-4x"></i>
+                                        <h1 class="m-xs">{{InfoProjePlaniCount.REDDEDILMIS_COUNT_PLAN}}</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Reddedilmiş Planlarım
+                                        </h3>
+                                        <br />
+                                        <a class="btn btn-xs anasayfa-widget-button-yellow" ng-click="PlanlarimListele('ReddedilmisPlanlarim')"><i class="fa fa-search"></i> Listele </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div ng-class="{ 'col-lg-6': !$storage.IS_KURUM_MUSTERI_KULLANICI, 'col-lg-12' : $storage.IS_KURUM_MUSTERI_KULLANICI}">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Taleplerim </h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-lg-7 m-b-xs">
+                                                <fieldset ng-disabled="GunHaftaAy">
+                                                    <div data-toggle="buttons" class="btn-group">
+                                                        <label class="btn btn-sm btn-white" ng-click="Taleplerim('Gun')"> <input type="radio" id="option1" name="options"> Bugün </label>
+                                                        <label class="btn btn-sm btn-white active" ng-click="Taleplerim('Hafta')"> <input type="radio" id="option2" name="options"> Hafta </label>
+                                                        <label class="btn btn-sm btn-white" ng-click="Taleplerim('Ay')"> <input type="radio" id="option3" name="options"> Ay </label>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+
+                                            <div class="col-lg-5 m-b-xs">
+                                                <!-- FİLTRELEME ALANI DIV i -->
+                                                <div class="pull-right">
+                                                    <a ng-click="taleplerimFiltreleme = !taleplerimFiltreleme" ng-class="{ 'btn-white': taleplerimFiltreleme, 'btn-white active' : !taleplerimFiltreleme}" class="btn btn-sm" tooltip="Filtreleme Alanını Göster" tooltip-append-to-body="true"><i class="fa fa-filter"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="taleplerimFiltreleme">
+                                            <div class="col-lg-12">
+
+                                                <form name="src-avans" class="form-horizontal">
+                                                    <div class="formEkleDuzenleInputs">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label">No</label>
+                                                                    <div class="col-lg-9">
+                                                                        <input type="number" name="txtTALEP_PROJE_TALEP_NO" id="txtTALEP_PROJE_TALEP_NO" ng-model="AramaKriterTalep.TALEP_PROJE_TALEP_NO" class="form-control formEkleDuzenleInput input-sm" placeholder="No giriniz.">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label">Durum </label>
+                                                                    <div class="col-lg-9">
+                                                                        <ol class="nya-bs-select form-control input-small" id="sel_TALEP_DURUM_TIPI_ID" name="sel_TALEP_DURUM_TIPI_ID" ng-model="AramaKriterTalep.TALEP_DURUM_TIPI_ID"
+                                                                            data-live-search="true" title="Seçiniz" data-size="5" allow-clear=" true">
+                                                                            <li nya-bs-option="item in TalepDurumListesi" deep-watch="true" data-value="item.TALEP_DURUM_TIPI_ID">
+                                                                                <a>
+                                                                                    {{item.TALEP_DURUM_TIPI_ADI}}
+                                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ol>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label"> Baş. Tarihi</label>
+                                                                    <div class="col-lg-9 small">
+                                                                        <div class="input-group date">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="datetime" name="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" id="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" ng-model="AramaKriterTalep.TALEP_PLANLANAN_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse input-sm">
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label"> Bit. Tarihi </label>
+                                                                    <div class="col-lg-9">
+                                                                        <div class="input-group date">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="datetime" name="txtTALEP_PLANLANAN_BITIS_TARIHI" id="txtTALEP_PLANLANAN_BITIS_TARIHI" ng-model="AramaKriterTalep.TALEP_PLANLANAN_BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse input-sm">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="form-actions">
+                                                                <div class="col-lg-12">
+                                                                    <div class="pull-right">
+
+                                                                        <button ng-click="TalepleriListele(AramaKriterTalep, AramaKriterTalep.SayfaNo= 1)" class="btn btn-xs btn-warning" type="submit">
+                                                                            <i class="fa fa-filter"></i>&nbsp;
+                                                                            <strong>Filtrele</strong>
+                                                                        </button>
+                                                                        <button ng-click="filtreTemizleTaleplerim()" class="btn btn-xs btn-danger" type="submit">
+                                                                            <i class="fa fa-eraser"></i>&nbsp;
+                                                                            <strong>Temizle</strong>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-if="TaleplerimListesi.length > 0">
+                                            <div class="col-lg-12">
+                                                <div class="client-detail ">
+                                                    <div class="full-height-scroll" full-scroll>
+                                                        <div class="project-list">
+                                                            <table class="table table-striped table-hover table-topFixed">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No </th>
+                                                                        <th>Durum</th>
+                                                                        <th>Konu </th>
+                                                                        <th>Baş - Bit Tarihi </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="post in TaleplerimListesi | filter:ignoreTurkish" style="background-color:{{post.PROJE_ETKI_RENK_KODU}} !important">
+
+                                                                        <td class="anasayfa-table-font">{{post.TALEP_PROJE_TALEP_NO}}</td>
+                                                                        <td class="anasayfa-table-font">{{post.TALEP_DURUM_TIPI_ADI}}</td>
+                                                                        <td class="editLink-Emfa anasayfa-table-font">
+                                                                            <a class="editLink-Emfa anasayfa-table-font" toolTip="{{post.TALEP_PROJE_KONU}}" ui-sref="talep.talepprojekayit.talepprojekart({talepProjeID: post.TALEP_PROJE_ID})">{{post.TALEP_PROJE_KONU | limitTo: 25}}{{post.TALEP_PROJE_KONU.length < 25 ? '' : '...'}}</a><br />
+                                                                        </td>
+                                                                        <td class="tarih anasayfa-table-font">
+                                                                            <span class="label label-warning">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                                {{post.TALEP_PLANLANAN_BASLANGIC_TARIHI | tarih}} -
+                                                                                {{post.TALEP_PLANLANAN_BITIS_TARIHI | tarih}}
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-if="TaleplerimListesi.length == 0 || TaleplerimListesi == null">
+                                            <div class="col-lg-12">
+                                                <br />
+                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                    <i class="fa fa-exclamation-circle"></i>
+                                                    &nbsp;Talep kaydı <strong>bulunmamaktadır.</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" ng-show="!$storage.IS_KURUM_MUSTERI_KULLANICI">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Proje Planlarım </h5>
+
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="row">
+                                            <div class="col-lg-7 ">
+                                                <fieldset ng-disabled="GunHaftaAyPlan">
+                                                    <div data-toggle="buttons" class="btn-group">
+                                                        <label class="btn btn-sm btn-white" ng-click="Planlarim('Gun')"> <input type="radio" id="option1" name="options"> Bugün </label>
+                                                        <label class="btn btn-sm btn-white active" ng-click="Planlarim('Hafta')"> <input type="radio" id="option2" name="options"> Hafta </label>
+                                                        <label class="btn btn-sm btn-white" ng-click="Planlarim('Ay')"> <input type="radio" id="option3" name="options"> Ay </label>
+                                                    </div>
+                                                </fieldset>
+
+                                            </div>
+
+                                            <div class="col-lg-5">
+                                                <!-- FİLTRELEME ALANI DIV i -->
+                                                <div class="pull-right">
+                                                    <a ng-click="planlarimFiltreleme = !planlarimFiltreleme" ng-class="{ 'btn-white': planlarimFiltreleme, 'btn-white active' : !planlarimFiltreleme}" class="btn btn-sm " tooltip="Filtreleme Alanını Göster" tooltip-append-to-body="true"><i class="fa fa-filter"></i></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-show="planlarimFiltreleme">
+                                            <div class="col-lg-12">
+                                                <form name="src-avans" class="form-horizontal">
+                                                    <div class="formEkleDuzenleInputs">
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label">No</label>
+                                                                    <div class="col-lg-9">
+                                                                        <input type="number" name="txtTASK_NO" id="txtTASK_NO" ng-model="AramaKriterPlan.TASK_NO" class="form-control formEkleDuzenleInput input-sm" placeholder="No giriniz.">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label">Adı</label>
+                                                                    <div class="col-lg-9">
+                                                                        <input type="text" name="txtTASK_ADI" id="txtTASK_ADI" ng-model="AramaKriterPlan.TASK_ADI" class="form-control formEkleDuzenleInput input-sm" placeholder="Adını giriniz.">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label"> Baş. Tarihi</label>
+                                                                    <div class="col-lg-9">
+                                                                        <div class="input-group date">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="datetime" name="txtBASLANGIC_TARIHI" id="txtBASLANGIC_TARIHI" ng-model="AramaKriterPlan.BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse input-sm">
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label class="col-lg-3 control-label"> Bit. Tarihi </label>
+                                                                    <div class="col-lg-9">
+                                                                        <div class="input-group date">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <input type="datetime" name="txtBITIS_TARIHI" id="txtBITIS_TARIHI" ng-model="AramaKriterPlan.BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse input-sm">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="form-actions">
+                                                                <div class="col-lg-12">
+                                                                    <div class="pull-right">
+                                                                        <button ng-click="PlanlarimListele(AramaKriterPlan, AramaKriterPlan.SayfaNo= 1)" class="btn btn-xs btn-warning" type="submit">
+                                                                            <i class="fa fa-filter"></i>&nbsp;
+                                                                            <strong>Filtrele</strong>
+                                                                        </button>
+                                                                        <button ng-click="filtreTemizlePlanlarim()" class="btn btn-xs btn-danger" type="submit">
+                                                                            <i class="fa fa-eraser"></i>&nbsp;
+                                                                            <strong>Temizle</strong>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                        <div class="row" ng-if="PlanlarimListesi.length > 0">
+                                            <div class="col-lg-12">
+                                                <div class="client-detail ">
+                                                    <div class="full-height-scroll" full-scroll>
+                                                        <div class="project-list">
+                                                            <table class="table table-striped table-hover table-topFixed">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>No</th>
+                                                                        <th>Durum</th>
+                                                                        <th>Adı</th>
+                                                                        <th>Baş - Bit Tarihi </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="post in PlanlarimListesi | filter:ignoreTurkishPlanlarim">
+                                                                        <td class="anasayfa-table-font">{{post.TASK_NO}}</td>
+                                                                        <td class="anasayfa-table-font">{{post.IS_DURUMU_ADI}}</td>
+                                                                        <td class="editLink-Emfa">
+                                                                            <a class="editLink-Emfa anasayfa-table-font" tooltip="{{post.TASK_ADI}}" ui-sref="proje.projelerkayit.plan.projeplanikayit({projeID: post.PROJE_ID, projePlanID: post.PROJE_PLANI_ID})">{{post.TASK_ADI | limitTo: 25}}{{post.TASK_ADI.length < 25 ? '' : '...'}}</a><br />
+                                                                        </td>
+                                                                        <td class="tarih anasayfa-table-font">
+                                                                            <span class="label label-warning">
+                                                                                <i class="fa fa-calendar"></i>
+                                                                                {{post.BASLANGIC_TARIHI | tarih}} - {{post.BITIS_TARIHI | tarih}}
+                                                                            </span>
+                                                                        </td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-if="PlanlarimListesi.length == 0 || PlanlarimListesi == null">
+                                            <div class="col-lg-12">
+                                                <br />
+                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                    <i class="fa fa-exclamation-circle"></i>
+                                                    &nbsp;Plan kaydı <strong>bulunmamaktadır.</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-2">
+                    <div class="sidebar-panel">
+                        <div>
+                            <h4>
+                                <span class="badge badge-info pull-right" ng-click="DuyuruListele()">Listele</span>
+                                Duyurular
+                            </h4>
+                            <div class="feed-element" ng-repeat="post in DuyuruListesi">
+                                <div class="media-body">
+                                    <a class="editLink-Emfa" ng-click="duyuruAlert(post.KONU, post.METNI)">{{post.KONU | limitTo: 50}}{{post.KONU.length < 50 ? '' : '...'}}</a><br />
+                                    <small class="text-muted">{{post.KAYIT_TARIHI | tarih}}</small>
+                                </div>
+                            </div>
+
+
+                            <div class="m-t-md">
+                                <h4>Eklentiler</h4>
+                                <div>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <span class="badge badge-primary pull-left"><i class="fa fa-plus-square"></i></span> &nbsp;
+                                            <a ng-click="DuyuruEkle()">Duyuru Ekle</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                    <!--<div class="m-t-md">
+                    <h4>Statistics</h4>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.
+                    </p>
+                    <div class="row m-t-sm">
+                        <div class="col-md-6">
+                            <bar-chart data="main.BarChart3.data" options="main.BarChart3.options"></bar-chart>
+                            <h5><strong>169</strong> Posts</h5>
+                        </div>
+                        <div class="col-md-6">
+                            <bar-chart data="main.BarChart2.data" options="main.BarChart2.options"></bar-chart>
+                            <h5><strong>28</strong> Orders</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-t-md">
+                    <h4>Discussion</h4>
+                    <div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <span class="badge badge-primary">16</span>
+                                General topic
+                            </li>
+                            <li class="list-group-item ">
+                                <span class="badge badge-info">12</span>
+                                The generated Lorem
+                            </li>
+                            <li class="list-group-item">
+                                <span class="badge badge-warning">7</span>
+                                There are many variations
+                            </li>
+                        </ul>
+                    </div>
+                </div>-->
+                </div>
+            </div>
+        </div>
+        <div ng-include="'views/common/footer.html'"></div>
+    </div>
+</div>
+
+
+<!--<div class="small-chat-box ng-small-chat fadeInRight animated" ng-show="openChat">
+
+    <div class="heading" draggable="true">
+        <small class="chat-date pull-right">
+            02.19.2015
+        </small>
+        Small chat
+    </div>
+
+    <div class="content" chat-slim-scroll>
+
+        <div class="left">
+            <div class="author-name">
+                Monica Jackson <small class="chat-date">
+                    10:02 am
+                </small>
+            </div>
+            <div class="chat-message active">
+                Lorem Ipsum is simply dummy text input.
+            </div>
+
+        </div>
+        <div class="right">
+            <div class="author-name">
+                Mick Smith
+                <small class="chat-date">
+                    11:24 am
+                </small>
+            </div>
+            <div class="chat-message">
+                Lorem Ipsum is simpl.
+            </div>
+        </div>
+        <div class="left">
+            <div class="author-name">
+                Alice Novak
+                <small class="chat-date">
+                    08:45 pm
+                </small>
+            </div>
+            <div class="chat-message active">
+                Check this stock char.
+            </div>
+        </div>
+        <div class="right">
+            <div class="author-name">
+                Anna Lamson
+                <small class="chat-date">
+                    11:24 am
+                </small>
+            </div>
+            <div class="chat-message">
+                The standard chunk of Lorem Ipsum
+            </div>
+        </div>
+        <div class="left">
+            <div class="author-name">
+                Mick Lane
+                <small class="chat-date">
+                    08:45 pm
+                </small>
+            </div>
+            <div class="chat-message active">
+                I belive that. Lorem Ipsum is simply dummy text.
+            </div>
+        </div>
+
+
+    </div>
+    <div class="form-chat">
+        <div class="input-group input-group-sm">
+            <input type="text" class="form-control"> <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">
+                    Send
+                </button>
+            </span>
+        </div>
+    </div>
+
+</div>-->
+<!-- Footer -->
+
+
+        </div>
+<!-- End page wrapper-->
+<!-- Right Sidebar -->
+<div ng-include="'views/common/right_sidebar.html'"></div>
+
+    </div>
+</div>
+<!-- End wrapper-->

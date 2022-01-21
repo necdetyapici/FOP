@@ -1,0 +1,100 @@
+﻿<div ng-init="init()"></div>
+<div ui-view>
+    <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <!--show data on table-->
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i> Teknolojik Fizibilite Listesi
+                        </h5>
+                    </div>
+
+                    <div class="ibox-content" ng-if="ProjeTeknolojikFizibiliteListesi.length > 0">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group" ng-repeat="post in ProjeTeknolojikFizibiliteListesi | filter:ignoreTurkish" ng-if="post.UST_TEKNOLOJIK_FIZIBILITE_ID==null">
+
+                                        <div class="row">
+                                            <div class="col-lg-3"><b>{{ post.TEKNOLOJIK_FIZIBILITE_ADI}}</b></div>
+                                            <div class="col-lg-9">
+                                                <div class="row" style="padding-bottom:10px;">
+                                                    <div class="col-lg-2"><b>No</b></div>
+                                                    <div class="col-lg-4"><b>Teknolojik Fizibilite Adı</b></div>
+                                                    <div class="col-lg-3" style="text-align: center;"><b>Mevcut Değil</b></div>
+                                                    <div class="col-lg-3" style="text-align: center;"><b>Mecvut </b></div>
+                                                </div>
+
+                                                <div class="row" ng-repeat="item in ProjeTeknolojikFizibiliteListesi | filter:ignoreTurkish" ng-if="post.TEKNOLOJIK_FIZIBILITE_ID==item.UST_TEKNOLOJIK_FIZIBILITE_ID">
+                                                    <div class="col-lg-2">
+                                                        <span class="label label-success">{{ $index + 1 }}</span>
+                                                    </div>
+                                                    <div class="col-lg-4" ng-model="item.TEKNOLOJIK_FIZIBILITE_ID">
+                                                        {{item.TEKNOLOJIK_FIZIBILITE_ADI}}
+                                                    </div>
+                                                    <div class="col-lg-3 i-checks" style="text-align: center;">
+                                                        <label>
+                                                            <input type="radio" icheck ng-model="item.MEVCUT" ng-value="false" ng-checked="!item.MEVCUT">
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-lg-3 i-checks" style="text-align: center;">
+                                                        <label>
+                                                            <input type="radio" icheck ng-model="item.MEVCUT" ng-value="true" ng-checked="item.MEVCUT">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed" ng-if="post.TEKNOLOJIK_FIZIBILITE_ID!=TeknolojikFizibiliteListesi[0].TEKNOLOJIK_FIZIBILITE_ID"></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="pull-right">
+                                            <div class="col-lg-12 ">
+                                                <button class=" btn btn-success" type="button" ng-click="ProjeTeknolojikFizibiliteEkleGuncelle(ProjeTeknolojikFizibiliteListesi)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet & Güncelle</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content" ng-if="ProjeTeknolojikFizibiliteListesi.length==0 || ProjeTeknolojikFizibiliteListesi.length== null">
+                        <br /><br />
+                        <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                            <i class="fa fa-exclamation-circle"></i>
+                            &nbsp;Teknoloji fizibilite kayıtları <strong>bulunmamaktadır.</strong>
+
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Show info alert if no data-->
+                <!--<div class="ibox" ng-if="ProjeTeknolojikFizibiliteListesi.length==0 || ProjeTeknolojikFizibiliteListesi.length== null">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i>Proje Teknolojik Fizibilite Listesi
+                        </h5>
+                        
+                    </div>
+
+                    <div class="ibox-content">
+                        <br /><br />
+                        <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                            <i class="fa fa-exclamation-circle"></i>
+                            &nbsp;Teknoloji fizibilite kayıtları <strong>bulunmamaktadır.</strong>
+                            
+                            </a>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,78 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 ng-if="DOKUMAN_ID == null" class="modal-title">Doküman Yükle</h4>
+        <h4 ng-if="DOKUMAN_ID != null" class="modal-title">Doküman Güncelle</h4>
+
+    </div>
+    <div class="modal-body">
+        <small ng-if="DOKUMAN_ID != null" class="text-danger"> Yükleyeceğiniz doküman ve güncelleme yaptığınız dokümanın revizyon alınmış olarak kabul edilecektir.</small>
+        <form method="get" name="frmDokumanYukle" id="frmDokumanYukle" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group" ng-if="DOKUMAN_ID == null">
+                            <label class="col-lg-4 control-label">Doküman Tipi <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOKUMAN_TIPI_ID" name="sel_DOKUMAN_TIPI_ID" ng-model="InfoDokumanYukle.DOKUMAN_TIPI_ID"
+                                    data-live-search="true" title="Dokuman Tipi Seçiniz Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanTipiListesi" deep-watch="true" data-value="item.DOKUMAN_TIPI_ID" required>
+                                        <a>
+                                            {{item.ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokumanYukle.sel_DOKUMAN_TIPI_ID.$invalid && formCalistirildiDokumanYukle" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Doküman<span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <div class="input-group">
+                                    <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="InfoDokumanYukle.ADI" name="flDOKUMAN_DOSYA1" id="flDOKUMAN_DOSYA1" readonly="" required="">
+                                    <div class="input-group-btn">
+                                        <label ng-show="!InfoDokumanYukle.ADI" for="flDOKUMAN_DOSYA" class="btn btn-primary" tooltip-append-to-body="true">
+                                            <input class="hide ng-isolate-scope" type="file" id="flDOKUMAN_DOSYA" ng-model="InfoDokumanYukle.ADI" name="flDOKUMAN_DOSYA" fileread="$scope.InfoDokumanYukle.DOKUMAN_DOSYA_BOYUTU" accept="image/x-png, image/gif, image/jpeg, .doc, .docx,.ppt, .pptx,.txt, application/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" required="" multiple>
+                                            <i class="fa fa-cloud-upload"></i>&nbsp;Dosya Yükle
+                                        </label>
+                                        <button ng-show="InfoDokumanYukle.ADI" class="btn  btn-danger ng-hide" type="button" ng-click="dokumanYukleSifirla()" tooltip-append-to-body="true">
+                                            <i class="fa fa-eraser"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <p ng-show="frmDokumanYukle.flDOKUMAN_DOSYA.$invalid && formCalistirildiDokumanYukle" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group" ng-if="DOKUMAN_ID == null">
+                            <label class="col-lg-4 control-label">Dosya Konumu <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOSYA_KONUMU" name="sel_DOSYA_KONUMU" ng-model="InfoDokumanYukle.DOSYA_KONUMU"
+                                    data-live-search="true" title="Dosya Konumu Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanKlasorListesi" deep-watch="true" data-value="item.DOKUMAN_KLASOR_ID">
+                                        <a>
+                                            {{item.UST_DOKUMAN_KLASOR_ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokumanYukle.sel_DOSYA_KONUMU.$invalid && formCalistirildiDokumanYukle" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="DokumanYukleEkleGuncelle(InfoDokumanYukle, frmDokumanYukle)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span></button>
+        <button type="button" class="btn btn-danger" ng-click="DokumanYukleKapat()"><i class="fa fa-close"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>
+
+
+

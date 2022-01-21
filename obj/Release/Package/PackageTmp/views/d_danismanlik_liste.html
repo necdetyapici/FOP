@@ -1,0 +1,154 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        <i class="fa fa-bars"></i>Danışmanlık Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmDanismanlik" id="frmDanismanlik" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Danışmanlık Türü<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_DANISMANLIK_TURU" name="cmb_DANISMANLIK_TURU" ng-model="YeniDanismanlik.DANISMANLIK_TURU" data-live-search="true" title="Danışmanlık türü seçiniz" data-size="5" ng-change="DanismanlikTuruDegisti()" required="true">
+                                                <li nya-bs-option="item in DDanismanlikTuruListesi" deep-watch="true" data-value="item.D_DANISMANLIK_TURU_ID">
+                                                    <a>
+                                                        {{item.ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDanismanlik.cmb_DANISMANLIK_TURU.$invalid && formCalistirildi" class="validation">Danışmanlık türü seçilmeden ekleme yapılamaz</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Danışmanlık Alanı</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_DANISMANLIK_ALANI" name="cmb_DANISMANLIK_ALANI" ng-model="Info.D_DANISMANLIK_ALANI_ID" data-live-search="true" title="Danışmanlık alanı seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in DDanismanlikAlaniListesi" deep-watch="true" data-value="item.D_DANISMANLIK_ALANI_ID">
+                                                    <a>
+                                                        {{item.ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDanismanlik.cmb_DANISMANLIK_ALANI.$invalid && formCalistirildi" class="validation">Danışmanlık alanı seçilmeden ekleme yapılamaz</p>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-actions">
+                                    <div class="pull-right">
+                                        <button class=" btn btn-success " type="button" ng-click="DDanismanlikEkle(Info)">
+                                            <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                        </button>
+
+                                        <!--<button ng-click="DDanismanlikGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                            <i class="fa fa-filter"></i>&nbsp;
+                                            <strong>Filtrele</strong>
+                                        </button>-->
+                                        <!--<button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" >
+                                            <i class="fa fa-eraser"></i>&nbsp;
+                                            <strong> Temizle</strong>
+                                        </button>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe"><i class="fa fa-list"></i> Danışmanlık Listesi</h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="m-b-lg">
+                        <div class="m-t-md">
+
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+
+
+                        <div class="project-list">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>Danışmanlık Türü</b></td>
+                                        <td><b>Danışmanlık Alanı</b></td>
+
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="post in DDanismanlikListesi | filter:ignoreTurkish">
+                                        <td class="table-main">
+                                            <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                            <a ui-sref="duzenleLinki({ kayitNo: post.D_DANISMANLIK_ID})">{{post.DanismanlikAlaniInfo.DDanismanlikTuruInfo.ADI}} </a><br />
+                                        </td>
+                                        <td class="table-main">
+                                            <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                            <a ui-sref="duzenleLinki({ kayitNo: post.D_DANISMANLIK_ID})">{{post.DanismanlikAlaniInfo.ADI}} </a><br />
+                                        </td>
+                                        <td>
+                                            <a ng-class="post.AKTIF == true ? 'label label-primary' : 'label label-danger'" ng-click="AktifPasifOnayi(post)">{{post.AKTIF == true ? 'Aktif' : 'Pasif'}}</a>
+                                            <!--<span class="label label-primary" ng-show="post.AKTIF == true" ng-click="AktifPasifOnayi(post)">Aktif</span>
+                                            <span class="label label-danger" ng-show="post.AKTIF == false" ng-click="AktifPasifOnayi(post)">Pasif</span>-->
+                                        </td>
+                                        <td class="form-actions">
+                                            
+                                            <div class="pull-right">
+
+                                                <a ng-click="hizmetAc(post.D_DANISMANLIK_ID)"  class="btn btn-sm btn-success " tooltip="Hizmetler" tooltip-append-to-body="true" ng-disabled="post.AKTIF == false"><i class="fa fa-h-square"></i></a>
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true" ng-disabled="post.hizmet_adedi > 0"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" class="text-center">
+                                            <pagination ng-model="AramaKriter.SayfaNo" ng-change="DDanismanlikGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                        items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

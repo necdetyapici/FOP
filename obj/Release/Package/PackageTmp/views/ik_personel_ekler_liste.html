@@ -1,0 +1,155 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Ekler Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkPersonelEkler" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtDosyaAdi" id="txtDosyaAdi" ng-model="AramaKriter.IK_PERSONEL_EKLER_DOSYA_ADI" class="form-control formEkleDuzenleInput" placeholder="Dosya adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel Dosya Tipi </label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_DOSYA_TIPI_ID" name="cmbIK_DOSYA_TIPI_ID" allow-clear="true" ng-model="AramaKriter.IK_DOSYA_TIPI_ID"
+                                                data-live-search="true" title="Personel Dosya Tipini Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IkDosyaTipiListesi" deep-watch="true" data-value="item.IK_DOSYA_TIPI_ID">
+                                                    <a>
+                                                        {{item.IK_DOSYA_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkPersonelEklerGetData(AramaKriter,AramaKriter.SayfaNo =1 )" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkPersonelEklerListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersoneleklerkayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkPersonelEklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Döküman Adı</b></td>
+                                            <td><b>Dosya Tipi</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkPersonelEklerListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <sa-dosyaindir tablo="IK_PERSONEL_EKLER" dosyaid="post.IK_PERSONEL_EKLER_ID" tooltip="Döküman İndir">{{post.IK_PERSONEL_EKLER_DOSYA_ADI}}</sa-dosyaindir><br />
+                                            </td>
+                                            <td>
+                                                {{post.IK_DOSYA_TIPI_ADI}}
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right" ng-if="post.IK_PERSONEL_EKLER_DOSYA_TIPI == 'image/jpeg' || post.IK_PERSONEL_EKLER_DOSYA_TIPI == 'image/png' || post.IK_PERSONEL_EKLER_DOSYA_TIPI == 'application/pdf'">
+                                                    <button ng-click="IkPersonelEklerGoster(post.IK_PERSONEL_EKLER_ID)" class="btn btn-sm btn-info" tooltip="Göster" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="IkPersonelEklerGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="ibox-content" ng-if="IkPersonelEklerListesi.length==0 || IkPersonelEklerListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersoneleklerkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkPersonelEklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Personel ekler kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersoneleklerkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

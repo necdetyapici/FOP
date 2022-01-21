@@ -1,0 +1,158 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Doküman Oluştur</h4>
+
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmDokuman" id="frmDokuman" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Tipi <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <label>
+                                    <input type="radio" id="rdTIPI" icheck ng-model="InfoDokuman.TIPI" ng-change="tipDegistir(true)" ng-value="true"> Proje Paketi Göre
+                                </label>
+
+                                <label>
+                                    <input type="radio" id="rdTIPI" ng-change="tipDegistir(false)" icheck ng-model="InfoDokuman.TIPI" ng-value="false"> Tek Dosya
+                                </label>
+                                <p ng-show="frmDokuman.rdTIPI.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokuman.TIPI == true">
+                            <label class="col-lg-4 control-label">Proje <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_PROJE_ID" name="sel_PROJE_ID" ng-model="InfoDokuman.PROJE_ID"
+                                    data-live-search="true" title="Proje Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID" ng-required="InfoDokuman.TIPI == true">
+                                        <a>
+                                            {{item.PROJE_ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokuman.sel_PROJE_ID.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokuman.TIPI == true">
+                            <label class="col-lg-4 control-label">Proje Paketi Grubu <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOKUMAN_PROJE_PAKETI_GRUP_ID" name="sel_DOKUMAN_PROJE_PAKETI_GRUP_ID" ng-model="InfoDokuman.DOKUMAN_PROJE_PAKETI_GRUP_ID"
+                                    data-live-search="true" title="Proje Paketi Grubu Seçiniz" data-size="5" required="true" ng-required="InfoDokuman.TIPI == true">
+                                    <li nya-bs-option="item in DokumanProjePaketiGrupListesi" deep-watch="true" data-value="item.DOKUMAN_PROJE_PAKETI_GRUP_ID">
+                                        <a>
+                                            {{item.ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokuman.sel_DOKUMAN_PROJE_PAKETI_GRUP_ID.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokuman.TIPI == false">
+                            <label class="col-lg-4 control-label"> Adı <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <input type="text" id="txtADI" name="txtADI" ng-model="InfoDokuman.ADI" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Adını giriniz." required>
+                                <p ng-show="frmDokuman.txtADI.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokuman.TIPI == false">
+                            <label class="col-lg-4 control-label">Doküman Tipi <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOKUMAN_TIPI_ID" name="sel_DOKUMAN_TIPI_ID" ng-model="InfoDokuman.DOKUMAN_TIPI_ID"
+                                    data-live-search="true" title="Dokuman Tipi Seçiniz Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanTipiListesi" deep-watch="true" data-value="item.DOKUMAN_TIPI_ID" required>
+                                        <a>
+                                            {{item.ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokuman.sel_DOKUMAN_TIPI_ID.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokuman.TIPI == false">
+                            <label class="col-lg-4 control-label">Doküman Cinsi <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <label>
+                                    <input type="radio" id="rdDOKUMAN_TIPI" icheck ng-change="dokumanTipiDegistir()" ng-model="InfoDokuman.DOKUMAN_TIPI" ng-value="true"> Doküman
+                                </label>
+
+                                <label>
+                                    <input type="radio" id="rdDOKUMAN_TIPI" icheck ng-change="dokumanTipiDegistir()" ng-model="InfoDokuman.DOKUMAN_TIPI" ng-value="false"> Şablon
+                                </label>
+                                <p ng-show="frmDokuman.rdDOKUMAN_TIPI.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokuman.TIPI == false">
+                            <label class="col-lg-4 control-label">Dokuman Türü <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <label>
+                                    <input type="radio" name="rdDOKUMAN_TURU" id="rdDOKUMAN_TURU" icheck ng-change="dokumanTuruDegistir(1)" ng-model="InfoDokuman.DOKUMAN_TURU_ID" ng-value="1"> Boş
+                                </label>
+                                <label>
+                                    <input type="radio" name="rdDOKUMAN_TURU" id="rdDOKUMAN_TURU" icheck ng-change="dokumanTuruDegistir(2)" ng-model="InfoDokuman.DOKUMAN_TURU_ID" ng-value="2"> Şablon Göre
+                                </label>
+                                <p ng-show="frmDokuman.rdDOKUMAN_TURU.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group" ng-if="InfoDokuman.DOKUMAN_TURU_ID == 2 && InfoDokuman.TIPI == false">
+                            <label class="col-lg-4 control-label">Şablon <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_UST_DOKUMAN_ID" name="sel_UST_DOKUMAN_ID" ng-model="InfoDokuman.UST_DOKUMAN_ID"
+                                    data-live-search="true" title="Şablon Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanSablonListesi" deep-watch="true" data-value="item.DOKUMAN_ID" ng-required="InfoDokuman.DOKUMAN_TIPI == 3">
+                                        <a>
+                                            {{item.ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokuman.sel_UST_DOKUMAN_ID.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Dosya Konumu <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOSYA_KONUMU" name="sel_DOSYA_KONUMU" ng-model="InfoDokuman.DOSYA_KONUMU"
+                                    data-live-search="true" title="Dosya Konumu Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanKlasorListesi" deep-watch="true" data-value="item.DOKUMAN_KLASOR_ID">
+                                        <a>
+                                            {{item.UST_DOKUMAN_KLASOR_ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokuman.sel_DOSYA_KONUMU.$invalid && formCalistirildiDokuman" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="DokumanEkleGuncelle(InfoDokuman, frmDokuman)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span></button>
+        <button type="button" class="btn btn-danger" ng-click="DokumanEkleKapat()"><i class="fa fa-close"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>
+
+
+

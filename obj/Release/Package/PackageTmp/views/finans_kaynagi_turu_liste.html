@@ -1,0 +1,127 @@
+﻿<div ng-init="init()"></div>
+
+
+<div class="wrapper  wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-barcode"></i>
+                        Finans Kaynağı Türü Bilgileri
+                    </h5>
+
+                </div>
+                <div class="ibox-content ">
+                    <form method="get" name="form" id="form" class="form-horizontal " accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Finans Kaynağı Türü  Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtFINANS_KAYNAGI_TURU_ADI" id="txtFINANS_KAYNAGI_TURU_ADI" ng-model="Info.FINANS_KAYNAGI_TURU_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Lütfen Finans Kaynağı Türü  Adını Giriniz." required />
+                                            <p ng-show="form.txtFINANS_KAYNAGI_TURU_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success " type="button" tooltip="Kaydet" ng-click="FinansKaynagiTuruEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>
+                                                Kaydet
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-barcode"></i>
+                        Finans Kaynağı Türü Listesi
+                    </h5>
+
+                </div>
+
+                <div class="ibox-content">
+                    <div class="m-b-lg">
+                        <div class="input-group">
+                            <input type="text" placeholder="Arama..." ng-model="txtArama" class="form-control">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-white"> Arama</button>
+                            </span>
+                        </div>
+                        <div class="m-t-md">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="FinansKaynagiTuruGetData(post)"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+
+                        <div class="project-list">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>No</b></td>
+                                        <td><b>Finans Kaynağı Türü Adı</b></td>
+                                        <td><b>Kayıt Tarihi</b></td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="post in FinansKaynagiTuruListesi | filter:ignoreTurkish">
+                                        <td>
+                                            <span class="label label-success">{{ $index + 1}}</span>
+                                        </td>
+                                        <td>
+                                            {{post.FINANS_KAYNAGI_TURU_ADI}}
+                                        </td>
+                                        <td class="tarih">
+                                            <span class="label label-primary label-kayit-primary">
+                                                <i class="fa fa-calendar"></i>
+                                                {{post.KAYIT_TARIHI | tarih}}
+                                            </span>
+                                        </td>
+                                        <td class="form-actions">
+                                            <div class="pull-right">
+                                                <a ui-sref="yonetim.musteriayari.proje.finanskaynagiturukayit({ FinansKaynagiTuruID: post.FINANS_KAYNAGI_TURU_ID})" class="btn btn-sm btn-success" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-pencil"></i><!-- Düzenle --></a>
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            <pagination ng-model="AramaKriter.SayfaNo" ng-change="FinansKaynagiTuruGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                        items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

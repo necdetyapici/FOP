@@ -1,0 +1,131 @@
+﻿<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Toplantı Katılımcı Ekle</h4>
+
+    </div>
+    <div class="modal-body">
+
+        <form method="get" name="frmToplantiKatilimci" id="frmToplantiKatilimci" class="form-horizontal" accessible-form>
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Katılımcı </label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="cmbKULLANICI_ID" name="cmbKULLANICI_ID" ng-model="InfoToplantiKatilimci.KULLANICI_ID"
+                                    data-live-search="true" title="Lütfen Seçiniz" data-size="5">
+                                    <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="[item.KULLANICI_ID,item.AD_SOYAD]">
+                                        <a>
+                                            {{item.AD_SOYAD}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Katılımcı Rolü <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID" name="cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID" ng-model="InfoToplantiKatilimci.TOPLANTI_KATILIMCI_ROLU_TIPI_ID"
+                                    data-live-search="true" title="Lütfen Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in ToplantiKatilimciRoluTipiListesi" deep-watch="true" data-value="[item.TOPLANTI_KATILIMCI_ROLU_TIPI_ID,item.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI]">
+                                        <a>
+                                            {{item.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+
+                                <p ng-show="frmToplantiKatilimci.cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID.$invalid && formCalistirildiToplantiKatilimci" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <button type="button" class="btn btn-success" ng-click="ToplantiKatilimciListesineEkle(InfoToplantiKatilimci,frmToplantiKatilimci,InfoToplantiKatilimci.KATILIMCI_DURUM=true)">&nbsp;&nbsp;<span class="bold">Ekle</span></button>
+                    <button class=" btn btn-info " type="button" tooltip="Dışarıdan Katılımcı Ekle" ng-click="DisaridanKatilimciEkle()">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="ibox-content" ng-if="ToplantiListeKatilimci.length>0">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="project-list table-emfa">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td><b>No</b></td>
+                                    <td><b>Katılımcı</b></td>
+                                    <td><b>Katılımcı Rolü</b></td>
+                                    <td><b>Kayıt Tarihi</b></td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="postToplantiKatilimci in ToplantiListeKatilimci track by $index">
+                                    <td class="project-title">
+                                        <span class="label label-success">{{ $index + 1 }}</span>
+                                    </td>
+
+                                    <td>
+                                        {{postToplantiKatilimci.AD_SOYAD}}<br />
+                                    </td>
+                                    <td class="no-wrap">
+                                        {{postToplantiKatilimci.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI}}
+                                    </td>
+
+                                    <td class="tarih">
+                                        <span class="label label-primary">
+                                            <i class="fa fa-calendar"></i>
+                                            {{postToplantiKatilimci.KAYIT_TARIHI | tarih  }}
+                                        </span>
+                                    </td>
+
+                                    <td class="form-actions">
+                                        <div class="pull-right">
+                                            <!--Toplantı katılımcısı silme işlemleri yapılmaktadır.-->
+                                            <a ng-click="modalSilmeOnayiToplantiKatilimci(postToplantiKatilimci)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <!--<tfoot>
+                                <tr>
+                                    <td colspan="10" class="text-center">
+                                        <pagination ng-model="AramaKriterListeToplantiKatilimciSayfalama.SayfaNo" ng-change="ToplantiKatilimciSayfalama()" total-items="ToplantiListeKatilimci."
+                                                    items-per-page="AramaKriterListeToplantiKatilimciSayfalama.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                    </td>
+                                </tr>
+                            </tfoot>-->
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ibox-content" ng-if="ToplantiListeKatilimci.length==0">
+            <br /><br />
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                        <i class="fa fa-exclamation-circle"></i>
+                        &nbsp;Katılımcı  kaydı <strong>bulunmamaktadır.</strong>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="ToplantiKatilimciListesiKaydet()"><i class="fa fa-times"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+        <!--<button type="button" class="btn btn-primary" ng-click="ToplantiKatilimciListesiGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>-->
+    </div>
+</div>

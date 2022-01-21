@@ -1,0 +1,330 @@
+﻿<div ng-init="init()"></div>
+   
+    <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-plus-square"></i> Proje Risk Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen Proje Risk bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="get" name="frmProjeRisk" id="frmProjeRisk" class="form-horizontal" accessible-form>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk Türü<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbRISK_TURU_ID" name="cmbRISK_TURU_ID" ng-model="InfoProjeRisk.RISK_TURU_ID"
+                                                    data-live-search="true" title="Risk Türü Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in RiskTuruListesi" deep-watch="true" data-value="item.RISK_TURU_ID">
+                                                        <a>
+                                                            {{item.RISK_TURU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbRISK_TURU_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <!--sas-->
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <textarea type="text" name="txtRISK_ADI" style="resize:none;" ng-maxlength="250" ng-minlength="1" ng-model="InfoProjeRisk.RISK_ADI" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Risk adını giriniz." required></textarea>
+                                                <p ng-show="frmProjeRisk.txtRISK_ADI.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk No<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="500" ng-minlength="1" id="txtPROJE_RISK_NO" name="txtPROJE_RISK_NO" ng-model="InfoProjeRisk.PROJE_RISK_NO" class="formEkleDuzenleInput form-control" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Süreç<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbSUREC_ID" name="cmbSUREC_ID" ng-model="InfoProjeRisk.SUREC_ID"
+                                                    data-live-search="true" title="Süreç Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in SurecListesi" deep-watch="true" data-value="item.SUREC_ID">
+                                                        <a>
+                                                            {{item.SUREC_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbSUREC_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Tedbir Öncesi-->
+                                <span class="surum-yonetim-header animated bounceInRight">Tedbir Öncesi</span>
+                                <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Olasılık Değeri<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTEDBIR_ONCESI_OLASILIK_DEGERI_ID" name="cmbTEDBIR_ONCESI_OLASILIK_DEGERI_ID" ng-model="InfoProjeRisk.TEDBIR_ONCESI_OLASILIK_DEGERI_ID" ng-change="TedbirOncesiRiskPuaniHesapla(InfoProjeRisk.TEDBIR_ONCESI_OLASILIK_DEGERI_ID, InfoProjeRisk.TEDBIR_ONCESI_ETKI_DEGERI_ID)"
+                                                    data-live-search="true" title="Olasılık Değeri Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in TedbirOncesiOlasilikDegeriListesi" deep-watch="true" data-value="item.OLASILIK_DEGERI_ID">
+                                                        <a>
+                                                            {{item.OLASILIK_DEGERI_KATSAYISI}} - {{item.OLASILIK_DEGERI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbTEDBIR_ONCESI_OLASILIK_DEGERI_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Etki Değeri<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTEDBIR_ONCESI_ETKI_DEGERI_ID" name="cmbTEDBIR_ONCESI_ETKI_DEGERI_ID" ng-model="InfoProjeRisk.TEDBIR_ONCESI_ETKI_DEGERI_ID" ng-change="TedbirOncesiRiskPuaniHesapla(InfoProjeRisk.TEDBIR_ONCESI_OLASILIK_DEGERI_ID, InfoProjeRisk.TEDBIR_ONCESI_ETKI_DEGERI_ID)"
+                                                    data-live-search="true" title="Etki Değeri Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in TedbirOncesiEtkiDegeriListesi" deep-watch="true" data-value="item.ETKI_DEGERI_ID">
+                                                        <a>
+                                                            {{item.ETKI_DEGERI_KATSAYISI}} - {{item.ETKI_DEGERI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbTEDBIR_ONCESI_ETKI_DEGERI_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Risk Puanı-->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk Puanı<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="text-center">
+                                                    <input class="form-control text-center formEkleDuzenleInput" readonly name="txtTEDBIR_ONCESI_RISK_PUANI" required ng-model="InfoProjeRisk.TEDBIR_ONCESI_RISK_PUANI" style="color: #ec5565;font-weight: bold;font-size: 14px;" />
+                                                </div>
+                                                <p ng-show="frmProjeRisk.txtTEDBIR_ONCESI_RISK_PUANI.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Tedbir Açıklama</label>
+                                            <div class="col-lg-10">
+                                                <textarea name="txtTEDBIR_ACIKLAMA" rows="7" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="InfoProjeRisk.TEDBIR_ACIKLAMA" class="form-control formEkleDuzenleInput" placeholder="Tedbir açıklama giriniz."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Tedbir Sonrası-->
+                                <span class="surum-yonetim-header animated bounceInRight">Tedbir Sonrası</span>
+                                <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                                <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-2 control-label">Aksiyon </label>
+                                                <div class="col-lg-10">
+                                                    <textarea name="txtAKSIYON_ACIKLAMA" rows="7" style="resize:none;" ng-model="InfoProjeRisk.AKSIYON_ACIKLAMA" ng-maxlength="500" ng-minlength="1" class="form-control formEkleDuzenleInput" placeholder="Aksiyon giriniz."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Olasılık Derecesi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTEDBIR_SONRASI_OLASILIK_DEGERI_ID" name="cmbTEDBIR_SONRASI_OLASILIK_DEGERI_ID" ng-model="InfoProjeRisk.TEDBIR_SONRASI_OLASILIK_DEGERI_ID"
+                                                    data-live-search="true" title="Olasılık Değeri Seçiniz" data-size="5" required="true" ng-change="TedbirSonrasiRiskPuaniHesapla(InfoProjeRisk.TEDBIR_SONRASI_OLASILIK_DEGERI_ID, InfoProjeRisk.TEDBIR_SONRASI_ETKI_DEGERI_ID)">
+                                                    <li nya-bs-option="item in TedbirSonrasiOlasilikDegeriListesi" deep-watch="true" data-value="item.OLASILIK_DEGERI_ID">
+                                                        <a>
+                                                            {{item.OLASILIK_DEGERI_KATSAYISI}} - {{item.OLASILIK_DEGERI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbTEDBIR_SONRASI_OLASILIK_DEGERI_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Etki Derecesi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTEDBIR_SONRASI_ETKI_DEGERI_ID" name="cmbTEDBIR_SONRASI_ETKI_DEGERI_ID" ng-model="InfoProjeRisk.TEDBIR_SONRASI_ETKI_DEGERI_ID"
+                                                    data-live-search="true" title="Etki Değeri Seçiniz" data-size="5" required="true" ng-change="TedbirSonrasiRiskPuaniHesapla(InfoProjeRisk.TEDBIR_SONRASI_OLASILIK_DEGERI_ID, InfoProjeRisk.TEDBIR_SONRASI_ETKI_DEGERI_ID)">
+                                                    <li nya-bs-option="item in TedbirSonrasiEtkiDegeriListesi" deep-watch="true" data-value="item.ETKI_DEGERI_ID">
+                                                        <a>
+                                                            {{item.ETKI_DEGERI_KATSAYISI}} - {{item.ETKI_DEGERI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbTEDBIR_SONRASI_ETKI_DEGERI_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Risk Puanı-->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Risk Puanı<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="text-center">
+                                                    <input class="form-control text-center formEkleDuzenleInput" readonly required ng-model="InfoProjeRisk.TEDBIR_SONRASI_RISK_PUANI" name="txtTEDBIR_SONRASI_RISK_PUANI" style="color: #ec5565;font-weight: bold;font-size: 14px;" />
+                                                </div>
+                                                <p ng-show="frmProjeRisk.txtTEDBIR_SONRASI_RISK_PUANI.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <!--Risk Stratejisi-->
+                                <span class="surum-yonetim-header animated bounceInRight">Risk Stratejisi</span>
+                                <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Risk Derecesi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <ol class="nya-bs-select form-control" id="cmbRISK_DERECESI_ID" name="cmbRISK_DERECESI_ID" ng-model="InfoProjeRisk.RISK_DERECESI_ID"
+                                                    data-live-search="true" title="Risk Derecesi Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in RiskDerecesiListesi" deep-watch="true" data-value="item.RISK_DERECESI_ID">
+                                                        <a>
+                                                            {{item.RISK_DERECESI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbRISK_DERECESI_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Risk İşleme Stratejisi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <ol class="nya-bs-select form-control" id="cmbRISK_ISLEME_STRATEJISI_ID" name="cmbRISK_ISLEME_STRATEJISI_ID" ng-model="InfoProjeRisk.RISK_ISLEME_STRATEJISI_ID"
+                                                    data-live-search="true" title="Risk İşleme Stratejisi Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in RiskIslemeStratejisiListesi" deep-watch="true" data-value="item.RISK_ISLEME_STRATEJISI_ID">
+                                                        <a>
+                                                            {{item.RISK_ISLEME_STRATEJISI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmProjeRisk.cmbRISK_ISLEME_STRATEJISI_ID.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--Risk Aksiyon-->
+                                <!--<span class="surum-yonetim-header animated bounceInRight">Aksiyon</span>
+                                <div class="hr-line-dashed" style="margin-top:0px"></div>-->
+
+                               
+
+                                <!--Değerlendirme Tarihi, Sorumlu, Butçe, Artık Risk Onayı-->
+                                <div class="hr-line-dashed"></div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Risk Degerlendirme Tarihi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-12">
+                                                <input type="datetime" readonly name="txtRISK_DEGERLENDIRME_TARIHI" ng-model="projeRiskDegerlendirmeTarih" nextgen-date-time-picker="" class="form-control formEkleDuzenleInput" required>
+                                                <p ng-show="frmProjeRisk.txtRISK_DEGERLENDIRME_TARIHI.$invalid && formCalistirildiProjeRisk" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Sorumlu </label>
+                                            <div class="col-lg-12">
+                                                <ol class="nya-bs-select form-control" id="cmbSORUMLU_ID" name="cmbSORUMLU_ID" allow-clear="true" ng-model="InfoProjeRisk.SORUMLU_ID"
+                                                    data-live-search="true" title="Sorumlu Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in ProjePersonelListesi" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                        <a>
+                                                            {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Bütçe </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" name="txtBUTCE" ui-number-mask="2" ng-model="InfoProjeRisk.BUTCE" class="form-control formEkleDuzenleInput" placeholder="Bütçe giriniz.">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Artık Risk Onayı </label>
+                                            <div class="col-lg-12">
+                                                <div class="mt-first-cb">
+                                                    <label><input ng-value="true" ng-checked="item.ARTIK_RISK_ONAYI" icheck type="checkbox" ng-model="InfoProjeRisk.ARTIK_RISK_ONAYI"> Aktif</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-12 control-label txt-algn-left">Değerlendirme </label>
+                                            <div class="col-lg-12">
+                                                <textarea name="txtDEGERLENDIRME" rows="7" style="resize:none;" ng-model="InfoProjeRisk.DEGERLENDIRME"   class="form-control formEkleDuzenleInput" placeholder="Değerlendirme giriniz."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="ProjeRiskEkleGuncelle(InfoProjeRisk)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="proje.projelerkayit.risk.projerisklistesi" ><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

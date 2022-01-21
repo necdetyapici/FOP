@@ -1,0 +1,662 @@
+﻿<div ng-init="init()"></div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title col-lg-12">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-plus-square"></i> Personel Bilgileri
+
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" name="frmProjePersonel" id="frmProjePersonel" class="form-horizontal" accessible-form>
+                                <div class="formEkleDuzenleInputs">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Personel<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <ol class="nya-bs-select form-control" id="cmbCALISAN_KULLANICI_ID" name="cmbCALISAN_KULLANICI_ID" ng-model="InfoProjePersonel.CALISAN_KULLANICI_ID"
+                                                        data-live-search="true" title="Personel Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                            <a>
+                                                                {{item.AD_SOYAD}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frmProjePersonel.cmbCALISAN_KULLANICI_ID.$invalid && formCalistirildiProjePersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Tecrübe <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <ol class="nya-bs-select form-control" id="cmbTECRUBE_ID" name="cmbTECRUBE_ID" ng-model="InfoProjePersonel.TECRUBE_ID"
+                                                        data-live-search="true" title="Tecrübe Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in TecrubeListesi" deep-watch="true" data-value="item.TECRUBE_ID">
+                                                            <a>
+                                                                {{item.TECRUBE_ADI}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frmProjePersonel.cmbTECRUBE_ID.$invalid && formCalistirildiProjePersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label no-wrap">Başlama Tarihi<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                        <input type="datetime" name="txtBASLAMA_TARIHI" id="txtBASLAMA_TARIHI" ng-model="InfoProjePersonel.BASLAMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control"
+                                                               ng-required="InfoProjePersonel.BASLAMA_TARIHI == null">
+                                                    </div>
+                                                    <p ng-show="frmProjePersonel.txtBASLAMA_TARIHI.$invalid && formCalistirildiProjePersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Ayrılma Tarihi </label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon">
+                                                            <i class="fa fa-calendar"></i>
+                                                        </span>
+                                                        <input type="datetime" name="txtAYRILMA_TARIHI" id="txtAYRILMA_TARIHI" ng-model="InfoProjePersonel.AYRILMA_TARIHI" nextgen-date-picker class="formEkleDuzenleInput form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-sm btn-success" type="button" ng-click="ProjePersonelEkleGuncelle(InfoProjePersonel)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title col-lg-12">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-plus-square"></i> Rol Bilgileri
+
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" name="frmProjeRol" id="frmProjeRol" class="form-horizontal" accessible-form>
+                                <div class="formEkleDuzenleInputs ">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Rol Tipi<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <ol class="nya-bs-select form-control" id="cmbPERSONEL_TIPI_ID" name="cmbPERSONEL_TIPI_ID" ng-model="InfoProjeRol.PERSONEL_TIPI_ID"
+                                                        data-live-search="true" title="Rol Tipi Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in PersonelTipiListesi" deep-watch="true" data-value="item.PERSONEL_TIPI_ID">
+                                                            <a>
+                                                                {{item.PERSONEL_TIPI_ADI}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frmProjeRol.cmbPERSONEL_TIPI_ID.$invalid && formCalistirildiProjeRol" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Açıklama <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <textarea name="txtROL_ACIKLAMA" id="txtROL_ACIKLAMA" style="resize:none;" rows="3" ng-model="InfoProjeRol.ROL_ACIKLAMA" ng-maxlength="500" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Açıklama giriniz." required></textarea>
+                                                    <p ng-show="frmProjeRol.txtROL_ACIKLAMA.$invalid && formCalistirildiProjeRol" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-sm btn-success" type="button" ng-click="ProjeRolEkleGuncelle(InfoProjeRol)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title ">
+                            <h5 class="panelHeaderListe">
+                                <i class="fa fa-list"></i> Personel Listesi
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form name="src-Personel" class="form-horizontal">
+                                <div class="formEkleDuzenleInputs">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Ad Soyad</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="txtCALISAN_KULLANICI_AD_SOYAD" id="txtCALISAN_KULLANICI_AD_SOYAD" ng-model="AramaKriter.CALISAN_KULLANICI_AD_SOYAD" class="form-control formEkleDuzenleInput" placeholder="Ad ve soyadını giriniz.">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button ng-click="ProjePersonelGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                        <i class="fa fa-filter"></i>&nbsp;
+                                                        <!--<strong>Filtrele</strong>-->
+                                                    </button>
+                                                    <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                        <i class="fa fa-eraser"></i>&nbsp;
+                                                        <!--<strong>Temizle</strong>-->
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjePersonelListesi.length>0 ">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <!--<a ui-sref=".kayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                        <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjePersonelGetData()"> <i class="fa fa-refresh"></i> </button>
+                                    </div>
+                                    <strong>Toplam {{ toplamKayitSayisiProjePersonel }} kayıt</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="project-list table-emfa">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td><b>No</b></td>
+                                                    <td><b>Ad Soyad</b></td>
+                                                    <td><b>Ayrılma Tarihi</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="post in ProjePersonelListesi | filter:ignoreTurkish">
+                                                    <td>
+                                                        <span class="label label-success">{{ $index + 1 }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.projepersonelkayit({ projePersonelID: post.PROJE_PERSONEL_ID})">{{post.CALISAN_KULLANICI_AD_SOYAD}} </a><br />
+                                                    </td>
+
+
+                                                    <td class="tarih">
+
+                                                        <span ng-show="post.AYRILMA_TARIHI" class="label label-danger">
+                                                            <i class="fa fa-calendar"></i>
+                                                            {{post.AYRILMA_TARIHI | tarih}}
+                                                        </span>
+                                                        <span ng-hide="post.AYRILMA_TARIHI" class="badge badge-success">
+                                                            <i class="fa fa-user"></i>
+                                                            Çalışan
+                                                        </span>
+
+
+                                                    </td>
+
+                                                    <td class="actions">
+                                                        <div class="pull-right">
+                                                            <a ui-sref="proje.projelerkayit.plan.projepersonelkayit({ projePersonelID: post.PROJE_PERSONEL_ID})"
+                                                               class="btn btn-sm btn-info"
+                                                               tooltip="Düzenle"
+                                                               tooltip-append-to-body="true">
+                                                                <i class="fa fa-paste"></i><!--Düzenle-->
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="actions">
+                                                        <div class="pull-right">
+                                                            <a ng-click="modalSilmeOnayiProjePersonel(post)"
+                                                               class="btn btn-sm btn-danger"
+                                                               tooltip="Sil"
+                                                               tooltip-append-to-body="true">
+                                                                <i class="fa fa-remove"></i><!-- Sil -->
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">
+                                                        <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjePersonelGetData(AramaKriter)" total-items="toplamKayitSayisiProjePersonel"
+                                                                    items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjePersonelListesi.length==0 || ProjePersonelListesi == null">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-sm btn-white" ng-click="ProjePersonelGetData()"> <i class="fa fa-refresh"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br /><br />
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        &nbsp;Personel kaydı <strong>bulunmamaktadır.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe">
+                                <i class="fa fa-list"></i> Rol Listesi
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form name="src-ProjeRol" class="form-horizontal">
+                                <div class="formEkleDuzenleInputs col-lg-offset-2">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Rol Adı</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" id="txtPERSONEL_TIPI_ADI" name="txtPERSONEL_TIPI_ADI" ng-model="AramaKriterProjeRol.PERSONEL_TIPI_ADI" class="form-control formEkleDuzenleInput" placeholder="Rol adını giriniz.">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-actions">
+                                            <div class="col-lg-12">
+                                                <div class="pull-right">
+                                                    <button ng-click="ProjeRolGetData(AramaKriterProjeRol, AramaKriterProjeRol.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                        <i class="fa fa-filter"></i>
+                                                    </button>
+                                                    <button ng-click="filtreTemizlePersonelRol()" class="btn btn-sm btn-danger" type="submit">
+                                                        <i class="fa fa-eraser"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjeRolListesi.length>0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjeRolGetData()"> <i class="fa fa-refresh"></i> </button>
+                                    </div>
+                                    <strong>Toplam {{ toplamKayitSayisiProjeRol }} kayıt</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="project-list table-emfa">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td><b>No</b></td>
+                                                    <td><b>Rol</b></td>
+                                                    <td><b>Açıklama</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="post in ProjeRolListesi | filter:ignoreTurkish">
+                                                    <td>
+                                                        <span class="label label-success">{{ $index + 1 }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.projerolkayit({ projeRolID: post.PROJE_ROL_ID})">{{post.PERSONEL_TIPI_ADI}} </a><br />
+                                                    </td>
+
+                                                    <td>
+                                                        {{post.ROL_ACIKLAMA}}
+                                                    </td>
+                                                    <td class="actions">
+
+                                                        <a ui-sref="proje.projelerkayit.plan.projerolkayit({ projeRolID: post.PROJE_ROL_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i><!--Düzenle--></a>
+
+                                                    </td>
+                                                    <td class="actions">
+
+                                                        <a ng-click="modalSilmeOnayiProjeRol(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10" class="text-center">
+                                                        <pagination ng-model="AramaKriterProjeRol.SayfaNo" ng-change="ProjeRolGetData(AramaKriterProjeRol)" total-items="toplamKayitSayisiProjeRol"
+                                                                    items-per-page="AramaKriterProjeRol.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjeRolListesi.length==0 || ProjeRolListesi == null">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <button type="button" class="btn btn-sm btn-white" ng-click="ProjeRolGetData()"> <i class="fa fa-refresh"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br /><br />
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        &nbsp; Rol kaydı <strong>bulunmamaktadır.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Show info alert if no data-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-plus-square"></i> Proje Personel Rol Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>
+                                    Lütfen Proje Personel Rol bilgilerini eksiksiz giriniz.
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <form method="get" name="frmProjePersonelRol" id="frmProjePersonelRol" class="form-horizontal" accessible-form>
+                                <div class="formEkleDuzenleInputs">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Proje Personeli<span class="text-danger">*</span></label>
+                                                <div class="col-lg-6">
+                                                    <ol class="nya-bs-select form-control" id="cmbPROJE_PERSONEL_ID" name="cmbPROJE_PERSONEL_ID" ng-model="InfoProjePersonelRol.PROJE_PERSONEL_ID"
+                                                        data-live-search="true" title="Proje Personeli Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in ProjePersonelListesiGenel" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                            <a>
+                                                                {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frmProjePersonelRol.cmbPROJE_PERSONEL_ID.$invalid && formCalistirildiProjePersonelRol" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Proje Personel Rol<span class="text-danger">*</span></label>
+                                                <div class="col-lg-6">
+                                                    <ol class="nya-bs-select form-control" id="cmbPROJE_ROL_ID" ng-click="" name="cmbPROJE_ROL_ID" ng-model="InfoProjePersonelRol.PROJE_ROL_ID"
+                                                        data-live-search="true" title="Proje Rol Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in PersonelProjeRolListesi" deep-watch="true" data-value="item.PROJE_ROL_ID">
+                                                            <a>
+                                                                {{item.PERSONEL_TIPI_ADI}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frmProjePersonelRol.cmbPROJE_ROL_ID.$invalid && formCalistirildiProjePersonelRol" class="validation">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-10">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-sm btn-success" type="button" ng-click="ProjePersonelRolEkleGuncelle(InfoProjePersonelRol)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe">
+                                <i class="fa fa-list"></i> Proje Personel Rol Listesi
+                            </h5>
+                        </div>
+                        <div class="ibox-content">
+                            <form name="src-ProjePersonelRol" class="form-horizontal">
+                                <div class="formEkleDuzenleInputs">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Personel Ad Soyad</label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" id="txtPERSONEL_AD_SOYAD" name="txtPERSONEL_AD_SOYAD" ng-model="AramaKriterProjePersonelRol.PERSONEL_AD_SOYAD" class="form-control formEkleDuzenleInput" placeholder="Personel ad soyad giriniz.">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button ng-click="ProjePersonelRolGetData(AramaKriterProjePersonelRol, AramaKriterProjePersonelRol.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                        <i class="fa fa-filter"></i>&nbsp;
+                                                        <strong>Filtrele</strong>
+                                                    </button>
+                                                    <button ng-click="filtreTemizleProjePersonelRol()" class="btn btn-sm btn-danger" type="submit">
+                                                        <i class="fa fa-eraser"></i>&nbsp;
+                                                        <strong>Temizle</strong>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjePersonelRolListesi.length>0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <!--<a ui-sref=".kayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                        <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjePersonelRolGetData()"> <i class="fa fa-refresh"></i> </button>
+                                    </div>
+                                    <strong>Toplam {{ toplamKayitSayisiProjePersonelRol }} kayıt</strong>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="project-list table-emfa">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td><b>No</b></td>
+                                                    <td><b>Personel Ad Soyad</b></td>
+                                                    <td><b>Rol</b></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="post in ProjePersonelRolListesi | filter:ignoreTurkish">
+                                                    <td>
+                                                        <span class="label label-success">{{ $index + 1}}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.projepersonelrolkayit({ projePersonelRolID: post.PROJE_PERSONEL_ROL_ID})">{{post.PERSONEL_AD_SOYAD}}</a><br />
+                                                    </td>
+                                                    <td>
+                                                        {{post.ROL_ADI}}
+                                                    </td>
+                                                    <td class="actions">
+                                                        <div class="pull-right">
+                                                            <a ui-sref="proje.projelerkayit.plan.projepersonelrolkayit({ projePersonelRolID: post.PROJE_PERSONEL_ROL_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                        </div>
+                                                    </td>
+                                                    <td class="actions">
+                                                        <a ng-click="modalSilmeOnayiProjePersonelRol(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10" class="text-center">
+                                                        <pagination ng-model="AramaKriterProjePersonelRol.SayfaNo" ng-change="ProjePersonelRolGetData(AramaKriterProjePersonelRol)" total-items="toplamKayitSayisiProjePersonelRol"
+                                                                    items-per-page="AramaKriterProjePersonelRol.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjePersonelRolListesi.length==0 ||ProjePersonelRolListesi == null">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <!--<a ui-sref=".kayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                        <button type="button" class="btn btn-sm btn-white" ng-click="ProjePersonelRolGetData()"> <i class="fa fa-refresh"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br /><br />
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        &nbsp;Personel rol kaydı <strong>bulunmamaktadır.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

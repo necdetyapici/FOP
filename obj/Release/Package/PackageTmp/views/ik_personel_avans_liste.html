@@ -1,0 +1,239 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Personel Avans Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkPersonelAvans" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Avans Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtAVANS_ADI" id="txtAVANS_ADI" ng-model="AramaKriter.AVANS_ADI" class="form-control formEkleDuzenleInput" placeholder="Avans adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Avans Türü </label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" id="cmbAVANS_TURU_ID" name="cmbAVANS_TURU_ID" allow-clear="true" ng-model="AramaKriter.AVANS_TURU_ID"
+                                                data-live-search="true" title="Avans Türü Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in AvansTuruListesi" deep-watch="true" data-value="item.AVANS_TURU_ID">
+                                                    <a>
+                                                        {{item.AVANS_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Talep Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_TARIHI" id="txtTALEP_TARIHI" ng-model="AramaKriter.TALEP_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Avans Durumu </label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" id="cmbAVANS_MASRAF_DURUMU_ID" name="cmbAVANS_MASRAF_DURUMU_ID" allow-clear="true" ng-model="AramaKriter.AVANS_MASRAF_DURUMU_ID"
+                                                data-live-search="true" title="Avans Durumu Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in AvansMasrafDurumuListesi" deep-watch="true" data-value="item.AVANS_MASRAF_DURUMU_ID">
+                                                    <a>
+                                                        {{item.AVANS_MASRAF_DURUMU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            
+                                            <button ng-click="AvansGetData(AramaKriter, AramaKriter.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <br />
+                </div>
+
+                <div class="ibox-content" ng-if="AvansListesi.length>0">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="AvansFormuYazdir(null, kullaniciID)"> <i class="fa fa-print"></i> </button>
+                                <button ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelavanskayit" ng-show="(kullaniciID == $storage.KULLANICI_ID)" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button> <!---->
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="AvansGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Avans No</b></td>
+                                            <td><b>Avans Adı</b></td>
+                                            <td><b>Avans Türü</b></td>
+                                            <td><b>Talep Tarihi</b></td>
+                                            <td><b>Ünvan</b></td>
+                                            <td><b>Durumu</b></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="post in AvansListesi | filter:txtArama">
+                                        <tr>
+
+                                            <td class="project-title">
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                {{post.AVANS_NO}}<br />
+                                            </td>
+                                            <td class="editLink-Emfa">
+                                                <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelavanskayit({ikPersonelAvansID: post.AVANS_ID})">{{post.AVANS_ADI}}</a><br />
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                {{post.AVANS_TURU_ADI}}
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.TALEP_TARIHI | tarih}}
+
+                                                </span>
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.IK_UNVAN_ADI}}
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                <label ng-show="post.AVANS_MASRAF_DURUMU_ID==1" class="label label-warning input-lg ng-scope">{{post.AVANS_MASRAF_DURUMU_ADI}}</label>
+                                                <label ng-show="post.AVANS_MASRAF_DURUMU_ID==4" class="label label-danger input-lg ng-scope">{{post.AVANS_MASRAF_DURUMU_ADI}}</label>
+                                                <label ng-show="post.AVANS_MASRAF_DURUMU_ID==3" class="label label-info input-lg ng-scope">{{post.AVANS_MASRAF_DURUMU_ADI}}</label>
+                                                <label ng-show="post.AVANS_MASRAF_DURUMU_ID==2" class="label label-warning input-lg ng-scope">{{post.AVANS_MASRAF_DURUMU_ADI}}</label>
+                                                <label ng-show="post.AVANS_MASRAF_DURUMU_ID==6" class="label label-warning input-lg ng-scope">{{post.AVANS_MASRAF_DURUMU_ADI}}</label>
+                                                <!--<label ng-show="post.AVANS_MASRAF_DURUMU_ID==5" class="label label-warning input-lg ng-scope">{{post.AVANS_MASRAF_DURUMU_ADI}}</label>-->
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="avansRed = !avansRed" ng-class="{ 'btn-danger': avansRed, 'btn-info' : !avansRed}" ng-show="post.AVANS_MASRAF_DURUMU_ID==4" class="btn btn-sm" tooltip="Red Açıklama Göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Açıklama Göster --></a>
+                                                    <a ng-click="avansGG = !avansGG" ng-class="{ 'btn-danger': avansGG, 'btn-info' : !avansGG}" ng-show="post.AVANS_MASRAF_DURUMU_ID==2" class="btn btn-sm" tooltip="Gözden geçirme açıklaması göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Açıklama Göster --></a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-info" ng-click="AvansFormuYazdir(post.AVANS_ID)"> <i class="fa fa-print"></i> </button>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelavanskayit({ikPersonelAvansID: post.AVANS_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="modalSilmeOnayi(post)" ng-show="post.AVANS_MASRAF_DURUMU_ID==1 && post.TALEP_EDEN_KULLANICI_ID == $storage.KULLANICI_ID" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil  --></a>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        <tr ng-show="avansRed || avansGG">
+                                            <td></td>
+                                            <td><b>Açıklama</b></td>
+                                            <td colspan="6" ng-show="avansRed">{{post.RED_ACIKLAMA}}</td>
+                                            <td colspan="6" ng-show="avansGG">{{post.GOZDEN_GECIRME_ACIKLAMA}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="AvansGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="AvansListesi.length==0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelavanskayit" ng-show="(kullaniciID == $storage.KULLANICI_ID)" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</button> <!---->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="AvansGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Personele ait avans kaydı <strong>bulunmamaktadır.</strong>
+                                <span ng-show="(kullaniciID == $storage.KULLANICI_ID)">
+                                    Eklemek için <a ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelavanskayit"
+                                                    class="alert-Link-Emfa alert-link">
+                                        tıklayınız.
+                                    </a>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,51 @@
+﻿<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav" id="side-menu">
+            <li class="nav-header">
+
+                <div class="dropdown profile-element text-center" dropdown>
+                    <img alt="Profil Resmim" class="img-square" width="48" height="48" src="{{($storage.KULLANICI_AVATAR != '') && $storage.KULLANICI_AVATAR || 'img/profile-small.jpg'}}" />
+                    <a class="dropdown-toggle" dropdown-toggle href>
+                        <span class="clear">
+                            <span class="m-t-xs">
+                                <strong class="font-bold">
+                                    {{$storage.adi}} {{$storage.soyadi}}
+                                </strong>
+                            </span>
+                            <span class="text-muted text-xs">{{$storage.gorevi}} <b class="caret"></b></span>
+                        </span>
+                    </a>
+
+                    <ul class="dropdown-menu animated fadeIn m-t-xs">
+                        <li><a ui-sref="profil.bilgilerim">Kullanıcı Bilgilerim</a></li>
+                        <li class="divider"></li>
+                        <li><a ng-click="logout()">Çıkış</a></li>
+                    </ul>
+                </div>
+
+                <div class="logo-element">FOP</div>
+               
+            </li>
+     
+            <li ng-repeat-start="post in GetMenuListesi() track by $index" ng-show="post.AltMenuListe.length <= 0" ui-sref-active="active">
+                <a ui-sref="post.Url"><i class="fa fa-flask"></i> <span class="nav-label">{{post.MENU_ADI}}</span></a>
+            </li>
+
+            <li ng-show="post.AltMenuListe.length > 0" ng-class="{active: $state.includes('{{post.DURUM}}')}">
+                <a href="index.html"><i class="{{post.IKON}}"></i> <span class="nav-label">{{post.MENU_ADI}}</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('{{post.DURUM}}')}">
+                    <li ui-sref-active="active" ng-repeat="postAltMenu in post.AltMenuListe">
+                        <a ui-sref="{{postAltMenu.URL}}" ui-sref-opts="{reload: true}">
+                            <i class="{{postAltMenu.IKON}}"></i>
+                            {{postAltMenu.MENU_ADI}}
+                        </a>
+
+                    </li>
+                </ul>
+            </li>
+
+            <li ng-repeat-end ng-show="false" menu-icerik-yuklendi="menuyuCalistir()"></li>
+
+        </ul>
+    </div>
+</nav>

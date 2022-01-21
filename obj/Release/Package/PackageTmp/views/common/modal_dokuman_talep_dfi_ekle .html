@@ -1,0 +1,257 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Talep Ekle</h4>
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmDokumanDfi" id="frmDokumanDfi" novalidate class="form-horizontal" accessible-form>
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                            <div class=" row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" readonly name="txtTALEP_TALEP_TIPI_ADI" id="txtTALEP_TALEP_TIPI_ADI" ng-model="$parent.InfoDokumanDfi.TALEP_TIPI_ADI" class="formEkleDuzenleInput form-control">
+                                            <p ng-show="frmDokumanDfi.txtTALEP_TALEP_TIPI_ADI.$invalid && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ID" name="cmb_PROJE_ID" ng-model="$parent.InfoDokumanDfi.PROJE_ID" ng-change="ProjeSec()"
+                                                data-live-search="true" title="Proje Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID" required =" true">
+                                                    <a>
+                                                        {{item.PROJE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDokumanDfi.cmb_PROJE_ID.$invalid && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Modül</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_MODUL_ID" name="cmb_PROJE_MODUL_ID" ng-model="$parent.InfoDokumanDfi.PROJE_MODUL_ID"
+                                                data-live-search="true" title="Modül Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                    <a>
+                                                        {{item.MODUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmb_PROJE_ITERASYON_ID" name="cmb_PROJE_ITERASYON_ID" ng-model="$parent.InfoDokumanDfi.PROJE_ITERASYON_ID"
+                                                data-live-search="true" title="İterasyon Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjeIterasyonListesi" deep-watch="true" data-value="item.PROJE_ITERASYON_ID">
+                                                    <a>
+                                                        {{item.PROJE_ITERASYON_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDokumanDfi.cmb_PROJE_ITERASYON_ID.$invalid && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Atayan <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtTALEP_ATAYAN_AD_SOYAD" readonly ng-model="$storage.AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Talep Atayan">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Sahibi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" name="cmb_KULLANICI_ID" id="cmb_KULLANICI_ID" ng-model="$parent.InfoDokumanDfi.KULLANICI_ID"
+                                                data-live-search="true" title="Talep Sahibi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDokumanDfi.cmb_KULLANICI_ID.$invalid && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep İlgili </label>
+                                        <div class="col-lg-6">
+
+                                            <div class="project-people" style="text-align:left;">
+                                                <ul style="margin-left:-45px;">
+                                                    <li ng-repeat=" postIlgili in TalepProjeIlgiDokumanListesi" style="display:inline-block; float: none; margin: 0 0 0 5px;">
+                                                        <a " tooltip-append-to-body="true" ng-click="modalSilmeOnayiTalepIlgiliDokuman(postIlgili)" class="btn btn-sm btn-circle">
+                                                            <img id="kullaniciFoto" ng-src="{{postIlgili.AvatarBase64}}" ng-show="postIlgili.AvatarBase64" class="img-sm" tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}" />
+                                                            <img ng-src="{{postIlgili.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postIlgili.AvatarBase64" class="imageContent img-sm" tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-info " type="button" ng-click="TalepIlgiliDokumanEkle()">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Konu<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtTALEP_PROJE_KONU" id="txtTALEP_PROJE_KONU" style="resize:none;" ng-maxlength="255" ng-minlength="1" ng-model="$parent.InfoDokumanDfi.TALEP_PROJE_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep konu giriniz." required></textarea>
+                                            <p ng-show="frmDokumanDfi.txtTALEP_PROJE_KONU.$invalid && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Planlanan Başlangıç Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" id="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" ng-model="$parent.InfoDokumanDfi.TALEP_PLANLANAN_BASLANGIC_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" required />
+                                            </div>
+                                            <p ng-show="frmDokumanDfi.txtTALEP_PLANLANAN_BASLANGIC_TARIHI.$invalid  && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Planlanan Bitiş Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_PLANLANAN_BITIS_TARIHI" id="txtTALEP_PLANLANAN_BITIS_TARIHI" ng-model="$parent.InfoDokumanDfi.TALEP_PLANLANAN_BITIS_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" required />
+                                            </div>
+                                            <p ng-show="frmDokumanDfi.txtTALEP_PLANLANAN_BITIS_TARIHI.$invalid  && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Döküman</label>
+
+                                        <div class="col-lg-8">
+                                            <label tooltip="Dökuman yüklemek için tıklayınız." for="fileupload" class="btn btn-sm btn-primary">
+                                                <input class="hide ng-isolate-scope" type="file" id="fileupload" name="fileupload" ng-file-model="$parent.InfoYeniDokumanDfiListesi" multiple accept="image/x-png, image/gif, image/jpeg, application/*">
+                                                <i class="fa fa-cloud-upload"></i>&nbsp;Yeni Dosya Yükle
+                                            </label>
+                                            <div ng-repeat="file in $parent.InfoYeniDokumanDfiListesi">
+                                                {{file.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <div class="ibox-content">
+                                            <label class="control-label" style="padding-bottom:5px;">Açıklama</label>
+                                            <div class="ibox-content no-padding bckrnd-white aa" ng-disabled="true">
+                                                <summernote config="$parent.options" ng-model="$parent.InfoDokumanDfi.TALEP_PROJE_ACIKLAMA"></summernote>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-suitcase"></i>  Talep Tipi Problem Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen talep tipi problem bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Süreç<span class="text-danger">*</span></label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="cmb_SUREC_ID" name="cmb_SUREC_ID" ng-model="$parent.InfoDokumanDfi.SUREC_ID"
+                                            data-live-search="true" title="Süreç Seçiniz" data-size="5" required ="true">
+                                            <li nya-bs-option="item in SurecListesi" deep-watch="true" data-value="item.SUREC_ID">
+                                                <a>
+                                                    {{item.SUREC_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="frmDokumanDfi.cmb_SUREC_ID.$invalid && formCalistirildiDokumanDfi" class="validation">Bu alan boş bırakılamaz.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">DFI Uygunsuzluk Neden Açıklama</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoDokumanDfi.TALEP_PROJE_TALEP_TIPI_DFI_UYGUNSUZLUK_NEDEN_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI uygunsuz neden açıklama giriniz."></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">DFI Tekrar Engelleme Faaliyet Açıklama</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoDokumanDfi.TALEP_PROJE_TALEP_TIPI_DFI_TEKRAR_ENGELLEME_FAALIYET_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI tekrar engelleme faaliyet açıklama giriniz."></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Kök Neden</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtKOK_NEDEN" style="resize:none;" ng-minlength="1" ng-model="$parent.InfoDokumanDfi.KOK_NEDEN" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="DFI Kök neden giriniz."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-success" ng-click="DokumanTalepEkleGuncelle(InfoDokumanDfi, frmDokumanDfi)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" tooltip="Geri" ng-click="DokumanDfiGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>
+
+
+
+
+

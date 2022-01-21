@@ -1,0 +1,75 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Dışarıdan Katılımcı Ekle</h4>
+    </div>
+    <div class="modal-body">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <form name="frmToplantiDisaridanKatilimci" id="frmToplantiDisaridanKatilimci" class="form-horizontal">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Ad Soyad</label>
+                                <div class="col-lg-8">
+                                    <input type="text" name="txtAD_SOYAD" ng-model="InfoToplantiKatilimci.AD_SOYAD" class="form-control formEkleDuzenleInput" placeholder="Katılımcı adını giriniz.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Telefon No</label>
+                                <div class="col-lg-8">
+                                    <input type="text" maxlength="17" mask="(999) 999 9999" name="txtTELEFON_NO" ng-model="InfoToplantiKatilimci.TOPLANTI_KATILIMCI_TELEFON_NO" class="form-control formEkleDuzenleInput" placeholder="Telefon no giriniz.">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Eposta</label>
+                                <div class="col-lg-8">
+                                    <input type="email" name="txtEPOSTA" ng-model="InfoToplantiKatilimci.TOPLANTI_KATILIMCI_E_POSTA" class="form-control formEkleDuzenleInput" placeholder="Eposta adresini giriniz.">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Katılımcı Rolü <span class="text-danger">*</span></label>
+                                <div class="col-lg-8">
+                                    <ol class="nya-bs-select form-control" id="cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID" name="cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID" ng-model="InfoToplantiKatilimci.TOPLANTI_KATILIMCI_ROLU_TIPI_ID"
+                                        data-live-search="true" title="Lütfen Seçiniz" data-size="5" required="true">
+                                        <li nya-bs-option="item in ToplantiKatilimciRoluTipiListesi" deep-watch="true" data-value="[item.TOPLANTI_KATILIMCI_ROLU_TIPI_ID,item.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI]">
+                                            <a>
+                                                {{item.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI}}
+                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                            </a>
+                                        </li>
+                                    </ol>
+
+                                    <p ng-show="frmToplantiDisaridanKatilimci.cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID.$invalid && formCalistirildiToplantiDisaridanKatilimci" class="validation">Bu alan boş bırakılamaz.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+            </div>
+
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="ToplantiKatilimciListesineEkle(InfoToplantiKatilimci,frmToplantiDisaridanKatilimci,InfoToplantiKatilimci.KATILIMCI_DURUM=false)">&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="DisaridanKatilimciGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>
+
+
+
+
+

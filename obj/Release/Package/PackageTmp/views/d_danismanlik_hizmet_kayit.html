@@ -1,0 +1,91 @@
+﻿<div ng-init="modalInit()">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            Danışmanlık Hizmet Bilgileri                           
+                        </h5>
+                        <div class="ibox-tools">
+                            <small> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form method="get" name="frmHizmet" id="frmHizmet" class="form-horizontal" accessible-form>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Hizmet Adı<span class="text-danger">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="txtHIZMET_ADI" ng-model="Info.HIZMET_ADI" class="form-control" placeholder="Lütfen Hizmet Adi giriniz." required>
+                                        <p ng-show="frmHizmet.txtHIZMET_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Başlangıç Tarihi</label>
+                                    <div class="col-sm-4">
+                                        <input type="datetime" name="txtBASLANGIC_TARIHI" ng-model="Info.BASLANGIC_TARIHI" nextgen-date-picker class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Tahmini Bitiş</label>
+                                    <div class="col-sm-4">
+                                        <input type="datetime" name="txtTAHMINI_BITIS" ng-model="Info.TAHMINI_BITIS" nextgen-date-picker class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="SeviyeListesi.length > 0">
+                                    <label class="col-sm-2 control-label">Belgendirme Kapsamı/Seviyesi</label>
+                                    <div class="col-sm-10">
+                                        <ol class="nya-bs-select form-control" id="cmbD_SEVIYE_KAPSAM_ID" name="cmbD_SEVIYE_KAPSAM_ID" ng-model="Info.D_SEVIYE_KAPSAM_ID"
+                                            data-live-search="true" title="Kapsam/Seviye seçimi yapınız" data-size="5">
+                                            <li nya-bs-option="item in SeviyeListesi" deep-watch="true" data-value="item.D_SEVIYE_KAPSAM_ID">
+                                                <a>
+                                                    {{item.ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Denetim Türü *</label>
+                                    <div class="col-sm-10">
+                                        <ol class="nya-bs-select form-control" id="cmbD_DENETIM_TURU_ID" name="cmbD_DENETIM_TURU_ID" ng-model="Info.D_DENETIM_TURU_ID"
+                                            data-live-search="true" title="Denetim türü seçimi yapınız" data-size="5">
+                                            <li nya-bs-option="item in DenetimTurleri" deep-watch="true" data-value="item.D_DENETIM_TURU_ID">
+                                                <a>
+                                                    {{item.ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                        <p ng-show="form.cmbD_DENETIM_TURU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                    </div>
+                                </div>
+                              
+
+                                <!--<div class="form-group">
+        <label class="col-sm-2 control-label">Gerceklesen Bitis </label>
+        <div class="col-sm-10">
+            <input type="datetime" name="txtGERCEKLESEN_BITIS" ng-model="Info.GERCEKLESEN_BITIS" nextgen-date-time-picker class="form-control">
+        </div>
+    </div>-->
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class=" btn btn-success " type="button" ng-click="DDanismanlikHizmetEkleGuncelle(Info,frmHizmet)">
+                                            <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                        </button>
+                                        <a class="btn btn-primary" ng-click="modalKapat()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+   
+
+</div>

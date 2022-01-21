@@ -1,0 +1,31 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title"> Personel Ekle</h4>
+        
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmMailGrupKullanici" id="frmMailGrupKullanici" class="form-horizontal" accessible-form>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Personel<span class="text-danger">*</span></label>
+                <div class="col-lg-8">
+                    <ol class="nya-bs-select form-control" id="sel_KULLANICI_ID" name="sel_KULLANICI_ID" ng-model="InfoMailGrupKullanici.KULLANICI_ID"
+                        data-live-search="true" title="Personel Seçiniz" data-size="5" required="true">
+                        <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                            <a>
+                                {{item.AD_SOYAD}}
+                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                            </a>
+                        </li>
+                    </ol>
+                    <p ng-show="frmMailGrupKullanici.sel_KULLANICI_ID.$invalid && formCalistirildiMailGrupKullanici" class="validation">Bu alan boş bırakılamaz.</p>
+                </div>
+            </div>
+            </form>
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="MailGrupKullaniciEkleGuncelle(InfoMailGrupKullanici, frmMailGrupKullanici)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="Geri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

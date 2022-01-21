@@ -1,0 +1,88 @@
+﻿
+<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Proje Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i>
+                    Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <a ui-sref="proje.projelerlistesi">
+                    <i class="fa fa-list"></i>
+                    Proje Listesi
+                </a>
+            </li>
+            <li class="active animated bounceInRight">
+                <i class="fa fa-file-text"></i>
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content" style="background:#f3f3f4">
+                    <div class="clients-list">
+                        <ul class="nav nav-tabs">
+                            <li ng-class="{'active' : tab == 1}">
+                                <a data-toggle="tab" ng-click="setTab(1)" ui-sref=".projekart" data-ui-sref-opts="{reload:true}">
+                                    <i class="fa fa-id-card-o"></i>&nbsp;Proje Kartı
+                                </a>
+                            </li>
+                            <li ng-class="{'active' : tab == 2}" ng-show="IsCreate" ui-sref="proje.projelerkayit.fizibilite.tahminleme">
+                                <a data-toggle="tab" ng-click="setTab(2)">
+                                    <i class="fa fa-briefcase"></i> &nbsp;Fizibilite
+                                </a>
+                            </li>
+                            <!--plan tabı teslim edilecek ürün ile gösterilmekte-->
+                            <li ng-class="{'active' : tab == 3}" ng-show="IsCreate" ui-sref=".plan.projepersonelrollistesi">
+                                <a data-toggle="tab" ng-click="setTab(3)">
+                                    <i class="fa fa-cubes"></i> &nbsp;Plan
+                                </a>
+                            </li>
+
+                            <li ng-class="{'active' : tab == 4}" ng-show="IsCreate" ui-sref=".risk.projerisklistesi" data-ui-sref-opts="{reload:true}">
+                                <a data-toggle="tab" ng-click="setTab(4)">
+                                    <i class="fa fa-bell"></i> &nbsp;Risk
+                                </a>
+                            </li>
+                            <li ng-class="{'active' : tab == 5}" ng-show="IsCreate" ui-sref=".talepyonetimsistemi.projeiterasyonlistesi" data-ui-sref-opts="{reload:true}">
+                                <a data-toggle="tab" ng-click="setTab(5)">
+                                    <i class="fa fa-id-card-o"></i> &nbsp;Talep Yönetim Sistemi
+                                </a>
+                            </li>
+
+                            <li ng-class="{'active' : tab == 6}" ng-show="IsCreate" ui-sref=".dokuman.projedokumanlistesi" data-ui-sref-opts="{reload:true}">
+                                <a data-toggle="tab" ng-click="setTab(6)">
+                                    <i class="fa fa-file-text-o"></i> &nbsp;Döküman
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ui-view></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

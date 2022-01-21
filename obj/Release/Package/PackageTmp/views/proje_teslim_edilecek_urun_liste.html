@@ -1,0 +1,253 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Teslim Edilecek Ürün Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeTeslimEdilecekUrun" id="frmProjeTeslimEdilecekUrun" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">
+                                            Teslim Edilecek Ürün Adı
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtTESLIM_EDILECEK_URUN_ADI" id="txtTESLIM_EDILECEK_URUN_ADI" ng-model="InfoTeslimEdilecekUrun.TESLIM_EDILECEK_URUN_ADI" ng-maxlength="50" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Teslim edilecek ürün adını giriniz." required>
+                                            <p ng-show="frmProjeTeslimEdilecekUrun.txtTESLIM_EDILECEK_URUN_ADI.$invalid && formCalistirildiTeslimEdilecekUrun" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Teslim Edilecek Ürün Sahibi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID" name="cmbPROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID" ng-model="InfoTeslimEdilecekUrun.PROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID"
+                                                data-live-search="true" title="Ürün Sahibi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjePersonelListesiGenel" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                    <a>
+                                                        {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeTeslimEdilecekUrun.cmbPROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID.$invalid && formCalistirildiTeslimEdilecekUrun" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ürün Teslim Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtTESLIM_EDILECEK_URUN_TESLIM_TARIHI" id="txtTESLIM_EDILECEK_URUN_TESLIM_TARIHI" ng-model="InfoTeslimEdilecekUrun.TESLIM_EDILECEK_URUN_TESLIM_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput input-sm" required>
+                                            </div>
+                                            <p ng-show="frmProjeTeslimEdilecekUrun.txtTESLIM_EDILECEK_URUN_TESLIM_TARIHI.$invalid && formCalistirildiTeslimEdilecekUrun" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeTeslimEdilecekUrunEkleGuncelle(InfoTeslimEdilecekUrun, Durum=undefined)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </button>
+                                            <!--<a class="btn btn-sm btn-primary"
+                                            href="#"
+                                            ui-sref="proje.projelerkayit.plan.teslimedilecekurun"
+                                            data-ui-sref-opts="{reload:true}">
+                                             <i class="fa fa-reply-all"></i>
+                                             &nbsp;&nbsp;
+                                             <span class="bold">Geri</span>
+                                                </a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Teslim Edilecek Ürün Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-IzinTuru" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Teslim Edilecek Ürün Adı</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="txtTESLIM_EDILECEK_URUN_ADI" id="txtTESLIM_EDILECEK_URUN_ADI" ng-model="AramaKriter.TESLIM_EDILECEK_URUN_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Teslim edilecek ürün adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="ProjeTeslimEdilecekUrunGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeTeslimEdilecekUrunListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref=".kayit" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjeTeslimEdilecekUrunGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Teslim Edilecek Ürün Adı</b></td>
+                                            <td><b>Ürün Sahibi</b></td>
+                                            <td><b>Ürün Teslim Tarihi</b></td>
+                                            <td><b>Kayıt Tarihi</b></td>
+                                            <td><b>Teslim Durumu</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in ProjeTeslimEdilecekUrunListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.teslimedilecekurunkayit({ teslimEdilecekUrunNo: post.PROJE_TESLIM_EDILECEK_URUN_ID})">{{post.TESLIM_EDILECEK_URUN_ADI}} </a><br />
+                                            </td>
+                                            <td>
+                                                {{post.PROJE_PERSONEL_URUN_SAHIBI_KULLANICI_AD_SOYAD}} <br />
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.TESLIM_EDILECEK_URUN_TESLIM_TARIHI | tarih  }}
+                                                </span>
+                                            </td>
+                                            <td class="tarih">
+                                                <span class="label label-primary label-kayit-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.KAYIT_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="" type="button" ng-show="post.TESLIM_EDILECEK_URUN_DURUM == true" ng-click="ProjeTeslimEdilecekUrunEkleGuncelleDurum(post, Durum=false)" tooltip="" class="btn btn-sm btn-info">
+                                                    <i class="fa fa-truck"></i>&nbsp;&nbsp;<span class="bold ng-binding">Teslim Edildi</span>
+                                                </a>
+                                                <a href="" type="button" ng-show="post.TESLIM_EDILECEK_URUN_DURUM == false" ng-click="ProjeTeslimEdilecekUrunEkleGuncelleDurum(post, Durum=true)" tooltip="" class="btn btn-sm btn-danger">
+                                                    <i class="fa fa-truck"></i>&nbsp;&nbsp;<span class="bold ng-binding">Teslim Edilmedi</span>
+                                                </a>
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="proje.projelerkayit.plan.teslimedilecekurunkayit({ teslimEdilecekUrunNo: post.PROJE_TESLIM_EDILECEK_URUN_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <button ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjeTeslimEdilecekUrunGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-show="ProjeTeslimEdilecekUrunListesi.length==0||ProjeTeslimEdilecekUrunListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref=".kayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeTeslimEdilecekUrunGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Proje işlemleri tanımlamalarına bağlı teslim edilecek ürün kaydı <strong>bulunmamaktadır.</strong>
+                                <!--Eklemek için <a ui-sref=".kayit"
+                                            class="alert-Link-Emfa alert-link">
+                                tıklayınız.
+                                        </a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+

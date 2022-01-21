@@ -1,0 +1,65 @@
+﻿<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Test Senaryo Adım Ekle</h4>
+    </div>
+    <div class="modal-body">
+
+        <form method="get" name="frmProjeTestSenaryoAdim" id="frmProjeTestSenaryoAdim" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Sıra <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtSIRA" id="txtSIRA" ng-model="InfoProjeTestSenaryoTestAdim.SIRA" class="formEkleDuzenleInput form-control"  placeholder="Sırasını giriniz." required>
+                                <p ng-show="frmProjeTestSenaryoAdim.txtSIRA.$invalid && formProjeTestSenaryoTestAdimCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Aktör <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtAKTOR" id="txtAKTOR" ng-model="InfoProjeTestSenaryoTestAdim.AKTOR" class="formEkleDuzenleInput form-control" ng-maxlength="50" ng-minlength="1" placeholder="Aktör giriniz." required>
+                                <p ng-show="frmProjeTestSenaryoAdim.txtAKTOR.$invalid && formProjeTestSenaryoTestAdimCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"> Giriş Koşulu <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="txtGIRIS_KOSULU" id="txtGIRIS_KOSULU" ng-model="InfoProjeTestSenaryoTestAdim.GIRIS_KOSULU" rows="7" style="resize: none" class="formEkleDuzenleInput form-control"  ng-minlength="1" placeholder="Giriş koşulu giriniz." required></textarea>
+                                <p ng-show="frmProjeTestSenaryoAdim.txtGIRIS_KOSULU.$invalid && formProjeTestSenaryoTestAdimCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Açıklama <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="txtACIKLAMA" id="txtACIKLAMA" ng-model="InfoProjeTestSenaryoTestAdim.ACIKLAMA" rows="7" style="resize: none" class="formEkleDuzenleInput form-control" ng-minlength="1" placeholder="Açıklama giriniz." required></textarea>                                        
+                                <p ng-show="frmProjeTestSenaryoAdim.txtACIKLAMA.$invalid && formProjeTestSenaryoTestAdimCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Beklenen Sonuç <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="txtBEKLENEN_SONUC" id="txtBEKLENEN_SONUC" ng-model="InfoProjeTestSenaryoTestAdim.BEKLENEN_SONUC" rows="7" style="resize: none" class="formEkleDuzenleInput form-control"  ng-minlength="1" placeholder="Beklenen sonuc giriniz." required></textarea>
+                                <p ng-show="frmProjeTestSenaryoAdim.txtBEKLENEN_SONUC.$invalid && formProjeTestSenaryoTestAdimCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="Ekle(InfoProjeTestSenaryoTestAdim, frmProjeTestSenaryoAdim)"><i class="fa fa-plus"></i>&nbsp;&nbsp;Ekle</button>
+        <button type="button" class="btn btn-info" ng-click="Geri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;Geri</button>
+    </div>
+</div>

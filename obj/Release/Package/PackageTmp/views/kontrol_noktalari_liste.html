@@ -1,0 +1,159 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li class="active">
+                Yönetim Paneli Tanımlaları
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<!-- Arama ve Sonuç Listeleme Kutusu -->
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Kontrol Noktaları Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-KontrolNoktalari" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kontrol Noktası Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtKONTROL_NOKTASI_ADI" id="txtKONTROL_NOKTASI_ADI" ng-model="AramaKriter.KONTROL_NOKTASI_ADI" class="form-control formEkleDuzenleInput" placeholder="Kontrol noktası adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kontrol Noktası Açıklama</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtKONTROL_NOKTASI_ACIKLAMA" id="txtKONTROL_NOKTASI_ACIKLAMA" ng-model="AramaKriter.KONTROL_NOKTASI_ACIKLAMA" class="form-control formEkleDuzenleInput" placeholder="Kontrol noktası açıklama giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="KontrolNoktalariGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="KontrolNoktalariListesi.length >0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.kontrolnoktalarikayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="KontrolNoktalariGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Kontrol Noktası Adı</b></td>
+                                            <td><b>Kontrol Noktası Açıklama</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in KontrolNoktalariListesi">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td>
+                                                <a class="editLink-Emfa" ui-sref="yonetim.kontrolnoktalarikayit({ kontrolNoktalariID: post.KONTROL_NOKTASI_ID})">{{post.KONTROL_NOKTASI_ADI}}</a>
+                                            </td>
+
+                                            <td>
+                                                {{post.KONTROL_NOKTASI_ACIKLAMA}}
+                                            </td>
+                                            <td class="table-actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="yonetim.kontrolnoktalarikayit({ kontrolNoktalariID: post.KONTROL_NOKTASI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="table-actions">
+                                                <div class="pull-right">
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="KontrolNoktalariGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" ng-if="KontrolNoktalariListesi.length == 0 || KontrolNoktalariListesi ==null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.kontrolnoktalarikayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="KontrolNoktalariGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp; Kontrol noktaları kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="yonetim.kontrolnoktalarikayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

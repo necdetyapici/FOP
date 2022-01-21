@@ -1,0 +1,315 @@
+﻿<div ng-init="init()"></div>
+<form method="get" name="frmProjeGereksinim" id="frmProjeGereksinim" class="form-horizontal" accessible-form>
+    <div class="formEkleDuzenleInputs">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa padding-bottom animated fadeInRightBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-plus-square"></i>  Gereksinim Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>
+                                    Lütfen Gereksinim bilgilerini eksiksiz giriniz.
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gereksinim No <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtPROJE_GEREKSINIM_NO" readonly ng-model="InfoProjeGereksinim.PROJE_GEREKSINIM_NO" class="formEkleDuzenleInput form-control" ng-maxlength="15" ng-minlength="1" placeholder="Gereksinim no giriniz.">
+                                            <!--<p ng-show="frm_projegereksinim.txtPROJE_GEREKSINIM_NO.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gereksinim Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <textarea name="txtPROJE_GEREKSINIM_ADI" ng-model="InfoProjeGereksinim.PROJE_GEREKSINIM_ADI" rows="5" style="resize: none" class="formEkleDuzenleInput form-control" ng-maxlength="255" ng-minlength="1" placeholder="Gereksinim adı giriniz." required></textarea>                                        <p ng-show="frmProjeGereksinim.txtPROJE_GEREKSINIM_ADI.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gereksinim Türü<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbGEREKSINIM_TURU_ID" name="cmbGEREKSINIM_TURU_ID" ng-model="InfoProjeGereksinim.GEREKSINIM_TURU_ID"
+                                                data-live-search="true" title="Gereksinim Türü Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in GereksinimTuruListesi" deep-watch="true" data-value="item.GEREKSINIM_TURU_ID">
+                                                    <a>
+                                                        {{item.GEREKSINIM_TURU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeGereksinim.cmbGEREKSINIM_TURU_ID.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gereksinim Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbGEREKSINIM_TIPI_ID" name="cmbGEREKSINIM_TIPI_ID" ng-model="InfoProjeGereksinim.GEREKSINIM_TIPI_ID"
+                                                data-live-search="true" title="Gereksinim Tipi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in GereksinimTipiListesi" deep-watch="true" data-value="item.GEREKSINIM_TIPI_ID">
+                                                    <a>
+                                                        {{item.GEREKSINIM_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeGereksinim.cmbGEREKSINIM_TIPI_ID.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_ITERASYON_ID" name="cmbPROJE_ITERASYON_ID" ng-model="InfoProjeGereksinim.PROJE_ITERASYON_ID"
+                                                data-live-search="true" title="Proje İterasyon Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjeIterasyonListesi" deep-watch="true" data-value="item.PROJE_ITERASYON_ID">
+                                                    <a>
+                                                        {{item.PROJE_ITERASYON_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeGereksinim.cmbPROJE_ITERASYON_ID.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Modülü</label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_MODUL_ID" name="cmbPROJE_MODUL_ID" ng-model="InfoProjeGereksinim.PROJE_MODUL_ID"
+                                                data-live-search="true" title="Proje Modülü Seçiniz" data-size="5" allow-clear="true">
+                                                <li nya-bs-option="item in ProjeModulListesi" deep-watch="true" data-value="item.PROJE_MODUL_ID">
+                                                    <a>
+                                                        {{item.MODUL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-hide="InfoProjeGereksinim.PROJE_GEREKSINIM_ID == undefined">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeGereksinimEkleGuncelle(InfoProjeGereksinim)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary"
+                                                    ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimlistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="InfoProjeGereksinim.PROJE_GEREKSINIM_ID == undefined">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-plus-square"></i>  Gereksinim Talep Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>
+                                    Lütfen Gereksinime ait talep kaydını eksiksiz giriniz.
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Talep Tipi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtTALEP_TIPI_ADI" ng-model="TALEP_TIPI_ADI" class="formEkleDuzenleInput form-control" placeholder="" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">İterasyon<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbTALEP_PROJE_ITERASYON_ID" name="cmbTALEP_PROJE_ITERASYON_ID" ng-model="InfoProjeGereksinim.TALEP_PROJE_ITERASYON_ID"
+                                                data-live-search="true" title="Proje İterasyon Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjeIterasyonListesi" deep-watch="true" data-value="item.PROJE_ITERASYON_ID">
+                                                    <a>
+                                                        {{item.PROJE_ITERASYON_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeGereksinim.cmbTALEP_PROJE_ITERASYON_ID.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Atayan <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtAD_SOYAD" readonly ng-model="$storage.AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Talep Atayan">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Sahibi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmb_KULLANICI_ID" name="cmb_KULLANICI_ID" ng-model="InfoProjeGereksinim.TALEP_SAHIBI_KULLANICI_ID"
+                                                data-live-search="true" title="Talep Sahibi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeGereksinim.cmb_KULLANICI_ID.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Konu<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <textarea type="text" name="txtTALEP_PROJE_KONU" style="resize:none;" ng-maxlength="255" ng-minlength="1" ng-model="InfoProjeGereksinim.TALEP_PROJE_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep konu giriniz." required></textarea>
+                                            <p ng-show="frmProjeGereksinim.txtTALEP_PROJE_KONU.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Öngörülen Zaman(Saat)</label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                                <input type="text" name="txtTALEP_ONGORULEN_ZAMAN" value="09:30" ng-model="InfoProjeGereksinim.TALEP_ONGORULEN_ZAMAN" clock-picker data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Talep öngörülen zaman(saat) giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Planlanan Başlangıç Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_PLANLANAN_BASLANGIC_TARIHI" ng-model="InfoProjeGereksinim.TALEP_PLANLANAN_BASLANGIC_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" required />
+                                            </div>
+                                            <p ng-show="frmProjeGereksinim.txtTALEP_PLANLANAN_BASLANGIC_TARIHI.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Planlanan Bitiş Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_PLANLANAN_BITIS_TARIHI" ng-model="InfoProjeGereksinim.TALEP_PLANLANAN_BITIS_TARIHI" nextgen-date-time-picker="" class="formEkleDuzenleInput form-control" required />
+                                            </div>
+                                            <p ng-show="frmProjeGereksinim.txtTALEP_PLANLANAN_BITIS_TARIHI.$invalid && formCalistirildiProjeGereksinim" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Süreç Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtSUREC_ADI" readonly class="formEkleDuzenleInput form-control" ng-model="TALEP_SUREC_ADI">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep İlgili </label>
+                                        <div class="col-lg-4">
+
+                                            <div class="project-people" style="text-align:left;">
+                                                <ul style="margin-left:-45px;">
+                                                    <li ng-repeat=" postIlgili in TalepProjeIlgiListesi" style="display:inline-block; float: none; margin: 0 0 0 5px;">
+                                                        <a " tooltip-append-to-body="true" ng-click="modalSilmeOnayiTalepIlgili(postIlgili)" class="btn btn-sm btn-circle">
+                                                            <img id="kullaniciFoto" ng-src="{{postIlgili.AvatarBase64}}" ng-show="postIlgili.AvatarBase64" class="img-sm" tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}" />
+                                                            <img ng-src="{{postIlgili.CINSIYET=='K' ?'../img/avatar/avatar-2-50x50.png':'../img/avatar/avatar-1-50x50.png'}}" alt="Avatar" ng-hide="postIlgili.AvatarBase64" class="imageContent img-sm" tooltip="{{postIlgili.TALEP_PROJE_ILGI_KULLANICI_AD_SOYAD}}">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-info " type="button" ng-click="TalepIlgiliEkle()">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Döküman</label>
+
+                                        <div class="col-lg-6">
+                                            <label tooltip="Dökuman yüklemek için tıklayınız." for="fileupload" class="btn btn-sm btn-primary">
+                                                <input class="hide ng-isolate-scope" type="file" id="fileupload" name="fileupload" ng-file-model="InfoYeniDokumanListesi" multiple accept="image/x-png, image/gif, image/jpeg, application/*">
+                                                <i class="fa fa-cloud-upload"></i>&nbsp;Yeni Dosya Yükle
+                                            </label>
+                                            <div ng-repeat="file in InfoYeniDokumanListesi">
+                                                {{file.name}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeGereksinimEkleGuncelle(InfoProjeGereksinim)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary"
+                                                    ui-sref="proje.projelerkayit.talepyonetimsistemi.projegereksinimlistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                &nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom  animate fadeInRightBig" >
+
+        </div>-->
+    </div>
+</form>
+
+
+

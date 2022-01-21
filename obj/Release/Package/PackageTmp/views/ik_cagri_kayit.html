@@ -1,0 +1,155 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Çağrı İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikcagrilistesi"><i class="fa fa-list"></i> Çağrı Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-phone"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-phone"></i>
+                        Çağrı Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;  Lütfen çağrı bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmCagri" id="frmCagri" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Arayan<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIK_CAGRI_HIZMETI_ARAYAN" ng-model="Info.IK_CAGRI_HIZMETI_ARAYAN" class="formEkleDuzenleInput form-control" placeholder="Arayanı giriniz.">
+                                            <p ng-show="frmCagri.txtIK_CAGRI_HIZMETI_ARAYAN.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Çağrı Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_CAGRI_HIZMETI_TARIHI" ng-model="Info.IK_CAGRI_HIZMETI_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+                                            </div>
+                                            <p ng-show="frmCagri.txtIK_CAGRI_HIZMETI_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Çağrı Saati<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
+                                                <input type="text" value="09:30" name="txtIK_CAGRI_HIZMETI_SAATI" ng-model="Info.IK_CAGRI_HIZMETI_SAATI" clock-picker data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Çağrı saatini giriniz." required>
+                                            </div>
+                                            <p ng-show="frmCagri.txtIK_CAGRI_HIZMETI_SAATI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Aranan Kişi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbKULLANICI_ID" name="cmbKULLANICI_ID" ng-model="Info.KULLANICI_ID"
+                                                data-live-search="true" title="Aranan Kişi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmCagri.cmbKULLANICI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Telefon<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_CAGRI_HIZMETI_TELEFON" maxlength="17"
+                                                   mask="(999) 999 9999" ng-model="Info.IK_CAGRI_HIZMETI_TELEFON" class="formEkleDuzenleInput form-control" required placeholder="Telefon numarası giriniz." />
+                                            <p ng-show="frmCagri.txtIK_CAGRI_HIZMETI_TELEFON.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Çağrıyı Açan<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="50" ng-minlength="1" name="txtCAGRI_ACAN_KULLANICI_AD_SOYAD" ng-model="cagriAcanKullaniciAdiSoyadi" class="formEkleDuzenleInput form-control" ng-disabled="true">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Görüşme Konusu <span class="text-danger">*</span></label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="txtIK_CAGRI_HIZMETI_GORUSME_KONUSU" ng-maxlength="500" ng-minlength="1" style="resize:none;" ng-model="Info.IK_CAGRI_HIZMETI_GORUSME_KONUSU" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Çağrı görüşme konusunu giriniz." required></textarea>
+                                            <p ng-show="frmCagri.txtIK_CAGRI_HIZMETI_GORUSME_KONUSU.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" ng-show="Info.IK_CAGRI_HIZMETI_ID>0&&((Info.CAGRI_DURUM==true&&(Info.KULLANICI_ID==kullaniciID||$storage.IS_PICT_YONETICI==true||$storage.IS_MUSTERI_YONETICI==true||Info.YONETICI_ID==kullaniciID))||Info.CAGRI_DURUM==false)">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Konuşma İçeriği <span class="text-danger">*</span></label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" ng-disabled="Info.KULLANICI_ID!=kullaniciID" name="txtGERI_DONUS_DEGERI" ng-maxlength="500" ng-minlength="1" style="resize:none;" ng-model="Info.GERI_DONUS_DEGERI" rows="9" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Konuşma içeriğini giriniz."></textarea>
+                                            <p ng-show="frmCagri.txtGERI_DONUS_DEGERI.$invalid &amp;&amp; formCalistirildi && Info.CAGRI_ONAY_DURUM_ID==2" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-primary" ng-show="Info.IK_CAGRI_HIZMETI_ID>0&&Info.KULLANICI_ID==kullaniciID" ng-click="cagriDurumAlert(Info, Info.CAGRI_ONAY_DURUM_ID = 2)"><i class="fa fa-handshake-o"></i>&nbsp;&nbsp;<span class="bold">Görüşüldü</span></button>
+                                            <button class="btn btn-warning" ng-show="Info.IK_CAGRI_HIZMETI_ID>0&&Info.KULLANICI_ID==kullaniciID" ng-click="IkCagriOnaylama(Info,Info.CAGRI_ONAY_DURUM_ID=1,Info.CAGRI_DURUM=false)"><i class="fa fa-pause"></i>&nbsp;&nbsp;<span class="bold">Beklemede</span></button>
+                                            <button class="btn btn-danger" ng-show="Info.IK_CAGRI_HIZMETI_ID>0&&Info.KULLANICI_ID==kullaniciID" ng-click="IkCagriOnaylama(Info, Info.CAGRI_ONAY_DURUM_ID = 3,Info.CAGRI_DURUM=false)"><i class="fa fa-times"></i>&nbsp;&nbsp;<span class="bold">Ulaşılamadı</span></button>
+                                            <button class=" btn btn-success " data-ui-sref-opts="{reload:true}" ng-click="IkCagriEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="insankaynaklari.ikcagrilistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

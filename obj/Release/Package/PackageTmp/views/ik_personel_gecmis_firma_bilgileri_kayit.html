@@ -1,0 +1,84 @@
+﻿<div ng-init="init()"></div>
+
+    <div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-handshake-o"></i> Personel Geçmiş Firma Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen Personel Geçmiş Firma bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <form method="get" name="frmPersonelGecmisFirmaBilgileri" id="frmPersonelGecmisFirmaBilgileri" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs ">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Geçmiş Firma Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIK_PERSONEL_GECMIS_FIRMA_BILGILERI_ADI" ng-model="InfoPersonelGecmisFirma.IK_PERSONEL_GECMIS_FIRMA_BILGILERI_ADI" class="formEkleDuzenleInput form-control" placeholder="Geçmiş firma bilgisini giriniz.">
+                                                <p ng-show="frmPersonelGecmisFirmaBilgileri.txtIK_PERSONEL_GECMIS_FIRMA_BILGILERI_ADI.$invalid && formCalistirildiPersonelGecmisFirma" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Geçmiş Firma Başlangıç Tarihi</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtIK_PERSONEL_GECMIS_FIRMA_BILGILERI_BASLANGIC_TARIHI" ng-model="InfoPersonelGecmisFirma.IK_PERSONEL_GECMIS_FIRMA_BILGILERI_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                                <p ng-show="frmPersonelGecmisFirmaBilgileri.txtIK_PERSONEL_GECMIS_FIRMA_BILGILERI_BASLANGIC_TARIHI.$invalid &amp;&amp; formCalistirildiPersonelGecmisFirma" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Geçmiş Firma Ayrılma Tarihi</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtIK_PERSONEL_GECMIS_FIRMA_BILGILERI_AYRILMA_TARIHI" ng-model="InfoPersonelGecmisFirma.IK_PERSONEL_GECMIS_FIRMA_BILGILERI_AYRILMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                                <p ng-show="frmPersonelGecmisFirmaBilgileri.txtIK_PERSONEL_GECMIS_FIRMA_BILGILERI_AYRILMA_TARIHI.$invalid &amp;&amp; formCalistirildiPersonelGecmisFirma" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="IkPersonelGecmisFirmaBilgileriEkleGuncelle(InfoPersonelGecmisFirma)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <button class="btn btn-sm btn-primary"
+                                                   ui-sref="insankaynaklari.ikpersonelkayit.ikpersonelgecmisfirmabilgilerilistesi">
+                                                    <i class="fa fa-reply-all"></i>
+                                                    &nbsp;&nbsp;
+                                                    <span class="bold">Geri</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+

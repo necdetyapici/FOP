@@ -1,0 +1,50 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="tanimlamalar.globalsablonlistesi"><i class="fa fa-list"></i> Global Şablon Ön İzleme</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-square-o"></i> Ön İzleme</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                
+               
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                                
+                            <div id="izleme"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button class="btn btn-primary" ui-sref="tanimlamalar.globalsablonkayit({ globalSablonID: InfoGlobalSablonOnIzleme.GLOBAL_SABLON_ID})"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                    
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

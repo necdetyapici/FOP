@@ -1,0 +1,80 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Doküman Farklı Kaydet</h4>
+
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmDokumanFarkli" id="frmDokumanFarkli" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group" >
+                            <label class="col-lg-4 control-label"> Adı <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <input type="text" id="txtADI" name="txtADI" ng-model="InfoDokumanFarkliKaydet.ADI" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Adını giriniz." required>
+                                <p ng-show="frmDokumanFarkli.txtADI.$invalid && formCalistirildiDokumanFarkliKaydet" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Doküman Tipi <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOKUMAN_TIPI_ID" name="sel_DOKUMAN_TIPI_ID" ng-model="InfoDokumanFarkliKaydet.DOKUMAN_TIPI_ID"
+                                    data-live-search="true" title="Dokuman Tipi Seçiniz Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanTipiListesi" deep-watch="true" data-value="item.DOKUMAN_TIPI_ID" required>
+                                        <a>
+                                            {{item.ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokumanFarkli.sel_DOKUMAN_TIPI_ID.$invalid && formCalistirildiDokumanFarkliKaydet" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="InfoDokumanFarkliKaydet.DOKUMAN_TIP_KONTROL == true">
+                            <label class="col-lg-4 control-label">Doküman Cinsi <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <label>
+                                    <input type="radio" id="rdDOKUMAN_TIPI" icheck  ng-model="InfoDokumanFarkliKaydet.DOKUMAN_TIPI" ng-value="true"> Doküman
+                                </label>
+
+                                <label>
+                                    <input type="radio" id="rdDOKUMAN_TIPI" icheck  ng-model="InfoDokumanFarkliKaydet.DOKUMAN_TIPI" ng-value="false"> Şablon
+                                </label>
+                                <p ng-show="frmDokumanFarkli.rdDOKUMAN_TIPI.$invalid && formCalistirildiDokumanFarkliKaydet" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Dosya Konumu <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <ol class="nya-bs-select form-control" id="sel_DOSYA_KONUMU" name="sel_DOSYA_KONUMU" ng-model="InfoDokumanFarkliKaydet.DOSYA_KONUMU"
+                                    data-live-search="true" title="Dosya Konumu Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in DokumanKlasorListesi" deep-watch="true" data-value="item.DOKUMAN_KLASOR_ID">
+                                        <a>
+                                            {{item.UST_DOKUMAN_KLASOR_ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmDokumanFarkli.sel_DOSYA_KONUMU.$invalid && formCalistirildiDokumanFarkliKaydet" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="DokumanFarkliKaydet(InfoDokumanFarkliKaydet, frmDokumanFarkli)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span></button>
+        <button type="button" class="btn btn-danger" ng-click="DokumanFarkliKaydetKapat()"><i class="fa fa-close"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>
+
+
+

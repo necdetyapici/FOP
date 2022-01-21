@@ -1,0 +1,284 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-graduation-cap"></i>  Talep Test Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen talep test senaryo bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools" style="margin-top: -6px;">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        <button class="btn btn-sm btn-info" type="button" ng-disabled="talepKapaliDurumu" ng-click="YeniTestSenaryo()">
+                            <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Test Senaryo Ekle</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeTestSenaryoTalepDurum" id="frmProjeTestSenaryoTalepDurum" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset ng-disabled="talepKapaliDurumu">
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Test Senaryo <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="pull-right">
+                                                    <button class=" btn btn-info " type="button" tooltip="Test Senaryo Ekle" ng-click="TestSenaryoSec()">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <button class=" btn btn-danger " type="button" tooltip="Temizle" ng-click="TestSenaryoTemizle()">
+                                                        <i class="fa fa-eraser"></i>
+                                                    </button>
+                                                </div>
+
+                                                <textarea type="text" name="txtPROJE_TEST_SENARYO_NO" id="txtPROJE_TEST_SENARYO_NO" style="resize:none;" ng-model="InfoProjeTestSenaryoTalepDurum.PROJE_TEST_SENARYO_NO" rows="4" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" readonly required></textarea>
+
+                                                <p ng-show="frmProjeTestSenaryoTalepDurum.txtPROJE_TEST_SENARYO_NO.$invalid && formCalistirildiTalepProjeTestSenaryo" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="ProjeTestSenaryoTalepDurumEkleGuncelle(InfoProjeTestSenaryoTalepDurum)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div ng-class="{ 'col-lg-12': !grupLogGoster, 'col-lg-8' : grupLogGoster}">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-bolt"></i>  Talep Test Senaryoları Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Test senaryolarınızı test etmeyi unutmayın.
+                        </small>
+                    </h5>
+
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeTestSenaryoTalepDurumGrupListesi.length>0">
+                    <form method="get" name="frm_TalepTipiTest" class="form-horizontal">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-sm btn-white" ng-click="ProjeTestSenaryoTalepDurumGetData()"> <i class="fa fa-refresh"></i> </button>
+                                </div>
+                                <strong>Toplam {{ toplamKayitSayisiProjeTestSenaryoTalepDurumGrup }} kayıt</strong>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="project-list">
+                                    <div class="table table-responsive table-emfa">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <td><b>Sonuç</b></td>
+                                                    <td><b>Test Senaryo No</b></td>
+                                                    <td><b>Test Senaryo Tipi</b></td>
+                                                    <td><b>Gereksinim No/Adı</b></td>
+                                                    <td><b>Testi Başlat</b></td>
+                                                    <td><b>Test Sonuçları</b></td>
+                                                    <td></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="postTestSenaryoTalepDurum in ProjeTestSenaryoTalepDurumGrupListesi | filter: ignoreTurkish">
+                                                    <td>
+                                                        <span class="label label-primary" ng-show="postTestSenaryoTalepDurum.DURUM == true">Başarılı</span>
+                                                        <span class="label label-danger" ng-show="postTestSenaryoTalepDurum.DURUM == false">Başarısız</span>
+                                                        <span class="label label-warning" ng-show="postTestSenaryoTalepDurum.DURUM == null">Beklemede</span>
+                                                    </td>
+
+                                                    <td class="table-main">
+                                                        <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                        {{postTestSenaryoTalepDurum.PROJE_TEST_SENARYO_NO}}<br />
+                                                    </td>
+                                                    <td>
+                                                        {{postTestSenaryoTalepDurum.TEST_SENARYO_TIPI_ADI }}
+                                                    </td>
+                                                    <td>
+
+
+                                                        {{postTestSenaryoTalepDurum.PROJE_GEREKSINIM_NO}} / {{postTestSenaryoTalepDurum.PROJE_GEREKSINIM_ADI}}
+
+
+                                                    </td>
+
+                                                    <td class="table-actions">
+                                                        <div class="text-center">
+                                                            <button class="btn btn-sm btn-circle btn-primary" ng-click="ProjeTestSenaryoTestAdimTalepDurumEkle(postTestSenaryoTalepDurum.PROJE_TEST_SENARYO_ID, postTestSenaryoTalepDurum.PROJE_TEST_SENARYO_NO)" tooltip="Başlat"  ng-disabled="talepKapaliDurumu" tooltip-append-to-body="true"><i class="fa fa-play"></i></button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-actions">
+                                                        <div class="text-center">
+                                                            <button class="btn btn-sm btn-circle btn-primary" ng-click="ProjeTestSenaryoTalepDurumLogGetData(postTestSenaryoTalepDurum.PROJE_TEST_SENARYO_ID, postTestSenaryoTalepDurum.PROJE_TEST_SENARYO_NO)" tooltip="Test Sonuçları Göster" tooltip-append-to-body="true"><i class="fa fa-list"></i></button>
+                                                        </div>
+                                                    </td>
+                                                    <td class="table-actions">
+                                                        <div class="text-center">
+                                                            <button class="btn btn-sm btn-circle btn-danger"  ng-disabled="talepKapaliDurumu" ng-click="modalSilmeOnayi(postTestSenaryoTalepDurum)" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="10" class="text-center">
+                                                        <pagination ng-model="AramaKriterProjeTestSenaryoTalepDurum.SayfaNo" ng-change="ProjeTestSenaryoTalepDurumGetData(AramaKriterProjeTestSenaryoTalepDurum)" total-items="toplamKayitSayisiProjeTestSenaryoTalepDurumGrup"
+                                                                    items-per-page="AramaKriterProjeTestSenaryoTalepDurum.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                    previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                    </td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeTestSenaryoTalepDurumGrupListesi.length==0 || ProjeTestSenaryoTalepDurumGrupListesi == null">
+                    <br /><br />
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Talebin test senaryo kayıtları <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+        <div ng-class="{ 'col-lg-4': grupLogGoster}" ng-hide="grupLogGoster == false">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-bolt"></i>  {{seciliProjeTestSenaryoNo}} Sonuçları
+
+                    </h5>
+                    <div class="ibox-tools">
+                        <a><span tooltip="Kapat" class="label" ng-click="grupLogGoster = !grupLogGoster">X</span></a>
+                    </div>
+                </div>
+
+
+
+                <div class="client-detail">
+                    <div class="full-height-scroll" full-scroll>
+                        <div class="ibox-content" ng-if="ProjeTestSenaryoTalepDurumGrupLogListesi.length>0">
+                            <form method="get" name="frm_TalepTipiTest" class="form-horizontal">
+                                
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="pull-right">
+                                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeTestSenaryoTalepDurumLogGetData(seciliProjeTestSenaryoId,seciliProjeTestSenaryoNo)"> <i class="fa fa-refresh"></i> </button>
+                                            </div>
+                                            <strong>Toplam {{ toplamKayitSayisiProjeTestSenaryoTalepDurumLog }} kayıt</strong>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="project-list">
+                                                <div class="table table-responsive ">
+                                                    <table class="table table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+                                                                <td><b>Sonuç</b></td>
+                                                                <td><b>Başlangıç Tarihi</b></td>
+                                                                <td><b>Sonuç Göster</b></td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="postTestSenaryoTalepDurum in ProjeTestSenaryoTalepDurumGrupLogListesi | filter: ignoreTurkish">
+                                                                <td>
+                                                                    <span class="label label-primary" ng-show="postTestSenaryoTalepDurum.DURUM == true">Başarılı</span>
+                                                                    <span class="label label-danger" ng-show="postTestSenaryoTalepDurum.DURUM == false">Başarısız</span>
+                                                                    <span class="label label-warning" ng-show="postTestSenaryoTalepDurum.DURUM == null">Beklemede</span>
+                                                                </td>
+
+
+                                                                <td class="tarih">
+                                                                    <span class="label label-primary" ng-if="postTestSenaryoTalepDurum.BASLANGIC_TARIHI != null">
+                                                                        <i class="fa fa-calendar"></i>
+                                                                        {{postTestSenaryoTalepDurum.BASLANGIC_TARIHI | tarihsaat}}
+
+                                                                    </span>
+                                                                </td>
+
+                                                                <td class="table-actions">
+                                                                    <div class="text-center">
+                                                                        <button class="btn btn-sm btn-circle btn-info" ng-click="TalepDurumLogSonucGoster(postTestSenaryoTalepDurum.PROJE_TEST_SENARYO_TALEP_DURUM_ID)" tooltip="Sonuç Göster" style="margin: 0px 10px 5px 10px;" tooltip-append-to-body="true"><i class="fa fa-eye"></i></button>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                 
+                            </form>
+                        </div>
+
+                        <div class="ibox-content" ng-if="ProjeTestSenaryoTalepDurumGrupLogListesi.length==0 || ProjeTestSenaryoTalepDurumGrupLogListesi == null">
+                            <br /><br />
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        &nbsp;Test senaryo log kayıtları <strong>bulunmamaktadır.</strong>
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+                            <br />
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

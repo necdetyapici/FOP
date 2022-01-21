@@ -1,0 +1,149 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <!--<h2>Proje İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                Doküman Yönetim Sistemi
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-truck"></i>
+                    Karşılaştır
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Karşılaştır
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="pull-left">
+                                                <h3><b>Kaynak</b></h3>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <label class="control-label">Revizyon : </label> {{kaynakRev}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-primary">
+                                                        <div class="panel-heading">Kaynak İçerik</div>
+                                                        <div class="panel-body">
+                                                            <div class="client-detail" style="height:600px;">
+                                                                <div class="full-height-scroll" full-scroll>
+                                                                    <div id="kaynakonizleme"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="pull-left">
+                                                <h3><b>Hedef</b></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <label class="control-label">Revizyon : </label> {{hedefRev}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <hr />
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="panel panel-primary">
+                                                        <div class="panel-heading">Hedef İçerik</div>
+                                                        <div class="panel-body">
+                                                            <div class="client-detail" style="height:600px;">
+                                                                <div class="full-height-scroll" full-scroll>
+                                                                    <div id="hedefonizleme"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading">Farklılık</div>
+                                        <div class="panel-body">
+                                            <div class="client-detail" style="height:600px;">
+                                                <div class="full-height-scroll" full-scroll>
+                                                    <rich-text-diff left="InfoDokumanKarsilastirma.KAYNAK_ACIKLAMA" right="InfoDokumanKarsilastirma.HEDEF_ACIKLAMA"></rich-text-diff>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

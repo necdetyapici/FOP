@@ -1,0 +1,92 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <!--<h2>Proje İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                Doküman Yönetim Sistemi
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-truck"></i>
+                    Dokümanlar Yayınlanan
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Dokümanlar
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+
+                                        <button class="btn btn-sm btn-success" ng-show="DOKUMAN_CINSI_ID != dokumanCinsi.klasor && DOKUMAN_CINSI_ID != dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != null" ng-click="DokumanIndirGetData(DOKUMAN_ID)"><i class="fa fa-download"></i>&nbsp;&nbsp;<span class="bold">İndir</span></button>
+                                        <button class="btn btn-sm btn-success" ng-show="DOKUMAN_CINSI_ID == dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != null" ng-click="DokumanYayinWordIndir()"><i class="fa fa-file-word-o"></i>&nbsp;&nbsp;<span class="bold">Word Olarak İndir</span></button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="client-detail" style="height:800px;">
+                                        <div class="full-height-scroll" full-scroll>
+                                            <div id="onizleme" ng-if="DOKUMAN_CINSI_GOSTER == true && DOKUMAN_CINSI_ID == dokumanCinsi.emfadokuman">
+                                                <textarea ui-tinymce="tinymceOptions"  ng-model="DOKUMAN_ON_IZLEME"></textarea>
+                                            </div>
+                                            
+                                            <!--<div ng-show="DOKUMAN_CINSI_GOSTER == true && DOKUMAN_CINSI_ID == dokumanCinsi.emfadokuman" id="onizleme"></div>-->
+                                            <iframe ng-show="DOKUMAN_CINSI_GOSTER == true && DOKUMAN_CINSI_ID != dokumanCinsi.emfadokuman && DOKUMAN_CINSI_ID != dokumanCinsi.klasor" id="pdf" class="pdf-object-container"></iframe>
+                                            <img ng-show="DOKUMAN_CINSI_GOSTER == false" style="width:100%; height:auto;" id="imgpdf" alt="Alternate Text" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3" id="agac">
+                            <div class="hr-line-dashed"></div>
+                            <div class="client-detail" style="height:800px;">
+                                <div class="full-height-scroll" full-scroll>
+                                    <div id="tree"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+</script>
+
+
+

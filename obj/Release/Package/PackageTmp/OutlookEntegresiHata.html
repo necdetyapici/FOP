@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Başarısız İşlem</title>
+</head>
+<body>
+    <div style="width:auto;margin:0">
+        <img src="img/EmfaPict.png" alt="EmfaPict Logo" />
+        <h1>Outlook Entegrasyonu Gerçekleştirilirken hata oluşmuştur.</h1>
+        <p>Sayfa <span id="myspan">10</span> saniye içinde kendiliğinden kapanacaktır.</p>
+    </div>
+
+    <script>
+        let timeLeft = 10;
+        var timer = setInterval(function () {
+            timeLeft = timeLeft - 1;
+            document.getElementById("myspan").innerHTML = timeLeft;
+
+
+
+
+            if (timeLeft == 0) {
+                window.close();
+            }
+
+
+        }, 1000);
+    </script>
+</body>
+</html>

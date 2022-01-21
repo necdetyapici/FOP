@@ -1,0 +1,96 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>BGRiskUygulamaKontrolKriteri Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="listelemelinkini.giriniz"> BGRiskUygulamaKontrolKriteri Listesi</a>
+            </li>
+            <li class="active">
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="row wrapper wrapper-content padding-bottom animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        BGRiskUygulamaKontrolKriteri Bilgileri
+                        <small>Lütfen BGRiskUygulamaKontrolKriteri bilgilerini eksiksiz giriniz.</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="form" id="form" class="form-horizontal" accessible-form>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">B G Risk Id *</label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbB_G_RISK_ID"
+                                        ng-options="item.ID as item.ADI for item in BGRiskListesi"
+                                        options="BGRiskListesi"
+                                        ng-model="Info.B_G_RISK_ID" required>
+                                    <option value="">Lütfen B_G_RISK_ID Seçiniz</option>
+                                </select>
+                                <p ng-show="form.cmbB_G_RISK_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Uygulama Kontrol Kriteri Id *</label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbUYGULAMA_KONTROL_KRITERI_ID"
+                                        ng-options="item.ID as item.ADI for item in UygulamaKontrolKriteriListesi"
+                                        options="UygulamaKontrolKriteriListesi"
+                                        ng-model="Info.UYGULAMA_KONTROL_KRITERI_ID" required>
+                                    <option value="">Lütfen UYGULAMA_KONTROL_KRITERI_ID Seçiniz</option>
+                                </select>
+                                <p ng-show="form.cmbUYGULAMA_KONTROL_KRITERI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kullanici Id *</label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbKULLANICI_ID"
+                                        ng-options="item.ID as item.ADI for item in KullanicilarListesi"
+                                        options="KullanicilarListesi"
+                                        ng-model="Info.KULLANICI_ID" required>
+                                    <option value="">Lütfen KULLANICI_ID Seçiniz</option>
+                                </select>
+                                <p ng-show="form.cmbKULLANICI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kayit Tarihi *</label>
+                            <div class="col-sm-10">
+                                <input type="datetime" name="txtKAYIT_TARIHI" ng-model="Info.KAYIT_TARIHI" nextgen-date-time-picker class="form-control"
+                                       required>
+                                <p ng-show="form.txtKAYIT_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class=" btn btn-success " type="button" ng-click="BGRiskUygulamaKontrolKriteriEkleGuncelle(Info)">
+                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                </button>
+                                <button class="btn btn-primary" ui-sref="listelemelinkini.giriniz"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

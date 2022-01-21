@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/06/2018 19:28:25" ReportInfo.Modified="07/18/2018 14:52:12" ReportInfo.CreatorVersion="2018.3.17.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlqHwzMSgwTFaHpjtG3vsOj8WgU5zB3HLH6LgDO+boCq3EPLixRHbTwUajMSeNn7L/i/WFGN2pYCVAC3y+73UFGjKbQyR83UMgnQUiro1iL0bs4vaN1HxZeC+hM0sPLBLWJC6shf/1+RG0acOr61G5Bcg5JNkRma3ePQ52/CTbyn0cnJYiGzgGFnZ+7zozUfFr60t/D+G1ZaKcJPxFOnrUWAQ==">
+      <TableDataSource Name="KULLANICILAR" DataType="System.Int32" Enabled="true" TableName="KULLANICILAR" SelectCommand="SELECT * FROM KULLANICILAR where (KULLANICI_ID=@KULLANICI_ID or @KULLANICI_ID=-1)&#13;&#10;">
+        <Column Name="KULLANICI_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_ADI" DataType="System.String"/>
+        <Column Name="KULLANICI_SIFRE" DataType="System.String"/>
+        <Column Name="AD_SOYAD" DataType="System.String"/>
+        <Column Name="KULLANICI_DURUM_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TIPI_ID" DataType="System.Int32"/>
+        <Column Name="KULLANICI_TELEFON" DataType="System.String"/>
+        <Column Name="KULLANICI_E_POSTA" DataType="System.String"/>
+        <Column Name="MUSTERI_ID" DataType="System.Int32"/>
+        <Column Name="PERSONEL_TIPI_ID" DataType="System.Int32"/>
+        <Column Name="CINSIYET" DataType="System.String"/>
+        <Column Name="DOGUM_TARIHI" DataType="System.DateTime"/>
+        <Column Name="ISE_BASLAMA_TARIHI" DataType="System.DateTime"/>
+        <Column Name="ISTEN_AYRILMA_TARIHI" DataType="System.DateTime"/>
+        <Column Name="KAYIT_TARIHI" DataType="System.DateTime"/>
+        <Column Name="KULLANICI_RESIM_ID" DataType="System.Int32"/>
+        <CommandParameter Name="KULLANICI_ID" DataType="22" Expression="[KULLANICI_ID]" DefaultValue="-1"/>
+        <CommandParameter Name="KULLANICI_TIPI_ID" DataType="8" Expression="[KULLANICI_TIPI_ID]" DefaultValue="1"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+    <Parameter Name="KULLANICI_ID" DataType="System.Int32" Expression="-1"/>
+    <Parameter Name="KULLANICI_TIPI_ID" DataType="System.String" Expression="1"/>
+  </Dictionary>
+  <ReportPage Name="Page1">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Top="9.45" Width="708.75" Height="28.35" Text="RAPOR BAŞLIĞI&#13;&#10;[KULLANICI_TIPI_ID]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="41.8" Width="718.2" Height="18.9">
+      <TextObject Name="Text3" Width="94.5" Height="18.9" Border.Lines="All" Text="Kullanıcı ID" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text5" Left="94.5" Width="207.9" Height="18.9" Border.Lines="All" Text="Kullanıcı Adı" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text7" Left="302.4" Width="406.35" Height="18.9" Border.Lines="All" Text="Ad Soyad" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="64.7" Width="718.2" Height="20.35" DataSource="KULLANICILAR">
+      <TextObject Name="Text2" Top="1.45" Width="94.5" Height="18.9" Border.Lines="All" Text="[KULLANICILAR.KULLANICI_ID]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="94.5" Top="1.45" Width="207.9" Height="18.9" Border.Lines="All" Text="[KULLANICILAR.KULLANICI_ADI]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="302.4" Top="1.45" Width="406.35" Height="18.9" Border.Lines="All" Text="[KULLANICILAR.AD_SOYAD]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="89.05" Width="718.2" Height="18.9">
+      <TextObject Name="Text8" Left="519.75" Width="94.5" Height="18.9" Border.Lines="All" Text="[Page]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text9" Left="614.25" Width="94.5" Height="18.9" Border.Lines="All" Text="[TotalPages]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="425.25" Width="94.5" Height="18.9" Border.Lines="All" Text="[Date]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageFooterBand>
+  </ReportPage>
+</Report>

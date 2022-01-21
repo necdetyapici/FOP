@@ -1,0 +1,224 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Kullanılacak Mevcut Kaynak Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <form method="get" name="frmProjeKullanilacakMevcutKaynaklar" id="frmProjeKullanilacakMevcutKaynaklar" class="form-horizontal" accessible-form>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kaynak Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtKAYNAK_ADI" id="txtKAYNAK_ADI" ng-model="InfoProjeKullanilacakMevcutKaynaklar.KAYNAK_ADI" class="form-control formEkleDuzenleInput" ng-maxlength="255" ng-minlength="1" placeholder="Kaynak adını giriniz." required />
+                                            <p ng-show="frmProjeKullanilacakMevcutKaynaklar.txtKAYNAK_ADI.$invalid && formCalistirildiKullanilacakMevcutKaynaklar" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kullanıma Alınma Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="datetime" class="formEkleDuzenleInput form-control" id="txtKULLANIMA_ALINMA_TARIHI" name="txtKULLANIMA_ALINMA_TARIHI" nextgen-date-picker="" ng-model="InfoProjeKullanilacakMevcutKaynaklar.KULLANIMA_ALINMA_TARIHI" required>
+                                            </div>
+                                            <p ng-show="frmProjeKullanilacakMevcutKaynaklar.txtKULLANIMA_ALINMA_TARIHI.$invalid && formCalistirildiKullanilacakMevcutKaynaklar" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kullanılacağı Yer <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input id="txtKULLANICILACAGI_YER" name="txtKULLANICILACAGI_YER" ng-model="InfoProjeKullanilacakMevcutKaynaklar.KULLANICILACAGI_YER" ng-maxlength="255" ng-minlength="1" class="form-control formEkleDuzenleInput" placeholder="Kullanicilacagi yeri giriniz." required />
+                                            <p ng-show="frmProjeKullanilacakMevcutKaynaklar.txtKULLANICILACAGI_YER.$invalid && formCalistirildiKullanilacakMevcutKaynaklar" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeKullanilacakMevcutKaynaklarEkleGuncelle(InfoProjeKullanilacakMevcutKaynaklar)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Kullanılacak Mevcut Kaynak Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-MevcutKaynaklar" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Kaynak Adı</label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtKAYNAK_ADI" id="txtKAYNAK_ADI" ng-model="AramaKriter.KAYNAK_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Kaynak adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="ProjeKullanilacakMevcutKaynaklarGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeKullanilacakMevcutKaynaklarListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref=".kayit" data-ui-sref-opts="{reload:true}" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjeKullanilacakMevcutKaynaklarGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Kaynak Adı</b></td>
+                                            <td><b>Kullanılacağı Yer</b></td>
+                                            <td><b>Kullanıma Alınma Tarihi</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in ProjeKullanilacakMevcutKaynaklarListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+
+                                            <td>
+                                                <a class="editLink-Emfa" ui-sref="proje.projelerkayit.plan.kullanilacakmevcutkaynaklarkayit({ kullanilacakmevcutkaynaklarNo: post.PROJE_KULLANILACAK_MEVCUT_KAYNAK_ID})">{{post.KAYNAK_ADI}} </a><br />
+                                            </td>
+
+                                            <td>
+                                                {{post.KULLANICILACAGI_YER}}
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.KULLANIMA_ALINMA_TARIHI | tarih}}
+                                                </span>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="proje.projelerkayit.plan.kullanilacakmevcutkaynaklarkayit({ kullanilacakmevcutkaynaklarNo: post.PROJE_KULLANILACAK_MEVCUT_KAYNAK_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="ProjeKullanilacakMevcutKaynaklarGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="ProjeKullanilacakMevcutKaynaklarListesi.length==0||ProjeKullanilacakMevcutKaynaklarListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref=".kayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="ProjeKullanilacakMevcutKaynaklarGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Proje işlemleri bağlı mevcut kaynaklar kaydı <strong>bulunmamaktadır.</strong>
+                                <!--Eklemek için <a ui-sref=".kayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

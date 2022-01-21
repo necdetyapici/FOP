@@ -1,0 +1,72 @@
+﻿<div ng-init="init()"></div>
+<!--<img src="../img/login/login-bg.png" class="login-background">-->
+<div class="middle-box text-center login-screen animated fadeInDown">
+    <div>
+        <div class="m-b">
+            <img src="/img/login/pict-logo.png" />
+
+        </div>
+        <h3 ng-hide="sifremiUnuttum == true">EMFA<span>PICT</span>' e Hoşgeldiniz.</h3>
+        <h3 ng-show="sifremiUnuttum == true">EMFA<span>PICT</span> Yeni Şifre Oluştur.</h3>
+        <!--<p>
+        Sisteme giriş yapmak için daha önce size verilmiş olan kullanıcı adınızı ve şifrenizi kullanabilirsiniz.
+    </p>-->
+
+        <div class="loginInfoAlert alert alert-info animated bounceIn alert-dismissable" ng-hide="sifremiUnuttum == true">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-info-circle"></i>&nbsp;Sisteme giriş yapmak için daha önce size verilmiş olan <strong>kullanıcı e-posta</strong> ve <strong>şifrenizi</strong> kullanabilirsiniz.
+        </div>
+        <div class="loginInfoAlert alert alert-info animated bounceIn alert-dismissable" ng-show="sifremiUnuttum == true">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            <i class="fa fa-info-circle"></i>&nbsp;Yeni şifre almak için daha önce size verilmiş olan <strong>kullanıcı adınızı</strong> ve <strong>e-posta adresinizi</strong> kullanabilirsiniz.
+        </div>
+
+
+        <form name="frmlogin" id="frmlogin" class="m-t" novalidate ng-hide="sifremiUnuttum == true">
+
+            <!--<div ng-show="sifremiUnuttum == true">
+            <div class="form-group">
+                <input name="sifremiUnuttumKullaniciAdi" type="text" class="loginInputRadius form-control" ng-model="SifremiUnuttum.kullaniciAdi" maxlength="40" placeholder="Kullanıcı Adı" required />
+                <p ng-show="form_login.sifremiUnuttumKullaniciAdi.$invalid && calistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+
+                <button id="btn_sifremiUnuttum" type="submit" ng-click="sifremiUnuttum(SifremiUnuttum)" class="btn btn-primary block full-width m-b">Gönder</button>
+            </div>
+        </div>-->
+            <div>
+                <div class="form-group">
+                    <input name="kullaniciEposta" type="email" class="loginInputRadius form-control" ng-model="Login.KullaniciEposta" maxlength="150" placeholder="Kullanıcı E-posta" required />
+                    <p ng-show="frmlogin.KullaniciEposta.$invalid && (form.KullaniciEposta.$dirty || formCalistirildi)" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                </div>
+
+                <div class="form-group">
+                    <input name="sifre" type="password" id="sifre" class="loginInputRadius form-control" ng-model="Login.sifre" maxlength="15" placeholder="Şifre" required />
+                    <p ng-show="frmlogin.sifre.$invalid && (form.sifre.$dirty || formCalistirildi)" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                </div>
+
+                <button id="cmdLogin" name="cmdLogin" type="submit" ng-click="kullaniciGiris(Login)" ng-disabled="buttonclicked" class="btn btn-primary block full-width m-b">{{loginButtonText}}</button>
+
+                <a href="#" ng-click="sifremiUnuttum = true"><small>Şifremi Unuttum?</small></a>
+            </div>
+        </form>
+
+        <form name="frmforgetPassword" id="frmforgetPassword" class="m-t" novalidate ng-show="sifremiUnuttum == true">
+
+            <div class="form-group">
+                <input name="kullaniciAdi" type="text" class="loginInputRadius form-control" ng-model="SifremiUnuttum.kullaniciAdi" maxlength="40" placeholder="Kullanıcı Adı" required />
+                <p ng-show="frmforgetPassword.kullaniciAdi.$invalid &&  formSifreUnuttumCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+            </div>
+
+            <div class="form-group">
+                <input type="email" name="sifremiUnuttumEposta" ng-model="SifremiUnuttum.eposta" ng-maxlength="150" ng-minlength="1" class="loginInputRadius form-control" placeholder="E-posta adresinizi giriniz."  required/>
+                <p ng-show="frmforgetPassword.sifremiUnuttumEposta.$invalid && formSifreUnuttumCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+            </div>
+
+            <button id="btn_sifremiUnuttum" type="submit" ng-click="sifreUnuttum(SifremiUnuttum)" ng-disabled="buttonclickedSifreUnuttum" class="btn btn-primary block full-width m-b">{{SifreUnuttumButtonText}}</button>
+
+            <a href="#" ng-click="sifremiUnuttum = false"><small>Kullanıcı Giriş</small></a>
+
+        </form>
+        <br /><br />
+        <p class="m-t"> <small>PICT v{{versiyon}} &copy; {{sistemTarih}}</small> </p>
+    </div>
+</div>

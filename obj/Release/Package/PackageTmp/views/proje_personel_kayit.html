@@ -1,0 +1,110 @@
+﻿<div class="row" ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Proje Proje Personel Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Proje Personel bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProjePersonel" id="frmProjePersonel" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbCALISAN_KULLANICI_ID" name="cmbCALISAN_KULLANICI_ID" ng-model="InfoProjePersonel.CALISAN_KULLANICI_ID"
+                                                data-live-search="true" title="Personel Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjePersonel.cmbCALISAN_KULLANICI_ID.$invalid && formCalistirildiProjePersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Tecrübe <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbTECRUBE_ID" name="cmbTECRUBE_ID" ng-model="InfoProjePersonel.TECRUBE_ID"
+                                                data-live-search="true" title="Tecrübe Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in TecrubeListesi" deep-watch="true" data-value="item.TECRUBE_ID">
+                                                    <a>
+                                                        {{item.TECRUBE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjePersonel.cmbTECRUBE_ID.$invalid && formCalistirildiProjePersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label no-wrap">Başlama Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtBASLAMA_TARIHI" ng-model="InfoProjePersonel.BASLAMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control"
+                                                       required>
+                                            </div>
+                                            <p ng-show="frmProjePersonel.txtBASLAMA_TARIHI.$invalid && formCalistirildiProjePersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ayrılma Tarihi </label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtAYRILMA_TARIHI" ng-model="InfoProjePersonel.AYRILMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjePersonelEkleGuncelle(InfoProjePersonel)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.projepersonelrollistesi">
+                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp;
+                                                <span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

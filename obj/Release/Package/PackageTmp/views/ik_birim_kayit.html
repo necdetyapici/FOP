@@ -1,0 +1,56 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper wrapper-content padding-bottom animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-barcode"></i>
+                        Birim Bilgileri
+                    </h5>
+                    <div class="ibox-tools">
+                        <small> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content ">
+                    <form method="get" name="form" id="form" class="form-horizontal " accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Birim Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_BIRIM_ADI" ng-model="Info.IK_BIRIM_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Lütfen Birim Adını Giriniz." required />
+                                            <p ng-show="form.txtIK_BIRIM_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success " type="button" tooltip="Kaydet" href="#" ui-sref="yonetim.musteriayari.insankaynaklari.ikbirimlistesi" ng-click="IkBirimEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>
+                                                Kaydet
+                                            </button>
+
+                                            <button class="btn btn-sm btn-primary " type="button" tooltip="Geri" href="#" ui-sref="yonetim.musteriayari.insankaynaklari.ikbirimlistesi">
+                                                <i class="fa fa-reply-all"></i>
+                                                Geri
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

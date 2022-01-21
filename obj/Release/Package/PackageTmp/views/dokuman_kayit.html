@@ -1,0 +1,134 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Dokuman Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="listelemelinkini.giriniz">Dokuman Listesi</a>
+            </li>
+            <li class="active">
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="row wrapper wrapper-content padding-bottom animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        Dokuman Bilgileri
+                        <small>Lütfen Dokuman bilgilerini eksiksiz giriniz.</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="form" id="form" class="form-horizontal" accessible-form>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Adi *</label>
+                            <div class="col-sm-10">
+                                <textarea name="txtADI" ng-model="Info.ADI" class="form-control" placeholder="Lütfen Adi bilgilerini giriniz."  required> </textarea>
+                                <p ng-show="form.txtADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Dokuman Tipi *</label>
+                            <div class="col-sm-10">
+                                <div class="mt-first-cb">
+                                    <label>
+                                       <input icheck type="checkbox" ng-model="Info.DOKUMAN_TIPI"> Aktif
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Dokuman Turu Id *</label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbDOKUMAN_TURU_ID"
+                                    ng-options="item.ID as item.ADI for item in DokumanTuruListesi"
+                                    options = "DokumanTuruListesi"
+                                    ng-model="Info.DOKUMAN_TURU_ID" required>
+                                    <option value="">Lütfen DOKUMAN_TURU_ID Seçiniz</option>
+                                </select>
+                                <p ng-show="form.cmbDOKUMAN_TURU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Global Sablon Id </label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbGLOBAL_SABLON_ID"
+                                    ng-options="item.ID as item.ADI for item in GlobalSablonListesi"
+                                    options = "GlobalSablonListesi"
+                                    ng-model="Info.GLOBAL_SABLON_ID" >
+                                 <option value="">Lütfen GLOBAL_SABLON_ID Seçiniz</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kullanici Id *</label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbKULLANICI_ID"
+                                    ng-options="item.ID as item.ADI for item in KullanicilarListesi"
+                                    options = "KullanicilarListesi"
+                                    ng-model="Info.KULLANICI_ID" required>
+                                 <option value="">Lütfen KULLANICI_ID Seçiniz</option>
+                                </select>
+                                <p ng-show="form.cmbKULLANICI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kayit Tarihi *</label>
+                            <div class="col-sm-10">
+                                <input type="datetime" name="txtKAYIT_TARIHI" ng-model="Info.KAYIT_TARIHI" nextgen-date-time-picker class="form-control"
+ required>
+                                <p ng-show="form.txtKAYIT_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Rev </label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtREV" ng-model="Info.REV" class="form-control" >
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Versiyon </label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtVERSIYON" ng-model="Info.VERSIYON" class="form-control" >
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Ust Dokuman Id </label>
+                            <div class="col-sm-10">
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                            <button class=" btn btn-success " type="button" ng-click="DokumanEkleGuncelle(Info)">
+                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                            </button>
+                            <a class="btn btn-primary" href="#" ui-sref="listelemelinkini.giriniz" ><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

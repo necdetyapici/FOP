@@ -1,0 +1,217 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Dış Görev İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikdisgorevlistesi"><i class="fa fa-list"></i> Dış Görev Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-suitcase"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+        <div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-suitcase"></i> Dış Görev Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>
+                                    Lütfen Dış Görev bilgilerini eksiksiz giriniz.
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">
+                            <form method="get" name="frmDisGorev" id="frmDisGorev" class="form-horizontal">
+                                <div class="formEkleDuzenleInputs">
+                                    <fieldset ng-disabled="(InfoDisGorev.IK_DIS_GOREV_DURUM_TIPI_ID == 3)">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Görevi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtGOREV_ADI" ng-model="InfoDisGorev.GOREV_ADI" class="formEkleDuzenleInput form-control" placeholder="Görev giriniz.">
+                                                        <p ng-show="frmDisGorev.txtGOREV_ADI.$invalid && formCalistirildiDisGorev" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Ulaşım Şekli(Gidiş) <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <ol class="nya-bs-select form-control" id="cmbGIDIS_ULASIM_SEKLI_TIPI_ID" name="cmbGIDIS_ULASIM_SEKLI_TIPI_ID" ng-model="InfoDisGorev.GIDIS_ULASIM_SEKLI_TIPI_ID"
+                                                            data-live-search="true" title="Ulaşım Şekli Seçiniz" data-size="5" required="true">
+                                                            <li nya-bs-option="item in UlasimSekliTipiListesi" deep-watch="true" data-value="item.ULASIM_SEKLI_TIPI_ID">
+                                                                <a>
+                                                                    {{item.ULASIM_SEKLI_TIPI_ADI}}
+                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ol>
+                                                        <p ng-show="frmDisGorev.cmbGIDIS_ULASIM_SEKLI_TIPI_ID.$invalid && formCalistirildiDisGorev" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Başlangıç Tarihi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group date">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="datetime" name="txtBASLANGIC_TARIHI" id="txtBASLANGIC_TARIHI" nextgen-date-time-picker="" ng-model="InfoDisGorev.BASLANGIC_TARIHI"  class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+                                                        </div>
+                                                        <p ng-show="frmDisGorev.txtBASLANGIC_TARIHI.$invalid &amp;&amp; formCalistirildiDisGorev" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Görevi Atayan <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtATAYAN_KULLANICI_AD_SOYAD" ng-model="atayanKullaniciAdSoyad" ng-disabled="true" class="formEkleDuzenleInput form-control" placeholder="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Proje </label>
+                                                    <div class="col-lg-8">
+                                                        <ol class="nya-bs-select form-control" id="cmbPROJE_ID" name="cmbPROJE_ID" allow-clear="true" ng-model="InfoDisGorev.PROJE_ID"
+                                                            data-live-search="true" title="Proje Seçiniz" data-size="5">
+                                                            <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                                <a>
+                                                                    {{item.PROJE_ADI}}
+                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ol>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Görev Yeri <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtGOREV_YERI" ng-model="InfoDisGorev.GOREV_YERI" class="formEkleDuzenleInput form-control" placeholder="Görev yeri giriniz.">
+                                                        <p ng-show="frmDisGorev.txtGOREV_YERI.$invalid && formCalistirildiDisGorev" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Ulaşım Şekli(Dönüş) <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <ol class="nya-bs-select form-control" id="cmbDONUS_ULASIM_SEKLI_TIPI_ID" name="cmbDONUS_ULASIM_SEKLI_TIPI_ID" ng-model="InfoDisGorev.DONUS_ULASIM_SEKLI_TIPI_ID"
+                                                            data-live-search="true" title="Ulaşım Şekli Seçiniz" data-size="5" required="true">
+                                                            <li nya-bs-option="item in UlasimSekliTipiListesi" deep-watch="true" data-value="item.ULASIM_SEKLI_TIPI_ID">
+                                                                <a>
+                                                                    {{item.ULASIM_SEKLI_TIPI_ADI}}
+                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ol>
+                                                        <p ng-show="frmDisGorev.cmbDONUS_ULASIM_SEKLI_TIPI_ID.$invalid && formCalistirildiDisGorev" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Bitiş Tarihi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <div class="input-group date">
+                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                            <input type="datetime" name="txtBITIS_TARIHI" id="txtBITIS_TARIHI" nextgen-date-time-picker="" ng-model="InfoDisGorev.BITIS_TARIHI"  class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+                                                        </div>
+                                                        <p ng-show="frmDisGorev.txtBITIS_TARIHI.$invalid &amp;&amp; formCalistirildiDisGorev" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label"> Görev Sahibi <span class="text-danger">*</span></label>
+                                                    <div class="col-lg-8">
+                                                        <ol class="nya-bs-select form-control" id="cmbATANAN_KULLANICI_ID" name="cmbATANAN_KULLANICI_ID" ng-model="InfoDisGorev.ATANAN_KULLANICI_ID"
+                                                            data-live-search="true" title="Görev Sahibi Seçiniz" data-size="5" required="true">
+                                                            <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                                <a>
+                                                                    {{item.AD_SOYAD}}
+                                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                </a>
+                                                            </li>
+                                                        </ol>
+                                                        <p ng-show="frmDisGorev.cmbATANAN_KULLANICI_ID.$invalid && formCalistirildiDisGorev" class="validation">Bu alan boş bırakılamaz.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">Açıklama</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea type="text" name="txtACIKLAMA" style="resize:none;" ng-minlength="1" ng-model="InfoDisGorev.ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-sm btn-info" ng-show="InfoDisGorev.ATANAN_KULLANICI_ID == $storage.KULLANICI_ID && ikDisGorevID > 0"
+                                                            ng-click="AvansAc(InfoDisGorev)">
+                                                        <i class="fa fa-mail-forward"></i>
+                                                        &nbsp;&nbsp;
+                                                        <span class="bold">Avans Kaydı Aç</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info" ng-show="InfoDisGorev.ATANAN_KULLANICI_ID == $storage.KULLANICI_ID && ikDisGorevID > 0"
+                                                            ng-click="MasrafAc(InfoDisGorev)">
+                                                        <i class="fa fa-mail-forward"></i>
+                                                        &nbsp;&nbsp;
+                                                        <span class="bold">Masraf Kaydı Aç</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-primary" type="button" ng-show="(InfoDisGorev.IK_DIS_GOREV_DURUM_TIPI_ID == 1 || InfoDisGorev.IK_DIS_GOREV_DURUM_TIPI_ID == 3) && InfoDisGorev.ATANAN_KULLANICI_ID == $storage.KULLANICI_ID" ng-click="IkDisGorevOnay(InfoDisGorevOnay.IK_DIS_GOREV_DURUM_TIPI_ID = 2)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Aç</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-warning" type="button" ng-show="InfoDisGorev.IK_DIS_GOREV_DURUM_TIPI_ID != 4 &&  (InfoDisGorev.ATANAN_KULLANICI_ID == $storage.KULLANICI_ID ||  InfoDisGorev.ATAYAN_KULLANICI_ID == $storage.KULLANICI_ID) &&  ikDisGorevID > 0" ng-click="IkDisGorevRed()">
+                                                        <i class="fa fa-exclamation"></i>&nbsp;&nbsp;<span class="bold">Reddet</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-danger" type="button" ng-show="InfoDisGorev.IK_DIS_GOREV_DURUM_TIPI_ID == 2 &&  InfoDisGorev.ATANAN_KULLANICI_ID == $storage.KULLANICI_ID" ng-click="IkDisGorevOnay(InfoDisGorevOnay.IK_DIS_GOREV_DURUM_TIPI_ID = 3)">
+                                                        <i class="fa fa-times"></i>&nbsp;&nbsp;<span class="bold">Kapat</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-info" type="button" ng-show="InfoDisGorev.IK_DIS_GOREV_DURUM_TIPI_ID == 2 &&  InfoDisGorev.ATANAN_KULLANICI_ID == $storage.KULLANICI_ID" ng-click="IkDisGorevOnay(InfoDisGorevOnay.IK_DIS_GOREV_DURUM_TIPI_ID = 1)">
+                                                        <i class="fa fa-clock-o"></i>&nbsp;&nbsp;<span class="bold">Bekleme</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-success" type="button" ng-click="IkDisGorevEkleGuncelle(InfoDisGorev)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                    </button>
+
+                                                    <button class="btn btn-sm btn-primary"
+                                                            ui-sref="insankaynaklari.ikdisgorevlistesi">
+                                                        <i class="fa fa-reply-all"></i>
+                                                        &nbsp;&nbsp;
+                                                        <span class="bold">Geri</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+

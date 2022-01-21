@@ -1,0 +1,298 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Demirbaş İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikdemirbaslistesi"><i class="fa fa-list"></i> Demirbaş Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-barcode"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-barcode"></i>
+                        Demirbaş Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen Demirbaş bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+
+                <form method="get" name="frmDemirbas" id="frmDemirbas" class="form-horizontal" accessible-form>
+                    <div class="ibox-content">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Demirbaş Türü <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input type="radio" name="rd_DURUM" ng-value="false" icheck ng-model="demirbasTipi" /> Elektronik
+                                            </label>
+                                            <label>
+                                                <input checked type="radio" name="rd_DURUM" ng-value="true" icheck ng-model="demirbasTipi" /> Genel
+                                            </label>
+                                            <p ng-show="frmDemirbas.rd_KARGO_TIPI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Marka Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtIK_DEMIRBAS_MARKA_ADI" ng-model="Info.IK_DEMIRBAS_MARKA_ADI" class="formEkleDuzenleInput form-control" placeholder="Marka adını giriniz." required>
+                                            <p ng-show="frmDemirbas.txtIK_DEMIRBAS_MARKA_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Model Adı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtIK_DEMIRBAS_MODEL_ADI" ng-model="Info.IK_DEMIRBAS_MODEL_ADI" class="formEkleDuzenleInput form-control" placeholder="Model adını giriniz." required>
+                                            <p ng-show="frmDemirbas.txtIK_DEMIRBAS_MODEL_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Seri No <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-maxlength="255" ng-minlength="1" name="txtIK_DEMIRBAS_SERI_NO" ng-model="Info.IK_DEMIRBAS_SERI_NO" class="formEkleDuzenleInput form-control" placeholder="Seri no giriniz." required>
+                                            <p ng-show="frmDemirbas.txtIK_DEMIRBAS_SERI_NO.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Garanti Başlangıç Tarihi </label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_DEMIRBAS_GARANTI_BASLANGIC_TARIHI" id="txtIK_DEMIRBAS_GARANTI_BASLANGIC_TARIHI" ng-model="Info.IK_DEMIRBAS_GARANTI_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                            <!--<p ng-show="frmDemirbas.txtIK_DEMIRBAS_GARANTI_BASLANGIC_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Satın Alma Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_DEMIRBAS_SATIN_ALMA_TARIHI" id="txtIK_DEMIRBAS_SATIN_ALMA_TARIHI" ng-model="Info.IK_DEMIRBAS_SATIN_ALMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+
+                                            </div>
+
+                                            <p ng-show="frmDemirbas.txtIK_DEMIRBAS_SATIN_ALMA_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Demirbaş Cinsi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_DEMIRBAS_CINSI_ID" name="cmbIK_DEMIRBAS_CINSI_ID" ng-model="Info.IK_DEMIRBAS_CINSI_ID"
+                                                data-live-search="true" title="Demirbaş Cinsini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkDemirbasCinsiListesi" deep-watch="true" data-value="item.IK_DEMIRBAS_CINSI_ID">
+                                                    <a>
+                                                        {{item.IK_DEMIRBAS_CINSI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDemirbas.cmbIK_DEMIRBAS_CINSI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Demirbaş Durumu <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbDEMIRBAS_DURUMU_ID" ng-disabled="Info.DEMIRBAS_DURUMU_ID == 1 && Info.IK_DEMIRBAS_ID > 0" name="cmbDEMIRBAS_DURUMU_ID" ng-model="Info.DEMIRBAS_DURUMU_ID"
+                                                data-live-search="true" title="Demirbaş Durumu Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in DemirbasDurumuListesi" deep-watch="true" data-value="item.DEMIRBAS_DURUMU_ID">
+                                                    <a>
+                                                        {{item.DEMIRBAS_DURUMU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDemirbas.cmbDEMIRBAS_DURUMU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Birim <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_BIRIM_ID" name="cmbIK_BIRIM_ID" ng-model="Info.IK_BIRIM_ID"
+                                                data-live-search="true" title="Birim Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkBirimListesi" deep-watch="true" data-value="item.IK_BIRIM_ID">
+                                                    <a>
+                                                        {{item.IK_BIRIM_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmDemirbas.cmbIK_BIRIM_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Garanti Bitiş Tarihi </label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_DEMIRBAS_GARANTI_BITIS_TARIHI" id="txtIK_DEMIRBAS_GARANTI_BITIS_TARIHI" ng-model="Info.IK_DEMIRBAS_GARANTI_BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                            </div>
+                                            <!--<p ng-show="frmDemirbas.txtIK_DEMIRBAS_GARANTI_BITIS_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>-->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Açıklama</label>
+                                        <div class="col-sm-10">
+                                            <textarea type="text" name="txtACIKLAMA" style="resize:none;" ng-model="Info.ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-show="demirbasTipi==true" ng-click="IkDemirbasEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-primary" href="#" ng-show="demirbasTipi==true" ui-sref="insankaynaklari.ikdemirbaslistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox float-e-margins" ng-if="demirbasTipi == false ">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-suitcase"></i> Elektronik Demirbaş Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>
+                                    Lütfen Elektronik Demirbaş bilgilerini eksiksiz giriniz.
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+
+                        <div class="ibox-content">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Mac Adresi </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtMAC_ADRESI" ng-model="Info.MAC_ADRESI" class="formEkleDuzenleInput form-control">
+                                                
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Ürün Adı</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="150" ng-minlength="1" name="txtURUN_ADI" ng-model="Info.URUN_ADI" class="formEkleDuzenleInput form-control">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Menşei </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="150" ng-minlength="1" name="txtMENSEI" ng-model="Info.MENSEI" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Voltaj Değeri  </label>
+                                            <div class="col-lg-8">
+                                                <input type="number" ng-maxlength="255" ng-minlength="1" name="txtVOLTAJ_DEGERI" ng-model="Info.VOLTAJ_DEGERI" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Antivirüs  </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtANTIVIRUS" ng-model="Info.ANTIVIRUS" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> İşlemci  </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtISLEMCI" ng-model="Info.ISLEMCI" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Ram Bellek </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txtRAM_BELLEK" ng-model="Info.RAM_BELLEK" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> HDD Bellek </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="50" ng-minlength="1" name="txHDD_BELLEK" ng-model="Info.HDD_BELLEK" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> İşletim Sistemi  </label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="150" ng-minlength="1" name="txtISLETIM_SISTEMI" ng-model="Info.ISLETIM_SISTEMI" class="formEkleDuzenleInput form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-success " type="button" ng-click="IkDemirbasEkleGuncelle(Info)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <a class="btn btn-primary" href="#" ui-sref="insankaynaklari.ikdemirbaslistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

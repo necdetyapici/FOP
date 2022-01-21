@@ -1,0 +1,46 @@
+﻿
+
+
+<div class="row" style="margin-top:30px" >
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                                <i class="fa fa-briefcase"></i> Fizibilite
+                            </h5>
+                        </div>
+                        <div class="fizibilite ibox-content">
+                            <ul class="alt-nav-tabs nav nav-tabs">
+                                <li ng-class="{'active-altTab' : altTab == 1}"><a class="altTabMenuItem" ng-click="setAltTab(1)" ui-sref=".tahminleme" data-ui-sref-opts="{reload:true}"><i class="fa fa-briefcase"></i>&nbsp;  Tahminleme</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 2}"><a class="altTabMenuItem" ng-click="setAltTab(2)" ui-sref=".projefizibilitelistesi"><i class="fa fa-briefcase"></i>&nbsp;  Fizibilite</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 3}"><a class="altTabMenuItem" ng-click="setAltTab(3)" ui-sref=".teknolojikfizibilitelistesi"><i class="fa fa-briefcase"></i>&nbsp;Teknolojik Fizibilite</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 10}"><a class="altTabMenuItem" ng-click="setAltTab(10)" ui-sref=".planlananpersonelsayisilistesi"><i class="fa fa-briefcase"></i>&nbsp;Planlanan Personel Sayısı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 12}"><a class="altTabMenuItem" ng-click="setAltTab(12)" ui-sref=".tedariklistesi"><i class="fa fa-briefcase"></i>&nbsp;Tedarik</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div ui-view></div>
+
+        <!--<div id="altTab-1" class="tab-pane active" ng-show="altTab == 1">
+            <div  ng-controller="proje_fizibiletesi_liste_controller" ng-include="'views/proje_fizibiletesi_liste.html'" ></div>
+        </div>
+        <div id="altTab-2" class="tab-pane" ng-if="altTab == 2">
+          
+        </div>
+        <div id="altTab-3" class="tab-pane" ng-if="altTab == 3">
+          
+        </div>
+        <div id="altTab-4" class="tab-pane" ng-if="altTab == 4">
+           
+        </div>-->
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Neden İzin Reddedildi ?</h4>
+        
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmIkPersonelIzinReddet" id="frmIkPersonelIzinReddet" class="form-horizontal" accessible-form>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">İzin Reddet</label>
+                <div class="col-sm-8">
+                    <textarea type="text" name="txtIZIN_REDDET" style="resize:none;" ng-model="InfoPersonelIzinOnay.IZIN_REDDET"  rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="İzin reddet giriniz." required></textarea>
+                    <p ng-show=" frmIkPersonelIzinReddet.txtIZIN_REDDET.$invalid && formCalistirildiPersonelIzinReddet" class="validation">Bu alan boş bırakılamaz.</p>
+
+                </div>
+            </div>
+            </form>
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="IkPersonelIzinOnaylama(InfoPersonelIzinOnay, InfoPersonelIzinOnay.IZIN_DURUMU_ID = 5)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="GeriIzinReddet()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

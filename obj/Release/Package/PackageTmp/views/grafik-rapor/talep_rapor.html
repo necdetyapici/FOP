@@ -1,0 +1,203 @@
+﻿<div ng-init="init()">
+
+    <div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+        <div class="col-lg-10">
+            <ol class="breadcrumb">
+                <li>
+                    <a ui-sref="anasayfa">
+                        <i class="fa fa-home"></i> Ana Sayfa
+                    </a>
+                </li>
+                <li>
+                    <i class="fa fa-archive"></i>
+                    İnsan Kaynakları
+                </li>
+                <li class="active">
+                    <strong>
+                        <i class="fa fa-money"></i>
+                        Talep Rapor
+                    </strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2"> </div>
+    </div>
+
+    <div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderListe">
+                            <i class="fa fa-list"></i> Talep Rapor
+                        </h5>
+                    </div>
+
+                    <div class="ibox-content">
+                        <form name="src-avans" class="form-horizontal">
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Proje Adı</label>
+                                            <div class="col-sm-8">
+                                                <ol class="nya-bs-select form-control" id="cmbPROJE_ID" name="cmbPROJE_ID" ng-model="AramaKriter.PROJE_ID"
+                                                    data-live-search="true" title="Proje Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                        <a>
+                                                            {{item.PROJE_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Talep Tipi </label>
+                                            <div class="col-sm-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTALEP_TIPI_ID" name="cmbTALEP_TIPI_ID" ng-model="AramaKriter.TALEP_TIPI_ID"
+                                                    data-live-search="true" title="Talep Tipi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in TalepTipiListesi" deep-watch="true" data-value="item.TALEP_TIPI_ID">
+                                                        <a>
+                                                            {{item.TALEP_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Talep Başlangıç Tarihi</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtTALEP_BASLANGIC_TARIHI" id="txtTALEP_BASLANGIC_TARIHI" ng-model="AramaKriter.TALEP_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Talep Bitiş Tarihi</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtTALEP_BITIS_TARIHI" id="txtTALEP_BITIS_TARIHI" ng-model="AramaKriter.TALEP_BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Talep Sahibi </label>
+                                            <div class="col-sm-8">
+                                                <ol class="nya-bs-select form-control" id="cmbKULLANICI_ID" name="cmbKULLANICI_ID" ng-model="AramaKriter.KULLANICI_ID"
+                                                    data-live-search="true" title="Talep Sahibi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in TalepSahibiListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                        <a>
+                                                            {{item.AD_SOYAD}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Talep Durum Tipi</label>
+                                            <div class="col-sm-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTALEP_DURUM_TIPI_ID" name="cmbTALEP_DURUM_TIPI_ID" ng-model="AramaKriter.TALEP_DURUM_TIPI_ID"
+                                                    data-live-search="true" title="Talep Durum Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in TalepDurumListesi" deep-watch="true" data-value="item.TALEP_DURUM_TIPI_ID">
+                                                        <a>
+                                                            {{item.TALEP_DURUM_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label">Grafik Tipi</label>
+                                            <div class="col-sm-8">
+                                                <ol class="nya-bs-select form-control" id="cmbGRAFIK_TIPI_ID" name="cmbGRAFIK_TIPI_ID" ng-model="AramaKriter.GRAFIK_TIPI_ID"
+                                                    data-live-search="true" title="Grafik Tipi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in GrafikTipiListesi" deep-watch="true" data-value="item.GRAFIK_TIPI_ID">
+                                                        <a>
+                                                            {{item.GRAFIK_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-actions">
+                                        <div class="col-lg-12">
+                                            <div class="pull-right">
+                                                <button ng-click="grafikTuru(AramaKriter)" class="btn btn-sm btn-warning" type="submit">
+                                                    <i class="fa fa-filter"></i>&nbsp;
+                                                    <strong>Sorgula</strong>
+                                                </button>
+                                                <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                    <i class="fa fa-eraser"></i>&nbsp;
+                                                    <strong>Temizle</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="ibox-content" ">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="text-center" ng-show="grafikData == null && pieData == null && grafikBarData == null">
+                                    <h2>Grafik görüntülemek için lütfen sorgulama yapınız.</h2>
+                                    <div class="spiner-example">
+                                        <div class="sk-spinner sk-spinner-wandering-cubes">
+                                            <div class="sk-cube1"></div>
+                                            <div class="sk-cube2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h4 ng-show="grafikData != null || pieData != null|| grafikBarData != null">Talep</h4>
+                                <div id="lineChart" ng-show="grafikData != null"></div>
+                                <div id="pie" ng-show="pieData != null"></div>
+                                <div id="barChart" ng-show="grafikBarData != null"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

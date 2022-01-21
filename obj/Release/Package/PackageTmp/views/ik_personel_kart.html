@@ -1,0 +1,562 @@
+﻿<!--<div ng-init="init()"></div>-->
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <form method="get" name="frm_Kullanici" id="frm_Kullanici" class="form-horizontal" accessible-form novalidate>
+                <div class="formEkleDuzenleInputs">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-graduation-cap"></i>
+                                Personel  Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>&nbsp;   Lütfen Personel bilgilerini eksiksiz giriniz.
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <div class="col-lg-12">
+                                                    <div class="m-b-xs">
+                                                        
+                                                        <img id="kullaniciFoto" ng-src="{{$parent.InfoPersonel.KULLANICI.AvatarBase64}}" ng-show="$parent.InfoPersonel.KULLANICI.AvatarBase64" class="user-photo" />
+                                                        <img ng-src="{{$parent.InfoPersonel.KULLANICI.CINSIYET=='K' ?'../img/avatar/avatar-2.png':'../img/avatar/avatar-1.png'}}" alt="Avatar" ng-hide="$parent.InfoPersonel.KULLANICI.AvatarBase64" class="image imageContent">
+                                                    </div>
+                                                </div>
+                                                <a tooltip="Yeni profil resmi yüklemek için tıklayınız." class="btn btn-sm btn-primary m-r-xs col-lg-12" ng-click="modalInfoResmi()"><i class="fa fa-photo"></i>&nbsp;Yeni Resim Yükle</a><a tooltip="Mevcut resmi kaldırmak için tıklayınız." ng-click="resmiTemizle()" class="btn btn-sm btn-danger" ng-show="$parent.InfoPersonel.KULLANICI.AvatarBase64"><i class="fa fa-eraser"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <!--<input type="hidden" name="txtKULLANICI_RESIM_ID" ng-model="Info.KULLANICI_RESIM_ID">-->
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Ad Soyad<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="txtAD_SOYAD" ng-model="$parent.InfoPersonel.KULLANICI.AD_SOYAD" class="formEkleDuzenleInput form-control" required placeholder="Adını ve soyadını giriniz.">
+                                                    <p ng-show="frm_Kullanici.txtAD_SOYAD.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Kullanıcı Adı <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" id="txtKULLANICI_ADI" name="txtKULLANICI_ADI" ng-model="$parent.InfoPersonel.KULLANICI.KULLANICI_ADI" class="formEkleDuzenleInput form-control" required placeholder="Kullanıcı adını giriniz.">
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_ADI.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Şifre <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="password" class="formEkleDuzenleInput form-control" ng-model="$parent.InfoPersonel.KULLANICI.KULLANICI_SIFRE_ACIK" name="txtKULLANICI_SIFRE_ACIK" maxlength="70" required placeholder="Şifre giriniz.">
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_SIFRE_ACIK.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">E-Posta <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">@</span>
+                                                        <input type="email" name="txtKULLANICI_E_POSTA" ng-model="$parent.InfoPersonel.KULLANICI.KULLANICI_E_POSTA" class="formEkleDuzenleInput form-control" required placeholder="E-posta adresini giriniz." />
+                                                    </div>
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_E_POSTA.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Cep Telefon<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" name="txtKULLANICI_TELEFON" maxlength="17"
+                                                           mask="(999) 999 9999" ng-model="$parent.InfoPersonel.KULLANICI.KULLANICI_TELEFON" class="formEkleDuzenleInput form-control" required placeholder="Telefon numarasını giriniz." />
+                                                    <p ng-show="frm_Kullanici.txtKULLANICI_TELEFON.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Kullanıcı Tipi <span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <ol class="nya-bs-select form-control" ng-disabled="$storage.IS_PICT_YONETICI != true && $storage.IS_MUSTERI_YONETICI != true" id="sel_KULLANICI_TIPI_ID" name="sel_KULLANICI_TIPI_ID" ng-model="$parent.InfoPersonel.KULLANICI.KULLANICI_TIPI_ID"
+                                                        data-live-search="true" title="Kullanıcı Tipini Seçiniz" data-size="5" required="true">
+                                                        <li nya-bs-option="item in KullaniciTipiListesi" deep-watch="true" data-value="item.KULLANICI_TIPI_ID">
+                                                            <a>
+                                                                {{item.KULLANICI_TIPI_ADI}}
+                                                                <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                            </a>
+                                                        </li>
+                                                    </ol>
+                                                    <p ng-show="frm_Kullanici.sel_KULLANICI_TIPI_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Cinsiyet</label>
+                                                <div class="col-lg-8">
+                                                    <label>
+                                                        <input icheck type="radio" name="rd_CINSIYET" class="formEkleDuzenleInput" value="E" ng-model="$parent.InfoPersonel.KULLANICI.CINSIYET"> Erkek
+                                                    </label>
+                                                    <label>
+                                                        <input icheck type="radio" name="rd_CINSIYET" value="K" ng-model="$parent.InfoPersonel.KULLANICI.CINSIYET"> Kadın
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Doğum Tarihi</label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="datetime" class="formEkleDuzenleInput form-control" nextgen-date-picker="" ng-model="$parent.InfoPersonel.KULLANICI.DOGUM_TARIHI">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">İşe Başlangıç Tarihi<span class="text-danger">*</span></label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="datetime" name="txtISE_BASLAMA_TARIHI" ng-model="$parent.InfoPersonel.KULLANICI.ISE_BASLAMA_TARIHI" ng-change="IzinSuresiHesaplama($parent.InfoPersonel.KULLANICI.ISE_BASLAMA_TARIHI)" nextgen-date-picker="" class="formEkleDuzenleInput form-control" required />
+                                                    </div>
+                                                    <p ng-show="frm_Kullanici.txtISE_BASLAMA_TARIHI.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">İşten Ayrılma Tarihi</label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="datetime" name="txtISTEN_AYRILMA_TARIHI" ng-model="$parent.InfoPersonel.KULLANICI.ISTEN_AYRILMA_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderEkleDuzenle">
+                                &nbsp; <i class="fa fa-graduation-cap"></i>
+                                İnsan Kaynakları Bilgileri
+                                <small class="text-warning">
+                                    <i class="fa fa-info-circle"></i>&nbsp;   Lütfen insan kaynakları bilgilerini eksiksiz giriniz. Aşağıdaki verileri girmediğiniz durumda diğer sayfalara erişemezsiniz.!
+                                </small>
+                            </h5>
+                            <div class="ibox-tools">
+                                <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">TC NO <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="txtIK_TC_NO" ng-model="$parent.InfoPersonel.IK_TC_NO" mask="99999999999" ng-maxlength="11" ng-minlength="11" class="formEkleDuzenleInput form-control" placeholder="TC no giriniz." required>
+                                            <p ng-show="frm_Kullanici.txtIK_TC_NO.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">
+                                            Kan Grubu
+                                        </label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="sel_KAN_GRUBU_ID" name="sel_KAN_GRUBU_ID" ng-model="$parent.InfoPersonel.KAN_GRUBU_ID"
+                                                data-live-search="true" title="Kan Grubu Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in KanGrubuListesi" deep-watch="true" data-value="item.KAN_GRUBU_ID">
+                                                    <a>
+                                                        {{item.KAN_GRUBU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel Sınıfı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input icheck type="radio" name="rd_IK_PERSONEL_SINIFLANDIRMA" class="formEkleDuzenleInput" ng-value="false" ng-model="$parent.InfoPersonel.IK_PERSONEL_SINIFLANDIRMA" required>  İdari
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_IK_PERSONEL_SINIFLANDIRMA" ng-value="true" ng-model="$parent.InfoPersonel.IK_PERSONEL_SINIFLANDIRMA" required>  Teknokent AR-GE
+                                            </label>
+                                            <p ng-show="frm_Kullanici.rd_IK_PERSONEL_SINIFLANDIRMA.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Ünvan <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="IK_UNVAN_ID" name="IK_UNVAN_ID" ng-model="$parent.InfoPersonel.IK_UNVAN_ID"
+                                                data-live-search="true" title="Ünvan Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkUnvanListesi" deep-watch="true" data-value="item.IK_UNVAN_ID">
+                                                    <a>
+                                                        {{item.IK_UNVAN_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_Kullanici.IK_UNVAN_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Departman </label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="sel_IK_DEPARTMAN_ID" name="sel_IK_DEPARTMAN_ID" ng-model="$parent.InfoPersonel.IK_DEPARTMAN_ID"
+                                                data-live-search="true" title="Departman Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IkDepartmanListesi" deep-watch="true" data-value="item.IK_DEPARTMAN_ID">
+                                                    <a>
+                                                        {{item.IK_DEPARTMAN_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Birim </label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="sel_IK_BIRIM_ID" name="sel_IK_BIRIM_ID" ng-model="$parent.InfoPersonel.IK_BIRIM_ID"
+                                                data-live-search="true" title="Birim Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IkBirimListesi" deep-watch="true" data-value="item.IK_BIRIM_ID">
+                                                    <a>
+                                                        {{item.IK_BIRIM_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Yönetici</label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="sel_IK_YONETICI_ID" name="sel_IK_YONETICI_ID" ng-model="$parent.InfoPersonel.IK_YONETICI_ID"
+                                                data-live-search="true" title="Personel Üst Amirini Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in KullaniciListesiGenel" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Şirket Hattı</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="txtIK_PERSONEL_SIRKET_HATTI_NUMARASI" maxlength="17"
+                                                   mask="(999) 999 9999" ng-model="$parent.InfoPersonel.IK_PERSONEL_SIRKET_HATTI_NUMARASI" ng-maxlength="15" class="formEkleDuzenleInput form-control" placeholder="Şirket hattı numarasını giriniz." />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Şirket Dahili No</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="txtIK_PERSONEL_DAHILI_TELEFON_NO" ng-maxlength="11" ng-minlength="1"
+                                                   ng-model="$parent.InfoPersonel.IK_PERSONEL_DAHILI_TELEFON_NO" class="formEkleDuzenleInput form-control" placeholder="Şirket Dahili numarasını giriniz. " />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Toplam Hakkettiği İzin</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" name="txtDEVIR_IZNI" ng-model="toplamIzni" class="formEkleDuzenleInput form-control" placeholder="Devir izin gün sayısını giriniz. " readonly />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Kalan İzin Hakkı</label>
+                                        <div class="col-sm-8">
+                                            <input type="number" name="txtDEVIR_IZNI" ng-model="$parent.InfoPersonel.DEVIR_IZNI" class="formEkleDuzenleInput form-control" placeholder="Kalan izin giriniz." />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Medeni Durumu</label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" id="IK_MEDENI_HAL" name="IK_MEDENI_HAL" ng-model="$parent.InfoPersonel.IK_MEDENI_HAL"
+                                                data-live-search="true" title="Medeni Durumunu Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IkMedeniHalListesi" deep-watch="true" data-value="item.IK_MEDENI_HAL">
+                                                    <a>
+                                                        {{item.IK_MEDENI_HAL_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Yakınlık Derecesi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="cmbIK_PERSONEL_YAKINLIK_DERECESI_ID" name="cmbIK_PERSONEL_YAKINLIK_DERECESI_ID" ng-model="$parent.InfoPersonel.IK_PERSONEL_YAKINLIK_DERECESI_ID" required="true"
+                                                data-live-search="true" title="Yakınlık Derecesi Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IkYakinlikDerecesiListesi" deep-watch="true" data-value="item.IK_YAKINLIK_DERECESI_ID">
+                                                    <a>
+                                                        {{item.IK_YAKINLIK_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_Kullanici.cmbIK_PERSONEL_YAKINLIK_DERECESI_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Yakını Ad-Soyad <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_PERSONEL_YAKININIZ_AD_SOYAD" ng-model="$parent.InfoPersonel.IK_PERSONEL_YAKININIZ_AD_SOYAD" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Yakınının adını ve soyadını giriniz." required>
+                                            <p ng-show="frm_Kullanici.txtIK_PERSONEL_YAKININIZ_AD_SOYAD.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Yakın Telefonu <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name="txtIK_PERSONEL_YAKIN_TELEFON_NO" maxlength="17"
+                                                   mask="(999) 999 9999" ng-model="$parent.InfoPersonel.IK_PERSONEL_YAKIN_TELEFON_NO" ng-maxlength="15" class="formEkleDuzenleInput form-control" placeholder="Yakınının telefonu giriniz." required />
+                                            <p ng-show="frm_Kullanici.txtIK_PERSONEL_YAKIN_TELEFON_NO.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Araç Plaka </label>
+
+                                        <div class="col-sm-8">
+                                            <input type="text" id="txtIK_PERSONEL_ARAC_PLAKA_NO" name="txtIK_PERSONEL_ARAC_PLAKA_NO" ng-model="$parent.InfoPersonel.IK_PERSONEL_ARAC_PLAKA_NO" ng-maxlength="15" class="formEkleDuzenleInput form-control" placeholder="Araç plakası giriniz.">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Adres <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <textarea type="text" name="txtIK_PERSONEL_ADRES" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="$parent.InfoPersonel.IK_PERSONEL_ADRES" rows="4" class="formEkleDuzenleInput form-control" placeholder="Adresini giriniz." required />
+                                            <p ng-show="frm_Kullanici.txtIK_PERSONEL_ADRES.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Personel İl <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="cmbIL_ILCE_ID" name="cmbIL_ILCE_ID" ng-model="$parent.InfoPersonel.IL_ID" required="true"
+                                                data-live-search="true" title="İl Seçiniz" data-size="5" ng-change="getIlce()">
+                                                <li nya-bs-option="item in IlListesi" deep-watch="true" data-value="item.IL_ILCE_ID">
+                                                    <a>
+                                                        {{item.IL_ILCE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_Kullanici.cmbIL_ILCE_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Personel İlçe <span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" allow-clear="true" id="cmbILCE_ID" name="cmbILCE_ID" ng-model="$parent.InfoPersonel.ILCE_ID" required="true"
+                                                data-live-search="true" title="İlçe Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in IlceListesi" deep-watch="true" data-value="item.IL_ILCE_ID">
+                                                    <a>
+                                                        {{item.IL_ILCE_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frm_Kullanici.cmbILCE_ID.$invalid && formCalistirildi" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="col-sm-offset-2 col-md-10">
+                                            <div class=" pull-right">
+                                                <!--ng-class="{'col-sm-3' kullaniciID<=0, 'col-sm-4' kullaniciID > 0"-->
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="IkPersonelEkleGuncelle($parent.InfoPersonel, frm_Kullanici)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <!--<button class="btn btn-sm btn-primary " ui-sref="insankaynaklari.ikpersonellistesi" ng-hide="$storage.IS_PICT_YONETICI == false || $storage.IS_MUSTERI_YONETICI == false"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>-->
+                                                <button class="btn btn-sm btn-danger" type="button" ng-show="false" ng-click="kullaniciTemizle()">
+                                                    <i class="fa fa-remove"></i>&nbsp;&nbsp;<span class="bold">Temizle</span>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins" ng-show="$parent.InfoPersonel.IK_PERSONEL_ID>0">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-graduation-cap"></i>
+                        Personel Bakmakla Yükümlü Olduğu Kişiler
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="frmIkBakmaklaYukumlu" id="frmIkBakmaklaYukumlu" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Adı Soyadı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtAD_SOYAD" ng-model="$parent.InfoBakmayaYukumlu.AD_SOYAD" class="form-control formEkleDuzenleInput  " required placeholder="Bakmakla yükümlü olduğunuz kişinin adını giriniz.">
+                                            <p ng-show="frmIkBakmaklaYukumlu.txtAD_SOYAD.$invalid && formCalistirildiBakmayaYukumlu" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Doğum Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="datetime" required class="formEkleDuzenleInput form-control" nextgen-date-picker="" name="txtYAKINININ_DOGUM_TARIHI" id="txtYAKINININ_DOGUM_TARIHI" ng-model="$parent.InfoBakmayaYukumlu.DOGUM_TARIHI">
+                                            </div>
+                                            <p ng-show="frmIkBakmaklaYukumlu.txtYAKINININ_DOGUM_TARIHI.$invalid && formCalistirildiBakmayaYukumlu" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Yakınlık Derecesi<span class="text-danger">*</span></label>
+                                        <div class="col-sm-8">
+                                            <ol class="nya-bs-select form-control" id="sel_IK_YAKINLIK_DERECESI_ID" name="sel_IK_YAKINLIK_DERECESI_ID" ng-model="$parent.InfoBakmayaYukumlu.IK_YAKINLIK_DERECESI_ID"
+                                                data-live-search="true" title="Yakınlık Derecesi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkYakinlikDerecesiListesi" deep-watch="true" data-value="item.IK_YAKINLIK_DERECESI_ID">
+                                                    <a>
+                                                        {{item.IK_YAKINLIK_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkBakmaklaYukumlu.sel_IK_YAKINLIK_DERECESI_ID.$invalid && formCalistirildiBakmayaYukumlu" class="validasyon_uyari">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="IkBakmayaYukumluOlduguKisiEkleGuncelle($parent.InfoBakmayaYukumlu, frmIkBakmaklaYukumlu)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkPersonelBakmayaYukumluListesi.length>0">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <strong>Toplam {{ toplamKayitSayisiBakmayaYukumlu }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Ad Soyad</b></td>
+                                            <td><b>Doğum Tarihi</b></td>
+                                            <td><b>Yakınlık Derecesi</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkPersonelBakmayaYukumluListesi ">
+
+                                            <td class="project-title">
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td>
+                                                {{post.AD_SOYAD}} <br />
+                                            </td>
+
+                                            <td class="tarih">
+                                                {{post.DOGUM_TARIHI | tarih}}
+                                            </td>
+
+                                            <td class="no-wrap">
+                                                {{post.IK_YAKINLIK_ADI}}
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriterBakmayaYukumlu.SayfaNo" ng-change="IkPersonelBakmayaYukumluOlduguKisiGetData(AramaKriterBakmayaYukumlu)" total-items="toplamKayitSayisiBakmayaYukumlu"
+                                                            items-per-page="AramaKriterBakmayaYukumlu.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="IkPersonelBakmayaYukumluListesi.length==0 || IkPersonelBakmayaYukumluListesi == null">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İnsan kaynakları personelinin bakmakla yükümlü olduğu kişi kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

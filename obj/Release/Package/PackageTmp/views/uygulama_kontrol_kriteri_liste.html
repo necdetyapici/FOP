@@ -1,0 +1,225 @@
+﻿
+<div ng-init="init()" ui-view></div>
+<div class="animated fadeInDownBig row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Uygulama Kontrol Kriteri Grup İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-cogs"></i>
+                Uygulama Kontrol Kriteri Grup
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-commenting-o"></i>
+                    Uygulama Kontrol Kriter
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content animated-emfa animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-bomb"></i>  Uygulama Kontrol Kriter Bilgileri
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmUygulamaKontrolKriteri" id="frmUygulamaKontrolKriteri" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Grup Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_GRUP_ADI" ng-model="uygulamaKontrolKriteriGrupAdi" class="form-control" readonly required>
+                                            <p ng-show="frmUygulamaKontrolKriteri.txtUYGULAMA_KONTROL_KRITERI_GRUP_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_NO" required ng-model="Info.UYGULAMA_KONTROL_KRITERI_NO" class="form-control" placeholder="Uygulama kontrol kriteri no giriniz.">
+                                            <p ng-show="frmUygulamaKontrolKriteri.txtUYGULAMA_KONTROL_KRITERI_NO.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_ADI" ng-model="Info.UYGULAMA_KONTROL_KRITERI_ADI" class="form-control" placeholder="Uygulama kontrol kriteri adı giriniz.">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Kontrol Açıklama</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtUYGULAMA_KONTROL_KRITERI_KONTROL_ACIKLAMA" style="resize:none;" ng-model="Info.UYGULAMA_KONTROL_KRITERI_KONTROL_ACIKLAMA" maxlength="1000" rows="9" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder=" Uygulama kontrol kriteri kontrol açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="UygulamaKontrolKriteriEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </button>
+                                            <a class="btn btn-primary" href="#" ui-sref="sistem.uygulamakontrolkriterigruplistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Uygulama Kontrol Kriter Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-UygulamaKontrolKriter" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriter Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_ADI" id="txtUYGULAMA_KONTROL_KRITERI_ADI" ng-model="AramaKriter.UYGULAMA_KONTROL_KRITERI_ADI" class="form-control formEkleDuzenleInput " placeholder="Uygulama kontrol kriter adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="UygulamaKontrolKriteriGetData(AramaKriter, AramaKriter.SayfaNo= 1 )" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="UygulamaKontrolKriteriListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="UygulamaKontrolKriteriGetData()" > <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{toplamKayitSayisi }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Uygulama Kontrol Kriter No</b></td>
+                                            <td><b>Uygulama Kontrol Kriter Adı</b></td>
+                                            <td><b>Uygulama Kontrol Kriter Açıklama</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in UygulamaKontrolKriteriListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td>
+                                                {{post.UYGULAMA_KONTROL_KRITERI_NO}}
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <a class="editLink-Emfa" ui-sref="sistem.uygulamakontrolkriterikayit({ uygulamaKontrolKriteriID: post.UYGULAMA_KONTROL_KRITERI_ID})">{{post.UYGULAMA_KONTROL_KRITERI_ADI}}</a><br />
+                                            </td>
+                                            <td>
+                                                {{post.UYGULAMA_KONTROL_KRITERI_KONTROL_ACIKLAMA}}
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="sistem.uygulamakontrolkriterikayit({ uygulamaKontrolKriteriID: post.UYGULAMA_KONTROL_KRITERI_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="UygulamaKontrolKriteriGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content" ng-show="UygulamaKontrolKriteriListesi.length==0||UygulamaKontrolKriteriListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="UygulamaKontrolKriteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Sistem tanımlamalarına bağlı uygulama kontrol kriteri kaydı <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

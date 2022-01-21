@@ -1,0 +1,249 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <!--<h2>Proje İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i> Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <i class="fa fa-archive"></i>
+                İnsan Kaynakları
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-truck"></i>
+                    Kargo
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Kargo Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkKargo" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gönderen</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtGONDEREN" id="txtGONDEREN" ng-model="AramaKriterListe.GONDEREN" class="form-control formEkleDuzenleInput  " placeholder="Gönderen giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Alıcı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtALICI" id="txtALICI" ng-model="AramaKriterListe.ALICI" class="form-control formEkleDuzenleInput " placeholder="Alıcı giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Şirketi</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="sel_KARGO_SIRKETI_ID" name="sel_KARGO_SIRKETI_ID" ng-model="AramaKriterListe.KARGO_SIRKETI_ID"
+                                                data-live-search="true" title="Kargo Şirketi Seçiniz" allow-clear="true" data-size="5">
+                                                <li nya-bs-option="item in KargoSirketiListesi" deep-watch="true" data-value="item.KARGO_SIRKETI_ID">
+                                                    <a>
+                                                        {{item.KARGO_SIRKETI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Gönderi Tipi</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="sel_KARGO_GONDERI_TIPI_ID" name="sel_KARGO_GONDERI_TIPI_ID" ng-model="AramaKriterListe.KARGO_GONDERI_TIPI_ID"
+                                                data-live-search="true" title="Kargo Gönderi Seçiniz" allow-clear="true" data-size="5">
+                                                <li nya-bs-option="item in KargoGonderiTipiListesi" deep-watch="true" data-value="item.KARGO_GONDERI_TIPI_ID">
+                                                    <a>
+                                                        {{item.KARGO_GONDERI_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gönderim Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtKARGO_TARIHI" id="txtKARGO_TARIHI" ng-model="AramaKriterListe.KARGO_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-pristine ng-untouched ng-valid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="IkKargoGetData(AramaKriterListe, AramaKriterListe.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkKargoListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikkargokayit" data-ui-sref-opts="{reload:true}" class="btn-create-shadow btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkKargoGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Gönderen</b></td>
+                                            <td><b>Alıcı</b></td>
+                                            <td><b>Kargo Tipi</b></td>
+                                            <td><b>Gönderi Tipi</b></td>
+                                            <td><b>Kargo Şirketi</b></td>
+                                            <td><b>Ödeme Şekli</b></td>
+                                            <td><b>Gönderim Tarihi</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkKargoListesi | filter:txtArama">
+                                            <td class="project-title">
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="editLink-Emfa">
+                                                <a ui-sref="insankaynaklari.ikkargokayit({ikKargoID: post.IK_KARGO_ID})">{{post.GONDEREN_AD_SOYAD}}</a><br />
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.ALICI_AD_SOYAD}}
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.KARGO_TIPI_ADI}}
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.KARGO_GONDERI_TIPI_ADI}}
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.KARGO_SIRKETI_ADI}}
+                                            </td>
+                                            <td class="no-wrap">
+                                                {{post.IK_KARGO_ODEME_SEKLI}}
+                                            </td>
+
+                                            <td class="tarih">
+                                                <span class="label label-primary">
+                                                    <i class="fa fa-calendar"></i>
+                                                    {{post.KARGO_TARIHI | tarih  }}
+                                                </span>
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="insankaynaklari.ikkargokayit({ikKargoID: post.IK_KARGO_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriterListe.SayfaNo" ng-change="IkKargoGetData(AramaKriterListe)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriterListe.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-show="IkKargoListesi.length==0||IkKargoListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="insankaynaklari.ikkargokayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkKargoGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İnsan kaynaklarına bağlı kargo kaydı <strong>bulunmamaktadır.</strong>
+                                Eklemek için <a ui-sref="insankaynaklari.ikkargokayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

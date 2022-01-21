@@ -1,0 +1,167 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading animated fadeInDownBig">
+    <div class="col-lg-10">
+        <h2>Doküman Yetki Grup Klasor</h2>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i> <a ui-sref="anasayfa"> Ana Sayfa</a></li>
+            <li><i class="fa fa-briefcase"></i> Tanımlamalar</li>
+            <li class="active"><strong><i class="fa fa-university"></i> Doküman Yetki Grup Klasör</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-university"></i>
+                        Doküman Yetki Grup Klasör Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp; Doküman Yetki Grup Klasör bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-8">
+
+                            <form method="get" name="frmYetkiGrupKlasor" id="frmYetkiGrupKlasor" class="form-horizontal" accessible-form>
+                                <div class="formEkleDuzenleInputs" style="padding-top:50px;">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label"> Doküman / Klasör <span class="text-danger">*</span></label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" id="txtDOKUMAN_KLASOR_ADI" name="txtDOKUMAN_KLASOR_ADI" ng-model="InfoYetkiKlasor.DOKUMAN_KLASOR_ADI" ng-maxlength="50" ng-minlength="1" class="formEkleDuzenleInput form-control" ng-disabled="true" placeholder="Adını giriniz." required>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Alt Klasörlerede Uygulansın mı? </label>
+                                                <div class="col-lg-6">
+                                                    <label>
+                                                        <input type="checkbox" id="rdPROJE_PAKETI_EKLENTISI" icheck ng-model="InfoYetkiKlasor.ALT_KLASOR_UYGULAMA">
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <h4>Yetkiler</h4>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-4 control-label">Görme </label>
+                                                        <div class="col-lg-8">
+                                                            <label>
+                                                                <input type="checkbox" id="rdPROJE_PAKETI_EKLENTISI" icheck ng-model="InfoYetkiKlasor.GORME">
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-4 control-label">Ekleme </label>
+                                                        <div class="col-lg-8">
+                                                            <label>
+                                                                <input type="checkbox" id="rdPROJE_PAKETI_EKLENTISI" icheck ng-model="InfoYetkiKlasor.EKLEME">
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-4 control-label">Yazma </label>
+                                                        <div class="col-lg-8">
+                                                            <label>
+                                                                <input type="checkbox" id="rdPROJE_PAKETI_EKLENTISI" icheck ng-model="InfoYetkiKlasor.YAZMA">
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-4 control-label">Silme </label>
+                                                        <div class="col-lg-8">
+                                                            <label>
+                                                                <input type="checkbox" id="rdPROJE_PAKETI_EKLENTISI" icheck ng-model="InfoYetkiKlasor.SILME">
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="col-lg-4 control-label">Taşıma </label>
+                                                        <div class="col-lg-8">
+                                                            <label>
+                                                                <input type="checkbox" id="rdPROJE_PAKETI_EKLENTISI" icheck ng-model="InfoYetkiKlasor.TASIMA">
+                                                            </label>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class=" btn btn-danger " type="button" ng-click="modalSilmeOnayi(InfoYetkiKlasor)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Sil</span>
+                                                </button>
+                                                <button class=" btn btn-success " type="button" ng-click="DokumanYetkiGrupKlasorEkleGuncelle(InfoYetkiKlasor, frmYetkiGrupKlasor)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <!--<a class="btn btn-primary" href="#" ui-sref="tanimlamalar.bgacikliklistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="hr-line-dashed"></div>
+                        <div class="client-detail" style="height:700px;">
+                            <div class="full-height-scroll" full-scroll>
+                                <div id="tree"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+

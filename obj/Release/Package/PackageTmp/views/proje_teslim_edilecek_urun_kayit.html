@@ -1,0 +1,90 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Teslim Edilecek Ürün Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeTeslimEdilecekUrun" id="frmProjeTeslimEdilecekUrun" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">
+                                            Teslim Edilecek Ürün Adı
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-lg-6">
+                                            <input type="text" name="txtTESLIM_EDILECEK_URUN_ADI" ng-model="InfoTeslimEdilecekUrun.TESLIM_EDILECEK_URUN_ADI" ng-maxlength="50" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Teslim edilecek ürün adını giriniz." required>
+                                            <p ng-show="frmProjeTeslimEdilecekUrun.txtTESLIM_EDILECEK_URUN_ADI.$invalid && formCalistirildiTeslimEdilecekUrun" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Teslim Edilecek Ürün Sahibi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID" name="cmbPROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID" ng-model="InfoTeslimEdilecekUrun.PROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID"
+                                                data-live-search="true" title="Ürün Sahibi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjePersonelListesiGenel" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                    <a>
+                                                        {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeTeslimEdilecekUrun.cmbPROJE_PERSONEL_URUN_SAHIBI_KULLANICI_ID.$invalid && formCalistirildiTeslimEdilecekUrun" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ürün Teslim Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </span>
+                                                <input type="datetime" name="txtTESLIM_EDILECEK_URUN_TESLIM_TARIHI" ng-model="InfoTeslimEdilecekUrun.TESLIM_EDILECEK_URUN_TESLIM_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput input-sm" required>
+                                            </div>
+                                            <p ng-show="frmProjeTeslimEdilecekUrun.txtTESLIM_EDILECEK_URUN_TESLIM_TARIHI.$invalid && formCalistirildiTeslimEdilecekUrun" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeTeslimEdilecekUrunEkleGuncelle(InfoTeslimEdilecekUrun)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.teslimedilecekurunlistesi">
+                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

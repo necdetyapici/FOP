@@ -1,0 +1,56 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Yeni Gündem Ekle</h4>
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmToplantiGundemHavuzu" id="frmToplantiGundemHavuzu" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Toplantı Gündemi Türü <span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <ol class="nya-bs-select form-control" id="cmbTOPLANTI_GUNDEMI_TURU_ID" name="cmbTOPLANTI_GUNDEMI_TURU_ID" ng-model="InfoToplantiYeniGundem.TOPLANTI_GUNDEMI_TURU_ID"
+                                    data-live-search="true" title="Toplantı Gündem Türünü Seçiniz" data-size="5" required="true">
+                                    <li nya-bs-option="item in ToplantiGundemiTuruListesi" deep-watch="true" data-value="item.TOPLANTI_GUNDEMI_TURU_ID">
+                                        <a>
+                                            {{item.TOPLANTI_GUNDEMI_TURU_ADI}}
+                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                        </a>
+                                    </li>
+                                </ol>
+                                <p ng-show="frmToplantiGundemHavuzu.cmbTOPLANTI_GUNDEMI_TURU_ID.$invalid && formCalistirildiGundemEkle" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                        
+
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">Toplantı Türü <span class="text-danger">*</span></label>
+                            <div class="col-lg-8">
+                                <input type="text" required="required" name="txtTOPLANTI_TURU_ADI" ng-model="InfoToplanti.TOPLANTI_TURU_ADI" class="formEkleDuzenleInput form-control" placeholder="Toplantı türü giriniz." ng-disabled="true">
+                                <p ng-show="frmToplanti.txtTOPLANTI_TURU_ADI.$invalid && formCalistirildiGundemEkle" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Toplantı Gündem Gerekçe <span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                <textarea type="text" name="txtTOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE" style="resize:none;" ng-model="InfoToplantiYeniGundem.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı günden gerekçe giriniz." required="required"></textarea>
+                                <p ng-show="frmToplantiGundemHavuzu.txtTOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE.$invalid && formCalistirildiGundemEkle" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="ToplantiGundemiHavuzuEkleGuncelle(InfoToplantiYeniGundem, frmToplantiGundemHavuzu )"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="YeniGundemGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>
+
+
+
+
+

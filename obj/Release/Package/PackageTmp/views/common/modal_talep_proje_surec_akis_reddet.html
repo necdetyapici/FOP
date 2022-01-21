@@ -1,0 +1,33 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Süreci Reddet ?</h4>
+    </div>
+    <div class="modal-body">
+
+        <form method="get" name="frmTalepSurecLogRed" id="frmTalepSurecLogRed" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Süreci Reddet <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="txtTALEP_PROJE_SUREC_LOG_NEDEN_DOGRULANMADI" id="txtTALEP_PROJE_SUREC_LOG_NEDEN_DOGRULANMADI" ng-model="InfoYeniTalepSurecAkis.TALEP_PROJE_SUREC_LOG_NEDEN_DOGRULANMADI" rows="7" style="resize: none" class="formEkleDuzenleInput form-control" ng-maxlength="255" ng-minlength="1" placeholder="Süreci Reddet..." required></textarea>
+                                <p ng-show="frmTalepSurecLogRed.txtTALEP_PROJE_SUREC_LOG_NEDEN_DOGRULANMADI.$invalid && formCalistirildiSurecRed" class="validation">Bu alan bos birakilamaz.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="YeniTalepSurecAkisKaydet(InfoYeniTalepSurecAkis,null, frmTalepSurecLogRed, InfoYeniTalepSurecAkis.YENI_SUREC_AKIS_TIPI_ID = 4)">Süreci Reddet</button>
+        <button type="button" class="btn btn-primary" ng-click="SurecAkisRedGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

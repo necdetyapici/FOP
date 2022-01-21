@@ -1,0 +1,179 @@
+﻿<div ng-init="init()"> </div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Sürüm Yönetim Stratejisi Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeSurumYonetimStratejisi" id="frmProjeSurumYonetimStratejisi" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="surum-yonetim-major">
+                                <span class="surum-yonetim-header animated bounceInRight">majör</span>
+                                <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Strateji<span class="text-danger">*</span></label>
+                                            <div class="col-lg-10">
+                                                <textarea name="txtMAJOR_STRATEJI" ng-model="InfoSurumYonetimStratejisi.MAJOR_STRATEJI" ng-maxlength="500" ng-minlength="1" class="surum-yonetim-strateji-area form-control formEkleDuzenleInput" placeholder="Major strateji giriniz." required> </textarea>
+                                                <p ng-show="frmProjeSurumYonetimStratejisi.txtMAJOR_STRATEJI.$invalid && formCalistirildiSurumYonetimStratejisi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Periyot</label>
+                                            <div class="col-lg-8">
+                                                <input type="number" name="txtMAJOR_PERIYOT" ng-model="InfoSurumYonetimStratejisi.MAJOR_PERIYOT" class="form-control  formEkleDuzenleInput input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Periyot Tipi</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbMAJOR_PERIYOT_TIPI_ID" name="cmbMAJOR_PERIYOT_TIPI_ID" allow-clear="true" ng-model="InfoSurumYonetimStratejisi.MAJOR_PERIYOT_TIPI_ID"
+                                                    data-live-search="true" title="Periyot Tipi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in PeriyotTipiListesi" deep-watch="true" data-value="item.PERIYOT_TIPI_ID">
+                                                        <a>
+                                                            {{item.PERIYOT_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="surum-yonetim-header animated bounceInRight">minör</span>
+
+                            <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                            <div class="surum-yonetim-minor">
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Strateji<span class="text-danger">*</span></label>
+                                            <div class="col-lg-10">
+                                                <textarea name="txtMINOR_STRATEJI" ng-model="InfoSurumYonetimStratejisi.MINOR_STRATEJI" ng-maxlength="500" ng-minlength="1" class="surum-yonetim-strateji-area form-control formEkleDuzenleInput" placeholder="Minor strateji giriniz." required> </textarea>
+                                                <p ng-show="frmProjeSurumYonetimStratejisi.txtMINOR_STRATEJI.$invalid && formCalistirildiSurumYonetimStratejisi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Periyot</label>
+                                            <div class="col-lg-8">
+                                                <input type="number" name="txtMINOR_PERIYOT" ng-model="InfoSurumYonetimStratejisi.MINOR_PERIYOT" class="form-control  formEkleDuzenleInput input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Periyot Tipi</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbMINOR_PERIYOT_TIPI_ID" name="cmbMINOR_PERIYOT_TIPI_ID" allow-clear="true" ng-model="InfoSurumYonetimStratejisi.MINOR_PERIYOT_TIPI_ID"
+                                                    data-live-search="true" title="Periyot Tipi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in PeriyotTipiListesi" deep-watch="true" data-value="item.PERIYOT_TIPI_ID">
+                                                        <a>
+                                                            {{item.PERIYOT_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="surum-yonetim-header animated bounceInRight">yama</span>
+
+                            <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                            <div class="surum-yonetim-yama">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Strateji<span class="text-danger">*</span></label>
+                                            <div class="col-lg-10">
+                                                <textarea name="txtYAMA_STRATEJI" ng-model="InfoSurumYonetimStratejisi.YAMA_STRATEJI" ng-maxlength="500" ng-minlength="1" class="surum-yonetim-strateji-area form-control formEkleDuzenleInput" placeholder="Yama strateji giriniz." required> </textarea>
+                                                <p ng-show="frmProjeSurumYonetimStratejisi.txtYAMA_STRATEJI.$invalid && formCalistirildiSurumYonetimStratejisi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Periyot</label>
+                                            <div class="col-lg-8">
+                                                <input type="number" name="txtYAMA_PERIYOT" ng-model="InfoSurumYonetimStratejisi.YAMA_PERIYOT" class="form-control  formEkleDuzenleInput input-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Periyot Tipi</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbYAMA_PERIYOT_TIPI_ID" name="cmbYAMA_PERIYOT_TIPI_ID" allow-clear="true" ng-model="InfoSurumYonetimStratejisi.YAMA_PERIYOT_TIPI_ID"
+                                                    data-live-search="true" title="Periyot Tipi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in PeriyotTipiListesi" deep-watch="true" data-value="item.PERIYOT_TIPI_ID">
+                                                        <a>
+                                                            {{item.PERIYOT_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed"></div>
+
+                            <div class="row ">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeSurumYonetimStratejisiEkleGuncelle(InfoSurumYonetimStratejisi)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.surumyonetimstratejisilistesi" >
+                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

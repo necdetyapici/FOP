@@ -1,0 +1,77 @@
+﻿
+
+<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-briefcase"></i> Fizibilite Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Fizibilite bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeFizibilitesi" id="frmProjeFizibilitesi" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs ">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Metrik <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbMETRIK_ID" name="cmbMETRIK_ID" ng-model="InfoProjeFizibilite.METRIK_ID"
+                                                data-live-search="true" title="Metrik Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in MetriklerListesi" deep-watch="true" data-value="item.METRIK_ID">
+                                                    <a>
+                                                        {{item.METRIK}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeFizibilitesi.cmbMETRIK_ID.$invalid && formCalistirildiProjeFizibilite" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Değerlendirme Yöntemi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbDEGERLENDIRME_YONTEMI_ID" name="cmbDEGERLENDIRME_YONTEMI_ID" ng-model="InfoProjeFizibilite.DEGERLENDIRME_YONTEMI_ID"
+                                                data-live-search="true" title="Değerlendirme Yöntemini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in DegerlendirmeYontemiListesi" deep-watch="true" data-value="item.DEGERLENDIRME_YONTEMI_ID">
+                                                    <a>
+                                                        {{item.DEGERLENDIRME_YONTEMI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeFizibilitesi.cmbDEGERLENDIRME_YONTEMI_ID.$invalid && formCalistirildiProjeFizibilite" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-10">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="ProjeFizibiletesiEkleGuncelle(InfoProjeFizibilite)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.fizibilite.projefizibilitelistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    

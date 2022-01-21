@@ -1,0 +1,88 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Süreç Doğrulama Kriter Grupları</h4>
+
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmTalepProjeSurecAkisTamamla" id="frmTalepProjeSurecAkisTamamla" class="form-horizontal" accessible-form>
+            <div class="ibox-content" ng-if="TalepProjeDogrulamaKriteriGrupListesi.length>0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="pull-right">
+
+                            <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="TalepProjeDogrulamaKriteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                        </div>
+                        <!--<strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>-->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="project-list table-emfa">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>No</b></td>
+                                        <td><b>Grup No</b></td>
+                                        <td><b>Doğrula Sayısı</b></td>
+                                        <td><b>Doğrulamadı Sayısı</b></td>
+                                        <td><b>Kriter Sonuçlar</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="post in TalepProjeDogrulamaKriteriGrupListesi | filter:ignoreTurkish">
+                                        <td>
+                                            <span class="label label-success">{{$index + 1}}</span>
+                                        </td>
+
+                                        <td>
+                                            {{post.GRUP_NO}}
+                                        </td>
+
+                                        <td class="actions">
+                                            {{post.DOGRULAMA_SAYISI}}
+                                        </td>
+                                        <td class="actions">
+                                            {{post.DOGRULANMADI_SAYISI}}
+                                        </td>
+                                        <td>
+                                            <a ng-click="surecDogrulamaKriterSonucGoster(AramaKriterTalepDogrulamaSonuc.GRUP_NO=post.GRUP_NO,AramaKriterTalepDogrulamaSonuc.TALEP_PROJE_SUREC_LOG_ID=post.TALEP_PROJE_SUREC_LOG_ID)" class="btn btn-sm btn-info" tooltip="Doğrulama Sonucu Göster" tooltip-append-to-body="true"><i class="fa fa-steam"></i></a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="ibox-content" ng-if="TalepProjeDogrulamaKriteriGrupListesi.length==0 || TalepProjeDogrulamaKriteriGrupListesi == null">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-white" ng-click="TalepProjeDogrulamaKriteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                    </div>
+                </div>
+            </div>
+
+            <br /><br />
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                        <i class="fa fa-exclamation-circle"></i>
+                        &nbsp;Doğrulama kriteri  kaydı <strong>bulunmamaktadır.</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" ng-click="surecDogrulamaKriterGrupGeri()"><i class="fa fa-close"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>

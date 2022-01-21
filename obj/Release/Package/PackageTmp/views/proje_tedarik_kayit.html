@@ -1,0 +1,110 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Proje Tedarik Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmTedarik" id="frmTedarik" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Tedarikçi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtTEDARIKCI" ng-model="InfoTedarik.TEDARIKCI" class="formEkleDuzenleInput form-control " ng-maxlength="255" ng-minlength="1" placeholder="Tedarikçi giriniz." required />
+                                            <p ng-show="frmTedarik.txtTEDARIKCI.$invalid && formCalistirildiTedarik" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Tedarik Edilcek Ürün<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input name="txtTEDARIK_EDILECEK_URUN" ng-model="InfoTedarik.TEDARIK_EDILECEK_URUN" class="formEkleDuzenleInput form-control " ng-maxlength="255" ng-minlength="1" placeholder="Tedarik edilecek ürün giriniz." required />
+                                            <p ng-show="frmTedarik.txtTEDARIK_EDILECEK_URUN.$invalid && formCalistirildiTedarik" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span class="ilgiliKisi">ilgili kişi</span>
+
+                            <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ad Soyad<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtILGILI_KISI" ng-model="InfoTedarik.ILGILI_KISI" class="formEkleDuzenleInput form-control " ng-maxlength="255" ng-minlength="1" placeholder="Ad soyad giriniz." required>
+                                            <p ng-show="frmTedarik.txtILGILI_KISI.$invalid && formCalistirildiTedarik" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">E-Posta</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group m-b">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                <input type="email" name="txtMUSTERI_E_POSTA" ng-model="InfoTedarik.ILGILI_KISI_E_POSTA" class="formEkleDuzenleInput form-control " ng-maxlength="150" ng-minlength="1" placeholder="E-Posta adresi giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Telefon<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group m-b-sm" style="margin-bottom:0px;">
+                                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                                                <input type="text" name="txtILGILI_KISI_TELEFON" ng-model="InfoTedarik.ILGILI_KISI_TELEFON" class="formEkleDuzenleInput form-control " placeholder="Telefon numarası giriniz." maxlength="17"
+                                                       mask="(999) 999 9999" required>
+                                                <p ng-show="frmTedarik.txtILGILI_KISI_TELEFON.$invalid && formCalistirildiTedarik" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hr-line-dashed" style="margin-top:0px"></div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="ProjeTedarikEkleGuncelle(InfoTedarik)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.fizibilite.tedariklistesi">
+                                                <i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

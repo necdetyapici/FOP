@@ -1,0 +1,31 @@
+﻿
+
+
+<div class="row" style="margin-top:30px">
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                                <i class="fa fa-cubes"></i> Dokuman Yönetim Sistemi Ayarları
+                            </h5>
+                        </div>
+
+                        <div class="fizibilite ibox-content">
+                            <ul class="alt-nav-tabs nav nav-tabs">
+                                <li ng-class="{'active-altTab' : altTab == 1}"><a class="altTabMenuItem" ng-click="setAltTab(1)" ui-sref=".dokumanformayarilistesi"><i class="fa fa-cubes"></i>&nbsp;Doküman Form Ayarı</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div ui-view></div>
+    </div>
+</div>

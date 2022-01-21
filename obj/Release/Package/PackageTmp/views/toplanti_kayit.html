@@ -1,0 +1,803 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Toplantı</h2>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a></li>
+            <li><a ui-sref="toplanti.toplantilistesi"><i class="fa fa-list"></i> Toplantı Listesi</a></li>
+            <li class="active animated bounceInRight"><strong><i class="fa fa-group"></i> Kayıt</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-group"></i>
+                        Toplantı  Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen toplantı bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmToplanti" id="frmToplanti" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Adı <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" required="required" ng-maxlength="255" name="txtTOPLANTI_ADI" ng-model="InfoToplanti.TOPLANTI_ADI" class="formEkleDuzenleInput form-control" placeholder="Toplantı adını giriniz.">
+                                                <p ng-show="frmToplanti.txtTOPLANTI_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Tarihi <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="datetime" name="txtTOPLANTI_TARIHI" ng-model="InfoToplanti.TOPLANTI_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required="required">
+                                                </div>
+                                                <p ng-show="frmToplanti.txtTOPLANTI_TARIHI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Başlangıç Saati <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    <input type="text" name="txtTOPLANTI_BASLANGIC_SAATI" ng-model="InfoToplanti.TOPLANTI_BASLANGIC_SAATI" clock-picker="" data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı başlangıç saatini giriniz." required="required">
+                                                </div>
+                                                <p ng-show="frmToplanti.txtTOPLANTI_BASLANGIC_SAATI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Bitiş Saati <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    <input type="text" name="txtBITIS_SAATI" ng-model="InfoToplanti.BITIS_SAATI" clock-picker="" data-autoclose="true" class="form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı bitiş saatini giriniz." required="required">
+                                                </div>
+                                                <p ng-show="frmToplanti.txtBITIS_SAATI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Yeri <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTOPLANTI_YERI_ID" name="cmbTOPLANTI_YERI_ID" ng-model="InfoToplanti.TOPLANTI_YERI_ID"
+                                                    data-live-search="true" title="Toplantı Yeri Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in ToplantiYeriListesi" deep-watch="true" data-value="item.TOPLANTI_YERI_ID">
+                                                        <a>
+                                                            {{item.TOPLANTI_YERI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+
+                                                        </a>
+                                                    </li>
+                                                </ol>
+
+                                                <p ng-show="frmToplanti.cmbTOPLANTI_TURU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Toplantı Türü <span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbTOPLANTI_TURU_ID" name="cmbTOPLANTI_TURU_ID" ng-model="InfoToplanti.TOPLANTI_TURU_ID"
+                                                    data-live-search="true" title="Toplantı Türü Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in ToplantiTuruListesi" deep-watch="true" data-value="item.TOPLANTI_TURU_ID">
+                                                        <a>
+                                                            {{item.TOPLANTI_TURU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmToplanti.cmbTOPLANTI_TURU_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Proje Adı</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbPROJE_ID" name="cmbPROJE_ID" allow-clear="true" ng-model="InfoToplanti.PROJE_ID"
+                                                    data-live-search="true" title="Proje Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in KullaniciProjeListesi" deep-watch="true" data-value="item.PROJE_ID">
+                                                        <a>
+                                                            {{item.PROJE_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" ng-show="toplantiID > 0">
+                                            <label class="col-lg-4 control-label"></label>
+                                            <div class="col-lg-8">
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-info" type="button" ng-click="ToplantiIliskiEkle()">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">İlişki Ekle</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <a ui-sref="toplanti.toplantikayit.toplantibagli  ({ toplantiBagliID: post.TOPLANTI_ID})" ng-click="toplantiBagliID == toplantiID" class="btn btn-info"> <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">İlişkili Toplantı Aç</span></a>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" ng-show="toplantiID == 0">
+                                            <label class="col-lg-4 control-label"></label>
+                                            <div class="col-lg-8">
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-info" type="button" ng-click="ToplantiKatilimciEkle()">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold"> Katılımcı Ekle</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-info" type="button" ng-click="GundemEkle(InfoToplanti.TOPLANTI_TURU_ID)">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Gündem Ekle</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <button class="btn btn-info" type="button" ng-click="ToplantiYeriEkle()">
+                                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Toplantı Yeri Ekle</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">Toplantı Açıklama <span class="text-danger">*</span></label>
+                                            <div class="col-sm-10">
+                                                <textarea type="text" name="txtTOPLANTI_ACIKLAMA" style="resize:none;" ng-model="InfoToplanti.TOPLANTI_ACIKLAMA" maxlength="500" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Toplantı açıklama giriniz." required="required"></textarea>
+                                                <p ng-show="frmToplanti.txtTOPLANTI_ACIKLAMA.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button ng-show="toplantiID>0&&InfoToplanti.DURUM==0" class=" btn btn-warning " type="button" ng-click="ToplantiEkleGuncelle(InfoToplanti,InfoToplanti.DURUM=1)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Toplantıyı Kapat</span>
+                                                </button>
+                                                <button class=" btn btn-success " type="button" ng-hide="InfoToplanti.DURUM==1" ng-click="ToplantiEkleGuncelle(InfoToplanti)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <a class="btn btn-primary" href="#" ui-sref="toplanti.toplantilistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig" ng-show="toplantiID >0">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Toplantı Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="clients-list" ng-init="tab=1">
+                                    <ul class="nav nav-tabs">
+                                        <li ng-class="{'active' : tab==1}" class="active"><a ng-click="tab=1">&nbsp;Toplantı Gündemleri</a></li>
+                                        <li ng-class="{'active' : tab==2}" class=""><a ng-click="tab=2">&nbsp;Katılımcı Listesi</a></li>
+                                        <li ng-class="{'active' : tab==3}"><a ng-click="tab=3">&nbsp;Görüşülen Konular</a></li>
+                                        <li ng-class="{'active' : tab==4}"><a ng-click="tab=4">&nbsp;Doküman</a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="form-horizontal">
+                                    <div class="tab-content">
+                                        <div id="tab-1" class="tab-pane active" ng-show="tab==1">
+                                            <div class="panel-body">
+                                                <div class="ibox">
+
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <div class="form-actions">
+                                                                <div class="pull-right">
+                                                                    <button class="btn btn-primary" ng-disabled="InfoToplanti.DURUM==1" ng-click="GundemEkle(InfoToplanti.TOPLANTI_TURU_ID)">Gündem Ekle</button>
+                                                                    <button class="btn btn-info" ng-disabled="InfoToplanti.DURUM==1" ng-click="YeniGundemEkle()">Yeni Gündem Ekle</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-show="ToplantiGundemListesi.length > 0">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="pull-right">
+
+                                                                    <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ToplantiGundemGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                                </div>
+                                                                <strong>Toplam {{ toplamKayitSayisiToplantiGundem }} kayıt</strong>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="project-list">
+                                                                    <div class="table table-responsive table-emfa">
+                                                                        <table class="table table-striped table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <td><b>No</b></td>
+                                                                                    <td><b>Toplantı Adı</b></td>
+                                                                                    <td><b>Toplantı Gündemi Gerekçe </b></td>
+                                                                                    <td><b>Toplantı Türü</b></td>
+                                                                                    <td><b>Gündem Durumu</b></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody ng-repeat="postToplantiGundem in ToplantiGundemListesi | filter:txtArama">
+                                                                                <tr>
+                                                                                    <td class="project-title">
+                                                                                        <span class="label label-success">{{ $index + 1 }}</span>
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        {{postToplantiGundem.TOPLANTI_ADI}} <br />
+                                                                                    </td>
+                                                                                    <td class="no-wrap">
+                                                                                        {{postToplantiGundem.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE}}
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        {{postToplantiGundem.TOPLANTI_TURU_ADI}}
+                                                                                    </td>
+
+                                                                                    <td>
+                                                                                        {{postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ADI}}
+                                                                                    </td>
+                                                                                    <td class="actions">
+                                                                                        <div class="pull-left">
+                                                                                            <a ng-click="gorusulenKonu = !gorusulenKonu" ng-class="{ 'btn-danger': gorusulenKonu, 'btn-info' : !gorusulenKonu}" class="btn btn-sm" tooltip="Görüşülen Konu Ekle" tooltip-append-to-body="true"><i class="fa fa-plus"></i><!-- Karar Göster --></a>
+
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="actions">
+                                                                                        <div class="pull-right">
+                                                                                            <a ng-click="karar = !karar" ng-class="{ 'btn-danger': karar, 'btn-info' : !karar}" class="btn btn-sm" tooltip="Karar Göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Karar Göster --></a>
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                    <td class="actions">
+                                                                                        <a ng-hide="postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ID == 4" ng-disabled="InfoToplanti.DURUM==1" ng-click="GundemKarar(postToplantiGundem,postToplantiGundem.gundemDurumu = 1)" class="btn btn-sm btn-info" tooltip="Karar Ekle/Değiştir" tooltip-append-to-body="true"><i class="fa fa-random"></i><!-- Karar Göster --></a>
+                                                                                    </td>
+                                                                                    <td class="actions">
+                                                                                        <div class="pull-right" ng-show="postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ID == 1">
+                                                                                            <a ng-click="[talepler = !talepler ,  TalepToplantiGundemId =postToplantiGundem.TOPLANTI_GUNDEM_ID]" ng-class="{ 'btn-danger': talepler, 'btn-info' : !talepler}" class="btn btn-sm" tooltip="Talepleri Göster" tooltip-append-to-body="true"><i class="fa fa-eye"></i><!-- Karar Göster --></a>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="actions">
+                                                                                        <div class="pull-left">
+                                                                                            <button class="btn btn-info" ng-if="postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ID == 1" ng-disabled="InfoToplanti.DURUM==1" ng-click="GundemTalepEkle(postToplantiGundem.TOPLANTI_GUNDEM_ID)">
+                                                                                                <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Talep Ekle</span>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="actions">
+                                                                                        <div class="pull-left" ng-show="postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ID==2">
+                                                                                            <button class="btn btn-sm btn-warning" tooltip="Ertele" ng-disabled="InfoToplanti.DURUM==1" ng-click="GundemKarar(postToplantiGundem, postToplantiGundem.gundemDurumu = 4)">
+                                                                                                <i class="fa fa-clock-o"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td class="actions">
+                                                                                        <div class="pull-left">
+                                                                                            <a ng-if="postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ID == 2" ng-disabled="InfoToplanti.DURUM==1" ng-click="modalSilmeOnayiToplantiGundem(postToplantiGundem)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                                                        </div>
+                                                                                    </td>
+
+                                                                                </tr>
+
+                                                                                <tr ng-show="karar">
+                                                                                    <td>
+                                                                                        <b>Karar</b>
+                                                                                    </td>
+                                                                                    <td colspan="12">
+                                                                                        <p>{{postToplantiGundem.GUNDEM_KARAR}}</p>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr ng-show="gorusulenKonu">
+                                                                                    <td>
+                                                                                        <b>Görüşülen Konu</b>
+                                                                                    </td>
+                                                                                    <td colspan="11">
+                                                                                        <form method="get" name="frmToplantiGundemGorusulenKonu" id="frmToplantiGundemGorusulenKonu" class="form-horizontal" accessible-form>
+                                                                                            <div class="row">
+                                                                                                <div class="col-lg-12">
+                                                                                                    <div class="form-group">
+                                                                                                        <div class="col-sm-12">
+                                                                                                            <textarea type="text" ng-disabled="InfoToplanti.DURUM==1" name="txtGORUSULEN_KONU" style="resize:none;" ng-model="postToplantiGundem.GORUSULEN_KONU" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Toplantıda görüşülen konuyu giriniz."></textarea>
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col-lg-12">
+                                                                                                    <div class="form-actions">
+                                                                                                        <div class="pull-right">
+                                                                                                            <button class=" btn btn-success" type="button" ng-disabled="InfoToplanti.DURUM==1" ng-click="ToplantiGundemDurumu(postToplantiGundem)">
+                                                                                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                                                                            </button>
+
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </form>
+
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                                <tr ng-show="talepler">
+
+                                                                                    <td colspan="12">
+                                                                                        <div class="row" ng-if="ToplantiGundemTalepProjeListesi.length>0">
+                                                                                            <table class="table table-striped table-hover">
+                                                                                                <tbody>
+                                                                                                    <tr ng-repeat="postToplantiGundemTalep in ToplantiGundemTalepProjeListesi" ng-if="postToplantiGundemTalep.TOPLANTI_GUNDEM_ID == TalepToplantiGundemId">
+                                                                                                        <td colspan="2"></td>
+                                                                                                        <td class="project-title">
+                                                                                                            <span class="label label-success">{{ $index + 1 }}</span>
+                                                                                                        </td>
+
+                                                                                                        <td>
+                                                                                                            {{postToplantiGundemTalep.TALEP_PROJE_TALEP_NO}}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{postToplantiGundemTalep.TALEP_TIPI_ADI}} / {{postToplantiGundemTalep.PROJE_ADI}}
+                                                                                                        </td>
+                                                                                                        <td class="editLink-Emfa">
+                                                                                                            <a ui-sref="talep.talepprojekayit.talepprojekart({talepProjeID: postToplantiGundemTalep.TALEP_PROJE_ID})">
+                                                                                                                {{postToplantiGundemTalep.TALEP_PROJE_KONU | limitTo: 25}}{{postToplantiGundemTalep.TALEP_PROJE_KONU.length < 25 ? '' : '...'}}
+                                                                                                            </a><br />
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{postToplantiGundemTalep.TALEP_SAHIBI_KULLANICI_ADI}}
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{postToplantiGundemTalep.TALEP_ATAYAN_KULLANICI_ADI}}
+                                                                                                        </td>
+                                                                                                        <td class="tarih">
+                                                                                                            <span class="label label-primary">
+                                                                                                                <i class="fa fa-calendar"></i>
+                                                                                                                {{postToplantiGundemTalep.TALEP_PLANLANAN_BASLANGIC_TARIHI | tarih}}
+                                                                                                            </span>
+                                                                                                        </td>
+                                                                                                        <td class="tarih">
+                                                                                                            <span class="label label-danger">
+                                                                                                                <i class="fa fa-calendar"></i>
+                                                                                                                {{postToplantiGundemTalep.TALEP_PLANLANAN_BITIS_TARIHI | tarih}}
+                                                                                                            </span>
+                                                                                                        </td>
+                                                                                                        <td>
+                                                                                                            {{postToplantiGundemTalep.TALEP_DURUM_TIPI_ADI}}
+                                                                                                        </td>
+                                                                                                    </tr>
+
+                                                                                                </tbody>
+
+                                                                                            </table>
+                                                                                        </div>
+                                                                                        <div class="row" ng-if="ToplantiGundemTalepProjeListesi.length==0">
+                                                                                            <div class="col-lg-12">
+                                                                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                                                                    <i class="fa fa-exclamation-circle"></i>
+                                                                                                    &nbsp;Toplantı gündeme ait talep kaydı <strong>bulunmamaktadır.</strong>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-if="ToplantiGundemListesi.length == 0 || ToplantiGundemListesi == null">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn btn-sm btn-white" ng-click="filtreTemizleToplantiGundem()"> <i class="fa fa-refresh"></i> </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <br /><br />
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                                    <i class="fa fa-exclamation-circle"></i> &nbsp;Toplantıya bağlı gündem kaydı <strong>bulunmamaktadır.</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-2" class="tab-pane active ng-hide" ng-show="tab==2">
+                                            <div class="panel-body">
+                                                <div class="ibox">
+                                                    <div class="ibox">
+                                                        <form method="get" name="frmToplantiKatilimci" id="frmToplantiKatilimci" class="form-horizontal" novalidate>
+                                                            <div class="formEkleDuzenleInputs">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label class="col-lg-4 control-label">Katılımcı <span class="text-danger">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <ol class="nya-bs-select form-control" id="cmbKULLANICI_ID" name="cmbKULLANICI_ID" ng-model="InfoToplantiKatilimci.KULLANICI_ID"
+                                                                                    data-live-search="true" title="Lütfen Seçiniz" data-size="5" required="true" ng-disabled="InfoToplanti.DURUM==1">
+                                                                                    <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="[item.KULLANICI_ID,item.AD_SOYAD]">
+                                                                                        <a>
+                                                                                            {{item.AD_SOYAD}}
+                                                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ol>
+                                                                                <p ng-show="frmToplantiKatilimci.cmbKULLANICI_ID.$invalid && formCalistirildiToplantiKatilimci" class="validation">Bu alan boş bırakılamaz.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <label class="col-lg-4 control-label">Katılımcı Rolü <span class="text-danger">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <ol class="nya-bs-select form-control" id="cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID" name="cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID" ng-model="InfoToplantiKatilimci.TOPLANTI_KATILIMCI_ROLU_TIPI_ID"
+                                                                                    data-live-search="true" title="Lütfen Seçiniz" data-size="5" required="true" ng-disabled="InfoToplanti.DURUM==1">
+                                                                                    <li nya-bs-option="item in ToplantiKatilimciRoluTipiListesi" deep-watch="true" data-value="[item.TOPLANTI_KATILIMCI_ROLU_TIPI_ID,item.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI]">
+                                                                                        <a>
+                                                                                            {{item.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI}}
+                                                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ol>
+
+                                                                                <p ng-show="frmToplantiKatilimci.cmbTOPLANTI_KATILIMCI_ROLU_TIPI_ID.$invalid && formCalistirildiToplantiKatilimci" class="validation">Bu alan boş bırakılamaz.</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <div class="form-group">
+                                                                            <div class="text-center">
+                                                                                <button class=" btn btn-success " type="button" ng-disabled="InfoToplanti.DURUM==1" ng-click="ToplantiKatilimciListesineEkle(InfoToplantiKatilimci,frmToplantiKatilimci,InfoToplantiKatilimci.KATILIMCI_DURUM=true)">
+                                                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                                                </button>
+                                                                                <button class=" btn btn-info " type="button" ng-disabled="InfoToplanti.DURUM==1" ng-click="DisaridanKatilimciEkle()">
+                                                                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Dışarıdan Katılımcı Ekle</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-if="ToplantiKatilimciListesi.length>0">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ToplantiKatilimciGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                                </div>
+                                                                <strong>Toplam {{ toplamKayitSayisiToplantiKatilimci }} kayıt</strong>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="project-list table-emfa">
+                                                                    <table class="table table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td><b>No</b></td>
+                                                                                <td><b>Katılımcı</b></td>
+                                                                                <td><b>Katılımcı Rolü</b></td>
+                                                                                <td><b>Kayıt Tarihi</b></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="postToplantiKatilimci in ToplantiKatilimciListesi | filter:txtArama">
+                                                                                <td class="project-title">
+                                                                                    <span class="label label-success">{{ $index + 1 }}</span>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    {{postToplantiKatilimci.KULLANICI_AD_SOYAD}}<br />
+                                                                                </td>
+                                                                                <td class="no-wrap">
+                                                                                    {{postToplantiKatilimci.TOPLANTI_KATILIMCI_ROLU_TIPI_ADI}}
+                                                                                </td>
+
+                                                                                <td class="tarih">
+                                                                                    <span class="label label-primary">
+                                                                                        <i class="fa fa-calendar"></i>
+                                                                                        {{postToplantiKatilimci.KAYIT_TARIHI | tarih  }}
+                                                                                    </span>
+                                                                                </td>
+
+                                                                                <td class="form-actions">
+                                                                                    <div class="pull-right">
+                                                                                        <a ng-click="modalSilmeOnayiToplantiKatilimci(postToplantiKatilimci)" ng-disabled="InfoToplanti.DURUM==1" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        <tfoot>
+                                                                            <tr>
+                                                                                <td colspan="10" class="text-center">
+                                                                                    <pagination ng-model="ToplantiKatilimciAramaKriterListe.SayfaNo" ng-change="ToplantiKatilimciGetData(ToplantiKatilimciAramaKriterListe)" total-items="toplamKayitSayisiToplantiKatilimci"
+                                                                                                items-per-page="ToplantiKatilimciAramaKriterListe.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tfoot>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-if="ToplantiKatilimciListesi.length==0 || ToplantiKatilimciListesi == null">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn btn-sm btn-white" ng-click="ToplantiKatilimciGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <br /><br />
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                                    <i class="fa fa-exclamation-circle"></i>
+                                                                    &nbsp;Katılımcı kaydı <strong>bulunmamaktadır.</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-3" class="tab-pane active ng-hide" ng-show="tab==3">
+                                            <div class="panel-body">
+                                                <div class="ibox">
+                                                    <div class="ibox-content" ng-if="ToplantiGundemListesi.length > 0">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="project-list table-emfa">
+                                                                    <table class="table table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+
+                                                                                <td><b>Toplantı Gündemi Gerekçe </b></td>
+                                                                                <td><b>Gündem Durumu</b></td>
+                                                                                <td><b>Görüşme Konusu</b></td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="postToplantiGundem in ToplantiGundemListesi | filter:txtArama" ng-if="postToplantiGundem.GORUSULEN_KONU != null">
+                                                                                <td class="no-wrap">
+                                                                                    {{postToplantiGundem.TOPLANTI_GUNDEMI_HAVUZU_GUNDEM_GEREKCE}}
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    {{postToplantiGundem.TOPLANTI_GUNDEMI_DURUMU_ADI}}
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{postToplantiGundem.GORUSULEN_KONU}}
+                                                                                </td>
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-if="ToplantiGundemListesi.length == 0 || ToplantiGundemListesi== null">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                                    <i class="fa fa-exclamation-circle"></i> &nbsp;Görüşme konusu kaydı <strong>bulunmamaktadır.</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="tab-4" class="tab-pane active ng-hide" ng-show="tab==4">
+                                            <div class="panel-body">
+                                                <div class="ibox">
+                                                    <div class="ibox">
+
+                                                        <form method="get" name="frmToplantiDokuman" id="frmToplantiDokuman" class="form-horizontal">
+                                                            <div class="formEkleDuzenleInputs">
+                                                                <div class="row">
+                                                                    <div class="col-lg-10">
+                                                                        <div class="form-group">
+                                                                            <label class="col-lg-4 control-label">Doküman<span class="text-danger">*</span></label>
+                                                                            <div class="col-lg-8">
+                                                                                <div class="input-group">
+                                                                                    <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="InfoToplantiDokuman.DOKUMAN_ADI" name="flDOKUMAN_DOSYA1" id="flDOKUMAN_DOSYA1" readonly="" required="">
+                                                                                    <div class="input-group-btn">
+                                                                                        <label ng-show="!InfoToplantiDokuman.DOKUMAN_ADI" for="flDOKUMAN_DOSYA" class="btn btn-primary" tooltip="Yeni dosya yüklemek için tıklayınız." tooltip-append-to-body="true">
+                                                                                            <input class="hide ng-isolate-scope" type="file" id="flDOKUMAN_DOSYA" ng-disabled="InfoToplanti.DURUM==1" ng-model="InfoToplantiDokuman.DOKUMAN_ADI" name="flDOKUMAN_DOSYA" fileread="$scope.InfoToplantiDokuman.DOKUMAN_DOSYA_BOYUTU" accept="image/x-png, image/gif, image/jpeg, application/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" required="">
+                                                                                            <i class="fa fa-cloud-upload"></i>&nbsp;Dosya Yükle
+                                                                                        </label>
+                                                                                        <button ng-show="InfoToplantiDokuman.DOKUMAN_ADI" class="btn  btn-danger ng-hide" type="button" ng-disabled="InfoToplanti.DURUM==1" ng-click="ToplantiDokumanSifirla()" tooltip="Dosya yüklemekten vazgeçmek ve dosya bilgilerini sıfırlamak için tıklayınız." tooltip-append-to-body="true">
+                                                                                            <i class="fa fa-eraser"></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <p ng-show="frmToplantiDokuman.flDOKUMAN_DOSYA.$invalid && formCalistirildiToplantiDokuman" class="validation">Bu alan boş bırakılamaz.</p>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-10">
+                                                                        <div class="form-actions">
+                                                                            <div class="pull-right">
+                                                                                <button class="btn btn-sm btn-success" type="button" ng-disabled="InfoToplanti.DURUM==1" ng-click="ToplantiDokumanEkleGuncelle(InfoToplantiDokuman)">
+                                                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-if="ToplantiDokumanListesi.length>0">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ToplantiDokumanGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                                </div>
+                                                                <strong>Toplam {{ toplamKayitSayisiToplantiDokuman }} kayıt</strong>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="project-list table-emfa">
+                                                                    <table class="table table-striped table-hover">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <td><b>No</b></td>
+                                                                                <td><b>Doküman Adı</b></td>
+                                                                                <td><b>Doküman Tipi</b></td>
+                                                                                <td></td>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr ng-repeat="postToplantiDokuman in ToplantiDokumanListesi | filter:txtArama">
+                                                                                <td>
+                                                                                    <span class="label label-success">{{ $index + 1}}</span>
+                                                                                </td>
+                                                                                <td class="table-main">
+                                                                                    <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                                                    <sa-dosyaindir tablo="TOPLANTI_DOKUMAN" dosyaid="postToplantiDokuman.TOPLANTI_DOKUMAN_ID" tooltip="Doküman İndir">{{postToplantiDokuman.DOKUMAN_ADI}}</sa-dosyaindir><br />
+                                                                                </td>
+                                                                                <td>
+                                                                                    {{postToplantiDokuman.DOKUMAN_DOSYA_TIPI}} <br />
+                                                                                </td>
+                                                                                <td class="actions">
+                                                                                    <div class="pull-right" ng-if="postToplantiDokuman.DOKUMAN_DOSYA_TIPI == 'image/jpeg' || postToplantiDokuman.DOKUMAN_DOSYA_TIPI == 'image/png' || postToplantiDokuman.DOKUMAN_DOSYA_TIPI == 'application/pdf'">
+                                                                                        <button ng-click="ToplantiDokumanGoster(postToplantiDokuman.TOPLANTI_DOKUMAN_ID)" class="btn btn-sm btn-info" tooltip="Göster" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td class="form-actions">
+                                                                                    <div class="pull-right">
+                                                                                        <a ng-click="modalSilmeOnayiToplantiDokuman(postToplantiDokuman)" ng-disabled="InfoToplanti.DURUM==1" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                        <tfoot>
+                                                                            <tr>
+                                                                                <td colspan="10" class="text-center">
+                                                                                    <pagination ng-model="AramaKriterDokuman.SayfaNo" ng-change="ToplantiDokumanGetData(AramaKriterDokuman)" total-items="toplamKayitSayisiToplantiDokuman"
+                                                                                                items-per-page="AramaKriterDokuman.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tfoot>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="ibox-content" ng-if="ToplantiDokumanListesi.length==0 || ToplantiDokumanListesi == null">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="pull-right">
+                                                                    <button type="button" class="btn btn-sm btn-white" ng-click="ToplantiDokumanGetData()"> <i class="fa fa-refresh"></i> </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <br /><br />
+
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                                                    <i class="fa fa-exclamation-circle"></i>
+                                                                    &nbsp;Doküman kaydı <strong>bulunmamaktadır.</strong>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,159 @@
+﻿<!--<div ng-init="init()"></div>-->
+    <div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5 class="panelHeaderEkleDuzenle">
+                            &nbsp; <i class="fa fa-briefcase"></i> Tahminleme Bilgileri
+                            <small class="text-warning">
+                                <i class="fa fa-info-circle"></i>
+                                Lütfen Tahminleme bilgilerini eksiksiz giriniz.
+                            </small>
+                        </h5>
+                        <div class="ibox-tools">
+                            <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content">
+                        <form method="get" name="form" id="form" class="form-horizontal" accessible-form>
+                            <div class="formEkleDuzenleInputs">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Yaşam Döngüsü</label>
+                                            <div class="col-lg-7">
+                                                <ol class="nya-bs-select form-control" id="sel_YASAM_DONGUSU_ID" name="sel_YASAM_DONGUSU_ID" ng-model="$parent.InfoProje.YASAM_DONGUSU_ID"
+                                                    data-live-search="true" title="Yaşam Döngüsünü Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in YasamDongusuListesi" deep-watch="true" data-value="item.YASAM_DONGUSU_ID">
+                                                        <a>
+                                                            {{item.YASAM_DONGUSU_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Periyot Tipi </label>
+                                            <div class="col-lg-7">
+                                                <ol class="nya-bs-select form-control" id="sel_PERIYOT_TIPI_ID" name="sel_PERIYOT_TIPI_ID" ng-model="$parent.InfoProje.PERIYOT_TIPI_ID"
+                                                    data-live-search="true" title="Periyot Tipini Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in PeriyotTipiListesi" deep-watch="true" data-value="item.PERIYOT_TIPI_ID">
+                                                        <a>
+                                                            {{item.PERIYOT_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Planlanan Başlangıç Tarihi </label>
+                                            <div class="col-lg-7">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input type="datetime" name="txtPLANLANAN_BASLANGIC_TARIHI" ng-model="$parent.InfoProje.PLANLANAN_BASLANGIC_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Proje Değerlendirme Periyot </label>
+                                            <div class="col-lg-7">
+                                                <input type="number" name="txtPROJE_DEGERLENDIRME_PERIYOT" ng-model="$parent.InfoProje.PROJE_DEGERLENDIRME_PERIYOT" class="formEkleDuzenleInput form-control" placeholder="Proje değerlendirme periyot giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Planlanan Bitiş Tarihi</label>
+                                            <div class="col-lg-7">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input type="datetime" name="txtPLANLANAN_BITIS_TARIHI" ng-model="$parent.InfoProje.PLANLANAN_BITIS_TARIHI" nextgen-date-picker="" class="form-control formEkleDuzenleInput">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Tahmin Edilen Proje Süresi </label>
+                                            <div class="col-lg-7">
+                                                <ol class="nya-bs-select form-control" id="sel_TAHMIN_EDILEN_PROJE_SURESI_ID" name="sel_TAHMIN_EDILEN_PROJE_SURESI_ID" ng-model="$parent.InfoProje.TAHMIN_EDILEN_PROJE_SURESI_ID"
+                                                    data-live-search="true" title="Tahmin Edilen Proje Süresini Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in TahminEdilenProjeSuresiListesi" deep-watch="true" data-value="item.TAHMIN_EDILEN_PROJE_SURESI_ID">
+                                                        <a>
+                                                            {{item.TAHMIN_EDILEN_PROJE_SURESI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label">Proje Kapsam</label>
+                                            <div class="col-lg-7">
+                                                <input name="txtPROJE_KAPSAM" ng-model="$parent.InfoProje.PROJE_KAPSAM" class="formEkleDuzenleInput form-control" ng-maxlength="500" ng-minlength="1" placeholder="Proje kapsam giriniz."  />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-5 control-label"> Bütçe </label>
+                                            <div class="col-lg-7">
+                                                <div class="input-group m-b">
+                                                    <span class="input-group-addon"><i class="fa fa-turkish-lira"></i></span>
+                                                    <input type="text" name="txtPLANLANAN_BUTCE" ui-number-mask="2" ng-model="$parent.InfoProje.PLANLANAN_BUTCE" class="formEkleDuzenleInput form-control"  placeholder="Planlanan bütçeyi giriniz.">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="ProjeTahminEkleGuncelle($parent.InfoProje)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <!--<a class="btn btn-sm btn-primary" href="#" ui-sref="proje.projelerlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+

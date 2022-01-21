@@ -1,0 +1,243 @@
+﻿<div ng-init="init()"></div>
+
+<div class="animated fadeInDownBig  row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <!--<h2>Metrik İşlemleri</h2>-->
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home">
+                </i>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-cogs"></i>
+                Sistem Tanımları
+            </li>
+            <li class="active">
+                <strong>
+                    <i class="fa fa-line-chart"></i>
+                    Metrik
+                </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig" style="animation-fill-mode: none;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle panelHeaderMetrikEkleDuzenle">
+                        &nbsp; <i class="fa fa-line-chart"></i> Metrik Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp; Lütfen Metrik bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmMetrik" id="frmMetrik" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs col-md-offset-2">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Üst Metrik </label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbUST_METRIK_ID" allow-clear="true" name="cmbUST_METRIK_ID" ng-model="Info.UST_METRIK_ID"
+                                                data-live-search="true" title="Üst Metrik Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in UstMetriklerListesi" deep-watch="true" data-value="item.METRIK_ID">
+                                                    <a>
+                                                        {{item.METRIK}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Metrik <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtMETRIK" id="txtMETRIK" ng-model="Info.METRIK" ng-maxlength="255" ng-minlength="1" class="form-control formEkleDuzenleInput" placeholder="Metrik giriniz." required>
+                                            <p ng-show="frmMetrik.txtMETRIK.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-sm btn-success" type="button" ng-click="MetriklerEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Ekle</span>
+                                            </button>
+                                            <!--<a class="btn btn-sm btn-primary" href="#" ui-sref="fizibilite.metriklistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe metrikListesiPanelHeaderListe">
+                        <i class="fa fa-list"></i>
+                        Metrik Listesi
+                    </h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-Metrik" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs col-lg-offset-2">
+
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Metrik Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtMETRIK" id="txtMETRIK" ng-model="AramaKriter.METRIK" class="form-control formEkleDuzenleInput  " placeholder="Metrik adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="MetriklerGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content" ng-if="MetriklerListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref="fizibilite.metrikkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MetriklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list">
+                                <div class="table table-responsive table-emfa">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td><b>No</b></td>
+                                                <td><b>Metrik</b></td>
+                                                <td><b>Üst Metrik</b></td>
+                                                <td><b>Kayıt Tarihi</b></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="post in MetriklerListesi | filter: ignoreTurkish">
+                                                <td>
+                                                    <span class="label label-success">{{ $index + 1}}</span>
+                                                </td>
+                                                <td class="table-main">
+                                                    <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                    <a class="editLink-Emfa" ui-sref="sistem.metrikkayit({ sistemMetrikID: post.METRIK_ID})">{{post.METRIK}} </a><br />
+                                                </td>
+                                                <td>
+                                                    {{post.UST_METRIK_ADI }}
+                                                </td>
+                                                <td>
+
+                                                    <span class="label label-primary label-kayit-primary">
+                                                        <i class="fa fa-calendar"></i>
+                                                        {{post.KAYIT_TARIHI | tarih}}
+                                                    </span>
+
+                                                </td>
+
+                                                <td class="table-actions">
+                                                    <div class="pull-right">
+                                                        <a ui-sref="sistem.metrikkayit({ sistemMetrikID: post.METRIK_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                    </div>
+                                                </td>
+                                                <td class="table-actions">
+                                                    <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="10" class="text-center">
+                                                    <pagination ng-model="AramaKriter.SayfaNo" ng-change="MetriklerGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                                items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                                previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-show="MetriklerListesi.length==0||MetriklerListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <!--<a ui-sref="fizibilite.metrikkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>-->
+                                <button type="button" class="btn btn-sm btn-white" ng-click="MetriklerGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Sistem tanımlamalarına bağlı metrik kaydı <strong>bulunmamaktadır.</strong>
+                                <!--Eklemek için <a ui-sref="fizibilite.metrikkayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

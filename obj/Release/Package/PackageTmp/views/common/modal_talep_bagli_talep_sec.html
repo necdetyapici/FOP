@@ -1,0 +1,169 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Talep Seç</h4>
+    </div>
+    <div class="modal-body">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <form name="src-TalepSec" class="form-horizontal">
+                    <div class="formEkleDuzenleInputs">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Talep Numarası</label>
+                                    <div class="col-lg-8">
+                                        <input type="text" name="txtTALEP_PROJE_TALEP_NO" ng-model="AramaKriterTalepListe.TALEP_PROJE_TALEP_NO" class="form-control formEkleDuzenleInput " placeholder="Talep Numarası giriniz.">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Talep Tipi</label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="sel_TALEP_TIPI_ID" name="sel_TALEP_TIPI_ID" ng-model="AramaKriterTalepListe.TALEP_TIPI_ID"
+                                            data-live-search="true" title="Talep Tipi Seçiniz" data-size="5">
+                                            <li nya-bs-option="item in TalepListesi" deep-watch="true" data-value="item.TALEP_TIPI_ID">
+                                                <a>
+                                                    {{item.TALEP_TIPI_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Talep Sahibi</label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="sel_TALEP_SAHIBI_KULLANICI_ID" name="sel_TALEP_SAHIBI_KULLANICI_ID" ng-model="AramaKriterTalepListe.TALEP_SAHIBI_KULLANICI_ID"
+                                            data-live-search="true" title="Talep Sahibi Seçiniz" data-size="5">
+                                            <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                <a>
+                                                    {{item.AD_SOYAD}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Talep Konu</label>
+                                    <div class="col-lg-8">
+                                        <textarea type="text" name="txtTALEP_PROJE_KONU" style="resize:none;" ng-maxlength="255" ng-minlength="1" ng-model="AramaKriterTalepListe.TALEP_PROJE_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep konu giriniz."></textarea>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Talep Durum Tipi</label>
+                                    <div class="col-lg-8">
+                                        <ol class="nya-bs-select form-control" id="sel_TALEP_DURUM_TIPI_ID" name="sel_TALEP_DURUM_TIPI_ID" ng-model="AramaKriterTalepListe.TALEP_DURUM_TIPI_ID"
+                                            data-live-search="true" title="Talep Durum Tipi Seçiniz" data-size="5">
+                                            <li nya-bs-option="item in TalepDurumListesi" deep-watch="true" data-value="item.TALEP_DURUM_TIPI_ID">
+                                                <a>
+                                                    {{item.TALEP_DURUM_TIPI_ADI}}
+                                                    <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-actions">
+                                <div class="col-lg-12">
+                                    <div class="pull-right">
+                                        <button ng-click="TalepProjeGetData(AramaKriterTalepListe, AramaKriterTalepListe.SayfaNo = 1)" class="btn btn-sm btn-warning" type="submit">
+                                            <i class="fa fa-filter"></i>&nbsp;
+                                            <strong>Filtrele</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <strong>Toplam {{ toplamKayitSayisiTalep }} kayıt</strong>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="TalepProjeListesi.length > 0">
+                    <div class="col-lg-12">
+                        <div class="project-list">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No </th>
+                                        <th>Konu </th>
+                                        <th>Tipi / Proje</th>
+                                        <th>Başlangıç - Bitiş Tarih </th>
+                                        <th>Durumu</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="post in TalepProjeListesi | filter:ignoreTurkish">
+
+                                        <td>{{post.TALEP_PROJE_TALEP_NO}}</td>
+                                        <td>
+                                            {{post.TALEP_PROJE_KONU | limitTo: 25}}{{post.TALEP_PROJE_KONU.length < 25 ? '' : '...'}}<br />
+                                        </td>
+                                        <td>{{post.TALEP_TIPI_ADI}} / {{post.PROJE_ADI}}</td>
+                                        <td class="tarih">
+                                            <span class="label label-warning">
+                                                <i class="fa fa-calendar"></i>
+                                                {{post.TALEP_PLANLANAN_BASLANGIC_TARIHI | tarih}} - <br />
+                                                {{post.TALEP_PLANLANAN_BITIS_TARIHI | tarih}}
+                                            </span>
+                                        </td>
+                                        <td>{{post.TALEP_DURUM_TIPI_ADI}}</td>
+                                        <td>
+                                            <button class=" btn btn-info " type="button" ng-click="BagliTalepOnay(post.TALEP_PROJE_ID, post.TALEP_PROJE_KONU)">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="10" class="text-center">
+                                            <pagination ng-model="AramaKriterTalepListe.SayfaNo" ng-change="TalepProjeGetData(AramaKriterTalepListe)" total-items="toplamKayitSayisiTalep"
+                                                        items-per-page="AramaKriterTalepListe.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                        previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-if="TalepProjeListesi.length == 0">
+                    <div class="col-lg-12">
+                        <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                            <i class="fa fa-exclamation-circle"></i>
+                            &nbsp;Talep kaydı <strong>bulunmamaktadır.</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="BagliTalepGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>
+
+
+
+
+

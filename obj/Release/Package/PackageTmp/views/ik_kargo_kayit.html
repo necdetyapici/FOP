@@ -1,0 +1,186 @@
+﻿<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Kargo Bilgileri İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikkargolistesi"><i class="fa fa-list"></i> Kargo Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-truck"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-truck"></i>
+                        Kargo  Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen kargo bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmKargo" id="frmKargo" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Tipi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input checked type="radio" name="rd_KARGO_TIPI" ng-value="false" icheck ng-model="kargoTipi" /> Gelen Kargo
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="rd_KARGO_TIPI" ng-value="true" icheck ng-model="kargoTipi" /> Giden Kargo
+                                            </label>
+                                            <p ng-show="frmKargo.txtIK_KARGO_GONDEREN.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="kargoTipi==false">
+                                        <label class="col-lg-4 control-label"> Gönderen Ad Soyadı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-required="(kargoTipi==false)" ng-maxlength="255" ng-minlength="1" name="txtIK_KARGO_GONDEREN" ng-model="Info.GONDEREN_ALICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Gönderen bilgilerini giriniz.">
+                                            <p ng-show="frmKargo.txtIK_KARGO_GONDEREN.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show="kargoTipi==false">
+                                        <label class="col-lg-4 control-label"> Alıcı Adı Soyadı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbGONDEREN_ALICI_KULLANICI_ID1" name="cmbGONDEREN_ALICI_KULLANICI_ID1" ng-model="Info.GONDEREN_ALICI_KULLANICI_ID"
+                                                data-live-search="true" title="Kargo Alıcısı Seçiniz" data-size="5" ng-required="(kargoTipi==false)" ng-disabled="pasif">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmKargo.cmbGONDEREN_ALICI_KULLANICI_ID1.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" ng-show="kargoTipi==true">
+                                        <label class="col-lg-4 control-label"> Gönderen Ad Soyadı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbGONDEREN_ALICI_KULLANICI_ID" name="cmbGONDEREN_ALICI_KULLANICI_ID" ng-model="Info.GONDEREN_ALICI_KULLANICI_ID"
+                                                data-live-search="true" title="Kargo Gönderenini Seçiniz" data-size="5" ng-required="(kargoTipi==true)" ng-disabled="pasif">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmKargo.cmbGONDEREN_ALICI_KULLANICI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" ng-show="kargoTipi==true">
+                                        <label class="col-lg-4 control-label"> Alıcı Adı Soyadı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-required="(kargoTipi==true)" ng-maxlength="255" ng-minlength="1" name="txtIK_KARGO_GONDERILEN" ng-model="Info.GONDEREN_ALICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Alıcı bilgilerini giriniz.">
+                                            <p ng-show="frmKargo.txtIK_KARGO_GONDERILEN.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Gönderi Tipi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbKARGO_GONDERI_TIPI_ID" name="cmbKARGO_GONDERI_TIPI_ID" ng-model="Info.KARGO_GONDERI_TIPI_ID"
+                                                data-live-search="true" title="Kargo Gönderi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KargoGonderiTipiListesi" deep-watch="true" data-value="item.KARGO_GONDERI_TIPI_ID">
+                                                    <a>
+                                                        {{item.KARGO_GONDERI_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmKargo.cmbKARGO_GONDERI_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Ödeme Şekli <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIK_KARGO_ODEME_SEKLI" ng-model="Info.IK_KARGO_ODEME_SEKLI" class="formEkleDuzenleInput form-control" placeholder="Ödeme şeklini giriniz.">
+                                            <p ng-show="frmKargo.txtIK_KARGO_ODEME_SEKLI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Gönderim Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtKARGO_TARIHI" ng-model="Info.KARGO_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+
+                                            </div>
+                                            <p ng-show="frmKargo.txtKARGO_TARIHI.$invalid &amp;&amp; formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Kargo Şirketi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbKARGO_SIRKETI_ID" name="cmbKARGO_SIRKETI_ID" ng-model="Info.KARGO_SIRKETI_ID"
+                                                data-live-search="true" title="Kargo Şirketi Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KargoSirketiListesi" deep-watch="true" data-value="item.KARGO_SIRKETI_ID">
+                                                    <a>
+                                                        {{item.KARGO_SIRKETI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmKargo.cmbKARGO_SIRKETI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label"> Kargo Not</label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" name="txtIK_KARGO_NOT" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="Info.IK_KARGO_NOT" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Kargo notu giriniz."></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " ng-click="IkKargoEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <button class="btn btn-primary" ui-sref="insankaynaklari.ikkargolistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

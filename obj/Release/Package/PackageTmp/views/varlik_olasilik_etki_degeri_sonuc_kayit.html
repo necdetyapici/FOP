@@ -1,0 +1,110 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>VarlikOlasilikEtkiDegeriSonuc Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="listelemelinkini.giriniz">VarlikOlasilikEtkiDegeriSonuc Listesi</a>
+            </li>
+            <li class="active">
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="row wrapper wrapper-content padding-bottom animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>
+                        VarlikOlasilikEtkiDegeriSonuc Bilgileri
+                        <small>Lütfen VarlikOlasilikEtkiDegeriSonuc bilgilerini eksiksiz giriniz.</small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="form" id="form" class="form-horizontal" accessible-form>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Varlik Olasilik Etki Degeri Tipi Id *</label>
+                            <div class="col-sm-10">
+                                <select chosen class="form-control" name="cmbVARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID"
+                                        ng-options="item.ID as item.ADI for item in VarlikOlasilikEtkiDegeriTipiListesi"
+                                        options="VarlikOlasilikEtkiDegeriTipiListesi"
+                                        ng-model="Info.VARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID" required>
+                                    <option value="">Lütfen VARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID Seçiniz</option>
+                                </select>
+                                <p ng-show="form.cmbVARLIK_OLASILIK_ETKI_DEGERI_TIPI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Varlik Olasilik Etki Degeri Sonuc Adi *</label>
+                            <div class="col-sm-10">
+                                <textarea name="txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_ADI" ng-model="Info.VARLIK_OLASILIK_ETKI_DEGERI_SONUC_ADI" class="form-control" placeholder="Lütfen Varlik Olasilik Etki Degeri Sonuc Adi bilgilerini giriniz." required> </textarea>
+                                <p ng-show="form.txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Varlik Olasilik Etki Degeri Sonuc Baslangic Degeri *</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_BASLANGIC_DEGERI" ng-model="Info.VARLIK_OLASILIK_ETKI_DEGERI_SONUC_BASLANGIC_DEGERI" class="form-control" required>
+                                <p ng-show="form.txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_BASLANGIC_DEGERI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Varlik Olasilik Etki Degeri Sonuc Bitis Degeri *</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_BITIS_DEGERI" ng-model="Info.VARLIK_OLASILIK_ETKI_DEGERI_SONUC_BITIS_DEGERI" class="form-control" required>
+                                <p ng-show="form.txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_BITIS_DEGERI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Varlik Olasilik Etki Degeri Sonuc Etki Renk Kodu *</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_ETKI_RENK_KODU" ng-model="Info.VARLIK_OLASILIK_ETKI_DEGERI_SONUC_ETKI_RENK_KODU" class="form-control" placeholder="Lütfen Varlik Olasilik Etki Degeri Sonuc Etki Renk Kodu giriniz." required>
+                                <p ng-show="form.txtVARLIK_OLASILIK_ETKI_DEGERI_SONUC_ETKI_RENK_KODU.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kullanici Id *</label>
+                            <div class="col-sm-10">
+                                <input type="number" name="txtKULLANICI_ID" ng-model="Info.KULLANICI_ID" class="form-control" required>
+                                <p ng-show="form.txtKULLANICI_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kayit Tarihi *</label>
+                            <div class="col-sm-10">
+                                <input type="datetime" name="txtKAYIT_TARIHI" ng-model="Info.KAYIT_TARIHI" nextgen-date-time-picker class="form-control"
+                                       required>
+                                <p ng-show="form.txtKAYIT_TARIHI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class=" btn btn-success " type="button" ng-click="VarlikOlasilikEtkiDegeriSonucEkleGuncelle(Info)">
+                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                </button>
+                                <button class="btn btn-primary" ui-sref="listelemelinkini.giriniz"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,94 @@
+﻿
+
+<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Uygulama Kontrol Kriteri Grup Kayıt</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-list"></i>
+                <a ui-sref="sistem.uygulamakontrolkriterigruplistesi">Uygulama Kontrol Kriteri Grup Listesi</a>
+            </li>
+            <li class="active  animated bounceInRight">
+                <i class="fa fa-commenting-o"></i>
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-commenting-o"></i>
+                        Uygulama Kontrol Kriteri Grup Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            &nbsp;Lütfen Uygulama Kontrol Kriteri Grup bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmUygulamaKontrolKriteriGrup" id="frmUygulamaKontrolKriteriGrup" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Uygulama Kontrol Kriteri Grup Adı <span class="text-danger">*</span> </label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtUYGULAMA_KONTROL_KRITERI_GRUP_ADI" ng-model="Info.UYGULAMA_KONTROL_KRITERI_GRUP_ADI" ng-maxlength="255" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Uygulama Kontrol Kriteri Grup Adı" required>
+                                            <p ng-show="frmUygulamaKontrolKriteriGrup.txtUYGULAMA_KONTROL_KRITERI_GRUP_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Üst Uygulama Kontrol Kriteri Grup</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbUST_UYGULAMA_KONTROL_KRITERI_GRUP_ID" name="cmbUST_UYGULAMA_KONTROL_KRITERI_GRUP_ID" allow-clear="true" ng-model="Info.UST_UYGULAMA_KONTROL_KRITERI_GRUP_ID"
+                                                data-live-search="true" title="Üst Uygulama Kontrol Kriteri Grup Seçiniz" data-size="5">
+                                                <li nya-bs-option="item in UygulamaKontrolKriteriGrupListesi" deep-watch="true" data-value="item.UYGULAMA_KONTROL_KRITERI_GRUP_ID">
+                                                    <a>
+                                                        {{item.UYGULAMA_KONTROL_KRITERI_GRUP_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-actions">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-sm btn-success" type="button" ng-click="UygulamaKontrolKriteriGrupEkleGuncelle(Info)">
+                                                        <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-primary" ui-sref="sistem.uygulamakontrolkriterigruplistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

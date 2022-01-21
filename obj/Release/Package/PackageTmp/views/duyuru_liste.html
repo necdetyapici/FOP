@@ -1,0 +1,184 @@
+﻿<div ng-init="init()"></div>
+<style>
+    .ucnokta {
+        max-width: 500px;
+        padding: 30px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Duyuru Tanımlama İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-bullhorn "></i>
+                <a>Duyuru Listesi</a>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInUp">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">Duyuru Listesi</h5>
+                </div>
+
+
+                <div class="ibox-content">
+                    <form name="src-Duyuru" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Duyuru Konusu</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtKONU" id="txtKONU" placeholder="Konuya Göre Filtrele..." ng-model="AramaKriter.KONU" class="form-control col-lg-5 ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Duyuru Metini</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtMETNI" id="txtMETNI" placeholder="Metine Göre Filtrele..." ng-model="AramaKriter.METNI" class="form-control col-lg-5 ">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Duyuru Durumu</label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select col-lg-5 form-control" id="cmbDUYURU_DURUMU_ID" name="cmbDUYURU_DURUMU_ID" ng-model="AramaKriter.DUYURU_DURUMU_ID"
+                                                data-live-search="true" title="Duyuru Durumuna Göre Filtrele" data-size="5">
+                                                <li nya-bs-option="item in DuyuruDurumuListesi" deep-watch="true" data-value="item.DUYURU_DURUMU_ID">
+                                                    <a>
+                                                        {{item.DUYURU_DURUMU_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 ">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="DuyuruGetData(AramaKriter,AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="yonetim.duyurukayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="DuyuruGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b></b></td>
+                                            <td><b>Konu</b></td>
+                                            <td><b>Metni</b></td>
+                                            <td><b>Yayınlanma <br />Tarihi</b></td>
+                                            <!--<td><b>Güncelleme Tarihi</b></td>-->
+                                            <td><b>Durum</b></td>
+                                            <td><b>İşlemler</b></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in DuyuruListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span><b class="success fa fa-newspaper-o"></b></span>
+                                            </td>
+                                            <td class="font-bold">
+                                                {{post.KONU}}
+                                            </td>
+                                            <td class="ucnokta" title={{post.METNI}}>
+                                                {{post.METNI}}
+                                            </td>
+
+                                            <td class="tarih ">
+                                                <span>
+                                                    <label class="label  label-primary" ng-show="post.DUYURU_DURUMU_ID == 1"><i class="fa fa-calendar"></i><b> {{post.KAYIT_TARIHI | tarih}}</b></label>
+                                                </span>
+
+                                            </td>
+                                            <td class="actions">
+                                                <div>
+                                                    <label class="label label-info  " ng-show="post.DUYURU_DURUMU_ID == 1"><i class="fa fa-plus-square"></i> {{post.DUYURU_DURUMU_ADI}} </></label>
+                                                    <label class="label label-warning ng-scope" ng-show="post.DUYURU_DURUMU_ID == 2"><i class="fa fa-square"></i>  {{post.DUYURU_DURUMU_ADI}} </label>
+                                                    <label class="label label-danger ng-scope" ng-show="post.DUYURU_DURUMU_ID == 3"><i class="fa fa-minus-square"></i> {{post.DUYURU_DURUMU_ADI}} </label>
+                                                </div>
+                                            </td>
+
+                                            <!--<td>
+                                                {{post.GUNCELLEME_TARIHI | tarih }}
+                                            </td>-->
+                                            <td class="actions">
+                                                <div>
+                                                    <button ui-sref="yonetim.duyurukayit({ duyuruID : post.DUYURU_ID})" ng-show="post.DUYURU_DURUMU_ID == 2" class="btn btn-outline btn-sm btn-warning " data-toggle="tooltip" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-pencil"></i></button>
+                                                    <button ng-click="DuyuruYayinla(post)" ng-show="post.DUYURU_DURUMU_ID == 2" class="btn btn-sm btn-info btn-outline " data-toggle="tooltip" tooltip="Yayınla" tooltip-append-to-body="true"><i class="fa fa-plus"></i></button>
+                                                    <button ng-click="DuyuruKaldir(post)" ng-show="post.DUYURU_DURUMU_ID == 2" ng-hide="post.DUYURU_DURUMU_ID == 3" class="btn btn-outline btn-sm btn-danger " tooltip="Kaldır" tooltip-append-to-body="true"><i class="fa fa-remove"></i></button>
+
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center ">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="DuyuruGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa"
+                                                            class="pagination-sm pane" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

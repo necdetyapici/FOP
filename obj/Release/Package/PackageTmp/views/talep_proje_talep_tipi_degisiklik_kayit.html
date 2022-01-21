@@ -1,0 +1,116 @@
+﻿<div ng-init="init()"></div>
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-exchange"></i> Değişiklik Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen Değişiklik bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmTalepTipiDegisiklik" id="frmTalepTipiDegisiklik" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <fieldset ng-disabled="$parent.talepKapaliDurumu">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Proje Etki<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_PROJE_ETKI_ID" name="cmb_PROJE_ETKI_ID" ng-model="InfoDegisiklik.PROJE_ETKI_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData(InfoDegisiklik.PROJE_ETKI_ID, InfoDegisiklik.PROJE_ACILIYET_ID)"
+                                                    data-live-search="true" title="Proje Etki Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in ProjeEtkiListesi" deep-watch="true" data-value="item.PROJE_ETKI_ID">
+                                                        <a>
+                                                            {{item.PROJE_ETKI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmTalepTipiDegisiklik.cmb_PROJE_ETKI_ID.$invalid && formCalistirildiTalepTipiDegisiklik" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Proje Aciliyet<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_PROJE_ACILIYET_ID" name="cmb_PROJE_ACILIYET_ID" ng-model="InfoDegisiklik.PROJE_ACILIYET_ID" ng-change="ProjeAciliyetEtkiSonucHesapGetData(InfoDegisiklik.PROJE_ETKI_ID, InfoDegisiklik.PROJE_ACILIYET_ID)"
+                                                    data-live-search="true" title="Proje Aciliyet Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in ProjeAciliyetListesi" deep-watch="true" data-value="item.PROJE_ACILIYET_ID">
+                                                        <a>
+                                                            {{item.PROJE_ACILIYET_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmTalepTipiDegisiklik.cmb_PROJE_ACILIYET_ID.$invalid && formCalistirildiTalepTipiDegisiklik" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label"> Aciliyet Etki Sonucu<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <input type="text" ng-maxlength="255" ng-minlength="1" name="txtPROJE_ACILIYET_ETKI_SONUC_ADI" ng-model="$parent.InfoDegisiklikHesap.PROJE_ACILIYET_ETKI_SONUC_ADI" class="formEkleDuzenleInput form-control" placeholder="" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Sınıflandırma Tipi<span class="text-danger">*</span></label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" name="cmb_TALEP_SINIFLANDIRMA_TIPI_ID" ng-model="InfoDegisiklik.TALEP_SINIFLANDIRMA_TIPI_ID"
+                                                    data-live-search="true" title="Sınıflandırma Tipini Seçiniz" data-size="5" required="true">
+                                                    <li nya-bs-option="item in TalepSiniflandirmaListesi" deep-watch="true" data-value="item.TALEP_SINIFLANDIRMA_TIPI_ID">
+                                                        <a>
+                                                            {{item.TALEP_SINIFLANDIRMA_TIPI_ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                                <p ng-show="frmTalepTipiDegisiklik.cmb_TALEP_SINIFLANDIRMA_TIPI_ID.$invalid && formCalistirildiTalepTipiDegisiklik" class="validation">Bu alan boş bırakılamaz.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label">Değişiklik Açıklama</label>
+                                            <div class="col-lg-10">
+                                                <textarea type="text" name="txtTALEP_PROJE_TALEP_TIPI_DEGISIKLIK_ACIKLAMA" style="resize:none;" ng-model="InfoDegisiklik.TALEP_PROJE_TALEP_TIPI_DEGISIKLIK_ACIKLAMA" rows="8" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Değişiklik açıklama giriniz."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="TalepProjeTalepTipiDegisiklikEkleGuncelle(InfoDegisiklik)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,24 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Neden Masraf Detay Reddedildi ?</h4>
+        
+    </div>
+    <div class="modal-body">
+        <form method="get" name="frmPersonelMasrafDetayReddet" id="frmPersonelMasrafDetayReddet" class="form-horizontal" accessible-form>
+            <div class="form-group">
+                <label class="col-sm-4 control-label">Masraf Detay Red</label>
+                <div class="col-sm-8">
+                    <textarea type="text" name="txtRED_ACIKLAMA" style="resize:none;" ng-model="InfoPersonelMasrafDetayOnay.RED_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Masraf detay red giriniz." required></textarea>
+
+                    <p ng-show="frmPersonelMasrafDetayReddet.txtRED_ACIKLAMA.$invalid && formCalistirildiPersonelMasrafDetayReddet" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                </div>
+            </div>
+            </form>
+
+</div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" ng-click="MasrafDetayOnay(InfoPersonelMasrafDetayOnay, InfoPersonelMasrafDetayOnay.DURUMU = false)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span></button>
+        <button type="button" class="btn btn-primary" ng-click="MasrafDetayRedGeri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+    </div>
+</div>

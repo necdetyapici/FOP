@@ -1,0 +1,108 @@
+﻿
+<div ng-init="init()"></div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Talep Kayıt İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="anasayfa">
+                    <i class="fa fa-home"></i>
+                    Ana Sayfa
+                </a>
+            </li>
+            <li>
+                <a ui-sref="talep.talepprojelistesi">
+                    <i class="fa fa-list"></i>
+                    Talep Listesi
+                </a>
+            </li>
+            <li class="active animated bounceInRight">
+                <i class="fa fa-pencil-square-o"></i>
+                <strong>Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+
+
+<!--<div class="mail-box-header">
+    <div class="pull-right tooltip-demo">
+        <a href="mail_compose.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Reply"><i class="fa fa-reply"></i> Reply</a>
+        <a href="#" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="Print email"><i class="fa fa-print"></i> </a>
+        <a href="mailbox.html" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </a>
+    </div>
+    <h2>
+        View Message
+    </h2>
+    <div class="mail-tools tooltip-demo m-t-md">
+
+
+        <h3>
+            <span class="font-normal">Subject: </span>Aldus PageMaker including versions of Lorem Ipsum.
+        </h3>
+        <h5>
+            <span class="pull-right font-normal">10:15AM 02 FEB 2014</span>
+            <span class="font-normal">From: </span>alex.smith@corporation.com
+        </h5>
+    </div>
+</div>-->
+
+<div class="wrapper wrapper-content  padding-bottom">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content" style="background:#f3f3f4">
+                    <div class="clients-list">
+                        <ul class="ik-nav nav nav-tabs">
+
+                            <li ng-class="{'active' : tab == 1}">
+                                <a data-toggle="tab" ng-click="setTab(1)" ui-sref=".talepprojekart">
+                                    <i class="fa fa-pencil-square-o"></i>&nbsp;Talep Kartı
+                                </a>
+                            </li>
+
+                            <li ng-class="{'active' : tab == 2}" ng-show="IsCreate" 
+                               ui-sref=".talepprojetaleptipidfikayit" ng-if="InfoTalep.TALEP_TIPI_ID == 1 && InfoTalep.TALEP_PROJE_ID > 0">
+                                <a data-toggle="tab" ng-click="setTab(2)">
+                                    <i class="fa fa-retweet"></i> &nbsp;DFI
+                                </a>
+                            </li>
+                            <li ng-class="{'active' : tab == 3}" ng-show="IsCreate"  ui-sref=".talepprojetaleptipiproblemkayit" ng-if="InfoTalep.TALEP_TIPI_ID == 2 && InfoTalep.TALEP_PROJE_ID > 0">
+                                <a data-toggle="tab" ng-click="setTab(3)">
+                                    <i class="fa fa-question-circle"></i> &nbsp;Problem
+                                </a>
+                            </li>
+                            <li ng-class="{'active' : tab == 4}" ng-show="IsCreate"  ui-sref=".talepprojetaleptipidegisiklikkayit" ng-if="InfoTalep.TALEP_TIPI_ID == 3 && InfoTalep.TALEP_PROJE_ID > 0">
+                                <a data-toggle="tab" ng-click="setTab(4)">
+                                    <i class="fa fa-exchange"></i> &nbsp;Değişiklik
+                                </a>
+                            </li>
+
+                            <li ng-class="{'active' : tab == 9}" ng-show="talepTipiTestIsCreate == true "  ui-sref=".projetestsenaryotalepdurumlistesi">
+                                <a data-toggle="tab" ng-click="setTab(9)">
+                                    <i class="fa fa-bolt"></i> &nbsp;Test
+                                </a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div ui-view>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

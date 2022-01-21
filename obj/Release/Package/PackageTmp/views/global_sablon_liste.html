@@ -1,0 +1,181 @@
+﻿<div ng-init="init()"></div>
+
+<div class="animated fadeInDownBig  row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Global Şablon</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <i class="fa fa-briefcase"></i>
+                Tanımlamalar
+            </li>
+            <li class="active">
+                <strong><i class="fa fa-square-o"></i> Global Şablon</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInUpBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe"><i class="fa fa-list"></i> Global Şablon Listesi</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="src-RiskTuru" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtADI" id="txtADI" ng-model="AramaKriter.ADI" class="form-control formEkleDuzenleInput " placeholder="Adını giriniz.">
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Dokuman Tipi</label>
+                                            <div class="col-lg-8">
+                                                <ol class="nya-bs-select form-control" id="cmbDOKUMAN_TIPI_ID" name="cmbDOKUMAN_TIPI_ID" allow-clear="true" ng-model="AramaKriter.DOKUMAN_TIPI_ID"
+                                                    data-live-search="true" title="Durum Tipi Seçiniz" data-size="5">
+                                                    <li nya-bs-option="item in DokumanTipiListesi" deep-watch="true" data-value="item.DOKUMAN_TIPI_ID">
+                                                        <a>
+                                                            {{item.ADI}}
+                                                            <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                        </a>
+                                                    </li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button ng-click="GlobalSablonGetData(AramaKriter, AramaKriter.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizle()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="GlobalSablonListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="tanimlamalar.globalsablonkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="GlobalSablonGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Adı</b></td>
+                                            <td><b>Dokuman Tipi</b></td>
+                                            <td><b>Şablon Sahibi</b></td>
+                                            <td><b>Şablon Bırak</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in GlobalSablonListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1}}</span>
+                                            </td>
+                                            <td class="table-main">
+
+                                                <a class="editLink-Emfa" ui-sref="tanimlamalar.globalsablonkayit({ globalSablonID: post.GLOBAL_SABLON_ID})">{{post.ADI}} </a><br />
+                                            </td>
+                                            <td>
+                                                {{post.DOKUMAN_TIPI_ADI}}
+                                            </td>
+                                            <td>
+                                                {{post.AKTIF_KULLANICI_AD_SOYAD}}
+                                            </td>
+                                            <td class="actions">
+                                                    <button class=" btn btn-info " type="button" ng-click="GlobalSablonAlBirak(post.GLOBAL_SABLON_ID)" ng-show="post.AKTIF== true">
+                                                        <i class="fa fa-unlock"></i>
+                                                    </button>
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <a ui-sref="tanimlamalar.globalsablonkayit({ globalSablonID: post.GLOBAL_SABLON_ID})" class="btn btn-sm btn-info" tooltip="Düzenle" tooltip-append-to-body="true"><i class="fa fa-paste"></i> Düzenle</a>
+                                                </div>
+                                            </td>
+                                            <td class="actions">
+                                                <a ng-click="modalSilmeOnayi(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="10" class="text-center">
+                                                <pagination ng-model="AramaKriter.SayfaNo" ng-change="GlobalSablonGetData(AramaKriter)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriter.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-show="GlobalSablonListesi.length==0||GlobalSablonListesi==undefined">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <a ui-sref="tanimlamalar.globalsablonkayit" class="btn btn-sm btn-success"> <i class="fa fa-plus"></i> Yeni Kayıt</a>
+                                <button type="button" class="btn btn-sm btn-white" ng-click="GlobalSablonGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Global şablon kaydı <strong>bulunmamaktadır.</strong>
+                                <!--Eklemek için <a ui-sref="tanimlamalar.riskturukayit"
+                                                class="alert-Link-Emfa alert-link">
+                                    tıklayınız.
+                                </a>-->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

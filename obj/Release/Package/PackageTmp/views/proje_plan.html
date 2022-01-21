@@ -1,0 +1,59 @@
+﻿
+
+
+<div class="row" style="margin-top:30px">
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content-emfa-tanimlamalar animated fadeInUpBig">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5 class="panelHeaderListe musteriListesiPanelHeaderListe">
+                                <i class="fa fa-cubes"></i> Plan
+                            </h5>
+                        </div>
+
+                        <div class="fizibilite ibox-content">
+                            <ul class="alt-nav-tabs nav nav-tabs">
+                                <li ng-class="{'active-altTab' : altTab == 5}"><a class="altTabMenuItem" ng-click="setAltTab(5)" ui-sref=".projepersonelrollistesi"><i class="fa fa-cubes"></i>&nbsp;Personel ve Rol</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 11}"><a class="altTabMenuItem" ng-click="setAltTab(11)" ui-sref=".teslimedilecekurunlistesi" ><i class="fa fa-cubes"></i>&nbsp;Teslim Edilecek Ürün</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 2}"><a class="altTabMenuItem" ng-click="setAltTab(2)" ui-sref=".konfigurasyonaraclistesi"><i class="fa fa-cubes"></i>&nbsp;Konfigürasyon Araçları</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 4}"><a class="altTabMenuItem" ng-click="setAltTab(4)" ui-sref=".kullanilacakmevcutkaynaklarlistesi"><i class="fa fa-cubes"></i>&nbsp;Kullanılacak Mevcut Kaynaklar</a></li>
+
+                                <!--<li ng-class="{'active-altTab' : altTab == 5}"><a class="altTabMenuItem" ng-click="setAltTab(5)" ui-sref=".personel"><i class="fa fa-cubes"></i>&nbsp;Personel</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 9}"><a class="altTabMenuItem" ng-click="setAltTab(9)" ui-sref=".rol"><i class="fa fa-cubes"></i>&nbsp;Rol</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 14}"><a class="altTabMenuItem" ng-click="setAltTab(14)" ui-sref=".personelrol"><i class="fa fa-cubes"></i>&nbsp;Personel Rol</a></li>-->
+                                <li ng-class="{'active-altTab' : altTab == 6}"><a class="altTabMenuItem" ng-click="setAltTab(6)" ui-sref=".musteriegitimilistesi"><i class="fa fa-cubes"></i>&nbsp;Müşteri Eğitimi</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 7}"><a class="altTabMenuItem" ng-click="setAltTab(7)" ui-sref=".verilecekegitimlistesi"><i class="fa fa-cubes"></i>&nbsp;Projede Verilecek Eğitim</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 8}"><a class="altTabMenuItem" ng-click="setAltTab(8)" ui-sref=".egitimalanpersonellistesi"><i class="fa fa-cubes"></i>&nbsp;Eğitim Alan Personel</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 13}"><a class="altTabMenuItem" ng-click="setAltTab(13)" ui-sref=".surumyonetimstratejisilistesi"><i class="fa fa-cubes"></i>&nbsp;Sürüm Yönetim Stratejisi</a></li>
+                                                              
+                                <li ng-class="{'active-altTab' : altTab == 15}"><a class="altTabMenuItem" ng-click="setAltTab(15)" ui-sref=".projeplanilistesi" ><i class="fa fa-cubes"></i>&nbsp;Proje Planı</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 16}"><a class="altTabMenuItem" ng-click="setAltTab(16)" ui-sref=".projesurumlistesi" ><i class="fa fa-cubes"></i>&nbsp;Proje Sürüm</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 17}"><a class="altTabMenuItem" ng-click="setAltTab(17)" ui-sref=".projemodullistesi" ><i class="fa fa-cubes"></i>&nbsp;Modül</a></li>
+                                <li ng-class="{'active-altTab' : altTab == 18}"><a class="altTabMenuItem" ng-click="setAltTab(18)" ui-sref=".projedogrulamakriterigruplistesi" ><i class="fa fa-cubes"></i>&nbsp;Doğrulama Kriteri Grup</a></li>
+                                <!--<li ng-class="{'active-altTab' : altTab == 17}"><a class="altTabMenuItem" ng-click="setAltTab(17)" ui-sref=".projeakislistesi" data-ui-sref-opts="{reload:true}"><i class="fa fa-cubes"></i>&nbsp;Proje Akış</a></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-9">
+        <div ui-view></div>
+        <!--<div id="altTab-1" class="tab-pane active" ng-show="altTab == 1">
+            <div  ng-controller="proje_fizibiletesi_liste_controller" ng-include="'views/proje_fizibiletesi_liste.html'" ></div>
+        </div>
+        <div id="altTab-2" class="tab-pane" ng-if="altTab == 2">
+
+        </div>
+        <div id="altTab-3" class="tab-pane" ng-if="altTab == 3">
+
+        </div>
+        <div id="altTab-4" class="tab-pane" ng-if="altTab == 4">
+
+        </div>-->
+    </div>
+</div>

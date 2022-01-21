@@ -1,0 +1,30 @@
+﻿<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">Gozden Geçirme Kriteri Adım Ekle</h4>
+    </div>
+    <div class="modal-body">
+
+        <form method="get" name="frmKriterAdim" id="frmKriterAdim" class="form-horizontal" accessible-form>
+            <div class="formEkleDuzenleInputs">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Kriter <span class="text-danger">*</span></label>
+                            <div class="col-sm-10">
+                                <textarea name="txtKRITER" id="txtKRITER" ng-model="InfoDokumanGozdenGecirmeKriterAdim.KRITER" rows="7" style="resize: none" class="formEkleDuzenleInput form-control" ng-minlength="1" placeholder="Doğrulama kriterini giriniz." required></textarea>
+                                <p ng-show="frmKriterAdim.txtKRITER.$invalid && formCalistirildiDokumanGozdenGecirmeKriterAdim" class="validation">Bu alan boş bırakılamaz.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" ng-click="DokumanGozdenGecirmeKriterAdimEkleGuncelle(InfoDokumanGozdenGecirmeKriterAdim, frmKriterAdim)"><i class="fa fa-plus"></i>&nbsp;&nbsp;Ekle</button>
+        <button type="button" class="btn btn-info" ng-click="Geri()"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;Geri</button>
+    </div>
+</div>

@@ -1,0 +1,246 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Avans İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.avanslistesi"><i class="fa fa-list"></i> Avans Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-money"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-money"></i>
+                        Avans Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen avans bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmIkPersonelAvans" id="frmIkPersonelAvans" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Avans No<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="50" ng-minlength="1" name="txtAVANS_NO" ng-model="InfoPersonelAvans.AVANS_NO" class="formEkleDuzenleInput form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Avans Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtAVANS_ADI" ng-model="InfoPersonelAvans.AVANS_ADI" class="formEkleDuzenleInput form-control" placeholder="Avans adını giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Eden<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtTALEP_EDEN_KULLANICI_ADI" ng-model="InfoPersonelAvans.TALEP_EDEN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Talep Eden giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ünvan<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtIK_UNVAN_ADI" ng-model="InfoPersonelAvans.IK_UNVAN_ADI" class="formEkleDuzenleInput form-control" placeholder="Personel Ünvan giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Gözden Geçiren Kullanıcı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtGOZDEN_GECIREN_KULLANICI_AD_SOYAD" ng-model="InfoPersonelAvans.GOZDEN_GECIREN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Gözden Geçiren Kullanıcıyı giriniz." readonly>
+
+                                        </div>
+                                    </div>
+
+
+                                    <!--<div class="form-group">
+                                        <label class="col-lg-4 control-label">Onaylayan<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtONAYLAYAN_KULLANICI_AD_SOYAD" ng-model="InfoPersonelAvans.ONAYLAYAN_KULLANICI_AD_SOYAD" class="formEkleDuzenleInput form-control" placeholder="Onaylayan giriniz." readonly>
+
+                                        </div>
+                                    </div>-->
+
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Muhasebe Yöneticisi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtMUHASEBE_KULLANICI_ADI" ng-model="InfoPersonelAvans.MUHASEBE_KULLANICI_ADI" class="formEkleDuzenleInput form-control" placeholder="Muhasebe Yöneticisi giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Görevlendirilme Yeri<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input icheck type="radio" name="rd_GOREVLENDIRME_YERI" class="formEkleDuzenleInput" value="1" ng-model="InfoPersonelAvans.GOREVLENDIRME_YERI" ng-disabled="true"> Şehir İçi
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" ng-disabled="true" name="rd_GOREVLENDIRME_YERI" value="2" ng-model="InfoPersonelAvans.GOREVLENDIRME_YERI"> Şehir Dışı
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" ng-disabled="true" name="rd_GOREVLENDIRME_YERI" value="3" ng-model="InfoPersonelAvans.GOREVLENDIRME_YERI"> Yurt Dışı
+                                            </label><br />
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-6">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Talep Miktarı <span class="text-danger">*</span></label>
+                                        <div class="col-lg-4">
+                                            <div class="input-group">
+                                                <input type="text" ng-disabled="true" name="txtTALEP_EDILEN_MIKTAR" ui-number-mask="2" ng-model="InfoPersonelAvans.TALEP_EDILEN_MIKTAR" class="formEkleDuzenleInput form-control" placeholder="Talep miktarı giriniz." readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <input type="text" ng-disabled="true" ng-maxlength="255" ng-minlength="1" name="txtPARA_BIRIMI_ADI" ng-model="InfoPersonelAvans.PARA_BIRIMI_ADI" class="formEkleDuzenleInput form-control" placeholder="Para birimini giriniz." readonly>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Ödeme Şekli<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <label>
+                                                <input icheck type="radio" name="rd_ODEME_SEKLI" class="formEkleDuzenleInput" value="1" ng-model="InfoPersonelAvans.ODEME_SEKLI" ng-disabled="true"> Banka Havalesi
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_ODEME_SEKLI" value="2" ng-model="InfoPersonelAvans.ODEME_SEKLI" ng-disabled="true"> Elden Nakit
+                                            </label>
+                                            <label>
+                                                <input icheck type="radio" name="rd_ODEME_SEKLI" value="3" ng-model="InfoPersonelAvans.ODEME_SEKLI" ng-disabled="true"> Kredi Kartı
+                                            </label><br />
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Banka Hesap No <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="50" ng-minlength="1" name="txtBANKA_HESAP_NO" ng-model="InfoPersonelAvans.BANKA_HESAP_NO" class="formEkleDuzenleInput form-control" placeholder="Talep tarihini giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label"> Talep Tarihi <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtTALEP_TARIHI" ng-model="InfoPersonelAvans.TALEP_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Avans Türü <span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="50" ng-minlength="1" name="txtAVANS_TURU_ADI" ng-model="InfoPersonelAvans.AVANS_TURU_ADI" class="formEkleDuzenleInput form-control" placeholder="Avans türünü giriniz." readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Proje Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" ng-disabled="true" ng-maxlength="50" ng-minlength="1" name="txtPROJE_ADI" ng-model="InfoPersonelAvans.PROJE_ADI" class="formEkleDuzenleInput form-control" placeholder="Proje adını giriniz." readonly>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Etiket</label>
+                                        <div class="col-lg-8">
+                                            <ui-select multiple ng-model="InfoPersonelAvans.SeciliEtiketler" tagging="etiketOlustur" tagging-label="(Yeni)" theme="bootstrap" style="width: 300px;" ng-disabled="true">
+                                                <ui-select-match placeholder="Etiket seçimi yapınız...">{{$item.ADI}}</ui-select-match>
+                                                <ui-select-choices repeat="item in ProjeEtiketListesi | filter: $select.search">
+                                                    {{item.ADI}}
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Onaylanan Miktar</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtONAYLANAN_MIKTAR" ui-number-mask="2" ng-model="InfoPersonelAvans.ONAYLANAN_MIKTAR" ng-readonly="!(($storage.KULLANICI_ID == InfoPersonelAvans.GOZDEN_GECIREN_KULLANICI_ID || $storage.KULLANICI_ID == InfoPersonelAvans.MUHASEBE_KULLANICI_ID) && (InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 2 || InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID == 6))" ng-required="($storage.KULLANICI_ID == InfoPersonelAvans.ONAYLAYAN_KULLANICI_ID &&  (InfoPersonelAvans.ONAYLANAN_MIKTAR == null || InfoPersonelAvans.ONAYLANAN_MIKTAR == ''))" class="formEkleDuzenleInput form-control" ng-disabled="onaylananMiktar" placeholder="Onaylanan miktarı giriniz.">
+                                            <p ng-show="frmIkPersonelAvans.txtONAYLANAN_MIKTAR.$invalid && formCalistirildiPersonelAvans" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Talep Nedeni <span class="text-danger">*</span></label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" ng-disabled="true" name="txtTALEP_NEDENI" ng-maxlength="500" ng-minlength="1" style="resize:none;" ng-model="InfoPersonelAvans.TALEP_NEDENI" rows="8" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Talep nedenini giriniz."></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Açıklama <span class="text-danger">*</span></label>
+                                        <div class="col-lg-10">
+                                            <textarea type="text" ng-disabled="true" name="txtACIKLAMA" ng-maxlength="500" ng-minlength="1" style="resize:none;" ng-model="InfoPersonelAvans.ACIKLAMA" rows="8" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+
+                                            <button ng-click="IkPersonelAvansGozdenGecir()" ng-show="InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID==6&&($storage.KULLANICI_ID == InfoPersonelAvans.GOZDEN_GECIREN_KULLANICI_ID )" class="btn btn-sm btn-warning"><i class="fa fa-paste"></i> Gözden Geçir</button>
+                                            <!--<button ng-click="IkPersonelAvansOnaylama(InfoPersonelAvans,InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID=5)" ng-show="InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID==2&&($storage.KULLANICI_ID == InfoPersonelAvans.ONAYLAYAN_KULLANICI_ID )" class="btn btn-sm btn-primary"><i class="fa fa-paste"></i>Onayla</button>-->
+                                            <button ng-click="IkPersonelAvansOnaylama(InfoPersonelAvans,InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID=3)" ng-show="InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID== 2 &&($storage.KULLANICI_ID == InfoPersonelAvans.MUHASEBE_KULLANICI_ID)" class="btn btn-sm btn-success"><i class="fa fa-paste"></i> Onayla</button>
+                                            <button ng-click="IkPersonelAvansReddet()" ng-show="(($storage.KULLANICI_ID == InfoPersonelAvans.GOZDEN_GECIREN_KULLANICI_ID) ||($storage.KULLANICI_ID == InfoPersonelAvans.MUHASEBE_KULLANICI_ID)) && (InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID != 4 && InfoPersonelAvans.AVANS_MASRAF_DURUMU_ID != 3)" class="btn btn-sm btn-danger">
+                                                <i class="fa fa-paste"></i> Reddet
+                                            </button>
+                                            <button class="btn btn-info" ui-sref="insankaynaklari.avanslistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

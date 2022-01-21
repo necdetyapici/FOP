@@ -1,0 +1,498 @@
+﻿<div ng-init="init()"></div>
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Eğitim İşlemleri</h2>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a ui-sref="anasayfa">Ana Sayfa</a>
+            </li>
+            <li>
+                <a ui-sref="insankaynaklari.ikegitimlistesi"><i class="fa fa-list"></i> Eğitim Listesi</a>
+            </li>
+            <li class="active animated bounceInRight">
+                <strong><i class="fa fa-sign-language"></i> Kayıt</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2"> </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-sign-language"></i>
+                        Eğitim  Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>&nbsp;   Lütfen eğitim bilgilerini eksiksiz giriniz.
+                        </small>
+                    </h5>
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <form method="get" name="frmEgitim" id="frmEgitim" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs col-md-offset-0">
+                            <div class="row">
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIK_EGITIM_ADI" ng-model="Info.IK_EGITIM_ADI" class="formEkleDuzenleInput form-control" placeholder="Eğitim adını giriniz.">
+                                            <p ng-show="frmEgitim.txtIK_EGITIM_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitimen Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <input type="text" required="required" ng-maxlength="255" ng-minlength="1" name="txtIK_EGITIM_EGITMEN_ADI" ng-model="Info.IK_EGITIM_EGITMEN_ADI" class="formEkleDuzenleInput form-control" placeholder="Eğitmen adını giriniz.">
+                                            <p ng-show="frmEgitim.txtIK_EGITIM_EGITMEN_ADI.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitmen E-Posta</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                <input type="email" name="txtIK_EGITIM_EGITMEN_E_POSTA" ng-model="Info.IK_EGITIM_EGITMEN_E_POSTA" ng-maxlength="150" ng-minlength="1" class="formEkleDuzenleInput form-control" placeholder="Eğitmen E-Posta adresini giriniz.">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Veren Kurum Adı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_EGITIM_VEREN_KURUM_ID" name="cmbIK_EGITIM_VEREN_KURUM_ID" ng-model="Info.IK_EGITIM_VEREN_KURUM_ID"
+                                                data-live-search="true" title="Eğitim Veren Kurum Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkEgitimVerenKurumListesi" deep-watch="true" data-value="item.IK_EGITIM_VEREN_KURUM_ID">
+                                                    <a>
+                                                        {{item.IK_EGITIM_VEREN_KURUM_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmEgitim.cmbIK_EGITIM_VEREN_KURUM_ID.$invalid && formCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Konu</label>
+                                        <div class="col-lg-8">
+                                            <textarea type="text" name="txtIK_EGITIM_KONU" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="Info.IK_EGITIM_KONU" rows="3" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Eğitim konusunu giriniz."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Başlangıç Tarihi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_EGITIM_BASLANGIC_TARIHI" ng-model="Info.IK_EGITIM_BASLANGIC_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-valid ng-touched ng-dirty ng-valid-parse" required>
+                                            </div>
+                                            <p ng-show="frmEgitim.txtIK_EGITIM_BASLANGIC_TARIHI.$invalid && formCalistirildi" class="validasyon_uyari ng-hide">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Eğitim Bitiş Tarihi</label>
+                                        <div class="col-lg-8">
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <input type="datetime" name="txtIK_EGITIM_BITIS_TARIHI" ng-model="Info.IK_EGITIM_BITIS_TARIHI" nextgen-date-picker="" class="formEkleDuzenleInput form-control ng-pristine ng-untouched ng-valid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Açıklama</label>
+                                        <div class="col-sm-10">
+                                            <textarea type="text" name="txtIK_EGITIM_ACIKLAMA" style="resize:none;" ng-maxlength="500" ng-minlength="1" ng-model="Info.IK_EGITIM_ACIKLAMA" rows="7" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="IkEgitimEkleGuncelle(Info)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                            <a class="btn btn-primary" href="#" ui-sref="insankaynaklari.ikegitimlistesi"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content-emfa padding-bottom animated fadeInUpBig" ng-show="ikEgitimID > 0">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Eğitim Personel Listesi
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmIkEgitimPersonel" id="frmIkEgitimPersonel" class="form-horizontal" novalidate>
+                        <div class="formEkleDuzenleInputs col-md-offset-0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Katılımcı<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbKULLANICI_ID" name="cmbKULLANICI_ID" ng-model="InfoEgitimPersonel.KULLANICI_ID"
+                                                data-live-search="true" title="Katılımcı Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in KullaniciListesi" deep-watch="true" data-value="item.KULLANICI_ID">
+                                                    <a>
+                                                        {{item.AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmIkEgitimPersonel.cmbKULLANICI_ID.$invalid && formEgitimPersonelCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class="btn btn-success" type="button" ng-click="IkEgitimPersonelEkleGuncelle(InfoEgitimPersonel)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkEgitimPersonel" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Katılımcı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtKULLANICI_AD_SOYAD" id="txtKULLANICI_AD_SOYAD" ng-model="AramaKriterListePersonelEgitim.KULLANICI_AD_SOYAD" class="form-control formEkleDuzenleInput input-sm  " placeholder="Katılımcı adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkEgitimPersonelGetData(AramaKriterListePersonelEgitim, AramaKriterListePersonelEgitim.SayfaNo= 1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizlePersonel()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkEgitimPersonelListesi.length>0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkEgitimPersonelGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisi }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Katılımcı Adı</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkEgitimPersonelListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.KULLANICI_AD_SOYAD}}<br />
+                                            </td>
+
+                                            <td class="form-actions">
+                                                <div class="pull-right">
+                                                    <button ng-click="modalSilmeOnayiEgitimPersonel(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true">
+                                                        <i class="fa fa-remove"></i>
+                                                        <!-- Sil -->
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriterListePersonelEgitim.SayfaNo" ng-change="IkEgitimPersonelGetData(AramaKriterListePersonelEgitim)" total-items="toplamKayitSayisi"
+                                                            items-per-page="AramaKriterListePersonelEgitim.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="IkEgitimPersonelListesi.length==0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkEgitimPersonelGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;Eğitim Personel ait kayıt <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderListe">
+                        <i class="fa fa-list"></i> Eğitim Dosyası
+                    </h5>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmEgitimDosya" id="frmEgitimDosya" class="form-horizontal" novalidate>
+                        <div class="formEkleDuzenleInputs col-md-offset-0">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya Tipi<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+                                            <ol class="nya-bs-select form-control" id="cmbIK_EGITIM_DOSYA_TIPI_ID" name="cmbIK_EGITIM_DOSYA_TIPI_ID" ng-model="InfoEgitimDosya.IK_EGITIM_DOSYA_TIPI_ID"
+                                                data-live-search="true" title="Dosya Tipini Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in IkEgitimDosyaTipiListesi" deep-watch="true" data-value="item.IK_EGITIM_DOSYA_TIPI_ID">
+                                                    <a>
+                                                        {{item.IK_EGITIM_DOSYA_TIPI_ADI}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmEgitimDosya.cmbIK_EGITIM_DOSYA_TIPI_ID.$invalid && formIkEgitimDosyaCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya<span class="text-danger">*</span></label>
+                                        <div class="col-lg-8">
+
+                                            <div class="input-group">
+                                                <input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-touched" ng-model="InfoEgitimDosya.IK_EGITIM_DOSYA_ADI" name="flIK_EGITIM_DOSYA1" id="flIK_EGITIM_DOSYA1" readonly="" required="">
+                                                <div class="input-group-btn">
+                                                    <label ng-show="!InfoEgitimDosya.IK_EGITIM_DOSYA_ADI" for="flIK_EGITIM_DOSYA" class="btn btn-primary" tooltip="Yeni dosya yüklemek için tıklayınız." tooltip-append-to-body="true">
+                                                        <input class="hide ng-isolate-scope" type="file" id="flIK_EGITIM_DOSYA" ng-model="InfoEgitimDosya.IK_EGITIM_DOSYA_ADI" name="flIK_EGITIM_DOSYA" fileread="$scope.InfoEgitimDosya.IK_EGITIM_DOSYA_BOYUTU" accept="image/x-png, image/gif, image/jpeg, application/*" onchange="angular.element(this).scope().handleFileSelect(this.files)" required="">
+                                                        <i class="fa fa-cloud-upload"></i>&nbsp;Dosya Yükle
+                                                    </label>
+                                                    <button ng-show="InfoEgitimDosya.IK_EGITIM_DOSYA_ADI" class="btn  btn-danger ng-hide" type="button" ng-click="egitimDosyaDokumanSifirla()" tooltip="Dosya yüklemekten vazgeçmek ve dosya bilgilerini sıfırlamak için tıklayınız." tooltip-append-to-body="true">
+                                                        <i class="fa fa-eraser"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <p ng-show="frmEgitimDosya.flIK_EGITIM_DOSYA.$invalid && formIkEgitimDosyaCalistirildi" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-actions">
+                                        <div class="pull-right">
+                                            <button class=" btn btn-success " type="button" ng-click="IkEgitimDosyaEkleGuncelle(InfoEgitimDosya)">
+                                                <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content">
+                    <form name="src-IkEgitimPersonelDosya" class="form-horizontal">
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Dosya Adı</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" name="txtIK_EGITIM_DOSYA_ADI" id="txtIK_EGITIM_DOSYA_ADI" ng-model="AramaKriterListeEgitimDosya.IK_EGITIM_DOSYA_ADI" class="form-control formEkleDuzenleInput input-sm  " placeholder="Dosya adını giriniz.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-actions">
+                                    <div class="col-lg-12">
+                                        <div class="pull-right">
+                                            <button ng-click="IkEgitimDosyaGetData(AramaKriterListeEgitimDosya,  AramaKriterListeEgitimDosya.SayfaNo=1)" class="btn btn-sm btn-warning" type="submit">
+                                                <i class="fa fa-filter"></i>&nbsp;
+                                                <strong>Filtrele</strong>
+                                            </button>
+                                            <button ng-click="filtreTemizleDosya()" class="btn btn-sm btn-danger" type="submit">
+                                                <i class="fa fa-eraser"></i>&nbsp;
+                                                <strong>Temizle</strong>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="ibox-content" ng-if="IkEgitimDosyaListesi.length > 0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="IkEgitimDosyaGetData()" data-ui-sref-opts="{reload:true}"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                            <strong> Toplam {{ toplamKayitSayisiEgitimDosya }} kayıt </strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="project-list table-emfa">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <td><b>No</b></td>
+                                            <td><b>Dosya Adı</b></td>
+                                            <td><b>Dosya Tipi</b></td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="post in IkEgitimDosyaListesi | filter:ignoreTurkish">
+                                            <td>
+                                                <span class="label label-success">{{ $index + 1 }}</span>
+                                            </td>
+
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                <sa-dosyaindir tablo="IK_EGITIM_DOSYA" dosyaid="post.IK_EGITIM_DOSYA_ID" tooltip="Döküman İndir">{{post.IK_EGITIM_DOSYA_ADI}}</sa-dosyaindir><br />
+                                            </td>
+
+                                            <td class="table-main">
+                                                <!--bu alana düzenle linli gelir.ana alan kolunudur.-->
+                                                {{post.IK_EGITIM_DOSYA_TIPI_ADI}}<br />
+                                            </td>
+                                            <td class="actions">
+                                                <div class="pull-right" ng-if="post.IK_EGITIM_DOSYA_DOSYA_TIPI == 'image/jpeg' || post.IK_EGITIM_DOSYA_DOSYA_TIPI == 'image/png' || post.IK_EGITIM_DOSYA_DOSYA_TIPI == 'application/pdf'">
+                                                    <button ng-click="IkEgitimDosyaGoster(post.IK_EGITIM_DOSYA_ID)" class="btn btn-sm btn-info" tooltip="Göster" tooltip-append-to-body="true"><i class="fa fa-print"></i> </button>
+                                                </div>
+                                            </td>
+
+                                            <td class="actions">
+                                                <div class="pull-right">
+                                                    <button ng-click="modalSilmeOnayiEgitimDosya(post)" class="btn btn-sm btn-danger" tooltip="Sil" tooltip-append-to-body="true"><i class="fa fa-remove"></i><!-- Sil --></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="text-center">
+                                                <pagination ng-model="AramaKriterListeEgitimDosya.SayfaNo" ng-change="IkEgitimDosyaGetData(AramaKriterListeEgitimDosya)" total-items="toplamKayitSayisiEgitimDosya"
+                                                            items-per-page="AramaKriterListeEgitimDosya.SayfaBasinaKayitSayisi" max-size="Ayarlar.MaxSayfaSayisi"
+                                                            previous-text="Önceki" next-text="Sonraki" first-text="İlk Sayfa" last-text="Son Sayfa" class="pagination-sm" boundary-links="true"></pagination>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ibox-content" ng-if="IkEgitimDosyaListesi.length==0">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-sm btn-white" ng-click="IkEgitimDosyaGetData()"> <i class="fa fa-refresh"></i> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br /><br />
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                                <i class="fa fa-exclamation-circle"></i>
+                                &nbsp;İnsan Kaynakları Eğitim Dosya ait kayıt <strong>bulunmamaktadır.</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

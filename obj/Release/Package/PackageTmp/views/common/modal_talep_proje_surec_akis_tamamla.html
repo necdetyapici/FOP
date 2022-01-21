@@ -1,0 +1,114 @@
+﻿
+<div class="inmodal">
+    <div class="modal-header">
+        <h4 class="modal-title">{{$parent.InfoTalep.TALEP_PROJE_SUREC_TIPI_ADI}} Süreç Akış Tamamla</h4>
+
+    </div>
+    <div class="modal-body">
+        <div class="ibox-content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="col-lg-4 control-label-center">Talep Konu :</label>
+                        <div class="col-lg-8">
+                            <p>{{$parent.InfoTalep.TALEP_PROJE_KONU}}</p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form method="get" name="frmTalepProjeSurecAkisTamamla" id="frmTalepProjeSurecAkisTamamla" class="form-horizontal" accessible-form>
+            
+
+            <div class="ibox-content" ng-if="ProjeDogrulamaKriteriListesi.length>0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="pull-right">
+
+                            <button type="button" class="btn-refresh-shadow btn btn-sm btn-white" ng-click="ProjeDogrulamaKriteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                        </div>
+                        <!--<strong>Toplam {{ toplamKayitSayisi }} kayıt</strong>-->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="project-list table-emfa">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <td><b>No</b></td>
+                                        <td><b>Kriter</b></td>
+                                        <td><b>Doğrula</b></td>
+                                        <td><b>Doğrulama</b></td>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="post in ProjeDogrulamaKriteriListesi | filter:ignoreTurkish">
+                                    <tr>
+                                        <td>
+                                            <span class="label label-success">{{$index + 1}}</span>
+                                        </td>
+
+                                        <td>
+                                            {{post.KRITER}}
+                                        </td>
+
+                                        <td class="actions">
+                                            <input type="radio" icheck ng-model="post.DURUMU" name="rd_DURUMU{{$index}}" id="rd_DURUMU{{$index}}" ng-value="true" ng-checked="post.DURUMU" required>
+                                        </td>
+                                        <td class="actions">
+
+                                            <input type="radio" class="danger" icheck ng-model="post.DURUMU" name="rd_DURUMU{{$index}}" id="rd_DURUMU{{$index}}" ng-value="false" ng-checked="!post.DURUMU" required>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="frmTalepProjeSurecAkisTamamla.rd_DURUMU{{$index}}.$invalid && formCalistirildiSurecAkisTamamlama ">
+                                        <td colspan="4">
+                                            <p ng-show="frmTalepProjeSurecAkisTamamla.rd_DURUMU{{$index}}.$invalid && formCalistirildiSurecAkisTamamlama " class="validation">Bu alan boş bırakılamaz.</p>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="post.DURUMU == false">
+                                        <td><b>Nedeni :</b></td>
+                                        <td colspan="3">
+                                            <textarea type="text" name="txtNEDENI{{$index}}" style="resize:none;" ng-model="post.NEDENI" rows="2" class="formEkleDuzenleInput form-control ng-pristine ng-valid ng-touched" placeholder="Açıklama giriniz." ng-required="post.NEDENI== null && post.DURUMU == false"></textarea>
+                                            <p ng-show="frmTalepProjeSurecAkisTamamla.txtNEDENI{{$index}}.$invalid && formCalistirildiSurecAkisTamamlama " class="validation">Bu alan boş bırakılamaz.</p>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="ibox-content" ng-if="ProjeDogrulamaKriteriListesi.length==0 || ProjeDogrulamaKriteriListesi == null">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-sm btn-white" ng-click="ProjeDogrulamaKriteriGetData()"> <i class="fa fa-refresh"></i> </button>
+                    </div>
+                </div>
+            </div>
+
+            <br /><br />
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="alert-Emfa alert alert-danger  animated bounceIn">
+                        <i class="fa fa-exclamation-circle"></i>
+                        &nbsp;Doğrulama kriteri  kaydı <strong>bulunmamaktadır.</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-show="ProjeDogrulamaKriteriListesi.length > 0" ng-click="YeniTalepSurecAkisKaydet(InfoYeniTalepSurecAkis,ProjeDogrulamaKriteriListesi, frmTalepProjeSurecAkisTamamla, InfoYeniTalepSurecAkis.YENI_SUREC_AKIS_TIPI_ID = 3)"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Süreci Tamamla</span></button>
+        <button type="button" class="btn btn-primary" ng-show="ProjeDogrulamaKriteriListesi.length > 0" ng-click="TalepProjeDogrulamaKriteriEkleGuncelle(ProjeDogrulamaKriteriListesi, frmTalepProjeSurecAkisTamamla)"><i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Kaydet/Kapat</span></button>
+        <button type="button" class="btn btn-danger" ng-show="ProjeDogrulamaKriteriListesi.length == 0 || ProjeDogrulamaKriteriListesi.length == null" ng-click="SurecAkisTamamlaGeri()"><i class="fa fa-close"></i>&nbsp;&nbsp;<span class="bold">Kapat</span></button>
+    </div>
+</div>

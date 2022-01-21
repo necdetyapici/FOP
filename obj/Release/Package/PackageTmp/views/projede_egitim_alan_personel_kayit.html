@@ -1,0 +1,83 @@
+﻿<div ng-init="init()"></div>
+
+<div class="wrapper wrapper-content-emfa-tanimlamalar-icerik padding-bottom animated fadeInRightBig">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 class="panelHeaderEkleDuzenle">
+                        &nbsp; <i class="fa fa-plus-square"></i> Eğitim Alan Personel Bilgileri
+                        <small class="text-warning">
+                            <i class="fa fa-info-circle"></i>
+                            Lütfen bilgileri eksiksiz giriniz.
+                        </small>
+                    </h5>
+
+                    <div class="ibox-tools">
+                        <small class="text-danger"> * işareti olan alanlar zorunludur.</small>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="get" name="frmProjeEgitimAlanPersonel" id="frmProjeEgitimAlanPersonel" class="form-horizontal" accessible-form>
+                        <div class="formEkleDuzenleInputs">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Verilecek Eğitim<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJEDE_VERILECEK_EGITIM_ID" name="cmbPROJEDE_VERILECEK_EGITIM_ID" ng-model="Info.PROJEDE_VERILECEK_EGITIM_ID"
+                                                data-live-search="true" title="Verilecek Eğitim Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in verilecekEgitimListesi" deep-watch="true" data-value="item.PROJEDE_VERILECEK_EGITIM_ID">
+                                                    <a>
+                                                        {{item.VERILECEK_EGITIM}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeEgitimAlanPersonel.cmbPROJEDE_VERILECEK_EGITIM_ID.$invalid && formCalistirildiProjeEgitimAlanPersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-lg-4 control-label">Personel<span class="text-danger">*</span></label>
+                                        <div class="col-lg-6">
+                                            <ol class="nya-bs-select form-control" id="cmbPROJE_PERSONEL_ID" name="cmbPROJE_PERSONEL_ID" ng-model="Info.PROJE_PERSONEL_ID"
+                                                data-live-search="true" title="Personel Seçiniz" data-size="5" required="true">
+                                                <li nya-bs-option="item in ProjePersonelListesiGenel" deep-watch="true" data-value="item.PROJE_PERSONEL_ID">
+                                                    <a>
+                                                        {{item.CALISAN_KULLANICI_AD_SOYAD}}
+                                                        <span class="glyphicon glyphicon-ok check-mark"></span>
+                                                    </a>
+                                                </li>
+                                            </ol>
+                                            <p ng-show="frmProjeEgitimAlanPersonel.cmbPROJE_PERSONEL_ID.$invalid && formCalistirildiProjeEgitimAlanPersonel" class="validation">Bu alan boş bırakılamaz.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-10">
+                                    <div class="form-actions">
+                                            <div class="pull-right">
+                                                <button class="btn btn-sm btn-success" type="button" ng-click="ProjedeEgitimAlanPersonelEkleGuncelle(Info)">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;<span class="bold">Kaydet</span>
+                                                </button>
+                                                <button class="btn btn-sm btn-primary" ui-sref="proje.projelerkayit.plan.egitimalanpersonellistesi">
+                                                    <i class="fa fa-reply-all"></i>&nbsp;&nbsp;<span class="bold">Geri</span>
+                                                </button>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+
+
